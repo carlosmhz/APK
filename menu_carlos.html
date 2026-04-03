@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comida de Carlos</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#f0ece4; --card:#faf8f3; --dark:#2a2a2a; --gold:#c9a84c; --soft:#e8e4dc; --muted:#8a877f; --border:#d8d4cc; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); min-height:100vh; font-family:'DM Sans',sans-serif; padding:30px 16px 50px; display:flex; flex-direction:column; align-items:center; }
+.header { width:min(480px,100%); background:var(--dark); color:var(--card); padding:28px 28px 22px; box-shadow:6px 6px 0 rgba(0,0,0,.15); }
+.eyebrow { font-size:10px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+.htitle { font-family:'Playfair Display',serif; font-size:36px; font-weight:900; line-height:1.05; }
+.hsub { font-size:12px; color:#888; margin-top:8px; }
+.goldbar { width:min(480px,100%); height:3px; background:var(--gold); }
+.tabs { width:min(480px,100%); display:flex; }
+.tab { flex:1; padding:12px; background:var(--soft); border:2px solid var(--dark); font-family:'DM Sans',sans-serif; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; cursor:pointer; color:var(--muted); }
+.tab:first-child { border-right:1px solid var(--dark); }
+.tab.on { background:var(--dark); color:var(--gold); }
+.card { width:min(480px,100%); background:var(--card); border:2px solid var(--dark); border-top:none; padding:24px; box-shadow:6px 6px 0 rgba(0,0,0,.1); }
+.slabel { font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border); padding-bottom:6px; margin-bottom:12px; margin-top:18px; }
+select, input { width:100%; padding:10px 14px; border:2px solid var(--border); border-radius:4px; background:var(--bg); font-family:'DM Sans',sans-serif; font-size:14px; color:var(--dark); outline:none; }
+select:focus, input:focus { border-color:var(--dark); }
+.btn { display:block; width:100%; padding:14px; background:var(--dark); color:var(--card); border:none; border-radius:4px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; letter-spacing:2px; text-transform:uppercase; cursor:pointer; margin-top:16px; }
+.btn:hover { background:#444; }
+.btn.gold { background:var(--gold); color:var(--dark); }
+.btn.gold:hover { background:#b8962e; }
+.codebox { display:none; margin-top:18px; background:var(--soft); border:2px dashed var(--gold); border-radius:4px; padding:16px; text-align:center; }
+.codelabel { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
+.codehint { font-size:11px; color:var(--muted); margin-top:8px; line-height:1.6; }
+.pitem { display:flex; align-items:center; gap:14px; padding:12px 16px; background:var(--dark); color:var(--card); border-radius:4px; margin-bottom:10px; }
+.picon { font-size:22px; flex-shrink:0; }
+.pcat { font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:2px; }
+.pval { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; }
+.lockbox { border:2px dashed var(--border); border-radius:8px; padding:24px 16px; text-align:center; margin-top:8px; }
+.locktitle { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--dark); margin-bottom:6px; }
+.lockhint { font-size:12px; color:var(--muted); margin-bottom:16px; line-height:1.6; }
+.rewardbox { display:none; background:var(--gold); border-radius:8px; padding:24px 16px; text-align:center; }
+.rewardlabel { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:rgba(0,0,0,.5); margin-bottom:6px; }
+.rewardtext { font-family:'Playfair Display',serif; font-size:26px; font-weight:900; color:var(--dark); }
+.errmsg { font-size:12px; color:#c0392b; text-align:center; margin-top:8px; display:none; }
+.welcome { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:var(--dark); margin-bottom:10px; }
+.welcomesub { font-size:13px; color:var(--muted); line-height:1.8; margin-bottom:20px; }
+.pininput { text-align:center; font-size:28px; letter-spacing:12px; max-width:180px; margin:0 auto 12px; display:block; }
+.linkbox { word-break:break-all; font-size:11px; color:var(--dark); background:var(--bg); border:1px solid var(--border); border-radius:4px; padding:10px; margin-top:10px; text-align:left; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="eyebrow">encargo del dia</div>
+  <div class="htitle">Comida de<br>Carlos</div>
+  <div class="hsub"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="58342d3b3b31393637313c3d3b3735313c392b18313b34372d3c763b3735">[email&#160;protected]</a></div>
+</div>
+<div class="goldbar"></div>
+
+<div class="tabs">
+  <button class="tab on" id="tabCarlos" onclick="verVista('carlos')">Soy Carlos</button>
+  <button class="tab" id="tabLucciana" onclick="verVista('lucciana')">Soy Lucciana</button>
+</div>
+
+<div class="card">
+
+  <div id="vistaCarlos">
+    <div class="slabel">Envase</div>
+    <select id="selEnvase">
+      <option value="">- elige -</option>
+      <option value="0">Taza de ColaCao</option>
+      <option value="1">Taza del m&amp;m</option>
+      <option value="2">Tazon del Real Madrid</option>
+      <option value="3">Tazon grande blanco</option>
+    </select>
+    <div class="slabel">Sabor</div>
+    <select id="selSabor">
+      <option value="">- elige -</option>
+      <option value="0">ColaCao</option>
+      <option value="1">Leche normal y corriente</option>
+    </select>
+    <div class="slabel">Acompanamiento</div>
+    <select id="selAcomp">
+      <option value="">- elige -</option>
+      <option value="0">Sobao</option>
+      <option value="1">Galletas</option>
+      <option value="2">Croissant</option>
+      <option value="3">Bizcocho de chocolate</option>
+      <option value="4">Croissant chocolate</option>
+      <option value="5">Pan de leche</option>
+    </select>
+    <div class="slabel">Recompensa</div>
+    <input type="text" id="selRecompensa" placeholder="Ej: 0,20 euros, elegir pelicula...">
+    <div class="slabel">PIN secreto (4 digitos)</div>
+    <input type="password" id="inpPin" maxlength="4" placeholder="1234" style="text-align:center;font-size:24px;letter-spacing:10px;">
+    <button class="btn" onclick="generar()">Generar enlace</button>
+    <div class="codebox" id="codebox">
+      <div class="codelabel">Enlace para Lucciana</div>
+      <div class="codehint">Pulsa el boton para mandarselo por WhatsApp.<br>Cuando cumpla la tarea, mandale el PIN por WhatsApp.</div>
+      <div class="linkbox" id="linkbox"></div>
+      <button class="btn gold" style="margin-top:14px;" onclick="whatsapp()">Enviar por WhatsApp</button>
+    </div>
+  </div>
+
+  <div id="vistaLucciana" style="display:none;">
+    <div id="panelTarea">
+      <p class="welcome">Hola Lucciana!</p>
+      <p class="welcomesub">Carlos te ha mandado un pedido. Preparalo y pidele el PIN para desbloquear tu recompensa.</p>
+      <div id="contenidoTarea" style="display:none;">
+        <div class="slabel">Tu tarea de hoy</div>
+        <div class="pitem"><div class="picon">&#x1F963;</div><div><div class="pcat">Envase</div><div class="pval" id="outEnvase"></div></div></div>
+        <div class="pitem"><div class="picon">&#x1F36B;</div><div><div class="pcat">Sabor</div><div class="pval" id="outSabor"></div></div></div>
+        <div class="pitem"><div class="picon">&#x1F36A;</div><div><div class="pcat">Acompanamiento</div><div class="pval" id="outAcomp"></div></div></div>
+        <div class="slabel">Recompensa</div>
+        <div class="lockbox" id="lockbox">
+          <div class="locktitle">&#x1F512; Recompensa bloqueada</div>
+          <div class="lockhint">Prepara el pedido y pide el PIN<br>a Carlos para desbloquear tu premio</div>
+          <input type="password" class="pininput" id="inpPinLucciana" maxlength="4" placeholder=". . . .">
+          <p class="errmsg" id="errPin">PIN incorrecto</p>
+          <button class="btn gold" onclick="desbloquear()">Desbloquear premio</button>
+        </div>
+        <div class="rewardbox" id="rewardbox">
+          <div class="rewardlabel">Tu recompensa es</div>
+          <div class="rewardtext" id="outRecompensa"></div>
+        </div>
+      </div>
+      <div id="sinTarea" style="display:none;">
+        <p style="font-size:13px;color:var(--muted);text-align:center;margin-top:20px;">No hay ninguna tarea activa.<br>Espera a que Carlos te mande el enlace!</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+var ENVASES     = ['Taza de ColaCao','Taza del m&m','Tazon del Real Madrid','Tazon grande blanco'];
+var SABORES     = ['ColaCao','Leche normal y corriente'];
+var ACOMPS      = ['Sobao','Galletas','Croissant','Bizcocho de chocolate','Croissant chocolate','Pan de leche'];
+var RECOMPENSAS = ['0,20 euros','Elegir cena','Elegir pelicula','Otro (preguntar a Carlos)'];
+var CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+var BASE  = 'https://carlosmhz.github.io/APK/menu_carlos.html';
+var payload = null;
+
+function xor(str, pin) {
+  var out = '';
+  for (var i = 0; i < str.length; i++) {
+    out += String.fromCharCode(str.charCodeAt(i) ^ pin.charCodeAt(i % pin.length));
+  }
+  return out;
+}
+function toHex(str) {
+  var h = '';
+  for (var i = 0; i < str.length; i++) h += ('0' + str.charCodeAt(i).toString(16)).slice(-2);
+  return h.toUpperCase();
+}
+function fromHex(h) {
+  var s = '';
+  for (var i = 0; i < h.length; i += 2) s += String.fromCharCode(parseInt(h.slice(i, i+2), 16));
+  return s;
+}
+
+function verVista(v) {
+  document.getElementById('vistaCarlos').style.display   = v === 'carlos'   ? 'block' : 'none';
+  document.getElementById('vistaLucciana').style.display = v === 'lucciana' ? 'block' : 'none';
+  document.getElementById('tabCarlos').className   = 'tab' + (v === 'carlos'   ? ' on' : '');
+  document.getElementById('tabLucciana').className = 'tab' + (v === 'lucciana' ? ' on' : '');
+}
+
+function generar() {
+  var ei  = document.getElementById('selEnvase').value;
+  var si  = document.getElementById('selSabor').value;
+  var ai  = document.getElementById('selAcomp').value;
+  var ri  = document.getElementById('selRecompensa').value.trim();
+  var pin = document.getElementById('inpPin').value.trim();
+  if (ei===''||si===''||ai===''||ri==='') { alert('Elige todas las opciones'); return; }
+  if (pin.length !== 4 || isNaN(Number(pin))) { alert('El PIN debe ser 4 digitos'); return; }
+  var pedido = CHARS[Number(ei)] + CHARS[Number(si)] + CHARS[Number(ai)];
+  var recompensaTexto = ri;
+  var cifrado = toHex(xor(recompensaTexto, pin));
+  var enlace = BASE + '?p=' + pedido + '&r=' + cifrado;
+  document.getElementById('linkbox').textContent = enlace;
+  document.getElementById('codebox').style.display = 'block';
+}
+
+function whatsapp() {
+  var enlace = document.getElementById('linkbox').textContent.trim();
+  var pin    = document.getElementById('inpPin').value.trim();
+  var msg    = 'Hola Lucciana!\n\nCarlos te manda tu tarea de hoy:\n' + enlace + '\n\nCuando la tengas lista, te mando el PIN para desbloquear tu recompensa!';
+  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+}
+
+function cargarDesdeURL() {
+  var params = new URLSearchParams(window.location.search);
+  var p = params.get('p');
+  var r = params.get('r');
+  if (!p || !r) {
+    document.getElementById('sinTarea').style.display = 'block';
+    return;
+  }
+  var ei = CHARS.indexOf(p[0]);
+  var si = CHARS.indexOf(p[1]);
+  var ai = CHARS.indexOf(p[2]);
+  if (ei<0||ei>=ENVASES.length||si<0||si>=SABORES.length||ai<0||ai>=ACOMPS.length) {
+    document.getElementById('sinTarea').style.display = 'block';
+    return;
+  }
+  payload = { e: ENVASES[ei], s: SABORES[si], a: ACOMPS[ai], r: r };
+  document.getElementById('outEnvase').textContent = payload.e;
+  document.getElementById('outSabor').textContent  = payload.s;
+  document.getElementById('outAcomp').textContent  = payload.a;
+  document.getElementById('contenidoTarea').style.display = 'block';
+  verVista('lucciana');
+}
+
+function desbloquear() {
+  var pin = document.getElementById('inpPinLucciana').value.trim();
+  document.getElementById('errPin').style.display = 'none';
+  if (!payload || pin.length !== 4) { document.getElementById('errPin').style.display = 'block'; return; }
+  try {
+    var descifrado = xor(fromHex(payload.r), pin);
+    if (!descifrado || descifrado.length === 0) { document.getElementById('errPin').style.display = 'block'; return; }
+    for (var c = 0; c < descifrado.length; c++) {
+      if (descifrado.charCodeAt(c) < 32 || descifrado.charCodeAt(c) > 126) {
+        document.getElementById('errPin').style.display = 'block'; return;
+      }
+    }
+    document.getElementById('lockbox').style.display    = 'none';
+    document.getElementById('outRecompensa').textContent = descifrado;
+    document.getElementById('rewardbox').style.display   = 'block';
+  } catch(e) 
