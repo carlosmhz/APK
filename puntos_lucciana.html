@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puntos Lucciana</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#f0ece4; --card:#faf8f3; --dark:#2a2a2a; --gold:#c9a84c; --soft:#e8e4dc; --muted:#8a877f; --border:#d8d4cc; --green:#2ecc71; --red:#e74c3c; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--bg); min-height:100vh; font-family:'DM Sans',sans-serif; display:flex; flex-direction:column; align-items:center; padding:0 0 60px; }
+
+/* LOGIN */
+#panelLogin { width:min(420px,100%); padding:40px 16px; display:flex; flex-direction:column; align-items:center; }
+.login-title { font-family:'Playfair Display',serif; font-size:42px; font-weight:900; color:var(--dark); text-align:center; line-height:1; margin-bottom:6px; }
+.login-sub { font-size:12px; color:var(--muted); letter-spacing:3px; text-transform:uppercase; margin-bottom:36px; }
+.login-card { width:100%; background:var(--card); border:2px solid var(--dark); padding:28px; box-shadow:6px 6px 0 rgba(0,0,0,.1); }
+.login-label { font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:10px; display:block; }
+.login-pin { width:100%; text-align:center; font-size:32px; letter-spacing:16px; padding:12px; border:2px solid var(--border); border-radius:4px; background:var(--bg); font-family:'DM Sans',sans-serif; color:var(--dark); outline:none; }
+.login-pin:focus { border-color:var(--dark); }
+.login-btn { width:100%; margin-top:16px; padding:14px; background:var(--dark); color:var(--card); border:none; border-radius:4px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; letter-spacing:2px; text-transform:uppercase; cursor:pointer; }
+.login-btn:hover { background:#444; }
+.login-err { font-size:12px; color:var(--red); text-align:center; margin-top:10px; display:none; }
+
+/* APP */
+#panelApp { display:none; width:100%; flex-direction:column; align-items:center; }
+
+.header { width:100%; background:var(--dark); color:var(--card); padding:20px 20px 16px; display:flex; align-items:center; justify-content:space-between; }
+.header-left .eyebrow { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); }
+.header-left .htitle { font-family:'Playfair Display',serif; font-size:22px; font-weight:900; }
+.header-user { font-size:11px; color:var(--gold); letter-spacing:1px; text-align:right; }
+.header-logout { font-size:10px; color:#666; cursor:pointer; margin-top:4px; text-align:right; }
+.header-logout:hover { color:#aaa; }
+.goldbar { width:100%; height:3px; background:var(--gold); }
+
+/* IMAGEN ESTADO */
+.score-img { width:120px; height:120px; object-fit:cover; border-radius:50%; margin:0 auto 16px; display:none; border:3px solid var(--border); }
+.score-img.visible { display:block; }
+
+/* PUNTOS GRANDES */
+.score-section { width:min(480px,100%); margin-top:24px; padding:0 16px; }
+.score-card { background:var(--card); border:2px solid var(--dark); padding:28px; box-shadow:6px 6px 0 rgba(0,0,0,.1); text-align:center; }
+.score-label { font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+.score-number { font-family:'Playfair Display',serif; font-size:80px; font-weight:900; line-height:1; color:var(--dark); transition:color 0.3s; }
+.score-number.positive { color:var(--green); }
+.score-number.negative { color:var(--red); }
+.score-pts { font-size:14px; color:var(--muted); margin-top:6px; letter-spacing:2px; text-transform:uppercase; }
+
+/* ACCIONES MODERADOR */
+.actions-section { width:min(480px,100%); margin-top:16px; padding:0 16px; }
+.actions-card { background:var(--card); border:2px solid var(--dark); padding:20px; box-shadow:6px 6px 0 rgba(0,0,0,.1); }
+.slabel { font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--muted); border-bottom:1px solid var(--border); padding-bottom:6px; margin-bottom:12px; }
+.action-row { display:grid; grid-template-columns:80px 1fr; gap:10px; margin-bottom:10px; align-items:center; }
+.pts-input { text-align:center; font-size:20px; font-weight:700; padding:10px; border:2px solid var(--border); border-radius:4px; background:var(--bg); font-family:'DM Sans',sans-serif; color:var(--dark); outline:none; width:100%; }
+.pts-input:focus { border-color:var(--dark); }
+.motivo-input { width:100%; padding:10px 14px; border:2px solid var(--border); border-radius:4px; background:var(--bg); font-family:'DM Sans',sans-serif; font-size:14px; color:var(--dark); outline:none; }
+.motivo-input:focus { border-color:var(--dark); }
+.btn-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:4px; }
+.btn { padding:12px; border:none; border-radius:4px; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; cursor:pointer; }
+.btn-add { background:var(--green); color:white; }
+.btn-add:hover { background:#27ae60; }
+.btn-sub { background:var(--red); color:white; }
+.btn-sub:hover { background:#c0392b; }
+.btn-reset { width:100%; margin-top:10px; padding:12px; background:transparent; border:2px solid var(--border); border-radius:4px; font-family:'DM Sans',sans-serif; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; cursor:pointer; color:var(--muted); }
+.btn-reset:hover { border-color:var(--red); color:var(--red); }
+
+/* TABS HISTORIAL / PUNTOS */
+.tabs-section { width:min(480px,100%); margin-top:16px; padding:0 16px; }
+.tabs { display:flex; }
+.tab { flex:1; padding:11px; background:var(--soft); border:2px solid var(--dark); font-family:'DM Sans',sans-serif; font-size:11px; font-weight:600; letter-spacing:2px; text-transform:uppercase; cursor:pointer; color:var(--muted); }
+.tab:first-child { border-right:1px solid var(--dark); }
+.tab.on { background:var(--dark); color:var(--gold); }
+
+/* HISTORIAL */
+.hist-section { width:min(480px,100%); padding:0 16px; }
+.hist-card { background:var(--card); border:2px solid var(--dark); border-top:none; box-shadow:6px 6px 0 rgba(0,0,0,.1); }
+.hist-empty { padding:30px; text-align:center; font-size:13px; color:var(--muted); }
+.hist-item { padding:14px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px; }
+.hist-item:last-child { border-bottom:none; }
+.hist-badge { width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:14px; font-weight:900; flex-shrink:0; }
+.hist-badge.pos { background:rgba(46,204,113,.15); color:var(--green); }
+.hist-badge.neg { background:rgba(231,76,60,.15); color:var(--red); }
+.hist-badge.reset { background:rgba(0,0,0,.08); color:var(--muted); font-size:18px; }
+.hist-body { flex:1; min-width:0; }
+.hist-motivo { font-size:14px; font-weight:600; color:var(--dark); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.hist-meta { font-size:11px; color:var(--muted); margin-top:2px; }
+.hist-pts { font-family:'Playfair Display',serif; font-size:18px; font-weight:900; flex-shrink:0; }
+.hist-pts.pos { color:var(--green); }
+.hist-pts.neg { color:var(--red); }
+.hist-pts.reset { color:var(--muted); font-size:13px; }
+
+/* MODAL CONFIRMACION */
+.modal-bg { position:fixed; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; z-index:999; display:none; padding:20px; }
+.modal { background:var(--card); border:2px solid var(--dark); padding:28px; width:min(360px,100%); box-shadow:8px 8px 0 rgba(0,0,0,.2); }
+.modal-title { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; margin-bottom:10px; }
+.modal-text { font-size:13px; color:var(--muted); line-height:1.7; margin-bottom:20px; }
+.modal-btns { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.modal-cancel { padding:12px; background:transparent; border:2px solid var(--border); border-radius:4px; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:600; letter-spacing:1px; cursor:pointer; color:var(--muted); }
+.modal-confirm { padding:12px; background:var(--red); border:none; border-radius:4px; font-family:'DM Sans',sans-serif; font-size:12px; font-weight:600; letter-spacing:1px; cursor:pointer; color:white; }
+
+.toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:var(--dark); color:var(--card); padding:12px 24px; border-radius:4px; font-size:13px; font-weight:600; opacity:0; transition:opacity 0.3s; pointer-events:none; z-index:1000; white-space:nowrap; }
+.toast.show { opacity:1; }
+
+/* SOLICITUDES */
+.sol-section { width:min(480px,100%); margin-top:16px; padding:0 16px; }
+.sol-card { background:var(--card); border:2px solid var(--dark); padding:20px; box-shadow:6px 6px 0 rgba(0,0,0,.1); }
+.sol-item { padding:14px 0; border-bottom:1px solid var(--border); }
+.sol-item:last-child { border-bottom:none; }
+.sol-motivo { font-size:14px; font-weight:600; color:var(--dark); margin-bottom:4px; }
+.sol-meta { font-size:11px; color:var(--muted); margin-bottom:10px; }
+.sol-btns { display:grid; grid-template-columns:60px 1fr 1fr; gap:8px; align-items:center; }
+.sol-pts { text-align:center; font-size:18px; font-weight:700; border:2px solid var(--border); border-radius:4px; padding:6px; background:var(--bg); color:var(--dark); font-family:'DM Sans',sans-serif; outline:none; width:100%; }
+.sol-aprobar { padding:8px; background:var(--green); color:white; border:none; border-radius:4px; font-size:12px; font-weight:600; cursor:pointer; }
+.sol-rechazar { padding:8px; background:var(--red); color:white; border:none; border-radius:4px; font-size:12px; font-weight:600; cursor:pointer; }
+.sol-empty { padding:20px; text-align:center; font-size:13px; color:var(--muted); }
+
+/* LOADER */
+.loader-overlay { position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:998; display:none; flex-direction:column; align-items:center; justify-content:center; gap:16px; }
+.loader-spinner { width:48px; height:48px; border:4px solid rgba(255,255,255,.2); border-top-color:var(--gold); border-radius:50%; animation:spin .8s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.loader-text { color:white; font-size:14px; font-weight:600; letter-spacing:1px; }
+
+/* GUIA */
+.guia-section { width:min(480px,100%); margin-top:16px; padding:0 16px 0; }
+.guia-card { background:var(--card); border:2px solid var(--dark); padding:20px; box-shadow:6px 6px 0 rgba(0,0,0,.1); }
+.guia-block { margin-bottom:18px; }
+.guia-block:last-child { margin-bottom:0; }
+.guia-subtitle { font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:var(--dark); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.guia-item { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid var(--border); font-size:13px; }
+.guia-item:last-child { border-bottom:none; }
+.guia-item-label { color:var(--dark); }
+.guia-item-pts { font-weight:700; font-family:'Playfair Display',serif; font-size:15px; }
+.guia-item-pts.pos { color:var(--green); }
+.guia-item-pts.neg { color:var(--red); }
+.guia-paga-box { background:linear-gradient(135deg,#f8f0d8,#fdf4e3); border:2px solid var(--gold); border-radius:8px; padding:16px; margin-top:6px; }
+.guia-paga-title { font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:var(--dark); margin-bottom:10px; }
+.guia-paga-item { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid rgba(201,168,76,.3); font-size:13px; }
+.guia-paga-item:last-child { border-bottom:none; }
+.guia-paga-val { font-weight:700; font-family:'Playfair Display',serif; font-size:15px; color:var(--gold); }
+.guia-nota { font-size:11px; color:var(--muted); margin-top:10px; line-height:1.6; font-style:italic; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="panelLogin">
+  <div style="margin-top:50px;">
+    <div class="login-title">Puntos<br>Lucciana</div>
+    <div class="login-sub" style="margin-top:8px;">sistema de puntos</div>
+  </div>
+  <div class="login-card" style="margin-top:30px;">
+    <span class="login-label">Introduce tu PIN</span>
+    <input type="password" class="login-pin" id="inpLoginPin" maxlength="4" placeholder="****" oninput="if(this.value.length===4) entrar()">
+    <button class="login-btn" onclick="entrar()">Entrar</button>
+    <div class="login-err" id="loginErr">PIN incorrecto</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="panelApp">
+  <div class="header">
+    <div class="header-left">
+      <div class="eyebrow">sistema de puntos</div>
+      <div class="htitle">Puntos Lucciana</div>
+    </div>
+    <div>
+      <div class="header-user" id="headerUser"></div>
+      <div class="header-logout" onclick="cerrarSesion()">Cerrar sesion</div>
+    </div>
+  </div>
+  <div class="goldbar"></div>
+
+  <!-- PUNTOS -->
+  <div class="score-section">
+    <div class="score-card">
+      <div class="score-label">Puntuacion actual</div>
+      <img id="imgEstado" class="score-img" src="" alt="">
+      <div class="score-number" id="scoreNumber">0</div>
+      <div class="score-pts">puntos</div>
+    </div>
+  </div>
+
+  <!-- ACCIONES (solo moderadores) -->
+  <div class="actions-section" id="actionsSection">
+    <div class="actions-card">
+      <div class="slabel">Asignar puntos</div>
+      <div class="action-row">
+        <input type="number" class="pts-input" id="inpPts" placeholder="10" min="1">
+        <input type="text" class="motivo-input" id="inpMotivo" placeholder="Motivo...">
+      </div>
+      <div style="margin-top:10px;">
+        <input type="file" id="inpFoto" accept="image/*" capture="environment" style="display:none;" onchange="previewFoto(this)">
+        <button type="button" onclick="document.getElementById('inpFoto').click()" style="width:100%;padding:10px;border:2px dashed var(--border);border-radius:4px;background:var(--bg);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:8px;">
+          <span style="font-size:20px;">📷</span> Añadir foto de prueba (opcional)
+        </button>
+        <img id="fotoPreviewImg" src="" style="display:none;width:100%;max-height:160px;object-fit:cover;border-radius:4px;margin-top:8px;border:1px solid var(--border);" onclick="quitarFoto()">
+        <div id="fotoQuitarBtn" style="display:none;text-align:center;margin-top:4px;font-size:11px;color:var(--red);cursor:pointer;" onclick="quitarFoto()">✕ Quitar foto</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-add" onclick="asignarPuntos(1)">+ Sumar</button>
+        <button class="btn btn-sub" onclick="asignarPuntos(-1)">- Restar</button>
+      </div>
+      <button class="btn-reset" id="btnReset" style="display:none;" onclick="confirmarReset()">Resetear puntuacion a 0</button>
+      <button class="btn-reset" id="btnBorrarHistorial" style="display:none;margin-top:6px;border-color:#c0392b;color:#c0392b;" onclick="confirmarBorrarHistorial()">Borrar historial completo</button>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs-section" style="margin-top:16px;">
+    <div class="tabs">
+      <button class="tab on" id="tabPuntos" onclick="verTab('puntos')">Puntuacion</button>
+      <button class="tab" id="tabHist" onclick="verTab('hist')">Historial</button>
+      <button class="tab" id="tabGuia" onclick="verTab('guia')">Guia</button>
+      <button class="tab" id="tabSol" onclick="verTab('sol')" style="display:none;">Solicitudes <span id="solBadge" style="display:none;background:var(--red);color:white;border-radius:50%;padding:1px 5px;font-size:9px;margin-left:3px;"></span></button>
+    </div>
+  </div>
+
+  <!-- GUIA -->
+  <div class="guia-section" id="guiaSection" style="display:none;">
+    <div class="guia-card">
+
+      <div class="guia-block">
+        <div class="guia-subtitle">&#x2795; Ejemplos de bonificaciones</div>
+        <div class="guia-item"><span class="guia-item-label">Registrar caminata</span><span class="guia-item-pts pos">+4 pts</span></div>
+        <div class="guia-item"><span class="guia-item-label">Ayudar en casa sin pedirlo</span><span class="guia-item-pts pos">+3 pts</span></div>
+        <div class="guia-item"><span class="guia-item-label">Bajar la basura</span><span class="guia-item-pts pos">+2 pts</span></div>
+        <div class="guia-item"><span class="guia-item-label">Acostarse a la hora sin protestar</span><span class="guia-item-pts pos">+1 pt</span></div>
+        <div class="guia-subtitle" style="margin-top:14px;">&#x1F3E0; Tareas del hogar</div>
+        <div class="guia-item"><span class="guia-item-label">Habitacion recogida (por dia)</span><span class="guia-item-pts pos">+1 pt</span></div>
+        <div class="guia-item"><span class="guia-item-label">Baño limpio (por dia)</span><span class="guia-item-pts pos">+1 pt</span></div>
+        <div class="guia-item"><span class="guia-item-label">Sacar cacharros del lavavajillas</span><span class="guia-item-pts pos">+1 pt</span></div>
+      </div>
+
+      <div class="guia-block">
+        <div class="guia-subtitle">&#x2796; Ejemplos de penalizaciones</div>
+        <div class="guia-item"><span class="guia-item-label">No hacer algo en el momento que se pide</span><span class="guia-item-pts neg">-2 pt</span></div>
+        <div class="guia-item"><span class="guia-item-label">Contestar mal</span><span class="guia-item-pts neg">-3 pts</span></div>
+        <div class="guia-item"><span class="guia-item-label">Dejar tus cosas por cualquier lado sin recoger</span><span class="guia-item-pts neg">-1 pts</span></div>
+        <div class="guia-item"><span class="guia-item-label">Seguir molestando cuando te dicen para</span><span class="guia-item-pts neg">-1 pt</span></div>
+      </div>
+
+      <div class="guia-block" id="guiaPaga" style="display:none;">
+        <div class="guia-subtitle">&#x1F4B0; Tu paga</div>
+        <div class="guia-paga-box">
+          <div class="guia-paga-title">Cada punto vale 0,20 euros</div>
+          <div class="guia-paga-item"><span>0 puntos</span><span class="guia-paga-val">0,00 extra</span></div>
+          <div class="guia-paga-item"><span>+5 puntos</span><span class="guia-paga-val" style="color:var(--green);">+1,00 euro</span></div>
+          <div class="guia-paga-item"><span>+10 puntos</span><span class="guia-paga-val" style="color:var(--green);">+2,00 euros</span></div>
+          <div class="guia-paga-item"><span>+25 puntos</span><span class="guia-paga-val" style="color:var(--green);">+5,00 euros</span></div>
+          <div class="guia-paga-item"><span>-5 puntos</span><span class="guia-paga-val" style="color:var(--red);">-1,00 euro</span></div>
+          <div class="guia-paga-item"><span>-10 puntos</span><span class="guia-paga-val" style="color:var(--red);">-2,00 euros</span></div>
+          <p class="guia-nota">Tus 5 euros semanales base son aparte. Los puntos solo suman o restan sobre ese importe. Minimo 0 euros de ajuste.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- SOLICITUDES MODERADOR -->
+  <div class="sol-section" id="solSection" style="display:none;">
+    <div class="sol-card" id="solCard">
+      <div class="sol-empty" id="solEmpty">No hay solicitudes pendientes</div>
+    </div>
+  </div>
+
+  <!-- SOLICITAR PUNTOS LUCCIANA -->
+  <div class="sol-section" id="solLuccianaSection" style="display:none;">
+    <div class="sol-card">
+      <div class="slabel">Solicitar puntos</div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6;">Describe la tarea que has hecho, adjunta una foto como prueba y Carlos la revisara.</p>
+      <input type="text" id="solMotivo" placeholder="Que has hecho..." style="width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:4px;background:var(--bg);font-family:DM Sans,sans-serif;font-size:14px;color:var(--dark);outline:none;margin-bottom:10px;">
+      <input type="file" id="solFoto" accept="image/*" capture="environment" style="display:none;" onchange="previewSolFoto(this)">
+      <button type="button" onclick="document.getElementById('solFoto').click()" style="width:100%;padding:10px;border:2px dashed var(--border);border-radius:4px;background:var(--bg);cursor:pointer;font-family:DM Sans,sans-serif;font-size:13px;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:8px;">
+        <span style="font-size:20px;">&#x1F4F7;</span> Foto de prueba (obligatoria)
+      </button>
+      <img id="solFotoPreview" src="" style="display:none;width:100%;max-height:160px;object-fit:cover;border-radius:4px;margin-top:8px;border:1px solid var(--border);">
+      <button class="btn" style="margin-top:12px;" onclick="enviarSolicitud()">Enviar solicitud</button>
+    </div>
+  </div>
+
+  <!-- HISTORIAL -->
+  <div class="hist-section">
+    <div class="hist-card" id="histCard">
+      <div class="hist-empty" id="histEmpty">Aun no hay movimientos</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL WHATSAPP -->
+<div class="modal-bg" id="modalWA">
+  <div class="modal">
+    <div class="modal-title" id="modalWATitle">+5 puntos sumados</div>
+    <div class="modal-text">Quieres notificarselo a Lucciana por WhatsApp?</div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="cerrarModalWA()">No</button>
+      <button class="modal-confirm" style="background:var(--green);" onclick="enviarWA()">Si, enviar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL BORRAR HISTORIAL -->
+<div class="modal-bg" id="modalBorrarHist">
+  <div class="modal">
+    <div class="modal-title">Borrar historial</div>
+    <div class="modal-text">Se eliminaran todos los movimientos del historial. La puntuacion actual no cambia. Esta accion no se puede deshacer.</div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="cerrarModalBorrarHist()">Cancelar</button>
+      <button class="modal-confirm" onclick="ejecutarBorrarHistorial()">Si, borrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL RESET -->
+<div class="modal-bg" id="modalReset">
+  <div class="modal">
+    <div class="modal-title">Resetear puntuacion</div>
+    <div class="modal-text">Se borrara la puntuacion actual y volvera a 0. El historial se conservara con una entrada de reset. Esta accion no se puede deshacer.</div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="cerrarModal()">Cancelar</button>
+      <button class="modal-confirm" onclick="ejecutarReset()">Si, resetear</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="loader-overlay" id="loaderOverlay">
+  <div class="loader-spinner"></div>
+  <div class="loader-text">Subiendo foto...</div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+<script src="puntos_lucciana.js"></script>
+</body>
+</html>
