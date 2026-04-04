@@ -154,7 +154,8 @@ function notificarLucciana(cambio, nuevo, motivo) {
   pendingWAmsg = emoji + ' Lucciana, ' + usuarioActual.nombre + ' te ha ' +
     (cambio > 0 ? 'sumado ' : 'restado ') +
     signo + cambio + ' puntos por: "' + motivo + '".' +
-    '\nTu puntuacion actual es ' + (nuevo > 0 ? '+' : '') + nuevo + ' puntos.';
+    '\\nTu puntuacion actual es ' + (nuevo > 0 ? '+' : '') + nuevo + ' puntos.' +
+'\\n\\nVer tu puntuacion: https://tinyurl.com/Puntos-Lucciana';
   var titulo = (cambio > 0 ? '+' : '') + cambio + ' puntos ' + (cambio > 0 ? 'sumados' : 'restados');
   document.getElementById('modalWATitle').textContent = titulo;
   document.getElementById('modalWA').style.display = 'flex';
