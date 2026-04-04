@@ -82,10 +82,10 @@ function actualizarScore(n) {
   var img = document.getElementById('imgEstado');
   if (usuarioActual && usuarioActual.nombre === 'Lucciana') {
     if (n > 0) {
-      img.src = 'https://carlosmhz.github.io/APK/happy tyler.avif';
+      img.src = 'https://carlosmhz.github.io/APK/happy.jpg';
       img.className = 'score-img visible';
     } else if (n < 0) {
-      img.src = 'https://carlosmhz.github.io/APK/sad tyler.jpg';
+      img.src = 'https://carlosmhz.github.io/APK/sad.jpg';
       img.className = 'score-img visible';
     } else {
       img.className = 'score-img';
