@@ -5,8 +5,8 @@ var fotoPreview   = null; // URL de la foto pendiente de subir
 var WHATSAPP_NUM  = '34685688139';
 
 var USERS = {
-  '1984': { nombre: 'Carlos',   rol: 'moderador' },
-  '2233': { nombre: 'Milu',     rol: 'moderador' },
+  '1990': { nombre: 'Carlos',   rol: 'moderador' },
+  '1992': { nombre: 'Milu',     rol: 'moderador' },
   '4455': { nombre: 'Abuelos',  rol: 'moderador' },
   '1111': { nombre: 'Lucciana', rol: 'lector'    }
 };
