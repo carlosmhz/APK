@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tour de Cervezas · Cracovia · José Miguel</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Literata:ital,wght@0,300;0,600;1,300&family=Inconsolata:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0b06;
+    --dark: #161009;
+    --card: #1c1408;
+    --card2: #201810;
+    --border: rgba(255,200,80,0.1);
+    --amber: #f0a820;
+    --amber2: #c8780a;
+    --foam: #fef8e8;
+    --muted: #7a6840;
+    --white: #f5edd8;
+    --green: #3aaa6a;
+    --red: #cc3030;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Literata', serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* BUBBLES BG */
+  .bubbles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .bubble {
+    position: absolute;
+    bottom: -20px;
+    border-radius: 50%;
+    background: rgba(240,168,32,0.06);
+    animation: rise linear infinite;
+  }
+
+  @keyframes rise {
+    to { transform: translateY(-110vh); opacity: 0; }
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    z-index: 1;
+    padding: 52px 22px 36px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(240,168,32,0.08) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mug {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 6px;
+    animation: tilt 3s ease-in-out infinite;
+  }
+
+  @keyframes tilt {
+    0%,100% { transform: rotate(-5deg); }
+    50%      { transform: rotate(5deg); }
+  }
+
+  .eyebrow {
+    font-family: 'Inconsolata', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 13vw, 5.5rem);
+    line-height: 0.92;
+    letter-spacing: 2px;
+    color: var(--white);
+  }
+
+  .hero-title em {
+    color: var(--amber);
+    font-style: normal;
+    display: block;
+  }
+
+  .hero-sub {
+    font-family: 'Inconsolata', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-top: 12px;
+    text-transform: uppercase;
+  }
+
+  .hero-pills {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(240,168,32,0.1);
+    border: 1px solid rgba(240,168,32,0.25);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-family: 'Inconsolata', monospace;
+    font-size: 11px;
+    color: var(--amber);
+  }
+
+  /* TABS */
+  .tabs-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(14,11,6,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tabs {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tab {
+    flex-shrink: 0;
+    padding: 13px 16px;
+    font-family: 'Inconsolata', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all 0.2s;
+  }
+
+  .tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+
+  /* PANELS */
+  .content {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 26px 16px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .panel { display: none; }
+  .panel.active { display: block; animation: up 0.3s ease; }
+
+  @keyframes up {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RUTA TIMELINE */
+  .ruta-intro {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+    font-family: 'Inconsolata', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .ruta-intro b { color: var(--amber); }
+
+  .stop {
+    display: flex;
+    gap: 0;
+    margin-bottom: 0;
+    position: relative;
+  }
+
+  /* Timeline line */
+  .stop-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 44px;
+    flex-shrink: 0;
+  }
+
+  .stop-dot {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--amber2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    color: var(--bg);
+    flex-shrink: 0;
+    z-index: 1;
+    position: relative;
+    border: 2px solid var(--amber);
+  }
+
+  .stop-dot.start { background: var(--amber); }
+
+  .stop-connector {
+    width: 2px;
+    flex: 1;
+    min-height: 20px;
+    background: linear-gradient(to bottom, var(--amber2), rgba(240,168,32,0.15));
+    margin: 4px 0;
+  }
+
+  .stop-body {
+    flex: 1;
+    padding-bottom: 26px;
+    padding-left: 14px;
+  }
+
+  .stop:last-child .stop-connector { display: none; }
+  .stop:last-child .stop-body { padding-bottom: 0; }
+
+  /* BAR CARD */
+  .bar-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .bar-card:hover { border-color: rgba(240,168,32,0.3); }
+
+  .bar-header {
+    padding: 16px 18px 12px;
+    cursor: pointer;
+  }
+
+  .bar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .bar-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .bar-price {
+    font-family: 'Inconsolata', monospace;
+    font-size: 11px;
+    color: var(--green);
+    border: 1px solid rgba(58,170,106,0.3);
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .bar-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .btag {
+    font-family: 'Inconsolata', monospace;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 2px 7px;
+    border-radius: 3px;
+  }
+
+  .btag.amber { color: var(--amber); border-color: rgba(240,168,32,0.3); }
+  .btag.red   { color: #e06060; border-color: rgba(204,48,48,0.3); }
+
+  .bar-desc {
+    font-size: 13px;
+    line-height: 1.65;
+    color: #b0956a;
+    font-style: italic;
+  }
+
+  .bar-expand {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 16px 18px;
+    background: var(--card2);
+  }
+
+  .bar-card.open .bar-expand { display: block; animation: up 0.25s ease; }
+
+  .bar-expand-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .info-block .label {
+    font-family: 'Inconsolata', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+
+  .info-block .val {
+    font-size: 13px;
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  .must-try {
+    background: rgba(240,168,32,0.07);
+    border: 1px solid rgba(240,168,32,0.2);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+  }
+
+  .must-try .mt-label {
+    font-family: 'Inconsolata', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 5px;
+  }
+
+  .must-try .mt-text {
+    font-size: 13px;
+    color: var(--white);
+    line-height: 1.5;
+  }
+
+  .tip-inline {
+    font-family: 'Inconsolata', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+    border-left: 2px solid rgba(240,168,32,0.3);
+    padding-left: 10px;
+  }
+
+  .expand-btn {
+    font-family: 'Inconsolata', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
+    transition: color 0.2s;
+  }
+
+  .bar-card.open .expand-btn { color: var(--amber); }
+
+  .expand-arrow {
+    transition: transform 0.2s;
+    display: inline-block;
+  }
+
+  .bar-card.open .expand-arrow { transform: rotate(90deg); }
+
+  /* CERVEZAS POLACAS */
+  .cerveza-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .cerveza-card.open { border-color: rgba(240,168,32,0.4); }
+
+  .c-icon { font-size: 2.2rem; flex-shrink: 0; }
+
+  .c-body { flex: 1; }
+
+  .c-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    color: var(--white);
+    margin-bottom: 3px;
+  }
+
+  .c-style {
+    font-family: 'Inconsolata', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .c-short { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  .c-expand {
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: #b0956a;
+    line-height: 1.65;
+    animation: up 0.2s ease;
+  }
+
+  .cerveza-card.open .c-expand { display: block; }
+
+  .c-arrow {
+    font-size: 10px;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+    margin-top: 5px;
+  }
+
+  .cerveza-card.open .c-arrow { transform: rotate(90deg); color: var(--amber); }
+
+  /* CHECKLIST DESPEDIDA */
+  .check-intro {
+    background: var(--card);
+    border: 1px solid rgba(204,48,48,0.2);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    font-family: 'Inconsolata', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .check-intro b { color: var(--red); }
+
+  .checklist { display: flex; flex-direction: column; gap: 10px; }
+
+  .check-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .check-item:hover { border-color: rgba(240,168,32,0.25); }
+
+  .check-item.done {
+    border-color: rgba(58,170,106,0.4);
+    background: rgba(58,170,106,0.05);
+  }
+
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    border: 2px solid var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+    transition: all 0.2s;
+  }
+
+  .check-item.done .check-box {
+    background: var(--green);
+    border-color: var(--green);
+  }
+
+  .check-text { font-size: 13px; color: var(--white); line-height: 1.4; }
+
+  .check-item.done .check-text { color: var(--muted); text-decoration: line-through; }
+
+  .check-bar-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    color: var(--amber);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    display: block;
+  }
+
+  .progress-wrap {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .progress-bar-bg {
+    height: 6px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 3px;
+    margin: 10px 0 8px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--amber2), var(--amber));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  .progress-label {
+    font-family: 'Inconsolata', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .progress-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  /* TIPS PANEL */
+  .tip-row {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 14px;
+  }
+
+  .t-icon { font-size: 1.6rem; flex-shrink: 0; width: 36px; text-align: center; }
+
+  .t-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    color: var(--white);
+    margin-bottom: 5px;
+  }
+
+  .t-text {
+    font-family: 'Inconsolata', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .section-label {
+    font-family: 'Inconsolata', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+</style>
+</head>
+<body>
+
+<!-- ANIMATED BUBBLES -->
+<div class="bubbles" id="bubbles"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="mug">🍺</span>
+  <div class="eyebrow">Despedida de Soltero · José Miguel</div>
+  <div class="hero-title">TOUR DE<em>CERVEZAS</em></div>
+  <div class="hero-sub">Cracovia · Polonia · 4 tíos · 1 noche</div>
+  <div class="hero-pills">
+    <span class="pill">🗺 6 paradas</span>
+    <span class="pill">🍺 Craft & Clásica</span>
+    <span class="pill">💶 Desde 1 € / caña</span>
+    <span class="pill">📍 Kazimierz</span>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab active" onclick="show('ruta', this)">🗺 La Ruta</button>
+    <button class="tab" onclick="show('cervezas', this)">🍺 Cervezas</button>
+    <button class="tab" onclick="show('checklist', this)">🎯 Checklist</button>
+    <button class="tab" onclick="show('tips', this)">⚡ Tips</button>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- PANEL RUTA -->
+  <div class="panel active" id="panel-ruta">
+
+    <div class="ruta-intro">
+      Ruta de <b>~4 horas</b> por lo mejor de la escena cervecera de Cracovia.<br>
+      Orden optimizado: empezáis en el centro y acabáis en <b>Kazimierz</b>, el barrio donde termina la noche. Pulsa cada parada para ver el detalle.
+    </div>
+
+    <!-- PARADA 1 -->
+    <div class="stop">
+      <div class="stop-line">
+        <div class="stop-dot start">1</div>
+        <div class="stop-connector"></div>
+      </div>
+      <div class="stop-body">
+        <div class="bar-card" onclick="toggleBar(this)">
+          <div class="bar-header">
+            <div class="bar-top">
+              <div class="bar-name">House of Beer</div>
+              <div class="bar-price">~1 € / caña</div>
+            </div>
+            <div class="bar-tags">
+              <span class="btag amber">200 cervezas</span>
+              <span class="btag">Casco Antiguo</span>
+              <span class="btag">Craft + Internacional</span>
+            </div>
+            <div class="bar-desc">El templo absoluto de la cerveza en Cracovia. Para calentar motores con variedad brutal.</div>
+            <div class="expand-btn">Ver más <span class="expand-arrow">▶</span></div>
+          </div>
+          <div class="bar-expand">
+            <div class="bar-expand-grid">
+              <div class="info-block">
+                <div class="label">Dirección</div>
+                <div class="val">Świętego Tomasza 35, Casco Antiguo</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Horario</div>
+                <div class="val">12:00 – 2:00h</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Ambiente</div>
+                <div class="val">Elegante, muebles de roble oscuro, techos altos</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Para vosotros</div>
+                <div class="val">Primera parada. Pedid la cerveza del día a 1 € y explorad la carta</div>
+              </div>
+            </div>
+            <div class="must-try">
+              <div class="mt-label">🍺 Qué pedir</div>
+              <div class="mt-text">La "cerveza del día" (la más barata, ~1 €). Luego probad algo polaco craft: preguntad al camarero qué tienen de producción local esta semana.</div>
+            </div>
+            <div class="tip-inline">Tiene sin gluten. Perfecto si alguien del grupo lo necesita. El personal habla inglés sin problema.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARADA 2 -->
+    <div class="stop">
+      <div class="stop-line">
+        <div class="stop-dot">2</div>
+        <div class="stop-connector"></div>
+      </div>
+      <div class="stop-body">
+        <div class="bar-card" onclick="toggleBar(this)">
+          <div class="bar-header">
+            <div class="bar-top">
+              <div class="bar-name">Multi Qlti Tap Bar</div>
+              <div class="bar-price">Precio medio</div>
+            </div>
+            <div class="bar-tags">
+              <span class="btag amber">20+ grifos rotativos</span>
+              <span class="btag">C/ Szewska</span>
+              <span class="btag">Zona fumadores</span>
+            </div>
+            <div class="bar-desc">El bar craft más completo del centro. Grifos que cambian cada semana. Los locales lo conocen bien.</div>
+            <div class="expand-btn">Ver más <span class="expand-arrow">▶</span></div>
+          </div>
+          <div class="bar-expand">
+            <div class="bar-expand-grid">
+              <div class="info-block">
+                <div class="label">Dirección</div>
+                <div class="val">ul. Szewska, cerca de la Plaza del Mercado</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Ambiente</div>
+                <div class="val">Simple, elegante, murales en paredes. Muy local.</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Especialidad</div>
+                <div class="val">Rotación constante: IPAs, stouts, sours polacos</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Truco</div>
+                <div class="val">Pedid en varios tamaños para probar más estilos</div>
+              </div>
+            </div>
+            <div class="must-try">
+              <div class="mt-label">🍺 Qué pedir</div>
+              <div class="mt-text">Lo que tengan de IPA polaca esa semana. Siempre hay algo de la escena craft local en rotación. Preguntad cuál es la más rara del grifo.</div>
+            </div>
+            <div class="tip-inline">Tiene interior/exterior con zona fumadores. Buen sitio para reagruparse antes de cruzar a Kazimierz.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARADA 3 -->
+    <div class="stop">
+      <div class="stop-line">
+        <div class="stop-dot">3</div>
+        <div class="stop-connector"></div>
+      </div>
+      <div class="stop-body">
+        <div class="bar-card" onclick="toggleBar(this)">
+          <div class="bar-header">
+            <div class="bar-top">
+              <div class="bar-name">Nalej Się</div>
+              <div class="bar-price">Self-service</div>
+            </div>
+            <div class="bar-tags">
+              <span class="btag amber">Autoservicio con tarjeta</span>
+              <span class="btag">Centro</span>
+              <span class="btag red">Experiencia única</span>
+            </div>
+            <div class="bar-desc">El primer multitap de autoservicio de Cracovia. Recargas una tarjeta y te sirves tú mismo. Ideal para una despedida.</div>
+            <div class="expand-btn">Ver más <span class="expand-arrow">▶</span></div>
+          </div>
+          <div class="bar-expand">
+            <div class="bar-expand-grid">
+              <div class="info-block">
+                <div class="label">Web</div>
+                <div class="val">nalejse.pl</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Sistema</div>
+                <div class="val">Tarjeta recargable, pagas por cl exactos servidos</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Ventaja</div>
+                <div class="val">Pruebas muchas cervezas sin comprometerte a una jarra</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Tipo</div>
+                <div class="val">Cervezas artesanales regionales e internacionales</div>
+              </div>
+            </div>
+            <div class="must-try">
+              <div class="mt-label">🎯 Para la despedida</div>
+              <div class="mt-text">Haced una mini cata entre los 4: cada uno elige una cerveza diferente del grifo y todos prueban todas. El que elige peor paga ronda.</div>
+            </div>
+            <div class="tip-inline">Perfecto para amantes de la cerveza que quieren explorar estilos sin arriesgar demasiado dinero en una pinta que no les guste.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARADA 4 — KAZIMIERZ -->
+    <div class="stop">
+      <div class="stop-line">
+        <div class="stop-dot">4</div>
+        <div class="stop-connector"></div>
+      </div>
+      <div class="stop-body">
+        <div class="bar-card" onclick="toggleBar(this)">
+          <div class="bar-header">
+            <div class="bar-top">
+              <div class="bar-name">Eszeweria</div>
+              <div class="bar-price">Precio bajo</div>
+            </div>
+            <div class="bar-tags">
+              <span class="btag amber">Kazimierz</span>
+              <span class="btag">Jardín trasero</span>
+              <span class="btag">Música en directo</span>
+            </div>
+            <div class="bar-desc">Bienvenidos a Kazimierz. Eszeweria es la primera parada del barrio judío: romántica, bohemia, con jardín escondido y precios de escándalo.</div>
+            <div class="expand-btn">Ver más <span class="expand-arrow">▶</span></div>
+          </div>
+          <div class="bar-expand">
+            <div class="bar-expand-grid">
+              <div class="info-block">
+                <div class="label">Dirección</div>
+                <div class="val">ul. Józefa, Kazimierz</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Horario</div>
+                <div class="val">Desde las 10:00h. Cierre tarde.</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Atmósfera</div>
+                <div class="val">Luces tenues, sillones retro, incienso, jardín trasero</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Extras</div>
+                <div class="val">A veces música en directo. Zona fumadores.</div>
+              </div>
+            </div>
+            <div class="must-try">
+              <div class="mt-label">🍺 Qué pedir</div>
+              <div class="mt-text">Cerveza artesana de barril, la que tengan. Y si alguien quiere vodka, pedid el vodka con limón de la casa: es su clásico agridulce.</div>
+            </div>
+            <div class="tip-inline">Al salir, girad a la derecha por Józefa: hay galerías de arte, tiendas de antigüedades y la Sinagoga Alta a 2 minutos. Vale la pena verlo de noche.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARADA 5 -->
+    <div class="stop">
+      <div class="stop-line">
+        <div class="stop-dot">5</div>
+        <div class="stop-connector"></div>
+      </div>
+      <div class="stop-body">
+        <div class="bar-card" onclick="toggleBar(this)">
+          <div class="bar-header">
+            <div class="bar-top">
+              <div class="bar-name">Alchemia</div>
+              <div class="bar-price">Precio bajo</div>
+            </div>
+            <div class="bar-tags">
+              <span class="btag amber">Leyenda de Kazimierz</span>
+              <span class="btag">4 salas con velas</span>
+              <span class="btag">Conciertos</span>
+            </div>
+            <div class="bar-desc">El bar más mítico del barrio judío. Antiguo punto de reunión de alquimistas, luego hogar de familias judías. Hoy, el templo de la noche de Cracovia.</div>
+            <div class="expand-btn">Ver más <span class="expand-arrow">▶</span></div>
+          </div>
+          <div class="bar-expand">
+            <div class="bar-expand-grid">
+              <div class="info-block">
+                <div class="label">Dirección</div>
+                <div class="val">ul. Estery 5, Kazimierz</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Ambiente</div>
+                <div class="val">Vintage decadente, 4 salas a la luz de velas, historia palpable</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Historia</div>
+                <div class="val">El local conserva las divisiones de las habitaciones judías originales</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Programación</div>
+                <div class="val">Conciertos y noches culturales frecuentes</div>
+              </div>
+            </div>
+            <div class="must-try">
+              <div class="mt-label">🍺 Qué pedir</div>
+              <div class="mt-text">La selección de bebidas es amplia. Buen momento para una ronda de cervezas polacas clásicas (Żywiec, Okocim) a modo de homenaje antes de la recta final.</div>
+            </div>
+            <div class="tip-inline">Llegad antes de las 23:00h para tener sitio sentado con comodidad. Si hay concierto esa noche, quedaos. La programación vale la pena.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARADA 6 — FINAL -->
+    <div class="stop">
+      <div class="stop-line">
+        <div class="stop-dot" style="background:var(--red);border-color:#e06060;">🏁</div>
+      </div>
+      <div class="stop-body">
+        <div class="bar-card" onclick="toggleBar(this)">
+          <div class="bar-header">
+            <div class="bar-top">
+              <div class="bar-name">Singer Café</div>
+              <div class="bar-price">~3,45 € / 500ml</div>
+            </div>
+            <div class="bar-tags">
+              <span class="btag amber">After hours desde 2AM</span>
+              <span class="btag">Kazimierz</span>
+              <span class="btag red">La recta final</span>
+            </span>
+            </div>
+            <div class="bar-desc">La última parada. Máquinas de coser Singer como mesas, papel pintado de la abuela y, a partir de las 2AM, la gente baila sobre las mesas. La noche de José Miguel acaba aquí.</div>
+            <div class="expand-btn">Ver más <span class="expand-arrow">▶</span></div>
+          </div>
+          <div class="bar-expand">
+            <div class="bar-expand-grid">
+              <div class="info-block">
+                <div class="label">Dirección</div>
+                <div class="val">ul. Estery 20, Kazimierz</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Horario</div>
+                <div class="val">9:00h – 2:00h (fin de semana hasta tarde)</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Precio cerveza</div>
+                <div class="val">500ml por 14,50 zł (~3,45 €). Shots vodka 2 €.</div>
+              </div>
+              <div class="info-block">
+                <div class="label">Self-service</div>
+                <div class="val">Pedís vosotros en la barra. Sin servicio a mesa.</div>
+              </div>
+            </div>
+            <div class="must-try">
+              <div class="mt-label">🎯 Misión final</div>
+              <div class="mt-text">Conseguir que José Miguel baile sobre una de las mesas Singer. Es la tradición del local. Si lo hace, la ronda es vuestra. Si no, la paga él.</div>
+            </div>
+            <div class="tip-inline">Antes de salir, pilad una <b>zapiekanka</b> en la Plaza Nowy, a 3 minutos andando. Es el final oficial de cualquier noche en Kazimierz.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PANEL CERVEZAS -->
+  <div class="panel" id="panel-cervezas">
+
+    <div class="section-label">Cervezas polacas que tenéis que probar</div>
+
+    <div class="cerveza-card" onclick="toggleCerveza(this)">
+      <div class="c-icon">🏆</div>
+      <div class="c-body">
+        <div class="c-name">Żywiec</div>
+        <div class="c-style">Lager clásica · La más conocida</div>
+        <div class="c-short">La embajadora de Polonia en el mundo. Clara, fácil, equilibrada. La encontraréis en todos lados.</div>
+        <div class="c-expand">Fundada en 1856 en la ciudad de Żywiec, al sur de Polonia. Es la lager polaca más exportada internacionalmente. Suave, con cuerpo ligero y final limpio. Ideal para comparar con otras y entender el sabor base de la cerveza polaca.</div>
+      </div>
+      <div class="c-arrow">▶</div>
+    </div>
+
+    <div class="cerveza-card" onclick="toggleCerveza(this)">
+      <div class="c-icon">🔶</div>
+      <div class="c-body">
+        <div class="c-name">Okocim</div>
+        <div class="c-style">Lager tradicional · La del pub</div>
+        <div class="c-short">Más cuerpo que Żywiec, con un amargor suave y final maltoso. La que piden los polacos en el bar de siempre.</div>
+        <div class="c-expand">Una de las cervezas más antiguas de Polonia, producida desde 1845 en la localidad de Brzesko. Tiene un perfil más robusto que otras lagers polacas, con notas de malta y un toque amargo moderado. El camarero polaco de toda la vida la sirve sin preguntar.</div>
+      </div>
+      <div class="c-arrow">▶</div>
+    </div>
+
+    <div class="cerveza-card" onclick="toggleCerveza(this)">
+      <div class="c-icon">🌿</div>
+      <div class="c-body">
+        <div class="c-name">Ursa Maior (craft)</div>
+        <div class="c-style">Craft de Bieszczady · Artesanal de montaña</div>
+        <div class="c-short">Elaborada en microcervecería propia en las montañas Bieszczady. La más "honesta" de las craft polacas.</div>
+        <div class="c-expand">La cervecería Ursa Maior tiene su propia barra en Cracovia. Producción pequeña, recetas con agua de montaña de los Bieszczady. El resultado son cervezas con carácter propio, alejadas del mercado masivo. Si la encontráis en algún grifo, es la que hay que pedir.</div>
+      </div>
+      <div class="c-arrow">▶</div>
+    </div>
+
+    <div class="cerveza-card" onclick="toggleCerveza(this)">
+      <div class="c-icon">🍋</div>
+      <div class="c-body">
+        <div class="c-name">Grodziskie</div>
+        <div class="c-style">Estilo histórico polaco · Ahumada de trigo</div>
+        <div class="c-short">El único estilo de cerveza polaco con historia propia: trigo ahumado, ligero y muy carbonatado. Difícil de encontrar, pero existe.</div>
+        <div class="c-expand">La Grodziskie es el único estilo cervecero genuinamente polaco, casi extinto durante el comunismo y resucitado por la revolución craft. Elaborada con malta de trigo ahumada en roble. Muy baja en alcohol (~3%), muy gasificada, con un aroma característico a humo suave. Si la veis en el menú de algún bar craft, es experiencia única.</div>
+      </div>
+      <div class="c-arrow">▶</div>
+    </div>
+
+    <div class="cerveza-card" onclick="toggleCerveza(this)">
+      <div class="c-icon">🌑</div>
+      <div class="c-body">
+        <div class="c-name">Porter Báltico</div>
+        <div class="c-style">Estilo oscuro · Alta graduación</div>
+        <div class="c-short">La cerveza fuerte de Europa del Este. Oscura, densa, con notas de chocolate y café. Cuidado con la graduación.</div>
+        <div class="c-expand">El Porter Báltico es el estilo oscuro propio del norte de Europa: graduación alta (7-10%), cuerpo denso, con notas de chocolate negro, café, caramelo y a veces ciruelas. Los polacos lo toman como digestivo. No es para tomar de un trago: es para saborear. Si queréis algo potente al final de la noche, este es.</div>
+      </div>
+      <div class="c-arrow">▶</div>
+    </div>
+
+  </div>
+
+  <!-- PANEL CHECKLIST -->
+  <div class="panel" id="panel-checklist">
+
+    <div class="check-intro">
+      Checklist del Tour de Cervezas de <b>José Miguel</b>.<br>
+      Marca cada parada y reto completado. La banda es el juez.
+    </div>
+
+    <span class="check-bar-label">📍 Paradas completadas</span>
+    <div class="checklist" id="cl-paradas">
+      <div class="check-item" onclick="toggleCheck(this, 'paradas')">
+        <div class="check-box">✓</div>
+        <div class="check-text">🏠 House of Beer — primera ronda de la noche</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this, 'paradas')">
+        <div class="check-box">✓</div>
+        <div class="check-text">🍺 Multi Qlti — IPA polaca de grifo</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this, 'paradas')">
+        <div class="check-box">✓</div>
+        <div class="check-text">🤖 Nalej Się — cata de autoservicio</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this, 'paradas')">
+        <div class="check-box">✓</div>
+        <div class="check-text">🌹 Eszeweria — jardín trasero de Kazimierz</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this, 'paradas')">
+        <div class="check-box">✓</div>
+        <div class="check-text">⚗️ Alchemia — el bar mítico de la ciudad</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this, 'paradas')">
+        <div class="check-box">✓</div>
+        <div class="check-text">🧵 Singer — José Miguel baila sobre la mesa</div>
+      </div>
+    </div>
+
+    <span class="check-bar-label">🎯 Retos del tour</span>
+    <div class="checklist" id="cl-retos">
+      <div class="check-item" onclick="toggleCheck(this, 'retos')">
+        <div class="check-box">✓</div>
+        <div class="check-text">Probar 5 cervezas distintas a lo largo de la noche</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this, 'retos')">
+        <div class="check-box">✓</div>
+        <div class="check-text">Pedir en polaco: "Jedno piwo poproszę" (una cerveza, por favor)</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this, 'retos')">
+        <div class="check-box">✓</div>
+        <div class="check-text">Zapiekanka de madrugada en la Plaza Nowy</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this, 'retos')">
+        <div class="check-box">✓</div>
+        <div class="check-text">Convencer a un local de que os recomiende su bar favorito</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-num" id="prog-num">0/10</div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="prog-bar" style="width:0%"></div>
+      </div>
+      <div class="progress-label">Misiones completadas · La noche de José Miguel</div>
+    </div>
+
+  </div>
+
+  <!-- PANEL TIPS -->
+  <div class="panel" id="panel-tips">
+
+    <div class="section-label">Lo que necesitáis saber</div>
+
+    <div class="tip-row">
+      <div class="t-icon">💶</div>
+      <div>
+        <div class="t-title">Cracovia es increíblemente barata</div>
+        <div class="t-text">Cerveza 500ml desde 1 € (la del día en House of Beer) hasta 3,50 € en sitios más premium. Shots de vodka a 2 €. Una noche de cervezas para 4 sale por 30-50 € en total si no os volvéis locos.</div>
+      </div>
+    </div>
+
+    <div class="tip-row">
+      <div class="t-icon">🤳</div>
+      <div>
+        <div class="t-title">Self-service en la mayoría de bares</div>
+        <div class="t-text">En muchos bares de Kazimierz (Singer, Eszeweria) pedís vosotros en la barra. No esperéis que el camarero os tome nota. Es parte de la cultura local, no mala educación.</div>
+      </div>
+    </div>
+
+    <div class="tip-row">
+      <div class="t-icon">🗺️</div>
+      <div>
+        <div class="t-title">La ruta tiene sentido geográfico</div>
+        <div class="t-text">Empezáis en el Casco Antiguo y acabáis en Kazimierz, a 15-20 min andando. No hace falta taxi entre paradas. El paseo por el puente Bernatka (Puente de los Amantes) sobre el Vístula es precioso de noche.</div>
+      </div>
+    </div>
+
+    <div class="tip-row">
+      <div class="t-icon">🚕</div>
+      <div>
+        <div class="t-title">Bolt para volver al hotel</div>
+        <div class="t-text">Al final de la noche, Bolt (el Uber polaco) funciona perfectamente. No cojáis taxis de la calle. El trayecto desde Kazimierz al centro cuesta 2-4 €.</div>
+      </div>
+    </div>
+
+    <div class="tip-row">
+      <div class="t-icon">🥖</div>
+      <div>
+        <div class="t-title">La zapiekanka es obligatoria</div>
+        <div class="t-text">Antes de volver, parad en la Plaza Nowy (a 3 min del Singer). La rotonda llena de puestos de zapiekanka es el colofón oficial de cualquier noche en Kazimierz. A las 2-3 AM sigue abierto.</div>
+      </div>
+    </div>
+
+    <div class="tip-row">
+      <div class="t-icon">🥴</div>
+      <div>
+        <div class="t-title">Al día siguiente: żurek</div>
+        <div class="t-text">La sopa antiresaca polaca por excelencia. Centeno fermentado, salchicha blanca y huevo duro. Pedidla de desayuno en cualquier restaurante del barrio. Los polacos la llaman "la cura" y llevan siglos teniendo razón.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  // TABS
+  function show(id, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // BAR CARDS
+  function toggleBar(el) {
+    const wasOpen = el.classList.contains('open');
+    document.querySelectorAll('.bar-card').forEach(b => b.classList.remove('open'));
+    if (!wasOpen) el.classList.add('open');
+  }
+
+  // CERVEZAS
+  function toggleCerveza(el) {
+    const wasOpen = el.classList.contains('open');
+    document.querySelectorAll('.cerveza-card').forEach(c => c.classList.remove('open'));
+    if (!wasOpen) el.classList.add('open');
+  }
+
+  // CHECKLIST
+  function toggleCheck(el, _) {
+    el.classList.toggle('done');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const total = document.querySelectorAll('.check-item').length;
+    const done  = document.querySelectorAll('.check-item.done').length;
+    document.getElementById('prog-num').textContent = done + '/' + total;
+    document.getElementById('prog-bar').style.width = (done / total * 100) + '%';
+  }
+
+  // BUBBLES
+  const bcontainer = document.getElementById('bubbles');
+  for (let i = 0; i < 18; i++) {
+    const b = document.createElement('div');
+    b.className = 'bubble';
+    const size = Math.random() * 14 + 4;
+    b.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${Math.random() * 100}%;
+      animation-duration: ${Math.random() * 10 + 8}s;
+      animation-delay: ${Math.random() * 8}s;
+    `;
+    bcontainer.appendChild(b);
+  }
+</script>
+</body>
+</html>
