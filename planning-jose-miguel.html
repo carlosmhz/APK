@@ -410,10 +410,11 @@
           <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Pod Baranem</div><div class="resto-type">Cena en Cracovia antes de salir · Auténtico</div></div><span class="resto-price">~15 € pp</span></div><div class="resto-expand">Uno de los más auténticos de Cracovia, clientela mayoritariamente local. El steak tartar se sirve con vodka por recomendación del camarero.<div class="resto-must">🥩 Steak tartar + vodka. La combinación definitiva.</div></div></div>
         </div>
         <div class="ipanel" id="d4-noche">
-          <div class="notice">🎉 <b>La noche grande.</b> Teatro Cubano (~21h) → Prozak 2.0 (~01h en adelante). Jueves cierra a las 05h.</div>
+          <div class="notice">🎉 <b>La noche grande.</b> Ruta sugerida: empezad con Teatro Cubano (~21h) para el ambiente latino, pasad por Frantic o Gorączka si queréis pop/comercial, y rematad con un rato en Prozak 2.0 si aguantáis. No hace falta hacer todos — elegid según el cuerpo.</div>
+
           <div class="club-card" onclick="toggleClub(this)">
             <div class="club-top"><div class="club-name">Teatro Cubano</div><div class="club-genre">🎺 Latino</div></div>
-            <div class="club-tags"><span class="ctag gold">⭐ Primera parada</span><span class="ctag">🕗 20:00 – 05:00h</span><span class="ctag">📍 ul. Jagiellońska 10</span></div>
+            <div class="club-tags"><span class="ctag gold">⭐ Para empezar</span><span class="ctag">🕗 20:00 – 05:00h</span><span class="ctag">📍 ul. Jagiellońska 10</span></div>
             <div class="club-desc">Patio cubano con ropa tendida, música latina en vivo, mojitos enormes. La comunidad española se concentra aquí. El sitio más social para arrancar la noche.</div>
             <div class="club-expand">
               <div class="club-info-grid">
@@ -425,32 +426,67 @@
               <div class="club-tip">💡 José Miguel paga la primera ronda de mojitos. Es la ley.</div>
             </div>
           </div>
+
+          <div class="club-card" onclick="toggleClub(this)" style="background:#1a1a2e;">
+            <div class="club-top"><div class="club-name">Frantic</div><div class="club-genre">🎵 Pop / Comercial</div></div>
+            <div class="club-tags"><span class="ctag gold">⭐ El más comercial</span><span class="ctag">🕙 22:00 – 05:00h</span><span class="ctag">📍 ul. Szewska 5</span></div>
+            <div class="club-desc">Tres salas con géneros distintos: pop, comercial, house, R&B y más. El club más internacional y accesible del centro, perfecto si no sois fans del techno. Ambiente joven y muy mezclado.</div>
+            <div class="club-expand">
+              <div class="club-info-grid">
+                <div class="cib"><div class="lbl">Música</div><div class="val">Pop, comercial, house, R&B, soul. Varios géneros según sala.</div></div>
+                <div class="cib"><div class="lbl">Ambiente</div><div class="val">Moderno, subterráneo, 3 salas. Público joven e internacional.</div></div>
+                <div class="cib"><div class="lbl">Precio copas</div><div class="val">Algo más caro que la media. ~8-10 € la copa.</div></div>
+                <div class="cib"><div class="lbl">Ubicación</div><div class="val">Calle Szewska, la calle de los clubs del centro.</div></div>
+              </div>
+              <div class="club-tip">⚠️ Es uno de los sitios más caros de Cracovia. Las copas pueden subir. Controlad lo que pedís. A cambio, es de los más animados y con mejor música comercial de la ciudad.</div>
+            </div>
+          </div>
+
+          <div class="club-card" onclick="toggleClub(this)" style="background:#0d1f0d;">
+            <div class="club-top"><div class="club-name">Gorączka</div><div class="club-genre">🔥 Todo tipo</div></div>
+            <div class="club-tags"><span class="ctag gold">⭐ 6 salas · Para todos</span><span class="ctag">🕙 Abre tarde · Cierra al amanecer</span><span class="ctag">📍 Centro</span></div>
+            <div class="club-desc">El nombre significa "fiebre" en polaco, y no es casual. Seis salas, tres bares y una pista de baile enorme. Muy popular entre erasmus y extranjeros. Lo que más gusta: que cada sala tiene un estilo diferente, así que encontráis algo que os cuadre sí o sí.</div>
+            <div class="club-expand">
+              <div class="club-info-grid">
+                <div class="cib"><div class="lbl">Música</div><div class="val">Varía por sala: pop, comercial, electrónica, hits internacionales.</div></div>
+                <div class="cib"><div class="lbl">Ambiente</div><div class="val">Muy internacional, erasmus y turistas. Buen rollo garantizado.</div></div>
+                <div class="cib"><div class="lbl">Ventaja</div><div class="val">6 salas = si una no os gusta, probáis otra sin salir del local.</div></div>
+                <div class="cib"><div class="lbl">Precio</div><div class="val">Precio medio. Descuentos para grupos.</div></div>
+              </div>
+              <div class="club-tip">💡 Ideal si no sabéis qué música queréis: exploráis las salas y os quedáis donde esté el ambiente mejor. El más versátil de todos.</div>
+            </div>
+          </div>
+
+          <div class="club-card" onclick="toggleClub(this)" style="background:#1a0a0a;">
+            <div class="club-top"><div class="club-name">Społem Deluxe</div><div class="club-genre">🕺 Variadísimo</div></div>
+            <div class="club-tags"><span class="ctag gold">⭐ La Bamba + Gangnam Style + todo</span><span class="ctag">📍 ul. Floriańska 53</span></div>
+            <div class="club-desc">Decoración de sótano comunista, precios baratísimos y la playlist más ecléctica de Cracovia: lo mismo te ponen La Bamba que Gangnam Style que reggaeton. Sin pretensiones, puro buen rollo. Muy popular entre locales y estudiantes.</div>
+            <div class="club-expand">
+              <div class="club-info-grid">
+                <div class="cib"><div class="lbl">Música</div><div class="val">Todo. Literalmente todo. Sin filtro ni géneros fijos.</div></div>
+                <div class="cib"><div class="lbl">Ambiente</div><div class="val">Decoración comunista, sótano, precio muy bajo. Muy local.</div></div>
+                <div class="cib"><div class="lbl">Precio</div><div class="val">De los más baratos de la ciudad. Copas a 3-4 €.</div></div>
+                <div class="cib"><div class="lbl">Vibe</div><div class="val">Sin postureo, puro cachondeo. El antídoto al club fashion.</div></div>
+              </div>
+              <div class="club-tip">💡 Si a las 2 AM queréis seguir pero sin pagar más ni aguantar pijos, este es vuestro sitio. Diversión asegurada sin importar el estado en que llegéis.</div>
+            </div>
+          </div>
+
           <div class="club-card" onclick="toggleClub(this)">
             <div class="club-top"><div class="club-name">Prozak 2.0</div><div class="club-genre">⚡ Techno</div></div>
-            <div class="club-tags"><span class="ctag gold">⭐ El remate final</span><span class="ctag">🕙 22:30 – 05:00h</span><span class="ctag">📍 Plac Dominikański 6</span></div>
-            <div class="club-desc">El club underground más famoso de Cracovia. Laberinto subterráneo, 4 barras, 3 pistas, mejor sonido de la ciudad. DJs con sets de 5-7 horas. Aquí termina la despedida.</div>
+            <div class="club-tags"><span class="ctag gold">⭐ Para los valientes del final</span><span class="ctag">🕙 22:30 – 05:00h</span><span class="ctag">📍 Plac Dominikański 6</span></div>
+            <div class="club-desc">El más famoso de Cracovia. Laberinto subterráneo, 4 barras, 3 pistas, mejor sonido de la ciudad. Techno puro durante horas. Para un rato si no sois fans, o para quedarse hasta el amanecer si el cuerpo aguanta.</div>
             <div class="club-expand">
               <div class="club-info-grid">
                 <div class="cib"><div class="lbl">Música</div><div class="val">Techno, house, electro. DJs internacionales.</div></div>
                 <div class="cib"><div class="lbl">Ambiente</div><div class="val">Underground, laberíntico, 2 niveles. Muy internacional.</div></div>
-                <div class="cib"><div class="lbl">Entrada</div><div class="val">Variable. Ver @prozakdwazero en Instagram.</div></div>
-                <div class="cib"><div class="lbl">Pico</div><div class="val">El ambiente arranca de verdad pasada la 01:00h.</div></div>
+                <div class="cib"><div class="lbl">Consejo</div><div class="val">El ambiente arranca de verdad pasada la 01:00h.</div></div>
+                <div class="cib"><div class="lbl">Instagram</div><div class="val">@prozakdwazero para ver quién pincha ese jueves.</div></div>
               </div>
-              <div class="club-tip">💡 Acordad punto de encuentro antes de entrar: fácil perderse. Quedaos hasta que amanezca si podéis.</div>
+              <div class="club-tip">💡 No hace falta quedarse hasta las 5h. Un rato para decir que estuvisteis en el más famoso de la ciudad y ya. Acordad punto de encuentro antes de entrar.</div>
             </div>
           </div>
-          <div class="club-card" onclick="toggleClub(this)" style="background:#1e1a2e;">
-            <div class="club-top"><div class="club-name">Alchemia</div><div class="club-genre">🕯 Alternativo</div></div>
-            <div class="club-tags"><span class="ctag gold">⭐ Si queréis algo diferente</span><span class="ctag">📍 ul. Estery 5 · Kazimierz</span></div>
-            <div class="club-desc">La leyenda de Kazimierz. 4 salas a la luz de velas, conciertos, historia judía palpable. Buena primera parada antes del Teatro Cubano si hay algo esa noche.</div>
-            <div class="club-expand">
-              <div class="club-info-grid">
-                <div class="cib"><div class="lbl">Ambiente</div><div class="val">Vintage decadente, velas, historia</div></div>
-                <div class="cib"><div class="lbl">Consejo</div><div class="val">Revisar programación de conciertos en su web</div></div>
-              </div>
-              <div class="club-tip">💡 Kazimierz de noche es precioso para ir andando de bar en bar.</div>
-            </div>
-          </div>
+
         </div>
       </div>
     </div>
