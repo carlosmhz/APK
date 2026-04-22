@@ -517,6 +517,14 @@
           <div class="act"><div class="act-t">🥴</div><div class="act-b"><div class="act-title">Desayuno antiresaca</div><div class="act-desc">Żurek en cualquier bar de leche. La cura polaca desde hace siglos. También el obwarzanek de los carritos callejeros para ir comiendo.</div></div></div>
           <div class="act"><div class="act-t">~10:30</div><div class="act-b"><div class="act-title">Último paseo y souvenirs</div><div class="act-desc">Plaza del Mercado a mediodía. Comprad ámbar polaco, vodka Żubrówka de recuerdo. Café en alguna terraza del Rynek antes de la visita.</div></div></div>
           <div class="act"><div class="act-t">12:00</div><div class="act-b"><div class="act-title">🏭 Fábrica de Oskar Schindler</div><div class="act-desc">Museo en la fábrica real donde Schindler salvó a más de 1.000 judíos. Uno de los mejores museos de Europa. Duración 1h 30m-2h, así que acabaréis sobre las 14:00h. En Zabłocie, junto a Kazimierz. <b>Reservad online con semanas de antelación.</b></div><span class="act-cost">🎟 ~12 € pp · Reserva obligatoria</span></div></div>
+         <div class="act">
+  <div class="act-t">🎟</div>
+  <div class="act-b">
+    <div class="act-title">Entradas a la Fábrica de Schindler</div>
+    <div class="act-desc">Pulsa para ver tu entrada individual.</div>
+    <button class="act-link" onclick="abrirSelectorEntradas()">🎫 Mostrar entrada</button>
+  </div>
+         </div>
           <div class="act"><div class="act-t">14:00</div><div class="act-b"><div class="act-title">Recoger maletas de la consigna</div><div class="act-desc">Al salir de Schindler, pasad a recoger las maletas de la consigna antes de coger el Bolt. No hay margen para entretenerse: el vuelo es a las 17:35h y hay que salir antes de las 15:00h.</div></div></div>
           <div class="act"><div class="act-t">15:00</div><div class="act-b"><div class="act-title">🚕 Bolt al aeropuerto — salid a esta hora como muy tarde</div><div class="act-desc">~20 min al aeropuerto en condiciones normales, pero los viernes puede haber tráfico. Saliendo a las 15:00h llegáis con margen suficiente para el check-in y el control de seguridad.</div><span class="act-cost">🚕 ~6-8 €</span></div></div>
           <div class="act"><div class="act-t">17:35</div><div class="act-b"><div class="act-title">✈️ FR8344 · Cracovia → Madrid</div><div class="act-desc">Llegada a Madrid 21:05h. Misión cumplida. José Miguel ya no tiene excusa para nada.</div></div></div>
@@ -812,6 +820,83 @@
     document.querySelectorAll('.extra-card').forEach(e => e.classList.remove('open'));
     if (!was) el.classList.add('open');
   }
+</script>
+<style>
+.modal-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.modal {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  width: 90%;
+  max-width: 320px;
+  text-align: center;
+}
+.modal-btn {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #D4001A;
+  color: white;
+  font-weight: 600;
+}
+.modal-close {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #888;
+  cursor: pointer;
+}
+</style>
+
+<div class="modal-bg" id="modalEntradas">
+  <div class="modal">
+    <h3>¿Quién eres?</h3>
+    <button class="modal-btn" onclick="abrirEntrada('javier')">Javier</button>
+    <button class="modal-btn" onclick="abrirEntrada('carlos')">Carlos</button>
+    <button class="modal-btn" onclick="abrirEntrada('bernardo')">Bernardo</button>
+    <button class="modal-btn" onclick="abrirEntrada('jose')">José Miguel 👑</button>
+    <div class="modal-close" onclick="cerrarModal()">Cerrar</div>
+  </div>
+</div>
+
+<script>
+const base = "https://carlosmhz.github.io/APK/";
+
+const entradas = {
+  javier: base + "ticket_JAVIER_RIVERO.pdf",
+  carlos: base + "ticket_CARLOS_MUNOZ.pdf",
+  bernardo: base + "ticket_BERNARDO_TORRES.pdf",
+  jose: base + "ticket_JOSE_MIGUEL_DELGADO.pdf"
+};
+
+function abrirSelectorEntradas() {
+  document.getElementById('modalEntradas').style.display = 'flex';
+}
+
+function cerrarModal() {
+  document.getElementById('modalEntradas').style.display = 'none';
+}
+
+function abrirEntrada(persona) {
+  cerrarModal();
+  window.open(entradas[persona], '_blank');
+}
+
+window.onclick = function(e) {
+  const modal = document.getElementById('modalEntradas');
+  if (e.target === modal) cerrarModal();
+}
 </script>
 </body>
 </html>
