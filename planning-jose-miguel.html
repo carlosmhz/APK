@@ -890,7 +890,7 @@ function cerrarModal() {
 
 function abrirEntrada(persona) {
   cerrarModal();
-  window.open(entradas[persona], '_blank');
+  window.open(entradas[persona] + '?v=' + Date.now(), '_blank');
 }
 
 window.onclick = function(e) {
