@@ -1,244 +1,475 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <link rel="manifest" href="manifest.json">
+<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#D4001A">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Despedida · José Miguel · Cracovia 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --rojo: #D4001A;
-    --rojo-suave: #fdf0f2;
-    --rojo-borde: rgba(212,0,26,0.18);
-    --blanco: #ffffff;
-    --gris-f: #f0f0f2;
-    --gris: #e0e0e0;
-    --gris2: #f5f5f7;
-    --texto: #181818;
-    --muted: #888;
-    --azul: #1a3a6b;
-    --verde: #1a7a3a;
-    --verde-s: #edf7f1;
-    --amarillo-s: #fffbea;
-    --amarillo-b: #e6c800;
-    --sombra: 0 2px 16px rgba(0,0,0,0.07);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', sans-serif; font-weight: 300; min-height: 100vh; }
+:root {
+  --rojo: #D4001A;
+  --rojo-suave: #fdf0f2;
+  --rojo-borde: rgba(212,0,26,0.18);
+  --blanco: #ffffff;
+  --gris-f: #f0f0f2;
+  --gris: #e0e0e0;
+  --gris2: #f5f5f7;
+  --texto: #181818;
+  --muted: #888;
+  --azul: #1a3a6b;
+  --verde: #1a7a3a;
+  --verde-s: #edf7f1;
+  --amarillo-s: #fffbea;
+  --amarillo-b: #e6c800;
+  --sombra: 0 2px 16px rgba(0,0,0,0.07);
+}
 
-  /* ── HERO ── */
-  .hero { background: var(--blanco); text-align: center; }
-  .flag-stripe { height: 9px; }
-  .flag-stripe.white { background: var(--blanco); border-top: 1px solid #eee; }
-  .flag-stripe.red { background: var(--rojo); }
-  .hero-body { padding: 30px 20px 24px; }
-  .stamp { width: 72px; height: 72px; border-radius: 50%; border: 3px solid var(--rojo); margin: 0 auto 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(-7deg); }
-  .stamp-eagle { font-size: 1.8rem; line-height: 1; }
-  .stamp-txt { font-family: 'Bebas Neue', sans-serif; font-size: 0.42rem; letter-spacing: 2px; color: var(--rojo); display: block; text-transform: uppercase; }
-  .hero-eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
-  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 11vw, 5rem); line-height: 0.9; letter-spacing: 2px; color: var(--texto); }
-  .hero-title span { color: var(--rojo); display: block; }
-  .hero-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--rojo); color: var(--blanco); padding: 6px 16px; border-radius: 30px; font-size: 12px; letter-spacing: 1px; font-weight: 600; margin-top: 12px; }
-  .hero-squad { margin-top: 9px; font-size: 12px; color: var(--muted); }
-  .hero-squad b { color: var(--texto); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', sans-serif; font-weight: 300; min-height: 100vh; }
 
-  /* ── NAV PRINCIPAL ── */
-  .main-nav {
-    position: sticky; top: 0; z-index: 20;
-    background: var(--rojo);
-    display: flex; overflow-x: auto; scrollbar-width: none;
-  }
-  .main-nav::-webkit-scrollbar { display: none; }
-  .mnav-btn {
-    flex-shrink: 0; flex: 1;
-    padding: 12px 8px;
-    font-family: 'DM Sans', sans-serif; font-weight: 700;
-    font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase;
-    color: rgba(255,255,255,0.65);
-    cursor: pointer; background: none; border: none;
-    border-bottom: 3px solid transparent;
-    transition: all 0.2s; text-align: center;
-  }
-  .mnav-btn.active { color: var(--blanco); border-bottom-color: var(--blanco); background: rgba(0,0,0,0.15); }
+/* ── HERO ── */
+.hero { background: var(--blanco); text-align: center; }
+.flag-stripe { height: 9px; }
+.flag-stripe.white { background: var(--blanco); border-top: 1px solid #eee; }
+.flag-stripe.red { background: var(--rojo); }
+.hero-body { padding: 30px 20px 24px; }
+.stamp { width: 72px; height: 72px; border-radius: 50%; border: 3px solid var(--rojo); margin: 0 auto 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(-7deg); }
+.stamp-eagle { font-size: 1.8rem; line-height: 1; }
+.stamp-txt { font-family: 'Bebas Neue', sans-serif; font-size: 0.42rem; letter-spacing: 2px; color: var(--rojo); display: block; text-transform: uppercase; }
+.hero-eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+.hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 11vw, 5rem); line-height: 0.9; letter-spacing: 2px; color: var(--texto); }
+.hero-title span { color: var(--rojo); display: block; }
+.hero-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--rojo); color: var(--blanco); padding: 6px 16px; border-radius: 30px; font-size: 12px; letter-spacing: 1px; font-weight: 600; margin-top: 12px; }
+.hero-squad { margin-top: 9px; font-size: 12px; color: var(--muted); }
+.hero-squad b { color: var(--texto); }
 
-  /* ── SECCIONES PRINCIPALES ── */
-  .main-section { display: none; }
-  .main-section.active { display: block; animation: fadeUp 0.3s ease; }
-  @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+/* ── NAV PRINCIPAL ── */
+.main-nav {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--rojo);
+  display: flex; overflow-x: auto; scrollbar-width: none;
+}
+.main-nav::-webkit-scrollbar { display: none; }
+.mnav-btn {
+  flex-shrink: 0; flex: 1;
+  padding: 12px 8px;
+  font-family: 'DM Sans', sans-serif; font-weight: 700;
+  font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  cursor: pointer; background: none; border: none;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s; text-align: center;
+}
+.mnav-btn.active { color: var(--blanco); border-bottom-color: var(--blanco); background: rgba(0,0,0,0.15); }
 
-  /* ── WRAPPERS ── */
-  .section-wrap { padding: 14px 14px 0; }
-  .section-label { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; padding: 4px 2px 10px; }
+/* ── SECCIONES PRINCIPALES ── */
+.main-section { display: none; }
+.main-section.active { display: block; animation: fadeUp 0.3s ease; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 
-  /* ── VUELOS ── */
-  .vuelo-card { background: var(--blanco); border-radius: 14px; box-shadow: var(--sombra); overflow: hidden; margin-bottom: 14px; }
-  .vuelo-hdr { background: var(--azul); padding: 10px 16px; font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; letter-spacing: 2px; color: var(--blanco); }
-  .vuelo-row { display: flex; align-items: center; padding: 11px 16px; border-bottom: 1px solid var(--gris); }
-  .vuelo-row:last-child { border-bottom: none; }
-  .vc { flex: 1; }
-  .vc.r { text-align: right; }
-  .vc .city { font-weight: 600; font-size: 12px; }
-  .vc .time { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--rojo); line-height: 1; letter-spacing: 1px; }
-  .vc .date { font-size: 10px; color: var(--muted); }
-  .vm { text-align: center; padding: 0 10px; flex-shrink: 0; }
-  .vm .icon { font-size: 1rem; }
-  .vm .cod { font-size: 9px; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
+/* ── WRAPPERS ── */
+.section-wrap { padding: 14px 14px 0; }
+.section-label { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; padding: 4px 2px 10px; }
 
-  /* ── DÍAS ── */
-  .day-card { background: var(--blanco); border-radius: 14px; box-shadow: var(--sombra); margin-bottom: 12px; overflow: hidden; }
-  .day-hdr { display: flex; align-items: stretch; cursor: pointer; }
-  .day-num { background: var(--rojo); color: var(--blanco); width: 60px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 13px 0; }
-  .day-num .wday { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.75; }
-  .day-num .dnum { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; line-height: 1; }
-  .day-num .mon { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; opacity: 0.75; }
-  .day-num.gris { background: #bbb; }
-  .day-num.gris .wday, .day-num.gris .dnum, .day-num.gris .mon { color: #fff; opacity: 0.9; }
-  .day-num.azul { background: var(--azul); }
-  .day-inf { flex: 1; padding: 11px 13px; }
-  .day-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: 1px; color: var(--texto); margin-bottom: 3px; }
-  .day-pre { font-size: 12px; color: var(--muted); line-height: 1.5; }
-  .day-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
-  .dtag { font-size: 10px; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--gris); color: var(--muted); }
-  .dtag.r { background: var(--rojo-suave); border-color: var(--rojo-borde); color: var(--rojo); }
-  .dtag.b { background: #e8eef5; border-color: rgba(26,58,107,0.2); color: var(--azul); }
-  .dtag.g { background: var(--verde-s); border-color: rgba(26,122,58,0.2); color: var(--verde); }
-  .day-arr { padding: 0 12px; display: flex; align-items: center; color: var(--gris); font-size: 12px; transition: transform 0.2s; flex-shrink: 0; }
-  .day-card.open .day-arr { transform: rotate(90deg); color: var(--rojo); }
+/* ── VUELOS ── */
+.vuelo-card { background: var(--blanco); border-radius: 14px; box-shadow: var(--sombra); overflow: hidden; margin-bottom: 14px; }
+.vuelo-hdr { background: var(--azul); padding: 10px 16px; font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; letter-spacing: 2px; color: var(--blanco); }
+.vuelo-row { display: flex; align-items: center; padding: 11px 16px; border-bottom: 1px solid var(--gris); }
+.vuelo-row:last-child { border-bottom: none; }
+.vc { flex: 1; }
+.vc.r { text-align: right; }
+.vc .city { font-weight: 600; font-size: 12px; }
+.vc .time { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--rojo); line-height: 1; letter-spacing: 1px; }
+.vc .date { font-size: 10px; color: var(--muted); }
+.vm { text-align: center; padding: 0 10px; flex-shrink: 0; }
+.vm .icon { font-size: 1rem; }
+.vm .cod { font-size: 9px; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
 
-  /* ── DAY BODY ── */
-  .day-body { display: none; border-top: 2px solid var(--rojo); background: var(--gris2); }
-  .day-card.open .day-body { display: block; animation: fadeUp 0.25s ease; }
+/* ── DÍAS ── */
+.day-card { background: var(--blanco); border-radius: 14px; box-shadow: var(--sombra); margin-bottom: 12px; overflow: hidden; }
+.day-hdr { display: flex; align-items: stretch; cursor: pointer; }
+.day-num { background: var(--rojo); color: var(--blanco); width: 60px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 13px 0; }
+.day-num .wday { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.75; }
+.day-num .dnum { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; line-height: 1; }
+.day-num .mon { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; opacity: 0.75; }
+.day-num.gris { background: #bbb; }
+.day-num.gris .wday, .day-num.gris .dnum, .day-num.gris .mon { color: #fff; opacity: 0.9; }
+.day-num.azul { background: var(--azul); }
+.day-inf { flex: 1; padding: 11px 13px; }
+.day-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; letter-spacing: 1px; color: var(--texto); margin-bottom: 3px; }
+.day-pre { font-size: 12px; color: var(--muted); line-height: 1.5; }
+.day-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
+.dtag { font-size: 10px; padding: 2px 7px; border-radius: 4px; border: 1px solid var(--gris); color: var(--muted); }
+.dtag.r { background: var(--rojo-suave); border-color: var(--rojo-borde); color: var(--rojo); }
+.dtag.b { background: #e8eef5; border-color: rgba(26,58,107,0.2); color: var(--azul); }
+.dtag.g { background: var(--verde-s); border-color: rgba(26,122,58,0.2); color: var(--verde); }
+.day-arr { padding: 0 12px; display: flex; align-items: center; color: var(--gris); font-size: 12px; transition: transform 0.2s; flex-shrink: 0; }
+.day-card.open .day-arr { transform: rotate(90deg); color: var(--rojo); }
 
-  /* ── INNER TABS — MÁS VISIBLES ── */
-  .inner-tabs {
-    display: flex;
-    background: var(--blanco);
-    padding: 10px 10px 0;
-    gap: 6px;
-    border-bottom: 1px solid var(--gris);
-  }
-  .itab {
-    flex: 1;
-    padding: 9px 6px;
-    font-family: 'DM Sans', sans-serif; font-weight: 700;
-    font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase;
-    color: var(--muted);
-    cursor: pointer; background: var(--gris-f);
-    border: 1px solid var(--gris);
-    border-bottom: none;
-    border-radius: 8px 8px 0 0;
-    transition: all 0.2s;
-    text-align: center;
-  }
-  .itab.active {
-    color: var(--rojo);
-    background: var(--blanco);
-    border-color: var(--rojo);
-    border-bottom-color: var(--blanco);
-    position: relative; z-index: 1;
-    margin-bottom: -1px;
-  }
-  .ipanel { display: none; padding: 15px; background: var(--blanco); }
-  .ipanel.active { display: block; animation: fadeUp 0.2s ease; }
+/* ── DAY BODY ── */
+.day-body { display: none; border-top: 2px solid var(--rojo); background: var(--gris2); }
+.day-card.open .day-body { display: block; animation: fadeUp 0.25s ease; }
 
-  /* ── ACTIVIDADES ── */
-  .act { display: flex; gap: 11px; margin-bottom: 13px; }
-  .act:last-child { margin-bottom: 0; }
-  .act-t { font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; color: var(--rojo); width: 44px; flex-shrink: 0; padding-top: 1px; letter-spacing: 0.5px; }
-  .act-b { flex: 1; border-left: 2px solid var(--gris); padding-left: 11px; }
-  .act-title { font-weight: 600; font-size: 13px; color: var(--texto); margin-bottom: 3px; }
-  .act-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
-  .act-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 7px; background: var(--rojo); color: var(--blanco); text-decoration: none; font-size: 11px; font-weight: 600; padding: 7px 14px; border-radius: 6px; }
-  .act-cost { display: inline-block; margin-top: 5px; background: var(--rojo-suave); color: var(--rojo); font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; border: 1px solid var(--rojo-borde); }
+/* ── INNER TABS ── */
+.inner-tabs {
+  display: flex;
+  background: var(--blanco);
+  padding: 10px 10px 0;
+  gap: 6px;
+  border-bottom: 1px solid var(--gris);
+}
+.itab {
+  flex: 1;
+  padding: 9px 6px;
+  font-family: 'DM Sans', sans-serif; font-weight: 700;
+  font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer; background: var(--gris-f);
+  border: 1px solid var(--gris);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  transition: all 0.2s;
+  text-align: center;
+}
+.itab.active {
+  color: var(--rojo);
+  background: var(--blanco);
+  border-color: var(--rojo);
+  border-bottom-color: var(--blanco);
+  position: relative; z-index: 1;
+  margin-bottom: -1px;
+}
+.ipanel { display: none; padding: 15px; background: var(--blanco); }
+.ipanel.active { display: block; animation: fadeUp 0.2s ease; }
 
-  /* ── RESTAURANTES ── */
-  .resto-card { background: var(--blanco); border: 1px solid var(--gris); border-radius: 10px; padding: 12px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.2s; }
-  .resto-card.open { border-color: var(--rojo); }
-  .resto-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
-  .resto-name { font-weight: 600; font-size: 13px; color: var(--texto); margin-bottom: 2px; }
-  .resto-type { font-size: 11px; color: var(--muted); }
-  .resto-price { font-size: 11px; font-weight: 600; color: var(--verde); background: var(--verde-s); border: 1px solid rgba(26,122,58,0.2); padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
-  .resto-expand { display: none; margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--gris); font-size: 12px; color: var(--muted); line-height: 1.6; animation: fadeUp 0.2s ease; }
-  .resto-card.open .resto-expand { display: block; }
-  .resto-must { display: inline-block; margin-top: 6px; background: #fff8e0; color: #7a5a00; border: 1px solid #f0d070; font-size: 11px; padding: 3px 8px; border-radius: 4px; }
+/* ── ACTIVIDADES ── */
+.act { display: flex; gap: 11px; margin-bottom: 13px; }
+.act:last-child { margin-bottom: 0; }
+.act-t { font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; color: var(--rojo); width: 44px; flex-shrink: 0; padding-top: 1px; letter-spacing: 0.5px; }
+.act-b { flex: 1; border-left: 2px solid var(--gris); padding-left: 11px; }
+.act-title { font-weight: 600; font-size: 13px; color: var(--texto); margin-bottom: 3px; }
+.act-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.act-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 7px; background: var(--rojo); color: var(--blanco); text-decoration: none; font-size: 11px; font-weight: 600; padding: 7px 14px; border-radius: 6px; cursor: pointer; border: none; }
+.act-cost { display: inline-block; margin-top: 5px; background: var(--rojo-suave); color: var(--rojo); font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; border: 1px solid var(--rojo-borde); }
 
-  /* ── CLUBS ── */
-  .club-card { background: var(--texto); border-radius: 12px; padding: 15px; margin-bottom: 10px; color: var(--blanco); cursor: pointer; }
-  .club-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
-  .club-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 1px; line-height: 1; }
-  .club-genre { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; background: var(--rojo); color: var(--blanco); padding: 3px 7px; border-radius: 4px; flex-shrink: 0; }
-  .club-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 7px; }
-  .ctag { font-size: 10px; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.55); }
-  .ctag.gold { border-color: var(--amarillo-b); color: var(--amarillo-b); }
-  .club-desc { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.6; }
-  .club-expand { display: none; margin-top: 11px; padding-top: 11px; border-top: 1px solid rgba(255,255,255,0.1); animation: fadeUp 0.2s ease; }
-  .club-card.open .club-expand { display: block; }
-  .club-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 9px; }
-  .cib .lbl { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 2px; }
-  .cib .val { font-size: 12px; color: rgba(255,255,255,0.85); line-height: 1.4; }
-  .club-tip { font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.6; border-left: 2px solid var(--rojo); padding-left: 9px; }
+/* ── RESTAURANTES ── */
+.resto-card { background: var(--blanco); border: 1px solid var(--gris); border-radius: 10px; padding: 12px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.2s; }
+.resto-card.open { border-color: var(--rojo); }
+.resto-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.resto-name { font-weight: 600; font-size: 13px; color: var(--texto); margin-bottom: 2px; }
+.resto-type { font-size: 11px; color: var(--muted); }
+.resto-price { font-size: 11px; font-weight: 600; color: var(--verde); background: var(--verde-s); border: 1px solid rgba(26,122,58,0.2); padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+.resto-expand { display: none; margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--gris); font-size: 12px; color: var(--muted); line-height: 1.6; animation: fadeUp 0.2s ease; }
+.resto-card.open .resto-expand { display: block; }
+.resto-must { display: inline-block; margin-top: 6px; background: #fff8e0; color: #7a5a00; border: 1px solid #f0d070; font-size: 11px; padding: 3px 8px; border-radius: 4px; }
 
-  /* ── NOTICE / WIP ── */
-  .notice { background: var(--rojo-suave); border: 1px solid var(--rojo-borde); border-radius: 8px; padding: 10px 12px; font-size: 11px; color: #a00015; line-height: 1.6; margin-bottom: 11px; }
-  .wip { background: var(--amarillo-s); border: 1px solid #f0d070; border-radius: 10px; padding: 12px 14px; display: flex; gap: 10px; font-size: 12px; color: #7a5a00; line-height: 1.6; }
+/* ── CLUBS ── */
+.club-card { background: var(--texto); border-radius: 12px; padding: 15px; margin-bottom: 10px; color: var(--blanco); cursor: pointer; }
+.club-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
+.club-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.25rem; letter-spacing: 1px; line-height: 1; }
+.club-genre { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; background: var(--rojo); color: var(--blanco); padding: 3px 7px; border-radius: 4px; flex-shrink: 0; }
+.club-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 7px; }
+.ctag { font-size: 10px; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.55); }
+.ctag.gold { border-color: var(--amarillo-b); color: var(--amarillo-b); }
+.club-desc { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+.club-expand { display: none; margin-top: 11px; padding-top: 11px; border-top: 1px solid rgba(255,255,255,0.1); animation: fadeUp 0.2s ease; }
+.club-card.open .club-expand { display: block; }
+.club-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 9px; }
+.cib .lbl { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 2px; }
+.cib .val { font-size: 12px; color: rgba(255,255,255,0.85); line-height: 1.4; }
+.club-tip { font-size: 11px; color: rgba(255,255,255,0.45); line-height: 1.6; border-left: 2px solid var(--rojo); padding-left: 9px; }
 
-  /* ── FILTROS DE RESTAURANTES ── */
-  .filter-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
-  .filter-btn {
-    padding: 6px 12px; border-radius: 20px;
-    font-size: 11px; font-weight: 600;
-    border: 1px solid var(--gris); color: var(--muted);
-    background: var(--blanco); cursor: pointer;
-    transition: all 0.2s;
-  }
-  .filter-btn.active { background: var(--rojo); border-color: var(--rojo); color: var(--blanco); }
+/* ── NOTICE / WIP ── */
+.notice { background: var(--rojo-suave); border: 1px solid var(--rojo-borde); border-radius: 8px; padding: 10px 12px; font-size: 11px; color: #a00015; line-height: 1.6; margin-bottom: 11px; }
+.wip { background: var(--amarillo-s); border: 1px solid #f0d070; border-radius: 10px; padding: 12px 14px; display: flex; gap: 10px; font-size: 12px; color: #7a5a00; line-height: 1.6; }
 
-  .resto-group { display: none; }
-  .resto-group.active { display: block; animation: fadeUp 0.2s ease; }
+/* ── FILTROS DE RESTAURANTES ── */
+.filter-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.filter-btn {
+  padding: 6px 12px; border-radius: 20px;
+  font-size: 11px; font-weight: 600;
+  border: 1px solid var(--gris); color: var(--muted);
+  background: var(--blanco); cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn.active { background: var(--rojo); border-color: var(--rojo); color: var(--blanco); }
+.resto-group { display: none; }
+.resto-group.active { display: block; animation: fadeUp 0.2s ease; }
 
-  /* ── ACTIVIDADES EXTRA ── */
-  .extra-card {
-    background: var(--blanco); border: 1px solid var(--gris);
-    border-radius: 12px; padding: 14px;
-    margin-bottom: 10px; cursor: pointer;
-    transition: border-color 0.2s;
-  }
-  .extra-card.open { border-color: var(--rojo); }
-  .extra-top { display: flex; gap: 12px; align-items: flex-start; }
-  .extra-emoji { font-size: 1.8rem; flex-shrink: 0; }
-  .extra-body { flex: 1; }
-  .extra-name { font-weight: 600; font-size: 13px; color: var(--texto); margin-bottom: 3px; }
-  .extra-sub { font-size: 11px; color: var(--muted); line-height: 1.5; }
-  .extra-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
-  .extra-expand { display: none; margin-top: 11px; padding-top: 11px; border-top: 1px solid var(--gris); font-size: 12px; color: var(--muted); line-height: 1.65; animation: fadeUp 0.2s ease; }
-  .extra-card.open .extra-expand { display: block; }
-  .extra-arr { font-size: 10px; color: var(--gris); transition: transform 0.2s; flex-shrink: 0; margin-top: 4px; }
-  .extra-card.open .extra-arr { transform: rotate(90deg); color: var(--rojo); }
+/* ── ACTIVIDADES EXTRA ── */
+.extra-card {
+  background: var(--blanco); border: 1px solid var(--gris);
+  border-radius: 12px; padding: 14px;
+  margin-bottom: 10px; cursor: pointer;
+  transition: border-color 0.2s;
+}
+.extra-card.open { border-color: var(--rojo); }
+.extra-top { display: flex; gap: 12px; align-items: flex-start; }
+.extra-emoji { font-size: 1.8rem; flex-shrink: 0; }
+.extra-body { flex: 1; }
+.extra-name { font-weight: 600; font-size: 13px; color: var(--texto); margin-bottom: 3px; }
+.extra-sub { font-size: 11px; color: var(--muted); line-height: 1.5; }
+.extra-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
+.extra-expand { display: none; margin-top: 11px; padding-top: 11px; border-top: 1px solid var(--gris); font-size: 12px; color: var(--muted); line-height: 1.65; animation: fadeUp 0.2s ease; }
+.extra-card.open .extra-expand { display: block; }
+.extra-arr { font-size: 10px; color: var(--gris); transition: transform 0.2s; flex-shrink: 0; margin-top: 4px; }
+.extra-card.open .extra-arr { transform: rotate(90deg); color: var(--rojo); }
 
-  /* ── PRESUPUESTO ── */
-  .budget-card { background: var(--blanco); border-radius: 14px; box-shadow: var(--sombra); overflow: hidden; margin-bottom: 14px; }
-  .budget-hdr { background: var(--rojo); padding: 11px 16px; font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; letter-spacing: 2px; color: var(--blanco); }
-  .brow { display: flex; justify-content: space-between; align-items: center; padding: 9px 16px; border-bottom: 1px solid var(--gris); font-size: 13px; }
-  .brow:last-child { border-bottom: none; }
-  .brow.tot { background: var(--rojo-suave); font-weight: 600; font-size: 14px; }
-  .brow .lbl { color: var(--texto); }
-  .brow .amt { color: var(--rojo); font-weight: 600; }
-  .brow.tot .amt { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 1px; }
+/* ── PRESUPUESTO ── */
+.budget-card { background: var(--blanco); border-radius: 14px; box-shadow: var(--sombra); overflow: hidden; margin-bottom: 14px; }
+.budget-hdr { background: var(--rojo); padding: 11px 16px; font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; letter-spacing: 2px; color: var(--blanco); }
+.brow { display: flex; justify-content: space-between; align-items: center; padding: 9px 16px; border-bottom: 1px solid var(--gris); font-size: 13px; }
+.brow:last-child { border-bottom: none; }
+.brow.tot { background: var(--rojo-suave); font-weight: 600; font-size: 14px; }
+.brow .lbl { color: var(--texto); }
+.brow .amt { color: var(--rojo); font-weight: 600; }
+.brow.tot .amt { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 1px; }
 
-  /* ── FOOTER ── */
-  .footer { text-align: center; padding: 16px 16px 40px; font-size: 11px; color: var(--muted); letter-spacing: 1px; }
-  .footer b { color: var(--rojo); }
+/* ── FOOTER ── */
+.footer { text-align: center; padding: 16px 16px 40px; font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+.footer b { color: var(--rojo); }
 
-  /* ── CAT LABEL ── */
-  .cat-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 0.85rem; letter-spacing: 2px; color: var(--muted);
-    text-transform: uppercase; margin: 16px 0 8px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .cat-label::after { content: ''; flex: 1; height: 1px; background: var(--gris); }
+/* ── CAT LABEL ── */
+.cat-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.85rem; letter-spacing: 2px; color: var(--muted);
+  text-transform: uppercase; margin: 16px 0 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+.cat-label::after { content: ''; flex: 1; height: 1px; background: var(--gris); }
+
+/* ══════════════════════════════════════
+   GALERÍA DE FOTOS
+══════════════════════════════════════ */
+
+/* Header de la galería */
+.fotos-header {
+  padding: 16px 14px 0;
+}
+
+.fotos-day-filter {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 12px;
+  margin-bottom: 4px;
+}
+.fotos-day-filter::-webkit-scrollbar { display: none; }
+
+.fday-btn {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px; font-weight: 600;
+  border: 1px solid var(--gris); color: var(--muted);
+  background: var(--blanco); cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.fday-btn.active { background: var(--rojo); border-color: var(--rojo); color: var(--blanco); }
+
+/* Botón de subida */
+.upload-zone {
+  margin: 0 14px 14px;
+  background: var(--blanco);
+  border: 2px dashed var(--gris);
+  border-radius: 14px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.upload-zone:active { border-color: var(--rojo); background: var(--rojo-suave); }
+.upload-zone-icon { font-size: 2rem; }
+.upload-zone-text { font-size: 13px; font-weight: 600; color: var(--texto); }
+.upload-zone-sub { font-size: 11px; color: var(--muted); }
+
+/* Selector de día para subida */
+.upload-day-select {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--blanco);
+  border-radius: 20px 20px 0 0;
+  padding: 20px 16px 40px;
+  z-index: 200;
+  box-shadow: 0 -4px 30px rgba(0,0,0,0.15);
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.upload-day-select.active { display: block; }
+.uds-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 14px; text-align: center; }
+.uds-btn {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; padding: 13px 14px;
+  background: var(--gris-f); border: 1px solid var(--gris);
+  border-radius: 10px; margin-bottom: 8px;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 600; color: var(--texto);
+  transition: all 0.15s;
+}
+.uds-btn:active { background: var(--rojo-suave); border-color: var(--rojo); color: var(--rojo); }
+.uds-btn-date { font-size: 11px; color: var(--muted); font-weight: 300; margin-left: auto; }
+.uds-cancel { text-align: center; padding: 12px; font-size: 12px; color: var(--muted); cursor: pointer; margin-top: 4px; }
+.uds-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 199; }
+.uds-overlay.active { display: block; }
+
+/* Grid de fotos estilo Instagram */
+.fotos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  padding: 0 0 80px;
+}
+
+.foto-thumb {
+  aspect-ratio: 1;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background: var(--gris);
+}
+
+.foto-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.foto-thumb:active img { transform: scale(0.95); }
+
+.foto-thumb .foto-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: flex-end;
+  padding: 6px;
+}
+.foto-thumb:hover .foto-overlay { opacity: 1; }
+.foto-thumb .foto-day-badge {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: white;
+  background: var(--rojo);
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+/* Separador de día en el grid */
+.fotos-day-sep {
+  grid-column: 1 / -1;
+  background: var(--gris-f);
+  padding: 10px 14px 6px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fotos-day-sep::after { content: ''; flex: 1; height: 1px; background: var(--gris); }
+
+/* Estado vacío */
+.fotos-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+.fotos-empty-icon { font-size: 3rem; margin-bottom: 10px; }
+
+/* Loader de subida */
+.foto-uploading {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--rojo-suave);
+  gap: 8px;
+}
+.upload-spinner {
+  width: 28px; height: 28px;
+  border: 3px solid var(--rojo-borde);
+  border-top-color: var(--rojo);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.upload-pct { font-size: 11px; font-weight: 600; color: var(--rojo); }
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 500;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox.active { display: flex; animation: fadeUp 0.2s ease; }
+.lightbox img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+.lightbox-close {
+  position: absolute;
+  top: 16px; right: 16px;
+  color: white; font-size: 1.5rem;
+  cursor: pointer; background: none; border: none;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+}
+.lightbox-meta {
+  margin-top: 14px;
+  text-align: center;
+  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+  line-height: 1.8;
+}
+.lightbox-meta b { color: white; }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: var(--texto); color: white;
+  padding: 10px 18px; border-radius: 30px;
+  font-size: 12px; font-weight: 600;
+  opacity: 0; transition: all 0.3s;
+  z-index: 600; white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Contador de fotos */
+.fotos-count {
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+  padding: 8px 0 4px;
+  letter-spacing: 1px;
+}
 </style>
 </head>
 <body>
@@ -252,9 +483,7 @@
     <div class="hero-title">JOSÉ<span>MIGUEL</span></div>
     <div class="hero-chip">✈️ 18 — 22 MAYO · CRACOVIA</div>
     <div class="hero-squad">Javier · Bernardo · Carlos · <b>José Miguel 👑</b></div>
-    <button class="act-link" id="btnInstalar" style="display:none; margin-top:12px;">
-📲 Instalar app
-    </button>
+    <button class="act-link" id="btnInstalar" style="display:none; margin-top:12px;">📲 Instalar app</button>
   </div>
   <div class="flag-stripe red"></div>
 </div>
@@ -265,6 +494,7 @@
   <button class="mnav-btn" onclick="showMain('restaurantes', this)">🍽 Comer</button>
   <button class="mnav-btn" onclick="showMain('extras', this)">🗺 Más planes</button>
   <button class="mnav-btn" onclick="showMain('presupuesto', this)">💶 Gastos</button>
+  <button class="mnav-btn" onclick="showMain('fotos', this)">📸 Fotos</button>
 </div>
 
 <!-- ════════════════ SECCIÓN: PROGRAMA ════════════════ -->
@@ -372,8 +602,8 @@
           <div class="act"><div class="act-t">Mañana</div><div class="act-b"><div class="act-title">🚶 Free Tour Casco Antiguo</div><div class="act-desc">Tour guiado gratuito ~2-3h. Propina al guía al final (~5-10 € por persona). Cubre Plaza del Mercado, Basílica de Santa María, Castillo de Wawel, Kazimierz. Buscad tour en español — salen varias veces al día.</div><span class="act-cost">🎟 Gratis + propina voluntaria</span></div></div>
           <div class="act"><div class="act-t">Tarde</div><div class="act-b">
             <div class="act-title">👻 Lost Souls Alley — Casa del Terror</div>
-            <div class="act-desc">La primera atracción de terror interactiva de Polonia, fundada en 2013. Un piso entero en el centro histórico (ul. Floriańska 6, planta 1) inspirado en películas de terror. Habitaciones a oscuras, una sola linterna para el grupo, actores en vivo que os pueden tocar, llaves y códigos para pasar de sala en sala. Hay tres versiones según el nivel de miedo que queráis: <b>verde</b> (suave), <b>amarilla</b> (media) o <b>roja</b> (máximo, contacto físico incluido). Grupos de máx. 6 personas — soléis ser 4, perfecto. Reservad online con antelación, suele llenarse.</div>
-            <span class="act-cost">🎟 ~5-15 € pp según versión · Reserva en lostsoulsalley.com</span>
+            <div class="act-desc">La primera atracción de terror interactiva de Polonia, fundada en 2013. Un piso entero en el centro histórico (ul. Floriańska 6, planta 1) inspirado en películas de terror. Habitaciones a oscuras, una sola linterna para el grupo, actores en vivo que os pueden tocar, llaves y códigos para pasar de sala en sala.<br><br>🟢 Javier, Bernardo y Carlos: nivel <b>verde</b> (suave). 🔴 José Miguel: nivel <b>rojo</b> (contacto físico, máximo terror). Grupos de máx. 6 personas — soléis ser 4, perfecto. Reservad online con antelación, suele llenarse.</div>
+            <span class="act-cost">🎟 Verde ~5 € · Rojo ~15 € · Reserva en lostsoulsalley.com</span>
           </div></div>
           <div class="act"><div class="act-t">Noche</div><div class="act-b"><div class="act-title">Noche tranquila · Kazimierz</div><div class="act-desc">Cena y algún bar, sin pasarse. El jueves es el día fuerte: Zakopane + termas + noche grande. Guardad energía.</div></div></div>
         </div>
@@ -405,7 +635,11 @@
         <div class="ipanel active" id="d4-plan">
           <div class="act"><div class="act-t">Mañana</div><div class="act-b"><div class="act-title">🚗 Recogida del coche</div><div class="act-desc">Todo riesgo incluido. Comparad en <b>Rentalcars.com</b> o <b>Discovercars</b>. Zakopane a 90 min al sur por la E77.</div><span class="act-cost">🚗 ~75 € total · ~19 € pp</span></div></div>
           <div class="act"><div class="act-t">~10:00</div><div class="act-b"><div class="act-title">🏔 Zakopane — Capital de las Tatras</div><div class="act-desc">Ciudad de madera a 850m. Mercadillo con <b>oscypek</b> (queso ahumado con mermelada de arándanos, obligatorio). Teleférico al <b>Kasprowy Wierch</b> (1.987m): vistas a Polonia y Eslovaquia simultáneamente. En mayo puede haber nieve arriba.</div><span class="act-cost">🚡 Teleférico: ~15-20 € pp</span></div></div>
-          <div class="act"><div class="act-t">~14:00</div><div class="act-b"><div class="act-title">♨️ Baños Termales Chochołów</div><div class="act-desc">A 25 min de Zakopane. Piscinas exteriores de agua termal caliente al pie de los Tatras. El contraste después de la mañana en la montaña es brutal. Jacuzzis, toboganes, zona relax. <b>Llevar bañador.</b></div><span class="act-cost">🎟 ~25 € pp</span></div></div>
+          <div class="act"><div class="act-t">~14:00</div><div class="act-b">
+            <div class="act-title">♨️ Baños Termales Chochołów</div>
+            <div class="act-desc">A 25 min de Zakopane. Piscinas exteriores de agua termal caliente al pie de los Tatras. El contraste después de la mañana en la montaña es brutal. Jacuzzis, toboganes, zona relax. <b>Llevar bañador.</b><br><br>🩲 José Miguel lleva el <b>mankini de Borat</b>. No es opcional. Es la ley.</div>
+            <span class="act-cost">🎟 ~25 € pp</span>
+          </div></div>
           <div class="act"><div class="act-t">~17:00</div><div class="act-b"><div class="act-title">Vuelta a Cracovia</div><div class="act-desc">90 min. Devolvéis el coche, cena rápida y a prepararse. Teatro Cubano abre a las 20h, Prozak a las 22:30h y cierra a las 05h.</div></div></div>
           <div class="act"><div class="act-t">21:00</div><div class="act-b"><div class="act-title">🎉 La noche grande de la despedida</div><div class="act-desc">Teatro Cubano para arrancar + opciones según el cuerpo. Ver pestaña Noche para detalle de cada sitio y avisos de precios.</div><span class="act-cost">💶 ~30-45 € pp noche completa (entrada + copas)</span></div></div>
         </div>
@@ -416,7 +650,6 @@
         </div>
         <div class="ipanel" id="d4-noche">
           <div class="notice">🎉 <b>La noche grande.</b> Ruta sugerida: empezad con Teatro Cubano (~21h) para el ambiente latino, pasad por Frantic o Gorączka si queréis pop/comercial, y rematad con un rato en Prozak 2.0 si aguantáis. No hace falta hacer todos — elegid según el cuerpo.</div>
-
           <div class="club-card" onclick="toggleClub(this)">
             <div class="club-top"><div class="club-name">Teatro Cubano</div><div class="club-genre">🎺 Latino</div></div>
             <div class="club-tags"><span class="ctag gold">⭐ Para empezar</span><span class="ctag">🕗 20:00 – 05:00h</span><span class="ctag">📍 ul. Jagiellońska 10</span><a class="ctag" style="color:#4fc3f7;border-color:#4fc3f7;text-decoration:none;" href="https://maps.google.com/?q=Teatro+Cubano,+Jagiellońska+10,+Kraków" target="_blank">🗺 Maps</a></div>
@@ -432,7 +665,6 @@
               <div class="club-tip">💡 José Miguel paga la primera ronda de mojitos. Es la ley.</div>
             </div>
           </div>
-
           <div class="club-card" onclick="toggleClub(this)" style="background:#1a1a2e;">
             <div class="club-top"><div class="club-name">Frantic</div><div class="club-genre">🎵 Pop / Comercial</div></div>
             <div class="club-tags"><span class="ctag gold">⭐ El más comercial</span><span class="ctag">🕙 22:00 – 05:00h</span><span class="ctag">📍 ul. Szewska 5</span><a class="ctag" style="color:#4fc3f7;border-color:#4fc3f7;text-decoration:none;" href="https://maps.google.com/?q=Frantic+Club,+Szewska+5,+Kraków" target="_blank">🗺 Maps</a></div>
@@ -445,14 +677,13 @@
                 <div class="cib"><div class="lbl">Precio copas</div><div class="val">Caro. ~8-10 € la copa. Entrada ~30 zł (7 €).</div></div>
                 <div class="cib"><div class="lbl">Ubicación</div><div class="val">Calle Szewska, la calle de los clubs del centro.</div></div>
               </div>
-              <div class="club-tip">⚠️ Varios visitantes denuncian precios de copas abusivos con turistas y cobro de entrada diferencial (locales gratis, extranjeros 30 zł). Preguntad el precio ANTES de pedir. Pagad siempre en PLN, nunca en euros. Si el precio os parece abusivo, el Społem Deluxe está a 5 minutos.</div>
+              <div class="club-tip">⚠️ Varios visitantes denuncian precios abusivos con turistas. Preguntad el precio ANTES de pedir. Pagad siempre en PLN, nunca en euros.</div>
             </div>
           </div>
-
           <div class="club-card" onclick="toggleClub(this)" style="background:#0d1f0d;">
             <div class="club-top"><div class="club-name">Coco Music Club</div><div class="club-genre">🎵 Pop / Mainstream</div></div>
             <div class="club-tags"><span class="ctag gold">⭐ Moderno y variado</span><span class="ctag">🕙 Jue 22:00 – 05:00h</span><span class="ctag">📍 ul. Szpitalna 38</span><a class="ctag" style="color:#4fc3f7;border-color:#4fc3f7;text-decoration:none;" href="https://maps.google.com/?q=Coco+Music+Club,+Szpitalna+38,+Kraków" target="_blank">🗺 Maps</a></div>
-            <div class="club-desc">Club minimalista y elegante con asientos de cuero, luces UV, dos pistas de baile y salas VIP. Música variada: mainstream, pop, latino, house. Muy popular entre turistas y locals por igual.</div>
+            <div class="club-desc">Club minimalista y elegante con asientos de cuero, luces UV, dos pistas de baile y salas VIP. Música variada: mainstream, pop, latino, house.</div>
             <div class="club-desc" style="margin-top:5px;font-size:11px;opacity:0.6;">⭐ 4.1/5 Google · "Buen ambiente, música variada y precios más razonables que otros clubs del centro"</div>
             <div class="club-expand">
               <div class="club-info-grid">
@@ -464,11 +695,10 @@
               <div class="club-tip">💡 Buena alternativa si Frantic tiene mucha cola o está demasiado lleno. Está a 5 minutos andando.</div>
             </div>
           </div>
-
           <div class="club-card" onclick="toggleClub(this)" style="background:#1a0a0a;">
             <div class="club-top"><div class="club-name">Społem Deluxe</div><div class="club-genre">🕺 Variadísimo</div></div>
             <div class="club-tags"><span class="ctag gold">⭐ La Bamba + Gangnam Style + todo</span><span class="ctag">📍 ul. Floriańska 53</span><a class="ctag" style="color:#4fc3f7;border-color:#4fc3f7;text-decoration:none;" href="https://maps.google.com/?q=Społem+Deluxe,+Floriańska+53,+Kraków" target="_blank">🗺 Maps</a></div>
-            <div class="club-desc">Decoración de sótano comunista, precios baratísimos y la playlist más ecléctica de Cracovia: lo mismo te ponen La Bamba que Gangnam Style que reggaeton. Sin pretensiones, puro buen rollo. Muy popular entre locales y estudiantes.</div>
+            <div class="club-desc">Decoración de sótano comunista, precios baratísimos y la playlist más ecléctica de Cracovia. Sin pretensiones, puro buen rollo.</div>
             <div class="club-desc" style="margin-top:5px;font-size:11px;opacity:0.6;">⭐ 4.6/5 Facebook · "El mejor sitio para salir de fiesta en Cracovia — música de todo tipo, precios bajos, sin postureo"</div>
             <div class="club-expand">
               <div class="club-info-grid">
@@ -477,14 +707,13 @@
                 <div class="cib"><div class="lbl">Precio</div><div class="val">De los más baratos de la ciudad. Copas a 3-4 €.</div></div>
                 <div class="cib"><div class="lbl">Vibe</div><div class="val">Sin postureo, puro cachondeo. El antídoto al club fashion.</div></div>
               </div>
-              <div class="club-tip">💡 Si a las 2 AM queréis seguir pero sin pagar más ni aguantar pijos, este es vuestro sitio. Diversión asegurada sin importar el estado en que llegéis.</div>
+              <div class="club-tip">💡 Si a las 2 AM queréis seguir pero sin pagar más ni aguantar pijos, este es vuestro sitio.</div>
             </div>
           </div>
-
           <div class="club-card" onclick="toggleClub(this)">
             <div class="club-top"><div class="club-name">Prozak 2.0</div><div class="club-genre">⚡ Techno</div></div>
             <div class="club-tags"><span class="ctag gold">⭐ Para los valientes del final</span><span class="ctag">🕙 22:30 – 05:00h</span><span class="ctag">📍 Plac Dominikański 6</span><a class="ctag" style="color:#4fc3f7;border-color:#4fc3f7;text-decoration:none;" href="https://maps.google.com/?q=Prozak+2.0,+Plac+Dominikański+6,+Kraków" target="_blank">🗺 Maps</a></div>
-            <div class="club-desc">El más famoso de Cracovia. Laberinto subterráneo, 4 barras, 3 pistas, mejor sonido de la ciudad. Techno puro durante horas. Para un rato si no sois fans, o para quedarse hasta el amanecer si el cuerpo aguanta.</div>
+            <div class="club-desc">El más famoso de Cracovia. Laberinto subterráneo, 4 barras, 3 pistas, mejor sonido de la ciudad. Techno puro durante horas.</div>
             <div class="club-desc" style="margin-top:5px;font-size:11px;opacity:0.6;">⭐ 4.1/5 Google · "El mejor sistema de sonido de la ciudad, DJs de nivel internacional — copas caras dentro"</div>
             <div class="club-expand">
               <div class="club-info-grid">
@@ -493,10 +722,9 @@
                 <div class="cib"><div class="lbl">Consejo</div><div class="val">El ambiente arranca de verdad pasada la 01:00h.</div></div>
                 <div class="cib"><div class="lbl">Instagram</div><div class="val">@prozakdwazero para ver quién pincha ese jueves.</div></div>
               </div>
-              <div class="club-tip">⚠️ Entrada ~10-30 zł según evento (2-7 €). Las copas dentro son caras (~10-12 € el cóctel). Si vais solo a curiosear un rato, con una ronda está bien. Pagad siempre en PLN. No hace falta quedarse hasta las 5h: un rato para decir que estuvisteis y listo. Acordad punto de encuentro antes de entrar, es fácil perderse.</div>
+              <div class="club-tip">⚠️ Entrada ~10-30 zł según evento (2-7 €). Las copas dentro son caras (~10-12 € el cóctel). Pagad siempre en PLN. Acordad punto de encuentro antes de entrar, es fácil perderse.</div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -518,20 +746,20 @@
           <button class="itab" onclick="showTab('d5','comer',this)">🍽 Comer</button>
         </div>
         <div class="ipanel active" id="d5-plan">
-          <div class="act"><div class="act-t">Mañana</div><div class="act-b"><div class="act-title">🧳 Check-out antes de las 11:00h</div><div class="act-desc">El apartamento (Cozy Old Town, Długa 28) tiene check-out hasta las 11:00h. Dejad las maletas hechas la noche anterior. Para no ir cargados a la Fábrica de Schindler, dejadlas en una consigna del centro histórico — buscad <b>"luggage storage Kraków Old Town"</b> en Google Maps, las hay desde ~3-5 € por maleta. Las recogéis de camino al aeropuerto.</div></div></div>
+          <div class="act"><div class="act-t">Mañana</div><div class="act-b"><div class="act-title">🧳 Check-out antes de las 11:00h</div><div class="act-desc">El apartamento (Cozy Old Town, Długa 28) tiene check-out hasta las 11:00h. Dejad las maletas hechas la noche anterior. Para no ir cargados, dejadlas en consigna — buscad <b>"luggage storage Kraków Old Town"</b> en Google Maps, desde ~3-5 € por maleta.</div></div></div>
           <div class="act"><div class="act-t">🥴</div><div class="act-b"><div class="act-title">Desayuno antiresaca</div><div class="act-desc">Żurek en cualquier bar de leche. La cura polaca desde hace siglos. También el obwarzanek de los carritos callejeros para ir comiendo.</div></div></div>
           <div class="act"><div class="act-t">~10:30</div><div class="act-b"><div class="act-title">Último paseo y souvenirs</div><div class="act-desc">Plaza del Mercado a mediodía. Comprad ámbar polaco, vodka Żubrówka de recuerdo. Café en alguna terraza del Rynek antes de la visita.</div></div></div>
-          <div class="act"><div class="act-t">12:00</div><div class="act-b"><div class="act-title">🏭 Fábrica de Oskar Schindler</div><div class="act-desc">Museo en la fábrica real donde Schindler salvó a más de 1.000 judíos. Uno de los mejores museos de Europa. Duración 1h 30m-2h, así que acabaréis sobre las 14:00h. En Zabłocie, junto a Kazimierz. <b>Reservad online con semanas de antelación.</b></div><span class="act-cost">🎟 ~12 € pp · Reserva obligatoria</span></div></div>
-         <div class="act">
-  <div class="act-t">🎟</div>
-  <div class="act-b">
-    <div class="act-title">Entradas a la Fábrica de Schindler</div>
-    <div class="act-desc">Pulsa para ver tu entrada individual.</div>
-    <button class="act-link" onclick="abrirSelectorEntradas()">🎫 Mostrar entrada</button>
-  </div>
-         </div>
-          <div class="act"><div class="act-t">14:00</div><div class="act-b"><div class="act-title">Recoger maletas de la consigna</div><div class="act-desc">Al salir de Schindler, pasad a recoger las maletas de la consigna antes de coger el Bolt. No hay margen para entretenerse: el vuelo es a las 17:35h y hay que salir antes de las 15:00h.</div></div></div>
-          <div class="act"><div class="act-t">15:00</div><div class="act-b"><div class="act-title">🚕 Bolt al aeropuerto — salid a esta hora como muy tarde</div><div class="act-desc">~20 min al aeropuerto en condiciones normales, pero los viernes puede haber tráfico. Saliendo a las 15:00h llegáis con margen suficiente para el check-in y el control de seguridad.</div><span class="act-cost">🚕 ~6-8 €</span></div></div>
+          <div class="act"><div class="act-t">12:00</div><div class="act-b"><div class="act-title">🏭 Fábrica de Oskar Schindler</div><div class="act-desc">Museo en la fábrica real donde Schindler salvó a más de 1.000 judíos. Uno de los mejores museos de Europa. Duración 1h 30m-2h. En Zabłocie, junto a Kazimierz. <b>Reservad online con semanas de antelación.</b></div><span class="act-cost">🎟 ~12 € pp · Reserva obligatoria</span></div></div>
+          <div class="act">
+            <div class="act-t">🎟</div>
+            <div class="act-b">
+              <div class="act-title">Entradas a la Fábrica de Schindler</div>
+              <div class="act-desc">Pulsa para ver tu entrada individual.</div>
+              <button class="act-link" onclick="abrirSelectorEntradas()">🎫 Mostrar entrada</button>
+            </div>
+          </div>
+          <div class="act"><div class="act-t">14:00</div><div class="act-b"><div class="act-title">Recoger maletas de la consigna</div><div class="act-desc">Al salir de Schindler, recoged las maletas antes de coger el Bolt. No hay margen: el vuelo es a las 17:35h y hay que salir antes de las 15:00h.</div></div></div>
+          <div class="act"><div class="act-t">15:00</div><div class="act-b"><div class="act-title">🚕 Bolt al aeropuerto — salid a esta hora como muy tarde</div><div class="act-desc">~20 min al aeropuerto en condiciones normales, pero los viernes puede haber tráfico.</div><span class="act-cost">🚕 ~6-8 €</span></div></div>
           <div class="act"><div class="act-t">17:35</div><div class="act-b"><div class="act-title">✈️ FR8344 · Cracovia → Madrid</div><div class="act-desc">Llegada a Madrid 21:05h. Misión cumplida. José Miguel ya no tiene excusa para nada.</div></div></div>
         </div>
         <div class="ipanel" id="d5-comer">
@@ -540,6 +768,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -547,7 +776,6 @@
 <div class="main-section" id="sec-restaurantes">
   <div class="section-wrap" style="padding-bottom:20px;">
     <div class="section-label">🍽 Dónde comer en Cracovia</div>
-
     <div class="filter-row">
       <button class="filter-btn active" onclick="showRestoGroup('todos', this)">Todos</button>
       <button class="filter-btn" onclick="showRestoGroup('barato', this)">💚 Barato</button>
@@ -555,66 +783,44 @@
       <button class="filter-btn" onclick="showRestoGroup('especial', this)">🔴 Especial</button>
       <button class="filter-btn" onclick="showRestoGroup('callejero', this)">🥡 Callejero</button>
     </div>
-
-    <!-- BARATO -->
     <div class="resto-group active" id="rg-todos">
-
       <div class="cat-label">💚 Económico · hasta 8 €</div>
-
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Bar Mleczny Pod Temida</div><div class="resto-type">Bar de leche comunista · El más barato</div></div><span class="resto-price">~4-5 € pp</span></div><div class="resto-expand">Decoración de época comunista intacta. Pedís en la barra con bandeja. Comida casera y contundente. Perfecto para desayuno antiresaca o almuerzo. ul. Grodzka 43.<div class="resto-must">🍵 Żurek en pan, bigos, cualquier sopa. Todo bajo 4 €.</div></div></div>
-
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Przystanek Pierogarnia</div><div class="resto-type">Pierogi · El plato nacional · Varios locales</div></div><span class="resto-price">~6-8 € pp</span></div><div class="resto-expand">Especialistas en pierogi en todas sus variedades. Ruskie (patata+queso), carne, setas, dulces. Varios locales en centro y Kazimierz. Puede haber cola.<div class="resto-must">🍽 El combo de degustación con varios tipos.</div></div></div>
-
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">U Babci Maliny</div><div class="resto-type">La abuela frambuesa · Cocina casera</div></div><span class="resto-price">~8 € pp</span></div><div class="resto-expand">Muy popular entre guías locales y viajeros. Cocina casera polaca auténtica. Carta en inglés. Cálido y acogedor. Cierra ~23h. ul. Szpitalna (Casco Antiguo).<div class="resto-must">🍽 Żurek, pierogi ruskie, codillo (golonko).</div></div></div>
-
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Bar Mleczny Pod Temida</div><div class="resto-type">Bar de leche comunista · El más barato</div></div><span class="resto-price">~4-5 € pp</span></div><div class="resto-expand">Decoración de época comunista intacta. Pedís en la barra con bandeja. ul. Grodzka 43.<div class="resto-must">🍵 Żurek en pan, bigos, cualquier sopa. Todo bajo 4 €.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Przystanek Pierogarnia</div><div class="resto-type">Pierogi · El plato nacional · Varios locales</div></div><span class="resto-price">~6-8 € pp</span></div><div class="resto-expand">Especialistas en pierogi en todas sus variedades. Ruskie, carne, setas, dulces. Varios locales en centro y Kazimierz.<div class="resto-must">🍽 El combo de degustación con varios tipos.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">U Babci Maliny</div><div class="resto-type">La abuela frambuesa · Cocina casera</div></div><span class="resto-price">~8 € pp</span></div><div class="resto-expand">Muy popular entre guías locales y viajeros. Cocina casera polaca auténtica. Carta en inglés. ul. Szpitalna.<div class="resto-must">🍽 Żurek, pierogi ruskie, codillo (golonko).</div></div></div>
       <div class="cat-label">🟡 Precio medio · 10-18 €</div>
-
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Czarna Kaczka</div><div class="resto-type">Polaco tradicional · Carta en español</div></div><span class="resto-price">~12-17 € pp</span></div><div class="resto-expand">La carta está disponible en español. Especialidad: el pato de la casa (czarna kaczka = pato negro, ~17 €) y el estofado del cazador bigos (~10 €). Buena relación calidad-precio.<div class="resto-must">🍽 El pato de la casa. Sin duda.</div></div></div>
-
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Wesele</div><div class="resto-type">Mejor calidad/precio del Rynek · Plaza Mayor</div></div><span class="resto-price">~12-15 € pp</span></div><div class="resto-expand">El restaurante más valorado de la Plaza del Mercado según viajeros españoles. Pierogi y servicio excelentes. Buena opción si queréis comer EN la plaza sin trampa turística.<div class="resto-must">🍽 Pierogi variados y żurek en pan.</div></div></div>
-
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Pod Baranem</div><div class="resto-type">Auténtico polaco · Clientela local</div></div><span class="resto-price">~15 € pp</span></div><div class="resto-expand">Uno de los más auténticos de la ciudad. Ambiente clásico, camareros serios por fuera y encantadores por dentro. El steak tartar se sirve con vodka por recomendación del camarero. Es la ley.<div class="resto-must">🥩 Steak tartar + vodka polaco. La combinación definitiva.</div></div></div>
-
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Czarna Kaczka</div><div class="resto-type">Polaco tradicional · Carta en español</div></div><span class="resto-price">~12-17 € pp</span></div><div class="resto-expand">La carta está disponible en español. Especialidad: el pato de la casa (~17 €) y el bigos (~10 €).<div class="resto-must">🍽 El pato de la casa. Sin duda.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Wesele</div><div class="resto-type">Mejor calidad/precio del Rynek · Plaza Mayor</div></div><span class="resto-price">~12-15 € pp</span></div><div class="resto-expand">El restaurante más valorado de la Plaza del Mercado según viajeros españoles.<div class="resto-must">🍽 Pierogi variados y żurek en pan.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Pod Baranem</div><div class="resto-type">Auténtico polaco · Clientela local</div></div><span class="resto-price">~15 € pp</span></div><div class="resto-expand">Uno de los más auténticos de la ciudad. El steak tartar se sirve con vodka por recomendación del camarero. Es la ley.<div class="resto-must">🥩 Steak tartar + vodka polaco. La combinación definitiva.</div></div></div>
       <div class="cat-label">🔴 Para una ocasión especial · +20 €</div>
-
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Starka</div><div class="resto-type">Top 3 TripAdvisor Cracovia · Cocina polaca premium</div></div><span class="resto-price">~20-25 € pp</span></div><div class="resto-expand">Años en el top 3-5 de TripAdvisor de Cracovia. Cocina polaca de calidad con productos premium y presentación muy cuidada. Reservad mesa con antelación. Ideal para una cena de despedida especial.<div class="resto-must">🍽 Magret de pato, salmón ahumado, cualquier sopa.</div></div></div>
-
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Starka</div><div class="resto-type">Top 3 TripAdvisor Cracovia · Cocina polaca premium</div></div><span class="resto-price">~20-25 € pp</span></div><div class="resto-expand">Años en el top 3-5 de TripAdvisor de Cracovia. Reservad mesa con antelación.<div class="resto-must">🍽 Magret de pato, salmón ahumado, cualquier sopa.</div></div></div>
       <div class="cat-label">🥡 Callejero · para ir rápido o de madrugada</div>
-
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Zapiekanki · Plaza Nowy</div><div class="resto-type">El fast food polaco · Kazimierz · Hasta las 3 AM</div></div><span class="resto-price">~2-3 €</span></div><div class="resto-expand">La rotonda de la Plaza Nowy está llena de puestos. El más famoso: <b>Zapiekanki Królewskie</b>. Media baguette tostada con champiñones, queso y salsas. El colofón obligatorio de cualquier noche en Kazimierz.<div class="resto-must">🥖 Con champiñones, queso y salsa. Madrugada obligatoria.</div></div></div>
-
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Obwarzanek · carritos callejeros</div><div class="resto-type">Desayuno andando · Toda la ciudad</div></div><span class="resto-price">~0,50 €</span></div><div class="resto-expand">Desde primera hora de la mañana en toda la ciudad. Aro de pan trenzado con sal o semillas, denominación de origen de Cracovia. El desayuno cracoviano por excelencia.<div class="resto-must">🥨 Con semillas de amapola, el más clásico.</div></div></div>
-
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Oscypek en Zakopane</div><div class="resto-type">Queso ahumado de montaña · Solo en Zakopane</div></div><span class="resto-price">~2-3 €</span></div><div class="resto-expand">Queso de leche de oveja ahumado, directo de la plancha. Lo venden señoras locales en el mercadillo de Zakopane. Con mermelada de arándanos por encima. El bocado definitivo de las Tatras.<div class="resto-must">🧀 Caliente, de la plancha, con mermelada. Imprescindible.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Zapiekanki · Plaza Nowy</div><div class="resto-type">El fast food polaco · Kazimierz · Hasta las 3 AM</div></div><span class="resto-price">~2-3 €</span></div><div class="resto-expand">La rotonda de la Plaza Nowy está llena de puestos. El más famoso: <b>Zapiekanki Królewskie</b>.<div class="resto-must">🥖 Con champiñones, queso y salsa. Madrugada obligatoria.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Obwarzanek · carritos callejeros</div><div class="resto-type">Desayuno andando · Toda la ciudad</div></div><span class="resto-price">~0,50 €</span></div><div class="resto-expand">Desde primera hora de la mañana en toda la ciudad. El desayuno cracoviano por excelencia.<div class="resto-must">🥨 Con semillas de amapola, el más clásico.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Oscypek en Zakopane</div><div class="resto-type">Queso ahumado de montaña · Solo en Zakopane</div></div><span class="resto-price">~2-3 €</span></div><div class="resto-expand">Queso de leche de oveja ahumado, directo de la plancha. Con mermelada de arándanos por encima.<div class="resto-must">🧀 Caliente, de la plancha, con mermelada. Imprescindible.</div></div></div>
     </div>
-
-    <!-- GRUPOS FILTRADOS (ocultos, se muestran al filtrar) -->
     <div class="resto-group" id="rg-barato">
       <div class="cat-label">💚 Económico · hasta 8 €</div>
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Bar Mleczny Pod Temida</div><div class="resto-type">Bar de leche comunista</div></div><span class="resto-price">~4-5 € pp</span></div><div class="resto-expand">ul. Grodzka 43. Decoración comunista intacta, pedís en la barra. El desayuno antiresaca definitivo.<div class="resto-must">🍵 Żurek en pan, bigos. Todo bajo 4 €.</div></div></div>
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Przystanek Pierogarnia</div><div class="resto-type">Pierogi · el plato nacional</div></div><span class="resto-price">~6-8 € pp</span></div><div class="resto-expand">Varios locales en centro y Kazimierz. Ruskie, carne, setas, dulces.<div class="resto-must">🍽 El combo de degustación.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Bar Mleczny Pod Temida</div><div class="resto-type">Bar de leche comunista</div></div><span class="resto-price">~4-5 € pp</span></div><div class="resto-expand">ul. Grodzka 43. El desayuno antiresaca definitivo.<div class="resto-must">🍵 Żurek en pan, bigos. Todo bajo 4 €.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Przystanek Pierogarnia</div><div class="resto-type">Pierogi · el plato nacional</div></div><span class="resto-price">~6-8 € pp</span></div><div class="resto-expand">Varios locales en centro y Kazimierz.<div class="resto-must">🍽 El combo de degustación.</div></div></div>
       <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">U Babci Maliny</div><div class="resto-type">La abuela frambuesa</div></div><span class="resto-price">~8 € pp</span></div><div class="resto-expand">Cocina casera polaca auténtica. Carta en inglés. ul. Szpitalna.<div class="resto-must">🍽 Żurek, pierogi ruskie, codillo.</div></div></div>
     </div>
-
     <div class="resto-group" id="rg-medio">
       <div class="cat-label">🟡 Precio medio · 10-18 €</div>
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Czarna Kaczka</div><div class="resto-type">Polaco · Carta en español</div></div><span class="resto-price">~12-17 € pp</span></div><div class="resto-expand">Carta en español. Especialidad: el pato de la casa (~17 €) y el bigos (~10 €).<div class="resto-must">🍽 El pato. Sin duda.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Czarna Kaczka</div><div class="resto-type">Polaco · Carta en español</div></div><span class="resto-price">~12-17 € pp</span></div><div class="resto-expand">Carta en español. El pato de la casa (~17 €) y el bigos (~10 €).<div class="resto-must">🍽 El pato. Sin duda.</div></div></div>
       <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Wesele</div><div class="resto-type">Mejor calidad/precio del Rynek</div></div><span class="resto-price">~12-15 € pp</span></div><div class="resto-expand">El mejor de la Plaza del Mercado según viajeros españoles.<div class="resto-must">🍽 Pierogi variados y żurek en pan.</div></div></div>
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Pod Baranem</div><div class="resto-type">Auténtico polaco · clientela local</div></div><span class="resto-price">~15 € pp</span></div><div class="resto-expand">El steak tartar se sirve con vodka por recomendación del camarero. Es la ley.<div class="resto-must">🥩 Steak tartar + vodka.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Pod Baranem</div><div class="resto-type">Auténtico polaco · clientela local</div></div><span class="resto-price">~15 € pp</span></div><div class="resto-expand">El steak tartar se sirve con vodka por recomendación del camarero.<div class="resto-must">🥩 Steak tartar + vodka.</div></div></div>
     </div>
-
     <div class="resto-group" id="rg-especial">
       <div class="cat-label">🔴 Para una ocasión especial · +20 €</div>
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Starka</div><div class="resto-type">Top 3 TripAdvisor Cracovia</div></div><span class="resto-price">~20-25 € pp</span></div><div class="resto-expand">Años en el top de TripAdvisor. Cocina polaca premium. Reservad con antelación. La cena de la despedida por excelencia.<div class="resto-must">🍽 Magret de pato, salmón, cualquier sopa.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Starka</div><div class="resto-type">Top 3 TripAdvisor Cracovia</div></div><span class="resto-price">~20-25 € pp</span></div><div class="resto-expand">Años en el top de TripAdvisor. Cocina polaca premium. Reservad con antelación.<div class="resto-must">🍽 Magret de pato, salmón, cualquier sopa.</div></div></div>
     </div>
-
     <div class="resto-group" id="rg-callejero">
       <div class="cat-label">🥡 Callejero</div>
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Zapiekanki · Plaza Nowy</div><div class="resto-type">Kazimierz · Hasta las 3 AM</div></div><span class="resto-price">~2-3 €</span></div><div class="resto-expand"><b>Zapiekanki Królewskie</b>, el puesto más famoso. El final obligatorio de cualquier noche.<div class="resto-must">🥖 Con champiñones, queso y salsa.</div></div></div>
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Obwarzanek · carritos</div><div class="resto-type">Desayuno andando</div></div><span class="resto-price">~0,50 €</span></div><div class="resto-expand">Desde primera hora por toda la ciudad. El desayuno cracoviano.<div class="resto-must">🥨 Con semillas de amapola.</div></div></div>
-      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Oscypek en Zakopane</div><div class="resto-type">Queso ahumado de montaña</div></div><span class="resto-price">~2-3 €</span></div><div class="resto-expand">Solo en Zakopane. Caliente de la plancha con mermelada de arándanos. Imprescindible.<div class="resto-must">🧀 Caliente, de la plancha, con mermelada.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Zapiekanki · Plaza Nowy</div><div class="resto-type">Kazimierz · Hasta las 3 AM</div></div><span class="resto-price">~2-3 €</span></div><div class="resto-expand"><b>Zapiekanki Królewskie</b>, el puesto más famoso.<div class="resto-must">🥖 Con champiñones, queso y salsa.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Obwarzanek · carritos</div><div class="resto-type">Desayuno andando</div></div><span class="resto-price">~0,50 €</span></div><div class="resto-expand">Desde primera hora por toda la ciudad.<div class="resto-must">🥨 Con semillas de amapola.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Oscypek en Zakopane</div><div class="resto-type">Queso ahumado de montaña</div></div><span class="resto-price">~2-3 €</span></div><div class="resto-expand">Solo en Zakopane. Caliente de la plancha con mermelada de arándanos.<div class="resto-must">🧀 Caliente, de la plancha, con mermelada.</div></div></div>
     </div>
-
   </div>
 </div>
 
@@ -623,111 +829,14 @@
   <div class="section-wrap" style="padding-bottom:20px;">
     <div class="section-label">🗺 Otras actividades en Cracovia</div>
     <div style="font-size:12px;color:var(--muted);margin-bottom:14px;">Planes que no están en el programa pero que merece la pena conocer. Por si hay un hueco o cambia algo.</div>
-
-    <div class="extra-card" onclick="toggleExtra(this)">
-      <div class="extra-top">
-        <div class="extra-emoji">⛏️</div>
-        <div class="extra-body">
-          <div class="extra-name">Minas de Sal de Wieliczka</div>
-          <div class="extra-sub">A 30 min de Cracovia · Patrimonio UNESCO · 2-3h de visita</div>
-          <div class="extra-tags"><span class="dtag r">Imprescindible</span><span class="dtag">~20 € pp</span></div>
-        </div>
-        <div class="extra-arr">▶</div>
-      </div>
-      <div class="extra-expand">Una de las minas de sal más antiguas y espectaculares del mundo. Capillas, lagos subterráneos y esculturas talladas en sal a 135m de profundidad. La catedral de la Asunción bajo tierra es alucinante. Reservad online. Bus desde la estación central cada media hora.</div>
-    </div>
-
-    <div class="extra-card" onclick="toggleExtra(this)">
-      <div class="extra-top">
-        <div class="extra-emoji">🏰</div>
-        <div class="extra-body">
-          <div class="extra-name">Castillo de Wawel</div>
-          <div class="extra-sub">En el centro de Cracovia · Antigua residencia real</div>
-          <div class="extra-tags"><span class="dtag r">Icónico</span><span class="dtag">~15 € interior</span></div>
-        </div>
-        <div class="extra-arr">▶</div>
-      </div>
-      <div class="extra-expand">El castillo real de la antigua capital de Polonia. La catedral de Wawel con el Altar de Veit Stoss y las criptas reales donde están enterrados los reyes polacos. El exterior es gratuito y ya merece la visita. El interior requiere entrada. Reservad con tiempo en temporada alta.</div>
-    </div>
-
-    <div class="extra-card" onclick="toggleExtra(this)">
-      <div class="extra-top">
-        <div class="extra-emoji">🚤</div>
-        <div class="extra-body">
-          <div class="extra-name">Crucero por el río Vístula</div>
-          <div class="extra-sub">Vistas al Castillo de Wawel · Ambiente relajado</div>
-          <div class="extra-tags"><span class="dtag">~10-15 € pp</span><span class="dtag g">Tranquilo</span></div>
-        </div>
-        <div class="extra-arr">▶</div>
-      </div>
-      <div class="extra-expand">Barcos que salen del muelle junto al Castillo de Wawel. Crucero de 1h con vistas al castillo desde el agua y al skyline de Cracovia. Hay versiones con cerveza incluida. Ideal para un rato tranquilo entre actividades.</div>
-    </div>
-
-    <div class="extra-card" onclick="toggleExtra(this)">
-      <div class="extra-top">
-        <div class="extra-emoji">🎳</div>
-        <div class="extra-body">
-          <div class="extra-name">Barrio de Nowa Huta</div>
-          <div class="extra-sub">Ciudad comunista construida desde cero en los 50 · Muy fotogénico</div>
-          <div class="extra-tags"><span class="dtag">Gratis</span><span class="dtag">~20 min en tranvía</span></div>
-        </div>
-        <div class="extra-arr">▶</div>
-      </div>
-      <div class="extra-expand">Ciudad satélite construida por los soviéticos en los años 50 como modelo de ciudad comunista ideal. Arquitectura estalinista imponente, avenidas anchas, estatua de Lenin (ya retirada). Una de las visitas más originales y fotogénicas de Polonia. Hay tours en tranvía desde el centro.</div>
-    </div>
-
-    <div class="extra-card" onclick="toggleExtra(this)">
-      <div class="extra-top">
-        <div class="extra-emoji">🎨</div>
-        <div class="extra-body">
-          <div class="extra-name">Museo Nacional de Cracovia</div>
-          <div class="extra-sub">Arte polaco · Da Vinci incluido</div>
-          <div class="extra-tags"><span class="dtag">~10 € pp</span><span class="dtag g">Cultura</span></div>
-        </div>
-        <div class="extra-arr">▶</div>
-      </div>
-      <div class="extra-expand">Alberga una de las obras más famosas de Polonia: <b>La dama del armiño</b> de Leonardo da Vinci. Impresionante ver el cuadro en persona. El museo también tiene una colección de arte polaco medieval y contemporáneo muy interesante.</div>
-    </div>
-
-    <div class="extra-card" onclick="toggleExtra(this)">
-      <div class="extra-top">
-        <div class="extra-emoji">🏟️</div>
-        <div class="extra-body">
-          <div class="extra-name">Barrio de Kazimierz de día</div>
-          <div class="extra-sub">Antiguo barrio judío · Galerías, mercadillos, historia</div>
-          <div class="extra-tags"><span class="dtag">Gratis</span><span class="dtag r">Imprescindible</span></div>
-        </div>
-        <div class="extra-arr">▶</div>
-      </div>
-      <div class="extra-expand">Visitarlo de día tiene un encanto completamente diferente a la noche. Sinagogas históricas, el mercado del barrio, tiendas de antigüedades, galerías de arte alternativo. La Plaza Nowy de día tiene un ambiente de mercadillo local muy auténtico.</div>
-    </div>
-
-    <div class="extra-card" onclick="toggleExtra(this)">
-      <div class="extra-top">
-        <div class="extra-emoji">🎯</div>
-        <div class="extra-body">
-          <div class="extra-name">Tiro con arco o paintball</div>
-          <div class="extra-sub">Actividad de grupo · Varias opciones en Cracovia</div>
-          <div class="extra-tags"><span class="dtag">~20-30 € pp</span><span class="dtag r">Perfecto despedida</span></div>
-        </div>
-        <div class="extra-arr">▶</div>
-      </div>
-      <div class="extra-expand">Cracovia tiene varias empresas que ofrecen actividades de grupo: paintball en exteriores, tiro con arco medieval, e incluso tiro con armas de fuego (pistolas y fusiles en poligonos cubiertos). Esta última es la alternativa local a lo que hacíais en Budapest. Buscad "shooting range Kraków" para comparar precios.</div>
-    </div>
-
-    <div class="extra-card" onclick="toggleExtra(this)">
-      <div class="extra-top">
-        <div class="extra-emoji">🏄</div>
-        <div class="extra-body">
-          <div class="extra-name">Cracovia Nightlife Ticket</div>
-          <div class="extra-sub">Entrada gratis a 10+ clubs · Shots gratuitos en bares</div>
-          <div class="extra-tags"><span class="dtag r">Noches de fiesta</span><span class="dtag">~15-20 €</span></div>
-        </div>
-        <div class="extra-arr">▶</div>
-      </div>
-      <div class="extra-expand">Un ticket que da acceso gratuito a más de 10 de los mejores clubs de Cracovia durante 2 días, incluyendo Prozak 2.0, Four Music Club, Choice Club, Frantic y más. Además, shot gratuito en varios locales. Se compra en GetYourGuide. Puede salir muy a cuenta si vais a varias discotecas en la misma noche.</div>
-    </div>
-
+    <div class="extra-card" onclick="toggleExtra(this)"><div class="extra-top"><div class="extra-emoji">⛏️</div><div class="extra-body"><div class="extra-name">Minas de Sal de Wieliczka</div><div class="extra-sub">A 30 min de Cracovia · Patrimonio UNESCO · 2-3h de visita</div><div class="extra-tags"><span class="dtag r">Imprescindible</span><span class="dtag">~20 € pp</span></div></div><div class="extra-arr">▶</div></div><div class="extra-expand">Una de las minas de sal más antiguas y espectaculares del mundo. Capillas, lagos subterráneos y esculturas talladas en sal a 135m de profundidad. Reservad online.</div></div>
+    <div class="extra-card" onclick="toggleExtra(this)"><div class="extra-top"><div class="extra-emoji">🏰</div><div class="extra-body"><div class="extra-name">Castillo de Wawel</div><div class="extra-sub">En el centro de Cracovia · Antigua residencia real</div><div class="extra-tags"><span class="dtag r">Icónico</span><span class="dtag">~15 € interior</span></div></div><div class="extra-arr">▶</div></div><div class="extra-expand">El castillo real de la antigua capital de Polonia. El exterior es gratuito y ya merece la visita. El interior requiere entrada.</div></div>
+    <div class="extra-card" onclick="toggleExtra(this)"><div class="extra-top"><div class="extra-emoji">🚤</div><div class="extra-body"><div class="extra-name">Crucero por el río Vístula</div><div class="extra-sub">Vistas al Castillo de Wawel · Ambiente relajado</div><div class="extra-tags"><span class="dtag">~10-15 € pp</span><span class="dtag g">Tranquilo</span></div></div><div class="extra-arr">▶</div></div><div class="extra-expand">Barcos que salen del muelle junto al Castillo de Wawel. Crucero de 1h con vistas al castillo desde el agua. Hay versiones con cerveza incluida.</div></div>
+    <div class="extra-card" onclick="toggleExtra(this)"><div class="extra-top"><div class="extra-emoji">🎳</div><div class="extra-body"><div class="extra-name">Barrio de Nowa Huta</div><div class="extra-sub">Ciudad comunista construida desde cero en los 50 · Muy fotogénico</div><div class="extra-tags"><span class="dtag">Gratis</span><span class="dtag">~20 min en tranvía</span></div></div><div class="extra-arr">▶</div></div><div class="extra-expand">Ciudad satélite construida por los soviéticos en los años 50. Arquitectura estalinista imponente, avenidas anchas. Hay tours en tranvía desde el centro.</div></div>
+    <div class="extra-card" onclick="toggleExtra(this)"><div class="extra-top"><div class="extra-emoji">🎨</div><div class="extra-body"><div class="extra-name">Museo Nacional de Cracovia</div><div class="extra-sub">Arte polaco · Da Vinci incluido</div><div class="extra-tags"><span class="dtag">~10 € pp</span><span class="dtag g">Cultura</span></div></div><div class="extra-arr">▶</div></div><div class="extra-expand">Alberga una de las obras más famosas de Polonia: <b>La dama del armiño</b> de Leonardo da Vinci. Impresionante ver el cuadro en persona.</div></div>
+    <div class="extra-card" onclick="toggleExtra(this)"><div class="extra-top"><div class="extra-emoji">🏟️</div><div class="extra-body"><div class="extra-name">Barrio de Kazimierz de día</div><div class="extra-sub">Antiguo barrio judío · Galerías, mercadillos, historia</div><div class="extra-tags"><span class="dtag">Gratis</span><span class="dtag r">Imprescindible</span></div></div><div class="extra-arr">▶</div></div><div class="extra-expand">Visitarlo de día tiene un encanto completamente diferente a la noche. Sinagogas históricas, mercado del barrio, tiendas de antigüedades.</div></div>
+    <div class="extra-card" onclick="toggleExtra(this)"><div class="extra-top"><div class="extra-emoji">🎯</div><div class="extra-body"><div class="extra-name">Tiro con arco o paintball</div><div class="extra-sub">Actividad de grupo · Varias opciones en Cracovia</div><div class="extra-tags"><span class="dtag">~20-30 € pp</span><span class="dtag r">Perfecto despedida</span></div></div><div class="extra-arr">▶</div></div><div class="extra-expand">Paintball en exteriores, tiro con arco medieval, e incluso tiro con armas de fuego en polígonos cubiertos. Buscad "shooting range Kraków" para comparar precios.</div></div>
+    <div class="extra-card" onclick="toggleExtra(this)"><div class="extra-top"><div class="extra-emoji">🏄</div><div class="extra-body"><div class="extra-name">Cracovia Nightlife Ticket</div><div class="extra-sub">Entrada gratis a 10+ clubs · Shots gratuitos en bares</div><div class="extra-tags"><span class="dtag r">Noches de fiesta</span><span class="dtag">~15-20 €</span></div></div><div class="extra-arr">▶</div></div><div class="extra-expand">Un ticket que da acceso gratuito a más de 10 de los mejores clubs de Cracovia durante 2 días, incluyendo Prozak 2.0, Frantic y más. Se compra en GetYourGuide.</div></div>
   </div>
 </div>
 
@@ -751,7 +860,6 @@
         <div class="brow tot"><span class="lbl">TOTAL ESTIMADO</span><span class="amt">~363 €</span></div>
       </div>
     </div>
-
     <div class="section-label" style="margin-top:4px;">💡 Consejos de dinero</div>
     <div class="day-card" style="cursor:default;">
       <div style="padding:14px 16px;font-size:12px;color:var(--muted);line-height:1.8;">
@@ -764,107 +872,76 @@
   </div>
 </div>
 
+<!-- ════════════════ SECCIÓN: FOTOS ════════════════ -->
+<div class="main-section" id="sec-fotos">
+
+  <div class="fotos-header">
+    <div class="section-label">📸 Fotos del viaje</div>
+    <div class="fotos-day-filter">
+      <button class="fday-btn active" onclick="filtrarFotos('todos', this)">Todas</button>
+      <button class="fday-btn" onclick="filtrarFotos('lun18', this)">Lun 18</button>
+      <button class="fday-btn" onclick="filtrarFotos('mar19', this)">Mar 19</button>
+      <button class="fday-btn" onclick="filtrarFotos('mie20', this)">Mié 20</button>
+      <button class="fday-btn" onclick="filtrarFotos('jue21', this)">Jue 21</button>
+      <button class="fday-btn" onclick="filtrarFotos('vie22', this)">Vie 22</button>
+    </div>
+  </div>
+
+  <!-- Zona de subida -->
+  <div class="upload-zone" onclick="abrirSelectorDia()">
+    <div class="upload-zone-icon">📷</div>
+    <div class="upload-zone-text">Añadir foto</div>
+    <div class="upload-zone-sub">Pulsa para subir desde tu carrete</div>
+  </div>
+
+  <!-- Contador -->
+  <div class="fotos-count" id="fotosCount">Cargando fotos...</div>
+
+  <!-- Grid de fotos -->
+  <div class="fotos-grid" id="fotosGrid">
+    <!-- Se rellena con JS -->
+  </div>
+
+</div>
+
+<!-- ══ SELECTOR DE DÍA PARA SUBIR ══ -->
+<div class="uds-overlay" id="udsOverlay" onclick="cerrarSelectorDia()"></div>
+<div class="upload-day-select" id="uploadDaySelect">
+  <div class="uds-title">¿De qué día es la foto?</div>
+  <button class="uds-btn" onclick="elegirDia('lun18')">🌙 Llegada a Cracovia <span class="uds-btn-date">Lun 18 mayo</span></button>
+  <button class="uds-btn" onclick="elegirDia('mar19')">🏛 Auschwitz + Tour Cervezas <span class="uds-btn-date">Mar 19 mayo</span></button>
+  <button class="uds-btn" onclick="elegirDia('mie20')">👻 Día tranquilo + Casa del Terror <span class="uds-btn-date">Mié 20 mayo</span></button>
+  <button class="uds-btn" onclick="elegirDia('jue21')">🏔 Zakopane + Termas + Fiesta <span class="uds-btn-date">Jue 21 mayo</span></button>
+  <button class="uds-btn" onclick="elegirDia('vie22')">✈️ Resaca + Schindler + Vuelo <span class="uds-btn-date">Vie 22 mayo</span></button>
+  <div class="uds-cancel" onclick="cerrarSelectorDia()">Cancelar</div>
+</div>
+
+<!-- Input oculto para selección de archivo -->
+<input type="file" id="fileInput" accept="image/*" multiple style="display:none" onchange="subirFotos(this.files)">
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="cerrarLightbox()">
+  <button class="lightbox-close" onclick="cerrarLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="">
+  <div class="lightbox-meta" id="lightboxMeta"></div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
 <div class="footer">
-  Versión 3 · Pendiente: <b>disfraces de José Miguel</b><br><br>
+  Versión 4 · <b>Con galería de fotos</b><br><br>
   🦅 Polska · Kraków · Mayo 2026
 </div>
 
-<script>
-  // NAV PRINCIPAL
-  function showMain(id, btn) {
-    document.querySelectorAll('.main-section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.mnav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('sec-' + id).classList.add('active');
-    btn.classList.add('active');
-  }
-
-  // DÍAS
-  function toggleDay(id) {
-    const c = document.getElementById(id);
-    const was = c.classList.contains('open');
-    document.querySelectorAll('.day-card').forEach(d => d.classList.remove('open'));
-    if (!was) c.classList.add('open');
-  }
-
-  // PESTAÑAS INTERNAS
-  function showTab(dayId, tabId, btn) {
-    event.stopPropagation();
-    const body = document.getElementById(dayId).querySelector('.day-body');
-    body.querySelectorAll('.ipanel').forEach(p => p.classList.remove('active'));
-    body.querySelectorAll('.itab').forEach(t => t.classList.remove('active'));
-    document.getElementById(dayId + '-' + tabId).classList.add('active');
-    btn.classList.add('active');
-  }
-
-  // RESTAURANTES (dentro de días)
-  function toggleResto(el) {
-    const was = el.classList.contains('open');
-    const parent = el.closest('.ipanel') || el.closest('.resto-group') || el.closest('.main-section');
-    parent.querySelectorAll('.resto-card').forEach(r => r.classList.remove('open'));
-    if (!was) el.classList.add('open');
-  }
-
-  // FILTROS RESTAURANTES
-  function showRestoGroup(id, btn) {
-    document.querySelectorAll('.resto-group').forEach(g => g.classList.remove('active'));
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('rg-' + id).classList.add('active');
-    btn.classList.add('active');
-  }
-
-  // CLUBS
-  function toggleClub(el) {
-    const was = el.classList.contains('open');
-    el.closest('.ipanel').querySelectorAll('.club-card').forEach(c => c.classList.remove('open'));
-    if (!was) el.classList.add('open');
-  }
-
-  // ACTIVIDADES EXTRA
-  function toggleExtra(el) {
-    const was = el.classList.contains('open');
-    document.querySelectorAll('.extra-card').forEach(e => e.classList.remove('open'));
-    if (!was) el.classList.add('open');
-  }
-</script>
+<!-- ══ MODAL ENTRADAS SCHINDLER ══ -->
 <style>
-.modal-bg {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
-.modal {
-  background: white;
-  border-radius: 14px;
-  padding: 20px;
-  width: 90%;
-  max-width: 320px;
-  text-align: center;
-}
-.modal-btn {
-  display: block;
-  width: 100%;
-  margin: 6px 0;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  background: #D4001A;
-  color: white;
-  font-weight: 600;
-}
-.modal-close {
-  margin-top: 10px;
-  font-size: 12px;
-  color: #888;
-  cursor: pointer;
-}
+.modal-bg { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:999; }
+.modal { background:white; border-radius:14px; padding:20px; width:90%; max-width:320px; text-align:center; }
+.modal-btn { display:block; width:100%; margin:6px 0; padding:10px; border-radius:8px; border:none; background:#D4001A; color:white; font-weight:600; cursor:pointer; }
+.modal-close { margin-top:10px; font-size:12px; color:#888; cursor:pointer; }
 </style>
-
-<div class="modal-bg" id="modalEntradas">
+<div class="modal-bg" id="modalEntradas" style="display:none;align-items:center;justify-content:center;">
   <div class="modal">
     <h3>¿Quién eres?</h3>
     <button class="modal-btn" onclick="abrirEntrada('javier')">Javier</button>
@@ -876,75 +953,277 @@
 </div>
 
 <script>
-const base = "https://carlosmhz.github.io/APK/";
+// ══════════════════════════════════════
+// CONFIG CLOUDINARY
+// ══════════════════════════════════════
+const CLOUD_NAME = 'dlywinzkr';
+const UPLOAD_PRESET = 'despedida_jose_miguel';
+const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
 
-const entradas = {
-  javier: base + "ticket_JAVIER_RIVERO-v2.pdf",
-  carlos: base + "ticket_CARLOS_MUNOZ-v2.pdf",
-  bernardo: base + "ticket_BERNARDO_TORRES-v2.pdf",
-  jose: base + "ticket_JOSE_MIGUEL_DELGADO-v2.pdf"
+const DIAS_LABEL = {
+  lun18: 'Lun 18 · Llegada',
+  mar19: 'Mar 19 · Auschwitz',
+  mie20: 'Mié 20 · Casa del Terror',
+  jue21: 'Jue 21 · Zakopane',
+  vie22: 'Vie 22 · Schindler'
 };
 
-function abrirSelectorEntradas() {
-  document.getElementById('modalEntradas').style.display = 'flex';
+// ══════════════════════════════════════
+// NAV PRINCIPAL
+// ══════════════════════════════════════
+function showMain(id, btn) {
+  document.querySelectorAll('.main-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.mnav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'fotos') cargarFotos();
 }
 
+// ══════════════════════════════════════
+// DÍAS
+// ══════════════════════════════════════
+function toggleDay(id) {
+  const c = document.getElementById(id);
+  const was = c.classList.contains('open');
+  document.querySelectorAll('.day-card').forEach(d => d.classList.remove('open'));
+  if (!was) c.classList.add('open');
+}
+
+function showTab(dayId, tabId, btn) {
+  event.stopPropagation();
+  const body = document.getElementById(dayId).querySelector('.day-body');
+  body.querySelectorAll('.ipanel').forEach(p => p.classList.remove('active'));
+  body.querySelectorAll('.itab').forEach(t => t.classList.remove('active'));
+  document.getElementById(dayId + '-' + tabId).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleResto(el) {
+  const was = el.classList.contains('open');
+  const parent = el.closest('.ipanel') || el.closest('.resto-group') || el.closest('.main-section');
+  parent.querySelectorAll('.resto-card').forEach(r => r.classList.remove('open'));
+  if (!was) el.classList.add('open');
+}
+
+function showRestoGroup(id, btn) {
+  document.querySelectorAll('.resto-group').forEach(g => g.classList.remove('active'));
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('rg-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleClub(el) {
+  const was = el.classList.contains('open');
+  el.closest('.ipanel').querySelectorAll('.club-card').forEach(c => c.classList.remove('open'));
+  if (!was) el.classList.add('open');
+}
+
+function toggleExtra(el) {
+  const was = el.classList.contains('open');
+  document.querySelectorAll('.extra-card').forEach(e => e.classList.remove('open'));
+  if (!was) el.classList.add('open');
+}
+
+// ══════════════════════════════════════
+// ENTRADAS SCHINDLER
+// ══════════════════════════════════════
+function abrirSelectorEntradas() {
+  const m = document.getElementById('modalEntradas');
+  m.style.display = 'flex';
+}
 function cerrarModal() {
   document.getElementById('modalEntradas').style.display = 'none';
 }
-
+const base = "https://carlosmhz.github.io/APK/";
+const entradas = {
+  javier:   base + "ticket_JAVIER_RIVERO-v2.pdf",
+  bernardo: base + "ticket_BERNARDO_GUAZA-v2.pdf",
+  carlos:   base + "ticket_CARLOS_MARTINEZ-v2.pdf",
+  jose:     base + "ticket_JOSE_MIGUEL_MARCOS-v2.pdf"
+};
 function abrirEntrada(persona) {
   cerrarModal();
-  window.open(entradas[persona] + '?v=' + Date.now(), '_blank');
+  window.open(entradas[persona], '_blank');
 }
 
-window.onclick = function(e) {
-  const modal = document.getElementById('modalEntradas');
-  if (e.target === modal) cerrarModal();
-}
-</script>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js');
-}
-</script>
-<script>
-let deferredPrompt;
+// ══════════════════════════════════════
+// GALERÍA DE FOTOS — CLOUDINARY
+// ══════════════════════════════════════
+let diaSeleccionado = null;
+let filtroActivo = 'todos';
 
-// ANDROID
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById('btnInstalar').style.display = 'inline-flex';
-});
-
-// Mostrar botón en iPhone
-const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-
-if (isIOS) {
-  document.getElementById('btnInstalar').style.display = 'inline-flex';
+function abrirSelectorDia() {
+  document.getElementById('udsOverlay').classList.add('active');
+  document.getElementById('uploadDaySelect').classList.add('active');
 }
 
-// CLICK (SOLO UNA VEZ)
-document.getElementById('btnInstalar').addEventListener('click', async () => {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    deferredPrompt = null;
+function cerrarSelectorDia() {
+  document.getElementById('udsOverlay').classList.remove('active');
+  document.getElementById('uploadDaySelect').classList.remove('active');
+}
+
+function elegirDia(dia) {
+  diaSeleccionado = dia;
+  cerrarSelectorDia();
+  document.getElementById('fileInput').click();
+}
+
+async function subirFotos(files) {
+  if (!files || files.length === 0) return;
+  const grid = document.getElementById('fotosGrid');
+
+  for (const file of files) {
+    // Añadir placeholder de carga
+    const placeholder = document.createElement('div');
+    placeholder.className = 'foto-uploading';
+    placeholder.innerHTML = `<div class="upload-spinner"></div><div class="upload-pct">Subiendo...</div>`;
+    grid.insertBefore(placeholder, grid.firstChild);
+
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', UPLOAD_PRESET);
+      formData.append('folder', `despedida/${diaSeleccionado}`);
+      formData.append('context', `dia=${diaSeleccionado}`);
+
+      const res = await fetch(CLOUDINARY_URL, { method: 'POST', body: formData });
+      const data = await res.json();
+
+      placeholder.remove();
+
+      if (data.secure_url) {
+        mostrarToast('📸 Foto subida');
+        await cargarFotos();
+      } else {
+        mostrarToast('❌ Error al subir');
+      }
+    } catch (e) {
+      placeholder.remove();
+      mostrarToast('❌ Sin conexión');
+    }
+  }
+}
+
+async function cargarFotos() {
+  const grid = document.getElementById('fotosGrid');
+  const countEl = document.getElementById('fotosCount');
+  grid.innerHTML = '<div class="fotos-empty"><div class="fotos-empty-icon">⏳</div>Cargando...</div>';
+
+  try {
+    // Usamos la API de búsqueda de Cloudinary (sin auth, carpeta pública)
+    const url = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/despedida.json`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    let fotos = (data.resources || []).map(r => ({
+      url: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,w_400,h_400,q_auto,f_auto/${r.public_id}`,
+      urlFull: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto,f_auto/${r.public_id}`,
+      publicId: r.public_id,
+      dia: r.public_id.split('/')[1] || 'otros',
+      fecha: r.created_at || ''
+    }));
+
+    // Ordenar por fecha descendente
+    fotos.sort((a, b) => b.fecha.localeCompare(a.fecha));
+
+    // Filtrar si hay filtro activo
+    const fotasFiltradas = filtroActivo === 'todos' ? fotos : fotos.filter(f => f.dia === filtroActivo);
+
+    countEl.textContent = fotos.length === 0 ? '' : `${fotos.length} foto${fotos.length !== 1 ? 's' : ''} · ${fotasFiltradas.length} mostrando`;
+
+    renderizarGrid(fotasFiltradas, fotos.length);
+
+  } catch (e) {
+    grid.innerHTML = `
+      <div class="fotos-empty">
+        <div class="fotos-empty-icon">📭</div>
+        Aún no hay fotos subidas.<br>
+        <span style="font-size:11px;margin-top:6px;display:block;">Sube la primera pulsando el botón de arriba.</span>
+      </div>`;
+    countEl.textContent = '';
+  }
+}
+
+function renderizarGrid(fotos, total) {
+  const grid = document.getElementById('fotosGrid');
+  grid.innerHTML = '';
+
+  if (fotos.length === 0) {
+    grid.innerHTML = `
+      <div class="fotos-empty">
+        <div class="fotos-empty-icon">🔍</div>
+        No hay fotos de este día todavía.
+      </div>`;
+    return;
+  }
+
+  // Agrupar por día si mostramos todas
+  if (filtroActivo === 'todos') {
+    const porDia = {};
+    fotos.forEach(f => {
+      if (!porDia[f.dia]) porDia[f.dia] = [];
+      porDia[f.dia].push(f);
+    });
+
+    const ordenDias = ['lun18', 'mar19', 'mie20', 'jue21', 'vie22', 'otros'];
+    ordenDias.forEach(dia => {
+      if (!porDia[dia] || porDia[dia].length === 0) return;
+      const sep = document.createElement('div');
+      sep.className = 'fotos-day-sep';
+      sep.textContent = DIAS_LABEL[dia] || dia;
+      grid.appendChild(sep);
+      porDia[dia].forEach(foto => grid.appendChild(crearThumb(foto)));
+    });
   } else {
-    mostrarInstruccionesIOS();
-  }
-});
-
-// iPHONE
-function mostrarInstruccionesIOS() {
-  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-  const isSafari = /safari/i.test(navigator.userAgent);
-
-  if (isIOS && isSafari) {
-    alert("Para instalar la app:\n\n1. Pulsa el botón compartir (⬆️)\n2. 'Añadir a pantalla de inicio'");
+    fotos.forEach(foto => grid.appendChild(crearThumb(foto)));
   }
 }
+
+function crearThumb(foto) {
+  const div = document.createElement('div');
+  div.className = 'foto-thumb';
+  div.innerHTML = `
+    <img src="${foto.url}" loading="lazy" alt="">
+    <div class="foto-overlay">
+      <span class="foto-day-badge">${DIAS_LABEL[foto.dia] || foto.dia}</span>
+    </div>`;
+  div.onclick = () => abrirLightbox(foto);
+  return div;
+}
+
+function filtrarFotos(dia, btn) {
+  filtroActivo = dia;
+  document.querySelectorAll('.fday-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  cargarFotos();
+}
+
+function abrirLightbox(foto) {
+  document.getElementById('lightboxImg').src = foto.urlFull;
+  document.getElementById('lightboxMeta').innerHTML = `<b>${DIAS_LABEL[foto.dia] || foto.dia}</b><br>Cracovia · Mayo 2026`;
+  document.getElementById('lightbox').classList.add('active');
+}
+
+function cerrarLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.getElementById('lightboxImg').src = '';
+}
+
+// Toast
+function mostrarToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// Cargar fotos al arrancar si estamos en esa pestaña
+window.addEventListener('DOMContentLoaded', () => {
+  if (document.getElementById('sec-fotos').classList.contains('active')) {
+    cargarFotos();
+  }
+});
 </script>
+
 </body>
 </html>
