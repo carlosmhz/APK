@@ -1209,6 +1209,90 @@ function mostrarToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 </script>
+<!-- BOTÓN FLOTANTE FRASES POLACO -->
+<button onclick="document.getElementById('modalPolaco').style.display='block'" style="position:fixed;bottom:24px;left:20px;z-index:999;background:#c0392b;color:white;border:none;border-radius:50px;padding:12px 18px;font-size:20px;box-shadow:0 4px 15px rgba(0,0,0,0.3);cursor:pointer;line-height:1;" title="Frases en polaco">🇵🇱</button>
+<!-- MODAL FRASES POLACO -->
+<div id="modalPolaco" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.75);overflow-y:auto;padding:20px 16px;" onclick="if(event.target===this)this.classList.remove('active')">
+  <div style="background:#1a1a2e;border-radius:20px;max-width:480px;margin:0 auto;padding:24px 20px;color:white;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <div><div style="font-size:22px;font-weight:800;">🇵🇱 Polaco de supervivencia</div><div style="font-size:12px;color:#aaa;margin-top:2px;">Fonética en español · Memoriza piwo proszę</div></div>
+      <button onclick="document.getElementById('modalPolaco').classList.remove('active')" style="background:rgba(255,255,255,0.1);border:none;color:white;border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;">✕</button>
+    </div>
 
+    <!-- BÁSICO -->
+    <div style="font-size:11px;font-weight:700;color:#e74c3c;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">🗣 Básico</div>
+    <div style="background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;margin-bottom:16px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;font-size:10px;font-weight:700;color:#888;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);">
+        <span>POLACO</span><span>SUENA COMO</span><span>SIGNIFICA</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Dzień dobry</span><span style="color:#aaa;">Dyen dobri</span><span>Buenos días</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Dobry wieczór</span><span style="color:#aaa;">Dobri viechur</span><span>Buenas noches</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Dziękuję</span><span style="color:#aaa;">Dyenkuié</span><span>Gracias</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Przepraszam</span><span style="color:#aaa;">Psheprasham</span><span>Perdona/Disculpa</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Tak / Nie</span><span style="color:#aaa;">Tak / Nie</span><span>Sí / No</span></div>
+    </div>
+
+    <!-- EN EL BAR -->
+    <div style="font-size:11px;font-weight:700;color:#e74c3c;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">🍺 En el bar</div>
+    <div style="background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;margin-bottom:16px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;font-size:10px;font-weight:700;color:#888;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);"><span>POLACO</span><span>SUENA COMO</span><span>SIGNIFICA</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Piwo proszę</span><span style="color:#aaa;">Pivo proshé</span><span>Una cerveza, por favor</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Dwa piwa proszę</span><span style="color:#aaa;">Dva piva proshé</span><span>Dos cervezas</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Wódkę proszę</span><span style="color:#aaa;">Vudke proshé</span><span>Un vodka, por favor</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Na zdrowie!</span><span style="color:#aaa;">Na zdravie</span><span>¡Salud!</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Rachunek proszę</span><span style="color:#aaa;">Rajunek proshé</span><span>La cuenta, por favor</span></div>
+    </div>
+
+    <!-- EN EL RESTAURANTE -->
+    <div style="font-size:11px;font-weight:700;color:#e74c3c;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">🍽 En el restaurante</div>
+    <div style="background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;margin-bottom:16px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;font-size:10px;font-weight:700;color:#888;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);"><span>POLACO</span><span>SUENA COMO</span><span>SIGNIFICA</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Poproszę stolik</span><span style="color:#aaa;">Poproshé stolik</span><span>Una mesa, por favor</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Smacznego</span><span style="color:#aaa;">Smachnego</span><span>Buen provecho</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Bardzo dobre</span><span style="color:#aaa;">Bardzo dobre</span><span>Muy bueno</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Paragon proszę</span><span style="color:#aaa;">Paragon proshé</span><span>El ticket/factura</span></div>
+    </div>
+
+    <!-- TRANSPORTE -->
+    <div style="font-size:11px;font-weight:700;color:#e74c3c;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">🚕 Transporte</div>
+    <div style="background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;margin-bottom:16px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;font-size:10px;font-weight:700;color:#888;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);"><span>POLACO</span><span>SUENA COMO</span><span>SIGNIFICA</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Lotnisko</span><span style="color:#aaa;">Lotnisko</span><span>Aeropuerto</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Centrum</span><span style="color:#aaa;">Tsentrum</span><span>Centro ciudad</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Gdzie jest...?</span><span style="color:#aaa;">Gdie iest</span><span>¿Dónde está...?</span></div>
+    </div>
+
+    <!-- EMERGENCIAS -->
+    <div style="font-size:11px;font-weight:700;color:#e74c3c;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">🆘 Emergencias</div>
+    <div style="background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;margin-bottom:16px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;font-size:10px;font-weight:700;color:#888;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);"><span>POLACO</span><span>SUENA COMO</span><span>SIGNIFICA</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Pomocy!</span><span style="color:#aaa;">Pomótsi</span><span>¡Socorro!</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Policja</span><span style="color:#aaa;">Polítsia</span><span>Policía (997)</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Pogotowie</span><span style="color:#aaa;">Pogotovie</span><span>Ambulancia (999)</span></div>
+    </div>
+
+    <!-- PARA VACILARSE -->
+    <div style="font-size:11px;font-weight:700;color:#e74c3c;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">😂 Para vacilarse</div>
+    <div style="background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;margin-bottom:4px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;font-size:10px;font-weight:700;color:#888;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);"><span>POLACO</span><span>SUENA COMO</span><span>SIGNIFICA</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Płacisz ty</span><span style="color:#aaa;">Pwátshis ti</span><span>Pagas tú (→ José Miguel)</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Jeszcze raz!</span><span style="color:#aaa;">Yeshche ras</span><span>¡Otra vez! / ¡Otra ronda!</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Nie pamiętam</span><span style="color:#aaa;">Nie pamientam</span><span>No me acuerdo (mañana)</span></div>
+    </div>
+
+    <div style="text-align:center;margin-top:20px;font-size:11px;color:#666;">Toca fuera del modal para cerrar</div>
+  </div>
+</div>
+
+<script>
+  // Mostrar/ocultar modal polaco con display
+  document.getElementById('modalPolaco').addEventListener('click', function(e) {
+    if (e.target === this) this.style.display = 'none';
+  });
+  document.getElementById('modalPolaco').classList = {
+    add: function(c) { if(c==='active') document.getElementById('modalPolaco').style.display='block'; },
+    remove: function(c) { if(c==='active') document.getElementById('modalPolaco').style.display='none'; }
+  };
+</script>
 </body>
 </html>
