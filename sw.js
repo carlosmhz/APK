@@ -1,4 +1,4 @@
-const CACHE_NAME = "cracovia-v1";
+const CACHE_NAME = "cracovia-v2";
 
 const urlsToCache = [
   "./",
