@@ -952,10 +952,24 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
   </div>
 </div>
 
-<script>
-// ══════════════════════════════════════
-// CONFIG CLOUDINARY
-// ══════════════════════════════════════
+<!-- ══ FIREBASE + CLOUDINARY ══ -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { getDatabase, ref, push, onValue, query, orderByChild } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+
+// ── Config ──
+const firebaseConfig = {
+  apiKey: "AIzaSyDyECju0z-V2JkvSKfbEsiJLr4yybwqDmg",
+  authDomain: "despedida-jose-miguel.firebaseapp.com",
+  databaseURL: "https://despedida-jose-miguel-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "despedida-jose-miguel",
+  storageBucket: "despedida-jose-miguel.firebasestorage.app",
+  messagingSenderId: "604108160651",
+  appId: "1:604108160651:web:b9809def8b622e6fc0de8e"
+};
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
 const CLOUD_NAME = 'dlywinzkr';
 const UPLOAD_PRESET = 'despedida_jose_miguel';
 const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`;
@@ -968,72 +982,68 @@ const DIAS_LABEL = {
   vie22: 'Vie 22 · Schindler'
 };
 
-// ══════════════════════════════════════
-// NAV PRINCIPAL
-// ══════════════════════════════════════
-function showMain(id, btn) {
+let filtroActivo = 'todos';
+let todasLasFotos = [];
+
+// ── Nav principal ──
+window.showMain = function(id, btn) {
   document.querySelectorAll('.main-section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.mnav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('sec-' + id).classList.add('active');
   btn.classList.add('active');
-  if (id === 'fotos') cargarFotos();
-}
+  if (id === 'fotos') escucharFotos();
+};
 
-// ══════════════════════════════════════
-// DÍAS
-// ══════════════════════════════════════
-function toggleDay(id) {
+// ── Días ──
+window.toggleDay = function(id) {
   const c = document.getElementById(id);
   const was = c.classList.contains('open');
   document.querySelectorAll('.day-card').forEach(d => d.classList.remove('open'));
   if (!was) c.classList.add('open');
-}
+};
 
-function showTab(dayId, tabId, btn) {
+window.showTab = function(dayId, tabId, btn) {
   event.stopPropagation();
   const body = document.getElementById(dayId).querySelector('.day-body');
   body.querySelectorAll('.ipanel').forEach(p => p.classList.remove('active'));
   body.querySelectorAll('.itab').forEach(t => t.classList.remove('active'));
   document.getElementById(dayId + '-' + tabId).classList.add('active');
   btn.classList.add('active');
-}
+};
 
-function toggleResto(el) {
+window.toggleResto = function(el) {
   const was = el.classList.contains('open');
   const parent = el.closest('.ipanel') || el.closest('.resto-group') || el.closest('.main-section');
   parent.querySelectorAll('.resto-card').forEach(r => r.classList.remove('open'));
   if (!was) el.classList.add('open');
-}
+};
 
-function showRestoGroup(id, btn) {
+window.showRestoGroup = function(id, btn) {
   document.querySelectorAll('.resto-group').forEach(g => g.classList.remove('active'));
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('rg-' + id).classList.add('active');
   btn.classList.add('active');
-}
+};
 
-function toggleClub(el) {
+window.toggleClub = function(el) {
   const was = el.classList.contains('open');
   el.closest('.ipanel').querySelectorAll('.club-card').forEach(c => c.classList.remove('open'));
   if (!was) el.classList.add('open');
-}
+};
 
-function toggleExtra(el) {
+window.toggleExtra = function(el) {
   const was = el.classList.contains('open');
   document.querySelectorAll('.extra-card').forEach(e => e.classList.remove('open'));
   if (!was) el.classList.add('open');
-}
+};
 
-// ══════════════════════════════════════
-// ENTRADAS SCHINDLER
-// ══════════════════════════════════════
-function abrirSelectorEntradas() {
-  const m = document.getElementById('modalEntradas');
-  m.style.display = 'flex';
-}
-function cerrarModal() {
+// ── Entradas Schindler ──
+window.abrirSelectorEntradas = function() {
+  document.getElementById('modalEntradas').style.display = 'flex';
+};
+window.cerrarModal = function() {
   document.getElementById('modalEntradas').style.display = 'none';
-}
+};
 const base = "https://carlosmhz.github.io/APK/";
 const entradas = {
   javier:   base + "ticket_JAVIER_RIVERO-v2.pdf",
@@ -1041,39 +1051,34 @@ const entradas = {
   carlos:   base + "ticket_CARLOS_MARTINEZ-v2.pdf",
   jose:     base + "ticket_JOSE_MIGUEL_MARCOS-v2.pdf"
 };
-function abrirEntrada(persona) {
-  cerrarModal();
+window.abrirEntrada = function(persona) {
+  window.cerrarModal();
   window.open(entradas[persona], '_blank');
-}
+};
 
-// ══════════════════════════════════════
-// GALERÍA DE FOTOS — CLOUDINARY
-// ══════════════════════════════════════
-let diaSeleccionado = null;
-let filtroActivo = 'todos';
-
-function abrirSelectorDia() {
+// ── Selector de día ──
+window.abrirSelectorDia = function() {
   document.getElementById('udsOverlay').classList.add('active');
   document.getElementById('uploadDaySelect').classList.add('active');
-}
-
-function cerrarSelectorDia() {
+};
+window.cerrarSelectorDia = function() {
   document.getElementById('udsOverlay').classList.remove('active');
   document.getElementById('uploadDaySelect').classList.remove('active');
-}
+};
 
-function elegirDia(dia) {
+let diaSeleccionado = null;
+window.elegirDia = function(dia) {
   diaSeleccionado = dia;
-  cerrarSelectorDia();
+  window.cerrarSelectorDia();
   document.getElementById('fileInput').click();
-}
+};
 
-async function subirFotos(files) {
+// ── Subida a Cloudinary + guardado en Firebase ──
+window.subirFotos = async function(files) {
   if (!files || files.length === 0) return;
   const grid = document.getElementById('fotosGrid');
 
   for (const file of files) {
-    // Añadir placeholder de carga
     const placeholder = document.createElement('div');
     placeholder.className = 'foto-uploading';
     placeholder.innerHTML = `<div class="upload-spinner"></div><div class="upload-pct">Subiendo...</div>`;
@@ -1083,8 +1088,6 @@ async function subirFotos(files) {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('upload_preset', UPLOAD_PRESET);
-      formData.append('folder', `despedida/${diaSeleccionado}`);
-      formData.append('context', `dia=${diaSeleccionado}`);
 
       const res = await fetch(CLOUDINARY_URL, { method: 'POST', body: formData });
       const data = await res.json();
@@ -1092,82 +1095,69 @@ async function subirFotos(files) {
       placeholder.remove();
 
       if (data.secure_url) {
-        mostrarToast('📸 Foto subida');
-        await cargarFotos();
+        // Guardar en Firebase
+        await push(ref(db, 'fotos'), {
+          url: data.secure_url,
+          urlThumb: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,w_400,h_400,q_auto,f_auto/${data.public_id}`,
+          dia: diaSeleccionado,
+          ts: Date.now()
+        });
+        mostrarToast('📸 ¡Foto añadida!');
       } else {
-        mostrarToast('❌ Error al subir');
+        console.error('Cloudinary error:', data);
+        mostrarToast('❌ Error: ' + (data.error?.message || 'desconocido'));
       }
     } catch (e) {
       placeholder.remove();
+      console.error(e);
       mostrarToast('❌ Sin conexión');
     }
   }
-}
+};
 
-async function cargarFotos() {
+// ── Escuchar fotos en tiempo real desde Firebase ──
+let escuchando = false;
+function escucharFotos() {
   const grid = document.getElementById('fotosGrid');
   const countEl = document.getElementById('fotosCount');
-  grid.innerHTML = '<div class="fotos-empty"><div class="fotos-empty-icon">⏳</div>Cargando...</div>';
 
-  try {
-    // Usamos la API de búsqueda de Cloudinary (sin auth, carpeta pública)
-    const url = `https://res.cloudinary.com/${CLOUD_NAME}/image/list/despedida.json`;
-    const res = await fetch(url);
-    const data = await res.json();
+  if (!escuchando) {
+    escuchando = true;
+    grid.innerHTML = '<div class="fotos-empty"><div class="fotos-empty-icon">⏳</div>Cargando...</div>';
 
-    let fotos = (data.resources || []).map(r => ({
-      url: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,w_400,h_400,q_auto,f_auto/${r.public_id}`,
-      urlFull: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/q_auto,f_auto/${r.public_id}`,
-      publicId: r.public_id,
-      dia: r.public_id.split('/')[1] || 'otros',
-      fecha: r.created_at || ''
-    }));
-
-    // Ordenar por fecha descendente
-    fotos.sort((a, b) => b.fecha.localeCompare(a.fecha));
-
-    // Filtrar si hay filtro activo
-    const fotasFiltradas = filtroActivo === 'todos' ? fotos : fotos.filter(f => f.dia === filtroActivo);
-
-    countEl.textContent = fotos.length === 0 ? '' : `${fotos.length} foto${fotos.length !== 1 ? 's' : ''} · ${fotasFiltradas.length} mostrando`;
-
-    renderizarGrid(fotasFiltradas, fotos.length);
-
-  } catch (e) {
-    grid.innerHTML = `
-      <div class="fotos-empty">
-        <div class="fotos-empty-icon">📭</div>
-        Aún no hay fotos subidas.<br>
-        <span style="font-size:11px;margin-top:6px;display:block;">Sube la primera pulsando el botón de arriba.</span>
-      </div>`;
-    countEl.textContent = '';
+    const fotosRef = query(ref(db, 'fotos'), orderByChild('ts'));
+    onValue(fotosRef, (snapshot) => {
+      todasLasFotos = [];
+      snapshot.forEach(child => {
+        todasLasFotos.unshift({ id: child.key, ...child.val() }); // más reciente primero
+      });
+      renderizarGrid();
+      const total = todasLasFotos.length;
+      countEl.textContent = total === 0 ? '' : `${total} foto${total !== 1 ? 's' : ''}`;
+    });
+  } else {
+    renderizarGrid();
   }
 }
 
-function renderizarGrid(fotos, total) {
+function renderizarGrid() {
   const grid = document.getElementById('fotosGrid');
   grid.innerHTML = '';
 
+  const fotos = filtroActivo === 'todos'
+    ? todasLasFotos
+    : todasLasFotos.filter(f => f.dia === filtroActivo);
+
   if (fotos.length === 0) {
-    grid.innerHTML = `
-      <div class="fotos-empty">
-        <div class="fotos-empty-icon">🔍</div>
-        No hay fotos de este día todavía.
-      </div>`;
+    grid.innerHTML = `<div class="fotos-empty"><div class="fotos-empty-icon">${todasLasFotos.length === 0 ? '📭' : '🔍'}</div>${todasLasFotos.length === 0 ? 'Aún no hay fotos.<br><span style="font-size:11px">Sube la primera pulsando el botón de arriba.</span>' : 'No hay fotos de este día todavía.'}</div>`;
     return;
   }
 
-  // Agrupar por día si mostramos todas
   if (filtroActivo === 'todos') {
     const porDia = {};
-    fotos.forEach(f => {
-      if (!porDia[f.dia]) porDia[f.dia] = [];
-      porDia[f.dia].push(f);
-    });
-
-    const ordenDias = ['lun18', 'mar19', 'mie20', 'jue21', 'vie22', 'otros'];
-    ordenDias.forEach(dia => {
-      if (!porDia[dia] || porDia[dia].length === 0) return;
+    fotos.forEach(f => { if (!porDia[f.dia]) porDia[f.dia] = []; porDia[f.dia].push(f); });
+    ['lun18','mar19','mie20','jue21','vie22'].forEach(dia => {
+      if (!porDia[dia]?.length) return;
       const sep = document.createElement('div');
       sep.className = 'fotos-day-sep';
       sep.textContent = DIAS_LABEL[dia] || dia;
@@ -1182,47 +1172,35 @@ function renderizarGrid(fotos, total) {
 function crearThumb(foto) {
   const div = document.createElement('div');
   div.className = 'foto-thumb';
-  div.innerHTML = `
-    <img src="${foto.url}" loading="lazy" alt="">
-    <div class="foto-overlay">
-      <span class="foto-day-badge">${DIAS_LABEL[foto.dia] || foto.dia}</span>
-    </div>`;
+  div.innerHTML = `<img src="${foto.urlThumb || foto.url}" loading="lazy" alt=""><div class="foto-overlay"><span class="foto-day-badge">${DIAS_LABEL[foto.dia] || foto.dia}</span></div>`;
   div.onclick = () => abrirLightbox(foto);
   return div;
 }
 
-function filtrarFotos(dia, btn) {
+window.filtrarFotos = function(dia, btn) {
   filtroActivo = dia;
   document.querySelectorAll('.fday-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  cargarFotos();
-}
+  renderizarGrid();
+};
 
-function abrirLightbox(foto) {
-  document.getElementById('lightboxImg').src = foto.urlFull;
+window.abrirLightbox = function(foto) {
+  document.getElementById('lightboxImg').src = foto.url;
   document.getElementById('lightboxMeta').innerHTML = `<b>${DIAS_LABEL[foto.dia] || foto.dia}</b><br>Cracovia · Mayo 2026`;
   document.getElementById('lightbox').classList.add('active');
-}
+};
 
-function cerrarLightbox() {
+window.cerrarLightbox = function() {
   document.getElementById('lightbox').classList.remove('active');
   document.getElementById('lightboxImg').src = '';
-}
+};
 
-// Toast
 function mostrarToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
 }
-
-// Cargar fotos al arrancar si estamos en esa pestaña
-window.addEventListener('DOMContentLoaded', () => {
-  if (document.getElementById('sec-fotos').classList.contains('active')) {
-    cargarFotos();
-  }
-});
 </script>
 
 </body>
