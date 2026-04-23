@@ -900,5 +900,10 @@ window.onclick = function(e) {
   if (e.target === modal) cerrarModal();
 }
 </script>
+  <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js');
+}
+  </script>
 </body>
 </html>
