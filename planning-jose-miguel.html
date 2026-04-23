@@ -252,6 +252,9 @@
     <div class="hero-title">JOSÉ<span>MIGUEL</span></div>
     <div class="hero-chip">✈️ 18 — 22 MAYO · CRACOVIA</div>
     <div class="hero-squad">Javier · Bernardo · Carlos · <b>José Miguel 👑</b></div>
+    <button class="act-link" id="btnInstalar" style="display:none; margin-top:12px;">
+📲 Instalar app
+    </button>
   </div>
   <div class="flag-stripe red"></div>
 </div>
@@ -900,10 +903,40 @@ window.onclick = function(e) {
   if (e.target === modal) cerrarModal();
 }
 </script>
-  <script>
+<script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js');
 }
-  </script>
+</script>
+<script>
+let deferredPrompt;
+
+// ANDROID
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('btnInstalar').style.display = 'inline-flex';
+});
+
+document.getElementById('btnInstalar').addEventListener('click', async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  } else {
+    mostrarInstruccionesIOS();
+  }
+});
+
+// iPHONE
+function mostrarInstruccionesIOS() {
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isSafari = /safari/i.test(navigator.userAgent);
+
+  if (isIOS && isSafari) {
+    alert("Para instalar la app:\n\n1. Pulsa el botón compartir (⬆️)\n2. 'Añadir a pantalla de inicio'");
+  }
+}
+</script>
 </body>
 </html>
