@@ -955,7 +955,7 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
 <!-- ══ FIREBASE + CLOUDINARY ══ -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getDatabase, ref, push, onValue, query, orderByChild } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+import { getDatabase, ref, push, remove, onValue, query, orderByChild } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
 
 // ── Config ──
 const firebaseConfig = {
@@ -1186,8 +1186,15 @@ window.filtrarFotos = function(dia, btn) {
 
 window.abrirLightbox = function(foto) {
   document.getElementById('lightboxImg').src = foto.url;
-  document.getElementById('lightboxMeta').innerHTML = `<b>${DIAS_LABEL[foto.dia] || foto.dia}</b><br>Cracovia · Mayo 2026`;
+  document.getElementById('lightboxMeta').innerHTML = `<b>${DIAS_LABEL[foto.dia] || foto.dia}</b><br>Cracovia · Mayo 2026<br><button onclick="borrarFoto('${foto.id}')" style="margin-top:10px;background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);padding:7px 16px;border-radius:20px;font-size:12px;cursor:pointer;">🗑 Eliminar foto</button>`;
   document.getElementById('lightbox').classList.add('active');
+};
+
+window.borrarFoto = async function(id) {
+  if (!confirm('¿Eliminar esta foto?')) return;
+  await remove(ref(db, 'fotos/' + id));
+  window.cerrarLightbox();
+  mostrarToast('🗑 Foto eliminada');
 };
 
 window.cerrarLightbox = function() {
