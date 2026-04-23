@@ -918,6 +918,14 @@ window.addEventListener('beforeinstallprompt', (e) => {
   document.getElementById('btnInstalar').style.display = 'inline-flex';
 });
 
+// Mostrar botón en iPhone
+const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+
+if (isIOS) {
+  document.getElementById('btnInstalar').style.display = 'inline-flex';
+}
+
+// CLICK (SOLO UNA VEZ)
 document.getElementById('btnInstalar').addEventListener('click', async () => {
   if (deferredPrompt) {
     deferredPrompt.prompt();
