@@ -689,6 +689,11 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
         <div class="vm"><div class="icon">✈️</div><div class="cod">vuelta</div></div>
         <div class="vc r"><div class="city">Madrid MAD</div><div class="time">21:05</div><div class="date">Vie 22 mayo</div></div>
       </div>
+      <div style="padding:12px 16px;">
+        <button onclick="abrirTarjetaEmbarque()" style="width:100%;background:linear-gradient(135deg,#1a3a6b,#0d2044);color:#fff;border:none;border-radius:10px;padding:12px;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:0.5px;display:flex;align-items:center;justify-content:center;gap:8px;">
+          🎫 Ver mi tarjeta de embarque
+        </button>
+      </div>
     </div>
   </div>
 
@@ -1721,5 +1726,43 @@ iniciarApp();
     <div onclick="document.getElementById('modalLikes').style.display='none'" style="text-align:center;padding:12px;font-size:12px;color:#888;cursor:pointer;margin-top:8px;">Cerrar</div>
   </div>
   </div>
+  <!-- MODAL TARJETA DE EMBARQUE -->
+<div id="modalEmbarque" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#0d1020;border-radius:16px;max-width:400px;width:100%;padding:20px;position:relative;text-align:center;">
+    <button onclick="document.getElementById('modalEmbarque').style.display='none'" style="position:absolute;top:12px;right:14px;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;">✕</button>
+    <div style="font-size:10px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Tarjeta de embarque</div>
+    <div id="embarqueNombre" style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:#fff;margin-bottom:14px;"></div>
+    <img id="embarqueImg" src="" alt="Boarding pass" style="width:100%;border-radius:10px;display:block;" onerror="this.style.display='none';document.getElementById('embarqueError').style.display='block'" />
+    <div id="embarqueError" style="display:none;padding:20px;font-size:12px;color:#666;">No se encontró la tarjeta.<br>Sube el archivo al repositorio.</div>
+    <div style="margin-top:12px;font-size:11px;color:#444;">FR5356 · MAD → KRK · Lun 18 mayo · 20:35h</div>
+  </div>
+</div>
+
+<script>
+function abrirTarjetaEmbarque() {
+  const usuario = localStorage.getItem('cracovia_user') || '';
+  const datos = {
+    'javier':   { nombre: 'Javier',        archivo: 'boarding-javier.png' },
+    'bernardo': { nombre: 'Bernardo',       archivo: 'boarding-bernardo.png' },
+    'carlos':   { nombre: 'Carlos',         archivo: 'boarding-carlos.png' },
+    'jose':     { nombre: 'José Miguel 👑', archivo: 'boarding-jose-miguel.png' }
+  };
+  const d = datos[usuario];
+  const modal = document.getElementById('modalEmbarque');
+  const img = document.getElementById('embarqueImg');
+  const err = document.getElementById('embarqueError');
+  if (!d) {
+    document.getElementById('embarqueNombre').textContent = 'Selecciónate primero arriba ↑';
+    img.style.display = 'none';
+    err.style.display = 'none';
+  } else {
+    document.getElementById('embarqueNombre').textContent = d.nombre;
+    img.src = d.archivo;
+    img.style.display = 'block';
+    err.style.display = 'none';
+  }
+  modal.style.display = 'flex';
+}
+</script>
 </body>
 </html>
