@@ -1746,11 +1746,16 @@ function abrirTarjetaEmbarque() {
     'carlos':   'boarding-carlos.pdf',
     'jose':     'boarding-jose-miguel.pdf'
   };
-  if (usuarioActual && boarding[usuarioActual]) {
-    window.open(boarding[usuarioActual], '_blank');
-  } else {
+  if (!usuarioActual || !boarding[usuarioActual]) {
     mostrarToast('Selecciónate primero arriba ↑');
+    return;
   }
+  fetch(boarding[usuarioActual], { method: 'HEAD' })
+    .then(r => {
+      if (r.ok) window.open(boarding[usuarioActual], '_blank');
+      else mostrarToast('🎫 Tarjeta aún no disponible');
+    })
+    .catch(() => mostrarToast('🎫 Tarjeta aún no disponible'));
 }
 </script>
 </body>
