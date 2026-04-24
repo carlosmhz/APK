@@ -249,7 +249,8 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
     <div class="hero-eyebrow">Despedida de Soltero · Mayo 2026</div>
     <div class="hero-title">JOSÉ<span>MIGUEL</span></div>
     <div class="hero-chip">✈️ 18 — 22 MAYO · CRACOVIA</div>
-    <div class="hero-squad">Javier · Bernardo · Carlos · <b>José Miguel 👑</b></div>
+   <div class="hero-squad">Javier · Bernardo · Carlos · <b>José Miguel 👑</b></div>
+    <button class="act-link" id="btnInstalar" style="display:none; margin-top:12px;">📲 Instalar app</button>
   </div>
   <div class="flag-stripe red"></div>
 </div>
@@ -812,6 +813,20 @@ function mostrarToast(msg) {
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw-novio.js');
 }
+  // ── PWA INSTALL ──
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('btnInstalar').style.display = 'inline-flex';
+});
+document.getElementById('btnInstalar').addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  if (outcome === 'accepted') document.getElementById('btnInstalar').style.display = 'none';
+  deferredPrompt = null;
+});
 </script>
 </body>
 </html>
