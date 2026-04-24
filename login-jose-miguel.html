@@ -353,8 +353,7 @@ let input = '';
 
 // Comprobar si ya está autenticado
 if (localStorage.getItem(STORAGE_KEY) === '1') {
-  document.getElementById('alreadyIn').style.display = 'flex';
-  document.getElementById('pinSection').style.display = 'none';
+  window.location.replace('planning-jose-miguel-novio.html');
 }
 
 function entrar() {
