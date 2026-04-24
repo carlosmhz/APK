@@ -1740,7 +1740,7 @@ iniciarApp();
 
 <script>
 function abrirTarjetaEmbarque() {
-  const usuario = localStorage.getItem('cracovia_user') || '';
+  const usuario = usuarioActual || '';
   const datos = {
     'javier':   { nombre: 'Javier',        archivo: 'boarding-javier.png' },
     'bernardo': { nombre: 'Bernardo',       archivo: 'boarding-bernardo.png' },
