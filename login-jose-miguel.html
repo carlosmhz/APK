@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="manifest" href="manifest-novio.json">
+<meta name="theme-color" content="#1a1a2e">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algo está a punto de pasar...</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  background: #0d0d1a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Sans', sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── PARTÍCULAS DE FONDO ── */
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: float linear infinite;
+  opacity: 0;
+}
+@keyframes float {
+  0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.6; }
+  90%  { opacity: 0.3; }
+  100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+}
+
+/* ── CONTENIDO ── */
+.container {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 30px 28px;
+  max-width: 380px;
+  width: 100%;
+}
+
+/* ── ICONO ── */
+.icon-wrap {
+  margin: 0 auto 28px;
+  width: 90px; height: 90px;
+  animation: pulse 3s ease-in-out infinite;
+}
+.icon-wrap img {
+  width: 100%; height: 100%;
+  border-radius: 22px;
+  box-shadow: 0 0 40px rgba(249, 212, 35, 0.3);
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(249,212,35,0.3); }
+  50% { transform: scale(1.04); box-shadow: 0 0 60px rgba(249,212,35,0.5); }
+}
+
+/* ── TEXTOS ── */
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 12px;
+}
+
+.headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 9vw, 2.8rem);
+  line-height: 1;
+  letter-spacing: 2px;
+  color: white;
+  margin-bottom: 8px;
+}
+.headline span { color: #f9d423; display: block; }
+
+.subline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  font-weight: 300;
+}
+
+/* ── CUENTA ATRÁS ── */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+.cd-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cd-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: white;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 8px 14px;
+  min-width: 64px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.cd-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-top: 5px;
+}
+.cd-sep {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem;
+  color: rgba(255,255,255,0.2);
+  padding-top: 8px;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+}
+.divider span {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+
+/* ── PIN ── */
+.pin-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 14px;
+  letter-spacing: 1px;
+}
+
+.pin-dots {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.pin-dot {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.2);
+  background: transparent;
+  transition: all 0.2s;
+}
+.pin-dot.filled {
+  background: #f9d423;
+  border-color: #f9d423;
+  box-shadow: 0 0 10px rgba(249,212,35,0.5);
+}
+.pin-dot.error {
+  background: #e74c3c;
+  border-color: #e74c3c;
+  animation: shake 0.4s ease;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.pin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+.pin-key {
+  padding: 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.12s;
+  -webkit-tap-highlight-color: transparent;
+}
+.pin-key:active {
+  background: rgba(249,212,35,0.2);
+  border-color: #f9d423;
+  color: #f9d423;
+  transform: scale(0.94);
+}
+.pin-key.del { font-size: 1.1rem; }
+.pin-key.empty { background: none; border: none; cursor: default; }
+
+.pin-error {
+  min-height: 18px;
+  margin-top: 14px;
+  font-size: 12px;
+  color: #e74c3c;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ── ESTADO: YA AUTENTICADO ── */
+.already-in {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.enter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f9d423;
+  color: #1a1a2e;
+  border: none;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(249,212,35,0.3);
+}
+.enter-btn:active { transform: scale(0.97); }
+.reset-link {
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  cursor: pointer;
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+
+<!-- Partículas -->
+<div class="particles" id="particles"></div>
+
+<div class="container">
+  <div class="icon-wrap">
+    <img src="icon-novio-192.png" alt="">
+  </div>
+
+  <div class="eyebrow">Mayo 2026</div>
+  <div class="headline">Algo está<span>a punto de pasar.</span></div>
+  <div class="subline">Te lo contamos el 18 de mayo.<br>Hasta entonces... espera.</div>
+
+  <!-- Cuenta atrás -->
+  <div class="countdown">
+    <div class="cd-unit"><div class="cd-num" id="cd-dias">--</div><div class="cd-label">días</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit"><div class="cd-num" id="cd-horas">--</div><div class="cd-label">horas</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">min</div></div>
+    <div class="cd-sep">:</div>
+    <div class="cd-unit"><div class="cd-num" id="cd-segs">--</div><div class="cd-label">seg</div></div>
+  </div>
+
+  <!-- Si ya está autenticado -->
+  <div class="already-in" id="alreadyIn">
+    <button class="enter-btn" onclick="entrar()">🎉 Entrar</button>
+    <span class="reset-link" onclick="resetAcceso()">No soy yo · cambiar</span>
+  </div>
+
+  <!-- PIN -->
+  <div id="pinSection">
+    <div class="divider"><span>¿Tienes el PIN?</span></div>
+    <div class="pin-label">Introduce el código que te han dado</div>
+    <div class="pin-dots">
+      <div class="pin-dot" id="d0"></div>
+      <div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div>
+      <div class="pin-dot" id="d3"></div>
+    </div>
+    <div class="pin-grid">
+      <button class="pin-key" onclick="key('1')">1</button>
+      <button class="pin-key" onclick="key('2')">2</button>
+      <button class="pin-key" onclick="key('3')">3</button>
+      <button class="pin-key" onclick="key('4')">4</button>
+      <button class="pin-key" onclick="key('5')">5</button>
+      <button class="pin-key" onclick="key('6')">6</button>
+      <button class="pin-key" onclick="key('7')">7</button>
+      <button class="pin-key" onclick="key('8')">8</button>
+      <button class="pin-key" onclick="key('9')">9</button>
+      <button class="pin-key empty"></button>
+      <button class="pin-key" onclick="key('0')">0</button>
+      <button class="pin-key del" onclick="borrar()">⌫</button>
+    </div>
+    <div class="pin-error" id="pinError"></div>
+  </div>
+
+</div>
+
+<script>
+// ── CUENTA ATRÁS ──
+const TARGET = new Date('2026-05-18T00:00:00');
+
+function actualizarCountdown() {
+  const diff = TARGET - Date.now();
+  if (diff <= 0) {
+    document.getElementById('cd-dias').textContent = '00';
+    document.getElementById('cd-horas').textContent = '00';
+    document.getElementById('cd-mins').textContent = '00';
+    document.getElementById('cd-segs').textContent = '00';
+    return;
+  }
+  const dias  = Math.floor(diff / 86400000);
+  const horas = Math.floor((diff % 86400000) / 3600000);
+  const mins  = Math.floor((diff % 3600000) / 60000);
+  const segs  = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-dias').textContent  = String(dias).padStart(2,'0');
+  document.getElementById('cd-horas').textContent = String(horas).padStart(2,'0');
+  document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+  document.getElementById('cd-segs').textContent  = String(segs).padStart(2,'0');
+}
+actualizarCountdown();
+setInterval(actualizarCountdown, 1000);
+
+// ── PARTÍCULAS ──
+const colors = ['#f9d423','#e74c3c','#3498db','#2ecc71','#9b59b6','#f39c12','#1abc9c'];
+const container = document.getElementById('particles');
+for (let i = 0; i < 25; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = Math.random() * 8 + 4;
+  p.style.cssText = `
+    width:${size}px; height:${size}px;
+    left:${Math.random()*100}%;
+    background:${colors[Math.floor(Math.random()*colors.length)]};
+    animation-duration:${Math.random()*12+8}s;
+    animation-delay:${Math.random()*10}s;
+  `;
+  container.appendChild(p);
+}
+
+// ── PIN ──
+const PIN_CORRECTO = '2947';
+const STORAGE_KEY = 'jm_acceso_ok';
+let input = '';
+
+// Comprobar si ya está autenticado
+if (localStorage.getItem(STORAGE_KEY) === '1') {
+  document.getElementById('alreadyIn').style.display = 'flex';
+  document.getElementById('pinSection').style.display = 'none';
+}
+
+function entrar() {
+  window.location.href = 'planning-jose-miguel-novio.html';
+}
+
+function resetAcceso() {
+  localStorage.removeItem(STORAGE_KEY);
+  document.getElementById('alreadyIn').style.display = 'none';
+  document.getElementById('pinSection').style.display = 'block';
+}
+
+function key(n) {
+  if (input.length >= 4) return;
+  input += n;
+  actualizarDots();
+  if (input.length === 4) setTimeout(comprobar, 150);
+}
+
+function borrar() {
+  input = input.slice(0, -1);
+  actualizarDots();
+  document.getElementById('pinError').textContent = '';
+}
+
+function actualizarDots() {
+  for (let i = 0; i < 4; i++) {
+    const d = document.getElementById(`d${i}`);
+    d.classList.toggle('filled', i < input.length);
+    d.classList.remove('error');
+  }
+}
+
+function comprobar() {
+  if (input === PIN_CORRECTO) {
+    // Animar dots en dorado
+    for (let i = 0; i < 4; i++) {
+      document.getElementById(`d${i}`).classList.add('filled');
+    }
+    localStorage.setItem(STORAGE_KEY, '1');
+    setTimeout(() => { window.location.href = 'planning-jose-miguel-novio.html'; }, 400);
+  } else {
+    // Error
+    for (let i = 0; i < 4; i++) {
+      const d = document.getElementById(`d${i}`);
+      d.classList.remove('filled');
+      d.classList.add('error');
+    }
+    document.getElementById('pinError').textContent = 'PIN incorrecto · Inténtalo de nuevo';
+    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+    setTimeout(() => {
+      for (let i = 0; i < 4; i++) document.getElementById(`d${i}`).classList.remove('error');
+      input = '';
+      actualizarDots();
+    }, 800);
+  }
+}
+
+// ── PWA ──
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw-novio.js');
+}
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+</script>
+
+</body>
+</html>
