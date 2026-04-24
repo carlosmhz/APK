@@ -470,6 +470,51 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
   padding: 8px 0 4px;
   letter-spacing: 1px;
 }
+
+/* ── PANTALLA DE BIENVENIDA ── */
+.welcome-screen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--rojo);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 24px;
+  text-align: center;
+  animation: fadeUp 0.3s ease;
+}
+.welcome-screen.active { display: flex; }
+.welcome-eagle { font-size: 3.5rem; margin-bottom: 8px; }
+.welcome-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: white; letter-spacing: 2px; line-height: 1; margin-bottom: 4px; }
+.welcome-sub { font-size: 12px; color: rgba(255,255,255,0.7); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 36px; }
+.welcome-label { font-size: 13px; color: rgba(255,255,255,0.8); margin-bottom: 14px; font-weight: 600; }
+.welcome-btns { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 280px; }
+.welcome-btn {
+  padding: 16px;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  border-radius: 14px;
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.welcome-btn:active { background: rgba(255,255,255,0.3); transform: scale(0.98); }
+.welcome-btn.novio { background: rgba(255,255,255,0.25); border-color: white; }
+
+/* ── CHIP DE IDENTIDAD EN HERO ── */
+.identity-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 8px;
+  font-size: 11px; color: var(--muted);
+  cursor: pointer;
+}
+.identity-chip span { color: var(--texto); font-weight: 600; }
+.identity-chip .cambiar { color: var(--rojo); font-size: 10px; text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -483,9 +528,26 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
     <div class="hero-title">JOSÉ<span>MIGUEL</span></div>
     <div class="hero-chip">✈️ 18 — 22 MAYO · CRACOVIA</div>
     <div class="hero-squad">Javier · Bernardo · Carlos · <b>José Miguel 👑</b></div>
+    <div class="identity-chip" onclick="resetIdentidad()">
+      Hola, <span id="heroNombre">...</span> &nbsp;·&nbsp; <span class="cambiar">cambiar</span>
+    </div>
     <button class="act-link" id="btnInstalar" style="display:none; margin-top:12px;">📲 Instalar app</button>
   </div>
   <div class="flag-stripe red"></div>
+</div>
+
+<!-- PANTALLA DE BIENVENIDA -->
+<div class="welcome-screen" id="welcomeScreen">
+  <div class="welcome-eagle">🦅</div>
+  <div class="welcome-title">CRACOVIA 2026</div>
+  <div class="welcome-sub">Despedida · José Miguel</div>
+  <div class="welcome-label">¿Quién eres?</div>
+  <div class="welcome-btns">
+    <button class="welcome-btn" onclick="elegirIdentidad('javier')">👤 Javier</button>
+    <button class="welcome-btn" onclick="elegirIdentidad('bernardo')">👤 Bernardo</button>
+    <button class="welcome-btn" onclick="elegirIdentidad('carlos')">👤 Carlos</button>
+    <button class="welcome-btn novio" onclick="elegirIdentidad('jose')">👑 José Miguel</button>
+  </div>
 </div>
 
 <!-- NAV PRINCIPAL -->
@@ -957,7 +1019,6 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
 import { getDatabase, ref, push, remove, onValue, query, orderByChild } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
 
-// ── Config ──
 const firebaseConfig = {
   apiKey: "AIzaSyDyECju0z-V2JkvSKfbEsiJLr4yybwqDmg",
   authDomain: "despedida-jose-miguel.firebaseapp.com",
@@ -982,8 +1043,50 @@ const DIAS_LABEL = {
   vie22: 'Vie 22 · Schindler'
 };
 
-let filtroActivo = 'todos';
-let todasLasFotos = [];
+const USUARIOS = {
+  javier:   { nombre: 'Javier',      emoji: '👤' },
+  bernardo: { nombre: 'Bernardo',     emoji: '👤' },
+  carlos:   { nombre: 'Carlos',       emoji: '👤' },
+  jose:     { nombre: 'José Miguel',  emoji: '👑' }
+};
+
+const base = "https://carlosmhz.github.io/APK/";
+const entradas = {
+  javier:   base + "ticket_JAVIER_RIVERO-v2.pdf",
+  bernardo: base + "ticket_BERNARDO_TORRES-v2.pdf",
+  carlos:   base + "ticket_CARLOS_MUNOZ-v2.pdf",
+  jose:     base + "ticket_JOSE_MIGUEL_DELGADO-v2.pdf"
+};
+
+// ── IDENTIDAD ──
+let usuarioActual = localStorage.getItem('usuario_cracovia') || null;
+
+function iniciarApp() {
+  if (!usuarioActual) {
+    document.getElementById('welcomeScreen').classList.add('active');
+  } else {
+    actualizarUIIdentidad();
+  }
+}
+
+window.elegirIdentidad = function(id) {
+  usuarioActual = id;
+  localStorage.setItem('usuario_cracovia', id);
+  document.getElementById('welcomeScreen').classList.remove('active');
+  actualizarUIIdentidad();
+};
+
+window.resetIdentidad = function() {
+  localStorage.removeItem('usuario_cracovia');
+  usuarioActual = null;
+  document.getElementById('welcomeScreen').classList.add('active');
+};
+
+function actualizarUIIdentidad() {
+  if (!usuarioActual) return;
+  const u = USUARIOS[usuarioActual];
+  document.getElementById('heroNombre').textContent = u.emoji + ' ' + u.nombre;
+}
 
 // ── Nav principal ──
 window.showMain = function(id, btn) {
@@ -1037,19 +1140,16 @@ window.toggleExtra = function(el) {
   if (!was) el.classList.add('open');
 };
 
-// ── Entradas Schindler ──
+// ── Entradas Schindler — abre directamente la del usuario ──
 window.abrirSelectorEntradas = function() {
-  document.getElementById('modalEntradas').style.display = 'flex';
+  if (usuarioActual && entradas[usuarioActual]) {
+    window.open(entradas[usuarioActual], '_blank');
+  } else {
+    document.getElementById('modalEntradas').style.display = 'flex';
+  }
 };
 window.cerrarModal = function() {
   document.getElementById('modalEntradas').style.display = 'none';
-};
-const base = "https://carlosmhz.github.io/APK/";
-const entradas = {
-  javier:   base + "ticket_JAVIER_RIVERO-v2.pdf",
-  bernardo: base + "ticket_BERNARDO_TORRES-v2.pdf",
-  carlos:   base + "ticket_CARLOS_MUNOZ-v2.pdf",
-  jose:     base + "ticket_JOSE_MIGUEL_DELGADO-v2.pdf"
 };
 window.abrirEntrada = function(persona) {
   window.cerrarModal();
@@ -1095,11 +1195,12 @@ window.subirFotos = async function(files) {
       placeholder.remove();
 
       if (data.secure_url) {
-        // Guardar en Firebase
+        const autor = usuarioActual ? USUARIOS[usuarioActual].nombre : 'Alguien';
         await push(ref(db, 'fotos'), {
           url: data.secure_url,
           urlThumb: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,w_400,h_400,q_auto,f_auto/${data.public_id}`,
           dia: diaSeleccionado,
+          autor: autor,
           ts: Date.now()
         });
         mostrarToast('📸 ¡Foto añadida!');
@@ -1115,8 +1216,11 @@ window.subirFotos = async function(files) {
   }
 };
 
-// ── Escuchar fotos en tiempo real desde Firebase ──
+// ── Galería ──
+let filtroActivo = 'todos';
+let todasLasFotos = [];
 let escuchando = false;
+
 function escucharFotos() {
   const grid = document.getElementById('fotosGrid');
   const countEl = document.getElementById('fotosCount');
@@ -1129,7 +1233,7 @@ function escucharFotos() {
     onValue(fotosRef, (snapshot) => {
       todasLasFotos = [];
       snapshot.forEach(child => {
-        todasLasFotos.unshift({ id: child.key, ...child.val() }); // más reciente primero
+        todasLasFotos.unshift({ id: child.key, ...child.val() });
       });
       renderizarGrid();
       const total = todasLasFotos.length;
@@ -1172,7 +1276,7 @@ function renderizarGrid() {
 function crearThumb(foto) {
   const div = document.createElement('div');
   div.className = 'foto-thumb';
-  div.innerHTML = `<img src="${foto.urlThumb || foto.url}" loading="lazy" alt=""><div class="foto-overlay"><span class="foto-day-badge">${DIAS_LABEL[foto.dia] || foto.dia}</span></div>`;
+  div.innerHTML = `<img src="${foto.urlThumb || foto.url}" loading="lazy" alt=""><div class="foto-overlay"><span class="foto-day-badge">${foto.autor || DIAS_LABEL[foto.dia] || foto.dia}</span></div>`;
   div.onclick = () => abrirLightbox(foto);
   return div;
 }
@@ -1186,7 +1290,8 @@ window.filtrarFotos = function(dia, btn) {
 
 window.abrirLightbox = function(foto) {
   document.getElementById('lightboxImg').src = foto.url;
-  document.getElementById('lightboxMeta').innerHTML = `<b>${DIAS_LABEL[foto.dia] || foto.dia}</b><br>Cracovia · Mayo 2026<br><button onclick="borrarFoto('${foto.id}')" style="margin-top:10px;background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);padding:7px 16px;border-radius:20px;font-size:12px;cursor:pointer;">🗑 Eliminar foto</button>`;
+  const autorText = foto.autor ? `📷 ${foto.autor}` : '';
+  document.getElementById('lightboxMeta').innerHTML = `<b>${DIAS_LABEL[foto.dia] || foto.dia}</b><br>${autorText}<br><button onclick="borrarFoto('${foto.id}')" style="margin-top:10px;background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);padding:7px 16px;border-radius:20px;font-size:12px;cursor:pointer;">🗑 Eliminar foto</button>`;
   document.getElementById('lightbox').classList.add('active');
 };
 
@@ -1208,6 +1313,9 @@ function mostrarToast(msg) {
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
 }
+
+// Arrancar
+iniciarApp();
 </script>
 <!-- BOTÓN FLOTANTE FRASES POLACO -->
 <button onclick="document.getElementById('modalPolaco').style.display='block'" style="position:fixed;bottom:24px;left:20px;z-index:999;background:#c0392b;color:white;border:none;border-radius:50px;padding:12px 18px;font-size:20px;box-shadow:0 4px 15px rgba(0,0,0,0.3);cursor:pointer;line-height:1;" title="Frases en polaco">🇵🇱</button>
