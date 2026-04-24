@@ -1109,7 +1109,33 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
 
 <div class="footer">
   Versión 4 · <b>Con galería de fotos</b><br><br>
-  🦅 Polska · Kraków · Mayo 2026
+  🦅 Polska · Kraków · Mayo 2026<br><br>
+  <button onclick="document.getElementById('modalPins').style.display='flex'" style="background:none;border:1px solid #ddd;color:var(--muted);padding:7px 16px;border-radius:20px;font-size:11px;cursor:pointer;">🔐 PINs José Miguel</button>
+</div>
+
+<!-- MODAL PINS -->
+<div id="modalPins" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:white;border-radius:16px;padding:24px 20px;width:88%;max-width:320px;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;margin-bottom:4px;">🔐 PINs José Miguel</div>
+    <div style="font-size:11px;color:#888;margin-bottom:20px;">Pulsa cada ticket para revelar el PIN</div>
+    <div onclick="this.querySelector('.pin-val').style.display=this.querySelector('.pin-val').style.display==='none'?'block':'none'" style="background:#f5f5f7;border-radius:10px;padding:13px 14px;margin-bottom:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-weight:600;font-size:13px;">✈️ Tarjeta de embarque</div>
+        <div class="pin-val" style="display:none;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#D4001A;letter-spacing:4px;margin-top:4px;">7392</div>
+        <div style="font-size:11px;color:#888;margin-top:2px;">Pulsa para revelar</div>
+      </div>
+      <span style="color:#ccc;">👁</span>
+    </div>
+    <div onclick="this.querySelector('.pin-val').style.display=this.querySelector('.pin-val').style.display==='none'?'block':'none'" style="background:#f5f5f7;border-radius:10px;padding:13px 14px;margin-bottom:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-weight:600;font-size:13px;">🎫 Viernes</div>
+        <div class="pin-val" style="display:none;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#D4001A;letter-spacing:4px;margin-top:4px;">4817</div>
+        <div style="font-size:11px;color:#888;margin-top:2px;">Pulsa para revelar</div>
+      </div>
+      <span style="color:#ccc;">👁</span>
+    </div>
+    <div onclick="document.getElementById('modalPins').style.display='none'" style="text-align:center;padding:10px;font-size:12px;color:#888;cursor:pointer;">Cerrar</div>
+  </div>
 </div>
 
 <!-- ══ MODAL ENTRADAS SCHINDLER ══ -->
