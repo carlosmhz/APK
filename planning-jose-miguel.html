@@ -413,42 +413,153 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
 @keyframes spin { to { transform: rotate(360deg); } }
 .upload-pct { font-size: 11px; font-weight: 600; color: var(--rojo); }
 
-/* Lightbox */
-.lightbox {
+/* ── FEED INSTAGRAM ── */
+.feed-screen {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.95);
   z-index: 500;
+  background: #000;
   flex-direction: column;
+}
+.feed-screen.active { display: flex; animation: fadeUp 0.2s ease; }
+
+.feed-topbar {
+  display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 12px 16px;
+  background: #111;
+  border-bottom: 1px solid #222;
+  flex-shrink: 0;
 }
-.lightbox.active { display: flex; animation: fadeUp 0.2s ease; }
-.lightbox img {
-  max-width: 100%;
-  max-height: 80vh;
-  object-fit: contain;
-  border-radius: 4px;
+.feed-back {
+  background: none; border: none;
+  color: white; font-size: 1.2rem;
+  cursor: pointer; padding: 4px 8px 4px 0;
+  margin-right: 8px;
 }
-.lightbox-close {
-  position: absolute;
-  top: 16px; right: 16px;
-  color: white; font-size: 1.5rem;
-  cursor: pointer; background: none; border: none;
-  width: 40px; height: 40px;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(255,255,255,0.1);
+.feed-topbar-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem; letter-spacing: 2px;
+  color: white; flex: 1;
+}
+.feed-topbar-count { font-size: 11px; color: #666; }
+
+.feed-scroll {
+  flex: 1;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.feed-item {
+  scroll-snap-align: start;
+  border-bottom: 1px solid #1a1a1a;
+  background: #000;
+}
+
+.feed-item-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  gap: 10px;
+}
+.feed-avatar {
+  width: 34px; height: 34px;
   border-radius: 50%;
+  background: var(--rojo);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; color: white;
+  flex-shrink: 0;
 }
-.lightbox-meta {
-  margin-top: 14px;
-  text-align: center;
-  color: rgba(255,255,255,0.6);
-  font-size: 12px;
-  line-height: 1.8;
+.feed-author { font-size: 13px; font-weight: 600; color: white; }
+.feed-day-tag {
+  font-size: 10px; color: #666;
+  margin-left: auto;
+  background: #1a1a1a;
+  padding: 2px 8px; border-radius: 10px;
 }
-.lightbox-meta b { color: white; }
+
+.feed-img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.feed-actions {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px 6px;
+  gap: 16px;
+}
+.feed-action-btn {
+  background: none; border: none;
+  color: white; font-size: 1.4rem;
+  cursor: pointer; padding: 0;
+  display: flex; align-items: center; gap: 6px;
+  transition: transform 0.15s;
+}
+.feed-action-btn:active { transform: scale(1.2); }
+.feed-action-btn.liked { color: #e74c3c; }
+.feed-like-count { font-size: 13px; font-weight: 600; color: white; }
+.feed-delete-btn {
+  margin-left: auto;
+  background: none; border: none;
+  color: #444; font-size: 1rem;
+  cursor: pointer; padding: 4px;
+}
+
+.feed-likes-text {
+  padding: 0 14px 6px;
+  font-size: 13px; color: white;
+  font-weight: 600;
+}
+
+.feed-comments {
+  padding: 0 14px 6px;
+}
+.feed-comment {
+  font-size: 13px; color: #ccc;
+  margin-bottom: 4px; line-height: 1.4;
+}
+.feed-comment b { color: white; }
+.feed-comment-time { font-size: 10px; color: #555; margin-left: 6px; }
+
+.feed-add-comment {
+  display: flex;
+  align-items: center;
+  padding: 8px 14px 14px;
+  gap: 10px;
+  border-top: 1px solid #1a1a1a;
+}
+.feed-comment-avatar {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--rojo);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: white;
+  flex-shrink: 0;
+}
+.feed-comment-input {
+  flex: 1;
+  background: none; border: none;
+  color: #aaa; font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  padding: 6px 0;
+  border-bottom: 1px solid #333;
+}
+.feed-comment-input::placeholder { color: #444; }
+.feed-comment-send {
+  background: none; border: none;
+  color: var(--rojo); font-size: 13px;
+  font-weight: 700; cursor: pointer;
+  padding: 0 4px;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+.feed-comment-send.ready { opacity: 1; }
 
 /* Toast */
 .toast {
@@ -981,11 +1092,16 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
 <!-- Input oculto para selección de archivo -->
 <input type="file" id="fileInput" accept="image/*" multiple style="display:none" onchange="subirFotos(this.files)">
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" onclick="cerrarLightbox()">
-  <button class="lightbox-close" onclick="cerrarLightbox()">✕</button>
-  <img id="lightboxImg" src="" alt="">
-  <div class="lightbox-meta" id="lightboxMeta"></div>
+<!-- ══ FEED INSTAGRAM ══ -->
+<div class="feed-screen" id="feedScreen">
+  <div class="feed-topbar">
+    <button class="feed-back" onclick="cerrarFeed()">←</button>
+    <div class="feed-topbar-title">📸 FOTOS</div>
+    <div class="feed-topbar-count" id="feedCount"></div>
+  </div>
+  <div class="feed-scroll" id="feedScroll">
+    <!-- Se rellena con JS -->
+  </div>
 </div>
 
 <!-- Toast -->
@@ -1273,14 +1389,6 @@ function renderizarGrid() {
   }
 }
 
-function crearThumb(foto) {
-  const div = document.createElement('div');
-  div.className = 'foto-thumb';
-  div.innerHTML = `<img src="${foto.urlThumb || foto.url}" loading="lazy" alt=""><div class="foto-overlay"><span class="foto-day-badge">${foto.autor || DIAS_LABEL[foto.dia] || foto.dia}</span></div>`;
-  div.onclick = () => abrirLightbox(foto);
-  return div;
-}
-
 window.filtrarFotos = function(dia, btn) {
   filtroActivo = dia;
   document.querySelectorAll('.fday-btn').forEach(b => b.classList.remove('active'));
@@ -1288,24 +1396,190 @@ window.filtrarFotos = function(dia, btn) {
   renderizarGrid();
 };
 
-window.abrirLightbox = function(foto) {
-  document.getElementById('lightboxImg').src = foto.url;
-  const autorText = foto.autor ? `📷 ${foto.autor}` : '';
-  document.getElementById('lightboxMeta').innerHTML = `<b>${DIAS_LABEL[foto.dia] || foto.dia}</b><br>${autorText}<br><button onclick="borrarFoto('${foto.id}')" style="margin-top:10px;background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);padding:7px 16px;border-radius:20px;font-size:12px;cursor:pointer;">🗑 Eliminar foto</button>`;
-  document.getElementById('lightbox').classList.add('active');
+// ── FEED INSTAGRAM ──
+let feedFotos = [];
+
+function crearThumb(foto) {
+  const div = document.createElement('div');
+  div.className = 'foto-thumb';
+  div.innerHTML = `<img src="${foto.urlThumb || foto.url}" loading="lazy" alt=""><div class="foto-overlay"><span class="foto-day-badge">${foto.autor || DIAS_LABEL[foto.dia] || foto.dia}</span></div>`;
+  div.onclick = () => abrirFeed(foto);
+  return div;
+}
+
+window.abrirFeed = function(fotoInicial) {
+  feedFotos = filtroActivo === 'todos'
+    ? todasLasFotos
+    : todasLasFotos.filter(f => f.dia === filtroActivo);
+
+  const scroll = document.getElementById('feedScroll');
+  document.getElementById('feedCount').textContent = `${feedFotos.length} foto${feedFotos.length !== 1 ? 's' : ''}`;
+  scroll.innerHTML = '';
+
+  feedFotos.forEach(foto => {
+    scroll.appendChild(crearFeedItem(foto));
+  });
+
+  document.getElementById('feedScreen').classList.add('active');
+
+  // Scroll a la foto pulsada
+  const idx = feedFotos.findIndex(f => f.id === fotoInicial.id);
+  if (idx > 0) {
+    requestAnimationFrame(() => {
+      const items = scroll.querySelectorAll('.feed-item');
+      if (items[idx]) items[idx].scrollIntoView({ behavior: 'instant' });
+    });
+  }
 };
+
+window.cerrarFeed = function() {
+  document.getElementById('feedScreen').classList.remove('active');
+};
+
+function crearFeedItem(foto) {
+  const autor = foto.autor || 'Alguien';
+  const inicial = autor.charAt(0).toUpperCase();
+  const diaLabel = DIAS_LABEL[foto.dia] || foto.dia;
+  const yoSoy = usuarioActual ? USUARIOS[usuarioActual].nombre : '';
+  const miInicial = yoSoy.charAt(0).toUpperCase();
+
+  const div = document.createElement('div');
+  div.className = 'feed-item';
+  div.id = `feed-${foto.id}`;
+  div.innerHTML = `
+    <div class="feed-item-header">
+      <div class="feed-avatar">${inicial}</div>
+      <div>
+        <div class="feed-author">${autor}</div>
+      </div>
+      <span class="feed-day-tag">${diaLabel}</span>
+    </div>
+    <img class="feed-img" src="${foto.url}" loading="lazy" alt="">
+    <div class="feed-actions">
+      <button class="feed-action-btn" id="like-btn-${foto.id}" onclick="toggleLike('${foto.id}')">🤍</button>
+      <span class="feed-like-count" id="like-count-${foto.id}">0</span>
+      <button class="feed-delete-btn" onclick="borrarFoto('${foto.id}')">🗑</button>
+    </div>
+    <div class="feed-likes-text" id="likes-text-${foto.id}"></div>
+    <div class="feed-comments" id="comments-${foto.id}"></div>
+    <div class="feed-add-comment">
+      <div class="feed-comment-avatar">${miInicial || '?'}</div>
+      <input class="feed-comment-input" id="comment-input-${foto.id}" placeholder="Añade un comentario..." oninput="toggleSendBtn('${foto.id}')">
+      <button class="feed-comment-send" id="comment-send-${foto.id}" onclick="enviarComentario('${foto.id}')">Publicar</button>
+    </div>`;
+
+  // Escuchar likes y comentarios en tiempo real
+  escucharLikes(foto.id);
+  escucharComentarios(foto.id);
+
+  return div;
+}
+
+function escucharLikes(fotoId) {
+  const likesRef = ref(db, `likes/${fotoId}`);
+  onValue(likesRef, (snapshot) => {
+    const likes = {};
+    snapshot.forEach(child => { likes[child.key] = child.val(); });
+
+    const total = Object.keys(likes).length;
+    const countEl = document.getElementById(`like-count-${fotoId}`);
+    const btnEl = document.getElementById(`like-btn-${fotoId}`);
+    const textEl = document.getElementById(`likes-text-${fotoId}`);
+    if (!countEl) return;
+
+    countEl.textContent = total;
+
+    const yoSoy = usuarioActual ? USUARIOS[usuarioActual].nombre : '';
+    const yoDiLike = Object.values(likes).includes(yoSoy);
+    btnEl.textContent = yoDiLike ? '❤️' : '🤍';
+    btnEl.classList.toggle('liked', yoDiLike);
+
+    const nombres = Object.values(likes);
+    if (nombres.length === 0) {
+      textEl.textContent = '';
+    } else if (nombres.length === 1) {
+      textEl.textContent = `Le gusta a ${nombres[0]}`;
+    } else if (nombres.length === 2) {
+      textEl.textContent = `Les gusta a ${nombres[0]} y ${nombres[1]}`;
+    } else {
+      textEl.textContent = `Les gusta a ${nombres[0]}, ${nombres[1]} y ${nombres.length - 2} más`;
+    }
+  });
+}
+
+window.toggleLike = async function(fotoId) {
+  if (!usuarioActual) return mostrarToast('Elige quién eres primero');
+  const yoSoy = USUARIOS[usuarioActual].nombre;
+  const likesRef = ref(db, `likes/${fotoId}`);
+
+  // Leer likes actuales
+  const { get } = await import("https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js");
+  const snap = await get(likesRef);
+  const likes = {};
+  snap.forEach(child => { likes[child.key] = child.val(); });
+
+  const miKey = Object.keys(likes).find(k => likes[k] === yoSoy);
+  if (miKey) {
+    await remove(ref(db, `likes/${fotoId}/${miKey}`));
+  } else {
+    await push(likesRef, yoSoy);
+  }
+};
+
+function escucharComentarios(fotoId) {
+  const commRef = query(ref(db, `comentarios/${fotoId}`), orderByChild('ts'));
+  onValue(commRef, (snapshot) => {
+    const el = document.getElementById(`comments-${fotoId}`);
+    if (!el) return;
+    el.innerHTML = '';
+    snapshot.forEach(child => {
+      const c = child.val();
+      const div = document.createElement('div');
+      div.className = 'feed-comment';
+      const tiempo = c.ts ? hace(c.ts) : '';
+      div.innerHTML = `<b>${c.autor}</b> ${c.texto} <span class="feed-comment-time">${tiempo}</span>`;
+      el.appendChild(div);
+    });
+  });
+}
+
+window.toggleSendBtn = function(fotoId) {
+  const input = document.getElementById(`comment-input-${fotoId}`);
+  const btn = document.getElementById(`comment-send-${fotoId}`);
+  btn.classList.toggle('ready', input.value.trim().length > 0);
+};
+
+window.enviarComentario = async function(fotoId) {
+  if (!usuarioActual) return mostrarToast('Elige quién eres primero');
+  const input = document.getElementById(`comment-input-${fotoId}`);
+  const texto = input.value.trim();
+  if (!texto) return;
+  const autor = USUARIOS[usuarioActual].nombre;
+  await push(ref(db, `comentarios/${fotoId}`), { autor, texto, ts: Date.now() });
+  input.value = '';
+  document.getElementById(`comment-send-${fotoId}`).classList.remove('ready');
+};
+
+function hace(ts) {
+  const diff = Date.now() - ts;
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return 'ahora';
+  if (m < 60) return `${m}m`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h`;
+  return `${Math.floor(h / 24)}d`;
+}
 
 window.borrarFoto = async function(id) {
   if (!confirm('¿Eliminar esta foto?')) return;
   await remove(ref(db, 'fotos/' + id));
-  window.cerrarLightbox();
+  await remove(ref(db, 'likes/' + id));
+  await remove(ref(db, 'comentarios/' + id));
+  window.cerrarFeed();
   mostrarToast('🗑 Foto eliminada');
 };
 
-window.cerrarLightbox = function() {
-  document.getElementById('lightbox').classList.remove('active');
-  document.getElementById('lightboxImg').src = '';
-};
+window.cerrarLightbox = window.cerrarFeed; // compatibilidad
 
 function mostrarToast(msg) {
   const t = document.getElementById('toast');
