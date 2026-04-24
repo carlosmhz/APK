@@ -671,6 +671,8 @@ window.abrirFeed = function(fotoInicial) {
 };
 
 window.cerrarFeed = function() {
+  unsubscribers.forEach(unsub => unsub());
+  unsubscribers.length = 0;
   document.getElementById('feedScreen').classList.remove('active');
   document.getElementById('feedScroll').innerHTML = '';
 };
@@ -705,9 +707,11 @@ function crearFeedItem(foto) {
   return div;
 }
 
+const unsubscribers = [];
+
 function escucharLikes(fotoId) {
   const likesRef = ref(db, `likes/${fotoId}`);
-  onValue(likesRef, (snapshot) => {
+  const unsub = onValue(likesRef, (snapshot) => {
     const likes = {};
     snapshot.forEach(child => { likes[child.key] = child.val(); });
     const total = Object.keys(likes).length;
@@ -739,6 +743,7 @@ function escucharLikes(fotoId) {
   };
     }
   });
+  unsubscribers.push(unsub);
 }
 
 window.toggleLike = async function(fotoId) {
@@ -754,7 +759,7 @@ window.toggleLike = async function(fotoId) {
 
 function escucharComentarios(fotoId) {
   const commRef = query(ref(db, `comentarios/${fotoId}`), orderByChild('ts'));
-  onValue(commRef, (snapshot) => {
+  const unsub = onValue(commRef, (snapshot) => {
     const el = document.getElementById(`comments-${fotoId}`);
     if (!el) return;
     el.innerHTML = '';
@@ -766,6 +771,7 @@ function escucharComentarios(fotoId) {
       el.appendChild(div);
     });
   });
+  unsubscribers.push(unsub);
 }
 
 window.toggleSendBtn = function(fotoId) {
