@@ -1,4 +1,4 @@
-const CACHE_NAME = "cracovia-novio-v1";
+const CACHE_NAME = "cracovia-novio-v2";
 
 const urlsToCache = [
   "./planning-jose-miguel-novio.html"
