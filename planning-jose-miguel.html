@@ -419,7 +419,7 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
   position: fixed;
   inset: 0;
   z-index: 500;
-  background: #000;
+  background: #f0f0f2;
   flex-direction: column;
 }
 .feed-screen.active { display: flex; animation: fadeUp 0.2s ease; }
@@ -428,20 +428,20 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
   display: flex;
   align-items: center;
   padding: 12px 16px;
-  background: #111;
-  border-bottom: 1px solid #222;
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
   flex-shrink: 0;
 }
 .feed-back {
   background: none; border: none;
-  color: white; font-size: 1.2rem;
+  color: var(--texto); font-size: 1.2rem;
   cursor: pointer; padding: 4px 8px 4px 0;
   margin-right: 8px;
 }
 .feed-topbar-title {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.1rem; letter-spacing: 2px;
-  color: white; flex: 1;
+  color: var(--texto); flex: 1;
 }
 .feed-topbar-count { font-size: 11px; color: #666; }
 
@@ -455,7 +455,7 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
 .feed-item {
   scroll-snap-align: start;
   border-bottom: 1px solid #1a1a1a;
-  background: #000;
+  background: white;
 }
 
 .feed-item-header {
@@ -472,7 +472,7 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
   font-size: 14px; font-weight: 700; color: white;
   flex-shrink: 0;
 }
-.feed-author { font-size: 13px; font-weight: 600; color: white; }
+.feed-author { font-size: 13px; font-weight: 600; color: var(--texto); }
 .feed-day-tag {
   font-size: 10px; color: #666;
   margin-left: auto;
@@ -502,7 +502,7 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
 }
 .feed-action-btn:active { transform: scale(1.2); }
 .feed-action-btn.liked { color: #e74c3c; }
-.feed-like-count { font-size: 13px; font-weight: 600; color: white; }
+.feed-like-count { font-size: 13px; font-weight: 600; color: var(--texto); }
 .feed-delete-btn {
   margin-left: auto;
   background: none; border: none;
@@ -512,7 +512,7 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
 
 .feed-likes-text {
   padding: 0 14px 6px;
-  font-size: 13px; color: white;
+  font-size: 13px; color: var(--texto);
   font-weight: 600;
 }
 
