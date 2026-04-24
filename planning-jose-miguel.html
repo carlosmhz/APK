@@ -1525,13 +1525,22 @@ function escucharLikes(fotoId) {
 
     const nombres = Object.values(likes);
     if (nombres.length === 0) {
-      textEl.textContent = '';
-    } else if (nombres.length === 1) {
-      textEl.textContent = `Le gusta a ${nombres[0]}`;
-    } else if (nombres.length === 2) {
-      textEl.textContent = `Les gusta a ${nombres[0]} y ${nombres[1]}`;
-    } else {
-      textEl.textContent = `Les gusta a ${nombres[0]}, ${nombres[1]} y ${nombres.length - 2} más`;
+  textEl.textContent = '';
+  textEl.onclick = null;
+  textEl.style.cursor = 'default';
+} else if (nombres.length === 1) {
+  textEl.textContent = `Le gusta a ${nombres[0]}`;
+  textEl.onclick = null;
+  textEl.style.cursor = 'default';
+} else {
+  textEl.textContent = `Les gusta a ${nombres[0]}, ${nombres[1]}${nombres.length > 2 ? ` y ${nombres.length - 2} más` : ''}`;
+  textEl.style.cursor = 'pointer';
+  textEl.onclick = () => {
+    document.getElementById('modalLikesLista').innerHTML = nombres.map(n =>
+      `<div style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:14px;font-weight:600;">❤️ ${n}</div>`
+    ).join('');
+    document.getElementById('modalLikes').style.display = 'flex';
+  };
     }
   });
 }
@@ -1705,5 +1714,12 @@ iniciarApp();
     remove: function(c) { if(c==='active') document.getElementById('modalPolaco').style.display='none'; }
   };
 </script>
+  <div id="modalLikes" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.5);align-items:flex-end;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:white;border-radius:20px 20px 0 0;padding:24px 20px 40px;width:100%;max-width:480px;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;margin-bottom:16px;">❤️ Les gusta a...</div>
+    <div id="modalLikesLista"></div>
+    <div onclick="document.getElementById('modalLikes').style.display='none'" style="text-align:center;padding:12px;font-size:12px;color:#888;cursor:pointer;margin-top:8px;">Cerrar</div>
+  </div>
+  </div>
 </body>
 </html>
