@@ -1740,28 +1740,17 @@ iniciarApp();
 
 <script>
 function abrirTarjetaEmbarque() {
-  const usuario = usuarioActual || '';
-  const datos = {
-    'javier':   { nombre: 'Javier',        archivo: 'boarding-javier.png' },
-    'bernardo': { nombre: 'Bernardo',       archivo: 'boarding-bernardo.png' },
-    'carlos':   { nombre: 'Carlos',         archivo: 'boarding-carlos.png' },
-    'jose':     { nombre: 'José Miguel 👑', archivo: 'boarding-jose-miguel.png' }
+  const boarding = {
+    'javier':   'boarding-javier.pdf',
+    'bernardo': 'boarding-bernardo.pdf',
+    'carlos':   'boarding-carlos.pdf',
+    'jose':     'boarding-jose-miguel.pdf'
   };
-  const d = datos[usuario];
-  const modal = document.getElementById('modalEmbarque');
-  const img = document.getElementById('embarqueImg');
-  const err = document.getElementById('embarqueError');
-  if (!d) {
-    document.getElementById('embarqueNombre').textContent = 'Selecciónate primero arriba ↑';
-    img.style.display = 'none';
-    err.style.display = 'none';
+  if (usuarioActual && boarding[usuarioActual]) {
+    window.open(boarding[usuarioActual], '_blank');
   } else {
-    document.getElementById('embarqueNombre').textContent = d.nombre;
-    img.src = d.archivo;
-    img.style.display = 'block';
-    err.style.display = 'none';
+    mostrarToast('Selecciónate primero arriba ↑');
   }
-  modal.style.display = 'flex';
 }
 </script>
 </body>
