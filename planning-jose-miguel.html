@@ -520,11 +520,12 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
   padding: 0 14px 6px;
 }
 .feed-comment {
-  font-size: 13px; color: #ccc;
-  margin-bottom: 4px; line-height: 1.4;
+  font-size: 13px; color: var(--texto);
+  margin-bottom: 6px; line-height: 1.5;
+  display: flex; align-items: baseline; gap: 5px; flex-wrap: wrap;
 }
-.feed-comment b { color: white; }
-.feed-comment-time { font-size: 10px; color: #555; margin-left: 6px; }
+.feed-comment b { color: var(--rojo); font-weight: 700; flex-shrink: 0; }
+.feed-comment-time { font-size: 10px; color: #aaa; flex-shrink: 0; }
 
 .feed-add-comment {
   display: flex;
