@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="manifest-novio.json">
 <meta name="theme-color" content="#D4001A">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -808,6 +808,10 @@ function mostrarToast(msg) {
     <div style="text-align:center;margin-top:20px;font-size:11px;color:#666;">Toca fuera del modal para cerrar</div>
   </div>
 </div>
-
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw-novio.js');
+}
+</script>
 </body>
 </html>
