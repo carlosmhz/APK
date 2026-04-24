@@ -672,6 +672,7 @@ window.abrirFeed = function(fotoInicial) {
 
 window.cerrarFeed = function() {
   document.getElementById('feedScreen').classList.remove('active');
+  document.getElementById('feedScroll').innerHTML = '';
 };
 
 function crearFeedItem(foto) {
