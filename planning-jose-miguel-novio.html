@@ -221,9 +221,13 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
 .feed-delete-btn { margin-left: auto; background: none; border: none; color: #ccc; font-size: 1rem; cursor: pointer; padding: 4px; }
 .feed-likes-text { padding: 0 14px 6px; font-size: 13px; color: var(--texto); font-weight: 600; }
 .feed-comments { padding: 0 14px 6px; }
-.feed-comment { font-size: 13px; color: #444; margin-bottom: 4px; line-height: 1.4; }
-.feed-comment b { color: var(--texto); }
-.feed-comment-time { font-size: 10px; color: #aaa; margin-left: 6px; }
+.feed-comment {
+  font-size: 13px; color: var(--texto);
+  margin-bottom: 6px; line-height: 1.5;
+  display: flex; align-items: baseline; gap: 5px; flex-wrap: wrap;
+}
+.feed-comment b { color: var(--rojo); font-weight: 700; flex-shrink: 0; }
+.feed-comment-time { font-size: 10px; color: #aaa; flex-shrink: 0; }
 .feed-add-comment { display: flex; align-items: center; padding: 8px 14px 14px; gap: 10px; border-top: 1px solid #f0f0f0; }
 .feed-comment-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--rojo); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; flex-shrink: 0; }
 .feed-comment-input { flex: 1; background: none; border: none; color: #444; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; padding: 6px 0; border-bottom: 1px solid #e0e0e0; }
