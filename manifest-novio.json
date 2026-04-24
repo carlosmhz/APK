@@ -1,7 +1,8 @@
 {
   "name": "Cracovia 2026 · José Miguel",
   "short_name": "Cracovia 👑",
-  "start_url": "./login-jose-miguel.html"  "display": "standalone",
+  "start_url": "./login-jose-miguel.html"  
+  "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#D4001A",
   "icons": [
