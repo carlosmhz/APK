@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#D4001A">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cracovia 2026 · José Miguel 👑</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rojo: #D4001A;
+  --rojo-suave: #fdf0f2;
+  --rojo-borde: rgba(212,0,26,0.18);
+  --blanco: #ffffff;
+  --gris-f: #f0f0f2;
+  --gris: #e0e0e0;
+  --gris2: #f5f5f7;
+  --texto: #181818;
+  --muted: #888;
+  --verde: #1a7a3a;
+  --verde-s: #edf7f1;
+  --sombra: 0 2px 16px rgba(0,0,0,0.07);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', sans-serif; font-weight: 300; min-height: 100vh; }
+
+/* ── HERO ── */
+.hero { background: var(--blanco); text-align: center; }
+.flag-stripe { height: 9px; }
+.flag-stripe.white { background: var(--blanco); border-top: 1px solid #eee; }
+.flag-stripe.red { background: var(--rojo); }
+.hero-body { padding: 30px 20px 24px; }
+.stamp { width: 72px; height: 72px; border-radius: 50%; border: 3px solid var(--rojo); margin: 0 auto 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(-7deg); }
+.stamp-eagle { font-size: 1.8rem; line-height: 1; }
+.stamp-txt { font-family: 'Bebas Neue', sans-serif; font-size: 0.42rem; letter-spacing: 2px; color: var(--rojo); display: block; text-transform: uppercase; }
+.hero-eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+.hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem, 11vw, 5rem); line-height: 0.9; letter-spacing: 2px; color: var(--texto); }
+.hero-title span { color: var(--rojo); display: block; }
+.hero-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--rojo); color: var(--blanco); padding: 6px 16px; border-radius: 30px; font-size: 12px; letter-spacing: 1px; font-weight: 600; margin-top: 12px; }
+.hero-squad { margin-top: 9px; font-size: 12px; color: var(--muted); }
+.hero-squad b { color: var(--texto); }
+
+/* ── NAV ── */
+.main-nav {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--rojo);
+  display: flex; overflow-x: auto; scrollbar-width: none;
+}
+.main-nav::-webkit-scrollbar { display: none; }
+.mnav-btn {
+  flex-shrink: 0; flex: 1;
+  padding: 12px 8px;
+  font-family: 'DM Sans', sans-serif; font-weight: 700;
+  font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  cursor: pointer; background: none; border: none;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s; text-align: center;
+}
+.mnav-btn.active { color: var(--blanco); border-bottom-color: var(--blanco); background: rgba(0,0,0,0.15); }
+
+/* ── SECCIONES ── */
+.main-section { display: none; }
+.main-section.active { display: block; animation: fadeUp 0.3s ease; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+.section-wrap { padding: 14px 14px 0; }
+.section-label { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 3px; color: var(--muted); text-transform: uppercase; padding: 4px 2px 10px; }
+
+/* ── RESTAURANTES ── */
+.filter-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.filter-btn { padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; border: 1px solid var(--gris); color: var(--muted); background: var(--blanco); cursor: pointer; transition: all 0.2s; }
+.filter-btn.active { background: var(--rojo); border-color: var(--rojo); color: var(--blanco); }
+.resto-group { display: none; }
+.resto-group.active { display: block; animation: fadeUp 0.2s ease; }
+.resto-card { background: var(--blanco); border: 1px solid var(--gris); border-radius: 10px; padding: 12px; margin-bottom: 8px; cursor: pointer; transition: border-color 0.2s; }
+.resto-card.open { border-color: var(--rojo); }
+.resto-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.resto-name { font-weight: 600; font-size: 13px; color: var(--texto); margin-bottom: 2px; }
+.resto-type { font-size: 11px; color: var(--muted); }
+.resto-price { font-size: 11px; font-weight: 600; color: var(--verde); background: var(--verde-s); border: 1px solid rgba(26,122,58,0.2); padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+.resto-expand { display: none; margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--gris); font-size: 12px; color: var(--muted); line-height: 1.6; animation: fadeUp 0.2s ease; }
+.resto-card.open .resto-expand { display: block; }
+.resto-must { display: inline-block; margin-top: 6px; background: #fff8e0; color: #7a5a00; border: 1px solid #f0d070; font-size: 11px; padding: 3px 8px; border-radius: 4px; }
+.cat-label { font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin: 16px 0 8px; display: flex; align-items: center; gap: 8px; }
+.cat-label::after { content: ''; flex: 1; height: 1px; background: var(--gris); }
+
+/* ── TICKETS ── */
+.ticket-card {
+  background: var(--blanco);
+  border: 1px solid var(--gris);
+  border-radius: 14px;
+  padding: 18px 16px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.ticket-card:active { border-color: var(--rojo); background: var(--rojo-suave); }
+.ticket-icon { font-size: 2rem; flex-shrink: 0; }
+.ticket-info { flex: 1; }
+.ticket-name { font-weight: 600; font-size: 14px; color: var(--texto); margin-bottom: 3px; }
+.ticket-sub { font-size: 11px; color: var(--muted); }
+.ticket-arrow { color: var(--gris); font-size: 12px; }
+
+/* ── PIN MODAL ── */
+.pin-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 300;
+  align-items: flex-end;
+  justify-content: center;
+}
+.pin-overlay.active { display: flex; }
+.pin-sheet {
+  background: var(--blanco);
+  border-radius: 20px 20px 0 0;
+  padding: 24px 20px 50px;
+  width: 100%;
+  max-width: 480px;
+  animation: slideUp 0.3s ease;
+}
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.pin-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 2px; color: var(--texto); margin-bottom: 4px; }
+.pin-sub { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+.pin-dots {
+  display: flex; gap: 12px; justify-content: center;
+  margin-bottom: 24px;
+}
+.pin-dot {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--gris);
+  transition: background 0.2s;
+}
+.pin-dot.filled { background: var(--rojo); }
+.pin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.pin-key {
+  padding: 18px;
+  background: var(--gris-f);
+  border: 1px solid var(--gris);
+  border-radius: 12px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  color: var(--texto);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.1s;
+}
+.pin-key:active { background: var(--rojo); color: white; border-color: var(--rojo); transform: scale(0.95); }
+.pin-key.del { font-size: 1rem; }
+.pin-error { text-align: center; font-size: 12px; color: var(--rojo); font-weight: 600; min-height: 18px; margin-top: 4px; }
+.pin-cancel { text-align: center; padding: 12px; font-size: 12px; color: var(--muted); cursor: pointer; margin-top: 4px; }
+
+/* ── FOTOS ── */
+.fotos-header { padding: 16px 14px 0; }
+.fotos-day-filter { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 12px; margin-bottom: 4px; }
+.fotos-day-filter::-webkit-scrollbar { display: none; }
+.fday-btn { flex-shrink: 0; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 600; border: 1px solid var(--gris); color: var(--muted); background: var(--blanco); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.fday-btn.active { background: var(--rojo); border-color: var(--rojo); color: var(--blanco); }
+.upload-zone { margin: 0 14px 14px; background: var(--blanco); border: 2px dashed var(--gris); border-radius: 14px; padding: 18px 16px; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+.upload-zone:active { border-color: var(--rojo); background: var(--rojo-suave); }
+.upload-zone-icon { font-size: 2rem; }
+.upload-zone-text { font-size: 13px; font-weight: 600; color: var(--texto); }
+.upload-zone-sub { font-size: 11px; color: var(--muted); }
+.fotos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 0 0 80px; }
+.foto-thumb { aspect-ratio: 1; overflow: hidden; position: relative; cursor: pointer; background: var(--gris); }
+.foto-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
+.foto-thumb:active img { transform: scale(0.95); }
+.foto-thumb .foto-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%); opacity: 0; transition: opacity 0.2s; display: flex; align-items: flex-end; padding: 6px; }
+.foto-thumb:hover .foto-overlay { opacity: 1; }
+.foto-thumb .foto-day-badge { font-size: 9px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: white; background: var(--rojo); padding: 2px 5px; border-radius: 3px; }
+.fotos-day-sep { grid-column: 1 / -1; background: var(--gris-f); padding: 10px 14px 6px; font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+.fotos-day-sep::after { content: ''; flex: 1; height: 1px; background: var(--gris); }
+.fotos-empty { grid-column: 1 / -1; text-align: center; padding: 50px 20px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.fotos-empty-icon { font-size: 3rem; margin-bottom: 10px; }
+.foto-uploading { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--rojo-suave); gap: 8px; }
+.upload-spinner { width: 28px; height: 28px; border: 3px solid var(--rojo-borde); border-top-color: var(--rojo); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.fotos-count { text-align: center; font-size: 11px; color: var(--muted); padding: 8px 0 4px; letter-spacing: 1px; }
+
+/* ── SELECTOR DÍA SUBIDA ── */
+.uds-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 199; }
+.uds-overlay.active { display: block; }
+.upload-day-select { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--blanco); border-radius: 20px 20px 0 0; padding: 20px 16px 40px; z-index: 200; box-shadow: 0 -4px 30px rgba(0,0,0,0.15); animation: slideUp 0.3s ease; }
+.upload-day-select.active { display: block; }
+.uds-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 14px; text-align: center; }
+.uds-btn { display: flex; align-items: center; gap: 12px; width: 100%; padding: 13px 14px; background: var(--gris-f); border: 1px solid var(--gris); border-radius: 10px; margin-bottom: 8px; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: var(--texto); transition: all 0.15s; }
+.uds-btn:active { background: var(--rojo-suave); border-color: var(--rojo); color: var(--rojo); }
+.uds-btn-date { font-size: 11px; color: var(--muted); font-weight: 300; margin-left: auto; }
+.uds-cancel { text-align: center; padding: 12px; font-size: 12px; color: var(--muted); cursor: pointer; margin-top: 4px; }
+
+/* ── FEED INSTAGRAM ── */
+.feed-screen { display: none; position: fixed; inset: 0; z-index: 500; background: #fff; flex-direction: column; }
+.feed-screen.active { display: flex; animation: fadeUp 0.2s ease; }
+.feed-topbar { display: flex; align-items: center; padding: 12px 16px; background: white; border-bottom: 1px solid #e0e0e0; flex-shrink: 0; }
+.feed-back { background: none; border: none; color: var(--texto); font-size: 1.2rem; cursor: pointer; padding: 4px 8px 4px 0; margin-right: 8px; }
+.feed-topbar-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px; color: var(--texto); flex: 1; }
+.feed-topbar-count { font-size: 11px; color: #666; }
+.feed-scroll { flex: 1; overflow-y: auto; scroll-snap-type: y mandatory; -webkit-overflow-scrolling: touch; }
+.feed-item { scroll-snap-align: start; border-bottom: 1px solid #f0f0f0; background: white; }
+.feed-item-header { display: flex; align-items: center; padding: 10px 14px; gap: 10px; }
+.feed-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--rojo); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: white; flex-shrink: 0; }
+.feed-author { font-size: 13px; font-weight: 600; color: var(--texto); }
+.feed-day-tag { font-size: 10px; color: #666; margin-left: auto; background: #f0f0f2; padding: 2px 8px; border-radius: 10px; }
+.feed-img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+.feed-actions { display: flex; align-items: center; padding: 10px 14px 6px; gap: 16px; }
+.feed-action-btn { background: none; border: none; color: var(--texto); font-size: 1.4rem; cursor: pointer; padding: 0; display: flex; align-items: center; gap: 6px; transition: transform 0.15s; }
+.feed-action-btn:active { transform: scale(1.2); }
+.feed-action-btn.liked { color: #e74c3c; }
+.feed-like-count { font-size: 13px; font-weight: 600; color: var(--texto); }
+.feed-delete-btn { margin-left: auto; background: none; border: none; color: #ccc; font-size: 1rem; cursor: pointer; padding: 4px; }
+.feed-likes-text { padding: 0 14px 6px; font-size: 13px; color: var(--texto); font-weight: 600; }
+.feed-comments { padding: 0 14px 6px; }
+.feed-comment { font-size: 13px; color: #444; margin-bottom: 4px; line-height: 1.4; }
+.feed-comment b { color: var(--texto); }
+.feed-comment-time { font-size: 10px; color: #aaa; margin-left: 6px; }
+.feed-add-comment { display: flex; align-items: center; padding: 8px 14px 14px; gap: 10px; border-top: 1px solid #f0f0f0; }
+.feed-comment-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--rojo); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: white; flex-shrink: 0; }
+.feed-comment-input { flex: 1; background: none; border: none; color: #444; font-size: 13px; font-family: 'DM Sans', sans-serif; outline: none; padding: 6px 0; border-bottom: 1px solid #e0e0e0; }
+.feed-comment-input::placeholder { color: #bbb; }
+.feed-comment-send { background: none; border: none; color: var(--rojo); font-size: 13px; font-weight: 700; cursor: pointer; padding: 0 4px; opacity: 0.4; transition: opacity 0.2s; }
+.feed-comment-send.ready { opacity: 1; }
+
+/* ── TOAST ── */
+.toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--texto); color: white; padding: 10px 18px; border-radius: 30px; font-size: 12px; font-weight: 600; opacity: 0; transition: all 0.3s; z-index: 600; white-space: nowrap; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+.footer { text-align: center; padding: 16px 16px 40px; font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+.footer b { color: var(--rojo); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="flag-stripe white"></div>
+  <div class="hero-body">
+    <div class="stamp"><div class="stamp-eagle">🦅</div><span class="stamp-txt">Polska · Kraków</span></div>
+    <div class="hero-eyebrow">Despedida de Soltero · Mayo 2026</div>
+    <div class="hero-title">JOSÉ<span>MIGUEL</span></div>
+    <div class="hero-chip">✈️ 18 — 22 MAYO · CRACOVIA</div>
+    <div class="hero-squad">Javier · Bernardo · Carlos · <b>José Miguel 👑</b></div>
+  </div>
+  <div class="flag-stripe red"></div>
+</div>
+
+<!-- NAV -->
+<div class="main-nav">
+  <button class="mnav-btn active" onclick="showMain('restaurantes', this)">🍽 Comer</button>
+  <button class="mnav-btn" onclick="showMain('fotos', this)">📸 Fotos</button>
+  <button class="mnav-btn" onclick="showMain('tickets', this)">🎟 Tickets</button>
+</div>
+
+<!-- ════════ SECCIÓN: RESTAURANTES ════════ -->
+<div class="main-section active" id="sec-restaurantes">
+  <div class="section-wrap" style="padding-bottom:20px;">
+    <div class="section-label">🍽 Dónde comer en Cracovia</div>
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="showRestoGroup('todos', this)">Todos</button>
+      <button class="filter-btn" onclick="showRestoGroup('barato', this)">💚 Barato</button>
+      <button class="filter-btn" onclick="showRestoGroup('medio', this)">🟡 Medio</button>
+      <button class="filter-btn" onclick="showRestoGroup('especial', this)">🔴 Especial</button>
+      <button class="filter-btn" onclick="showRestoGroup('callejero', this)">🥡 Callejero</button>
+    </div>
+    <div class="resto-group active" id="rg-todos">
+      <div class="cat-label">💚 Económico · hasta 8 €</div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Bar Mleczny Pod Temida</div><div class="resto-type">Bar de leche comunista · El más barato</div></div><span class="resto-price">~4-5 € pp</span></div><div class="resto-expand">Decoración de época comunista intacta. Pedís en la barra con bandeja. ul. Grodzka 43.<div class="resto-must">🍵 Żurek en pan, bigos, cualquier sopa. Todo bajo 4 €.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Przystanek Pierogarnia</div><div class="resto-type">Pierogi · El plato nacional · Varios locales</div></div><span class="resto-price">~6-8 € pp</span></div><div class="resto-expand">Especialistas en pierogi en todas sus variedades. Ruskie, carne, setas, dulces. Varios locales en centro y Kazimierz.<div class="resto-must">🍽 El combo de degustación con varios tipos.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">U Babci Maliny</div><div class="resto-type">La abuela frambuesa · Cocina casera</div></div><span class="resto-price">~8 € pp</span></div><div class="resto-expand">Muy popular entre guías locales y viajeros. Cocina casera polaca auténtica. Carta en inglés. ul. Szpitalna.<div class="resto-must">🍽 Żurek, pierogi ruskie, codillo (golonko).</div></div></div>
+      <div class="cat-label">🟡 Precio medio · 10-18 €</div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Czarna Kaczka</div><div class="resto-type">Polaco tradicional · Carta en español</div></div><span class="resto-price">~12-17 € pp</span></div><div class="resto-expand">La carta está disponible en español. Especialidad: el pato de la casa (~17 €) y el bigos (~10 €).<div class="resto-must">🍽 El pato de la casa. Sin duda.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Wesele</div><div class="resto-type">Mejor calidad/precio del Rynek · Plaza Mayor</div></div><span class="resto-price">~12-15 € pp</span></div><div class="resto-expand">El restaurante más valorado de la Plaza del Mercado según viajeros españoles.<div class="resto-must">🍽 Pierogi variados y żurek en pan.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Pod Baranem</div><div class="resto-type">Auténtico polaco · Clientela local</div></div><span class="resto-price">~15 € pp</span></div><div class="resto-expand">Uno de los más auténticos de la ciudad. El steak tartar se sirve con vodka por recomendación del camarero.<div class="resto-must">🥩 Steak tartar + vodka polaco. La combinación definitiva.</div></div></div>
+      <div class="cat-label">🔴 Para una ocasión especial · +20 €</div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Starka</div><div class="resto-type">Top 3 TripAdvisor Cracovia · Cocina polaca premium</div></div><span class="resto-price">~20-25 € pp</span></div><div class="resto-expand">Años en el top 3-5 de TripAdvisor de Cracovia. Reservad mesa con antelación.<div class="resto-must">🍽 Magret de pato, salmón ahumado, cualquier sopa.</div></div></div>
+      <div class="cat-label">🥡 Callejero · para ir rápido o de madrugada</div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Zapiekanki · Plaza Nowy</div><div class="resto-type">El fast food polaco · Kazimierz · Hasta las 3 AM</div></div><span class="resto-price">~2-3 €</span></div><div class="resto-expand">La rotonda de la Plaza Nowy está llena de puestos. El más famoso: <b>Zapiekanki Królewskie</b>.<div class="resto-must">🥖 Con champiñones, queso y salsa. Madrugada obligatoria.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Obwarzanek · carritos callejeros</div><div class="resto-type">Desayuno andando · Toda la ciudad</div></div><span class="resto-price">~0,50 €</span></div><div class="resto-expand">Desde primera hora de la mañana en toda la ciudad. El desayuno cracoviano por excelencia.<div class="resto-must">🥨 Con semillas de amapola, el más clásico.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Oscypek en Zakopane</div><div class="resto-type">Queso ahumado de montaña · Solo en Zakopane</div></div><span class="resto-price">~2-3 €</span></div><div class="resto-expand">Queso de leche de oveja ahumado, directo de la plancha. Con mermelada de arándanos por encima.<div class="resto-must">🧀 Caliente, de la plancha, con mermelada. Imprescindible.</div></div></div>
+    </div>
+    <div class="resto-group" id="rg-barato">
+      <div class="cat-label">💚 Económico · hasta 8 €</div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Bar Mleczny Pod Temida</div><div class="resto-type">Bar de leche comunista</div></div><span class="resto-price">~4-5 € pp</span></div><div class="resto-expand">ul. Grodzka 43.<div class="resto-must">🍵 Żurek en pan, bigos. Todo bajo 4 €.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Przystanek Pierogarnia</div><div class="resto-type">Pierogi · el plato nacional</div></div><span class="resto-price">~6-8 € pp</span></div><div class="resto-expand">Varios locales en centro y Kazimierz.<div class="resto-must">🍽 El combo de degustación.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">U Babci Maliny</div><div class="resto-type">La abuela frambuesa</div></div><span class="resto-price">~8 € pp</span></div><div class="resto-expand">Cocina casera polaca auténtica. Carta en inglés.<div class="resto-must">🍽 Żurek, pierogi ruskie, codillo.</div></div></div>
+    </div>
+    <div class="resto-group" id="rg-medio">
+      <div class="cat-label">🟡 Precio medio · 10-18 €</div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Czarna Kaczka</div><div class="resto-type">Polaco · Carta en español</div></div><span class="resto-price">~12-17 € pp</span></div><div class="resto-expand">Carta en español. El pato de la casa (~17 €) y el bigos (~10 €).<div class="resto-must">🍽 El pato. Sin duda.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Wesele</div><div class="resto-type">Mejor calidad/precio del Rynek</div></div><span class="resto-price">~12-15 € pp</span></div><div class="resto-expand">El mejor de la Plaza del Mercado.<div class="resto-must">🍽 Pierogi variados y żurek en pan.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Pod Baranem</div><div class="resto-type">Auténtico polaco · clientela local</div></div><span class="resto-price">~15 € pp</span></div><div class="resto-expand">El steak tartar se sirve con vodka.<div class="resto-must">🥩 Steak tartar + vodka.</div></div></div>
+    </div>
+    <div class="resto-group" id="rg-especial">
+      <div class="cat-label">🔴 Para una ocasión especial · +20 €</div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Starka</div><div class="resto-type">Top 3 TripAdvisor Cracovia</div></div><span class="resto-price">~20-25 € pp</span></div><div class="resto-expand">Años en el top de TripAdvisor. Cocina polaca premium.<div class="resto-must">🍽 Magret de pato, salmón, cualquier sopa.</div></div></div>
+    </div>
+    <div class="resto-group" id="rg-callejero">
+      <div class="cat-label">🥡 Callejero</div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Zapiekanki · Plaza Nowy</div><div class="resto-type">Kazimierz · Hasta las 3 AM</div></div><span class="resto-price">~2-3 €</span></div><div class="resto-expand"><b>Zapiekanki Królewskie</b>, el puesto más famoso.<div class="resto-must">🥖 Con champiñones, queso y salsa.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Obwarzanek · carritos</div><div class="resto-type">Desayuno andando</div></div><span class="resto-price">~0,50 €</span></div><div class="resto-expand">Desde primera hora por toda la ciudad.<div class="resto-must">🥨 Con semillas de amapola.</div></div></div>
+      <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Oscypek en Zakopane</div><div class="resto-type">Queso ahumado de montaña</div></div><span class="resto-price">~2-3 €</span></div><div class="resto-expand">Solo en Zakopane. Caliente de la plancha con mermelada de arándanos.<div class="resto-must">🧀 Caliente, de la plancha, con mermelada.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ SECCIÓN: FOTOS ════════ -->
+<div class="main-section" id="sec-fotos">
+  <div class="fotos-header">
+    <div class="section-label">📸 Fotos del viaje</div>
+    <div class="fotos-day-filter">
+      <button class="fday-btn active" onclick="filtrarFotos('todos', this)">Todas</button>
+      <button class="fday-btn" onclick="filtrarFotos('lun18', this)">Lun 18</button>
+      <button class="fday-btn" onclick="filtrarFotos('mar19', this)">Mar 19</button>
+      <button class="fday-btn" onclick="filtrarFotos('mie20', this)">Mié 20</button>
+      <button class="fday-btn" onclick="filtrarFotos('jue21', this)">Jue 21</button>
+      <button class="fday-btn" onclick="filtrarFotos('vie22', this)">Vie 22</button>
+    </div>
+  </div>
+  <div class="upload-zone" onclick="abrirSelectorDia()">
+    <div class="upload-zone-icon">📷</div>
+    <div class="upload-zone-text">Añadir foto</div>
+    <div class="upload-zone-sub">Pulsa para subir desde tu carrete</div>
+  </div>
+  <div class="fotos-count" id="fotosCount">Cargando fotos...</div>
+  <div class="fotos-grid" id="fotosGrid"></div>
+</div>
+
+<!-- ════════ SECCIÓN: TICKETS ════════ -->
+<div class="main-section" id="sec-tickets">
+  <div class="section-wrap" style="padding-bottom:40px;">
+    <div class="section-label">🎟 Tus tickets</div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">Cuando estéis en el lugar, los chicos te dirán el PIN para abrirlo. 🤫</p>
+    <div class="ticket-card" onclick="abrirPin('embarque')">
+      <div class="ticket-icon">✈️</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Tarjeta de embarque</div>
+        <div class="ticket-sub">Requiere PIN · Pulsa para ver</div>
+      </div>
+      <div class="ticket-arrow">▶</div>
+    </div>
+    <div class="ticket-card" onclick="abrirPin('viernes')">
+      <div class="ticket-icon">🎫</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Viernes</div>
+        <div class="ticket-sub">Requiere PIN · Pulsa para ver</div>
+      </div>
+      <div class="ticket-arrow">▶</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SELECTOR DÍA FOTOS ══ -->
+<div class="uds-overlay" id="udsOverlay" onclick="cerrarSelectorDia()"></div>
+<div class="upload-day-select" id="uploadDaySelect">
+  <div class="uds-title">¿De qué día es la foto?</div>
+  <button class="uds-btn" onclick="elegirDia('lun18')">🌙 Llegada a Cracovia <span class="uds-btn-date">Lun 18 mayo</span></button>
+  <button class="uds-btn" onclick="elegirDia('mar19')">🏛 Día 2 <span class="uds-btn-date">Mar 19 mayo</span></button>
+  <button class="uds-btn" onclick="elegirDia('mie20')">😎 Día 3 <span class="uds-btn-date">Mié 20 mayo</span></button>
+  <button class="uds-btn" onclick="elegirDia('jue21')">🎉 Día 4 <span class="uds-btn-date">Jue 21 mayo</span></button>
+  <button class="uds-btn" onclick="elegirDia('vie22')">✈️ Vuelta <span class="uds-btn-date">Vie 22 mayo</span></button>
+  <div class="uds-cancel" onclick="cerrarSelectorDia()">Cancelar</div>
+</div>
+<input type="file" id="fileInput" accept="image/*" multiple style="display:none" onchange="subirFotos(this.files)">
+
+<!-- ══ FEED INSTAGRAM ══ -->
+<div class="feed-screen" id="feedScreen">
+  <div class="feed-topbar">
+    <button class="feed-back" onclick="cerrarFeed()">←</button>
+    <div class="feed-topbar-title">📸 FOTOS</div>
+    <div class="feed-topbar-count" id="feedCount"></div>
+  </div>
+  <div class="feed-scroll" id="feedScroll"></div>
+</div>
+
+<!-- ══ PIN MODAL ══ -->
+<div class="pin-overlay" id="pinOverlay">
+  <div class="pin-sheet">
+    <div class="pin-title" id="pinTitle">Introduce el PIN</div>
+    <div class="pin-sub" id="pinSub">Pídelo a los chicos cuando estéis allí</div>
+    <div class="pin-dots">
+      <div class="pin-dot" id="dot0"></div>
+      <div class="pin-dot" id="dot1"></div>
+      <div class="pin-dot" id="dot2"></div>
+      <div class="pin-dot" id="dot3"></div>
+    </div>
+    <div class="pin-grid">
+      <button class="pin-key" onclick="pinKey('1')">1</button>
+      <button class="pin-key" onclick="pinKey('2')">2</button>
+      <button class="pin-key" onclick="pinKey('3')">3</button>
+      <button class="pin-key" onclick="pinKey('4')">4</button>
+      <button class="pin-key" onclick="pinKey('5')">5</button>
+      <button class="pin-key" onclick="pinKey('6')">6</button>
+      <button class="pin-key" onclick="pinKey('7')">7</button>
+      <button class="pin-key" onclick="pinKey('8')">8</button>
+      <button class="pin-key" onclick="pinKey('9')">9</button>
+      <button class="pin-key" onclick="pinKey('')"></button>
+      <button class="pin-key" onclick="pinKey('0')">0</button>
+      <button class="pin-key del" onclick="pinBorrar()">⌫</button>
+    </div>
+    <div class="pin-error" id="pinError"></div>
+    <div class="pin-cancel" onclick="cerrarPin()">Cancelar</div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<div class="footer">🦅 Polska · Kraków · Mayo 2026<br><b>¡Que lo disfrutes, cabezón! 👑</b></div>
+
+<!-- ══ FIREBASE + CLOUDINARY ══ -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { getDatabase, ref, push, remove, onValue, query, orderByChild } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDyECju0z-V2JkvSKfbEsiJLr4yybwqDmg",
+  authDomain: "despedida-jose-miguel.firebaseapp.com",
+  databaseURL: "https://despedida-jose-miguel-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "despedida-jose-miguel",
+  storageBucket: "despedida-jose-miguel.firebasestorage.app",
+  messagingSenderId: "604108160651",
+  appId: "1:604108160651:web:b9809def8b622e6fc0de8e"
+};
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const CLOUD_NAME = 'dlywlnzkr';
+const UPLOAD_PRESET = 'despedida_jose_miguel';
+const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`;
+
+const DIAS_LABEL = {
+  lun18: 'Lun 18 · Llegada',
+  mar19: 'Mar 19',
+  mie20: 'Mié 20',
+  jue21: 'Jue 21',
+  vie22: 'Vie 22 · Vuelta'
+};
+
+const usuarioActual = 'jose';
+const NOMBRE = 'José Miguel';
+
+const base = "https://carlosmhz.github.io/APK/";
+const TICKETS = {
+  embarque: { pin: '7392', url: base + "ticket_JOSE_MIGUEL_DELGADO-v2.pdf", label: 'Tarjeta de embarque' },
+  viernes:  { pin: '4817', url: base + "ticket_JOSE_MIGUEL_MARCOS-v2.pdf",  label: 'Viernes' }
+};
+
+// ── NAV ──
+window.showMain = function(id, btn) {
+  document.querySelectorAll('.main-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.mnav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'fotos') escucharFotos();
+};
+
+// ── RESTAURANTES ──
+window.toggleResto = function(el) {
+  const was = el.classList.contains('open');
+  const parent = el.closest('.resto-group') || el.closest('.main-section');
+  parent.querySelectorAll('.resto-card').forEach(r => r.classList.remove('open'));
+  if (!was) el.classList.add('open');
+};
+window.showRestoGroup = function(id, btn) {
+  document.querySelectorAll('.resto-group').forEach(g => g.classList.remove('active'));
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('rg-' + id).classList.add('active');
+  btn.classList.add('active');
+};
+
+// ── PIN ──
+let pinActivo = null;
+let pinIntroducido = '';
+
+window.abrirPin = function(ticket) {
+  pinActivo = ticket;
+  pinIntroducido = '';
+  actualizarDots();
+  document.getElementById('pinTitle').textContent = TICKETS[ticket].label;
+  document.getElementById('pinError').textContent = '';
+  document.getElementById('pinOverlay').classList.add('active');
+};
+
+window.cerrarPin = function() {
+  pinActivo = null;
+  pinIntroducido = '';
+  document.getElementById('pinOverlay').classList.remove('active');
+};
+
+window.pinKey = function(n) {
+  if (!n || pinIntroducido.length >= 4) return;
+  pinIntroducido += n;
+  actualizarDots();
+  if (pinIntroducido.length === 4) comprobarPin();
+};
+
+window.pinBorrar = function() {
+  pinIntroducido = pinIntroducido.slice(0, -1);
+  actualizarDots();
+  document.getElementById('pinError').textContent = '';
+};
+
+function actualizarDots() {
+  for (let i = 0; i < 4; i++) {
+    document.getElementById(`dot${i}`).classList.toggle('filled', i < pinIntroducido.length);
+  }
+}
+
+function comprobarPin() {
+  const t = TICKETS[pinActivo];
+  if (pinIntroducido === t.pin) {
+    cerrarPin();
+    window.open(t.url, '_blank');
+  } else {
+    document.getElementById('pinError').textContent = 'PIN incorrecto · Inténtalo de nuevo';
+    pinIntroducido = '';
+    actualizarDots();
+    // Vibración si disponible
+    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+  }
+}
+
+// ── FOTOS ──
+let diaSeleccionado = null;
+let filtroActivo = 'todos';
+let todasLasFotos = [];
+let escuchando = false;
+
+window.abrirSelectorDia = function() {
+  document.getElementById('udsOverlay').classList.add('active');
+  document.getElementById('uploadDaySelect').classList.add('active');
+};
+window.cerrarSelectorDia = function() {
+  document.getElementById('udsOverlay').classList.remove('active');
+  document.getElementById('uploadDaySelect').classList.remove('active');
+};
+window.elegirDia = function(dia) {
+  diaSeleccionado = dia;
+  window.cerrarSelectorDia();
+  document.getElementById('fileInput').click();
+};
+
+window.subirFotos = async function(files) {
+  if (!files || files.length === 0) return;
+  const grid = document.getElementById('fotosGrid');
+  for (const file of files) {
+    const placeholder = document.createElement('div');
+    placeholder.className = 'foto-uploading';
+    placeholder.innerHTML = `<div class="upload-spinner"></div>`;
+    grid.insertBefore(placeholder, grid.firstChild);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', UPLOAD_PRESET);
+      const res = await fetch(CLOUDINARY_URL, { method: 'POST', body: formData });
+      const data = await res.json();
+      placeholder.remove();
+      if (data.secure_url) {
+        await push(ref(db, 'fotos'), {
+          url: data.secure_url,
+          urlThumb: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,w_400,h_400,q_auto,f_auto/${data.public_id}`,
+          dia: diaSeleccionado,
+          autor: NOMBRE,
+          ts: Date.now()
+        });
+        mostrarToast('📸 ¡Foto añadida!');
+      } else {
+        mostrarToast('❌ Error al subir');
+      }
+    } catch (e) {
+      placeholder.remove();
+      mostrarToast('❌ Sin conexión');
+    }
+  }
+};
+
+function escucharFotos() {
+  const grid = document.getElementById('fotosGrid');
+  const countEl = document.getElementById('fotosCount');
+  if (!escuchando) {
+    escuchando = true;
+    grid.innerHTML = '<div class="fotos-empty"><div class="fotos-empty-icon">⏳</div>Cargando...</div>';
+    const fotosRef = query(ref(db, 'fotos'), orderByChild('ts'));
+    onValue(fotosRef, (snapshot) => {
+      todasLasFotos = [];
+      snapshot.forEach(child => { todasLasFotos.unshift({ id: child.key, ...child.val() }); });
+      renderizarGrid();
+      const total = todasLasFotos.length;
+      countEl.textContent = total === 0 ? '' : `${total} foto${total !== 1 ? 's' : ''}`;
+    });
+  } else {
+    renderizarGrid();
+  }
+}
+
+function renderizarGrid() {
+  const grid = document.getElementById('fotosGrid');
+  grid.innerHTML = '';
+  const fotos = filtroActivo === 'todos' ? todasLasFotos : todasLasFotos.filter(f => f.dia === filtroActivo);
+  if (fotos.length === 0) {
+    grid.innerHTML = `<div class="fotos-empty"><div class="fotos-empty-icon">${todasLasFotos.length === 0 ? '📭' : '🔍'}</div>${todasLasFotos.length === 0 ? 'Aún no hay fotos.' : 'No hay fotos de este día.'}</div>`;
+    return;
+  }
+  if (filtroActivo === 'todos') {
+    const porDia = {};
+    fotos.forEach(f => { if (!porDia[f.dia]) porDia[f.dia] = []; porDia[f.dia].push(f); });
+    ['lun18','mar19','mie20','jue21','vie22'].forEach(dia => {
+      if (!porDia[dia]?.length) return;
+      const sep = document.createElement('div');
+      sep.className = 'fotos-day-sep';
+      sep.textContent = DIAS_LABEL[dia] || dia;
+      grid.appendChild(sep);
+      porDia[dia].forEach(foto => grid.appendChild(crearThumb(foto)));
+    });
+  } else {
+    fotos.forEach(foto => grid.appendChild(crearThumb(foto)));
+  }
+}
+
+function crearThumb(foto) {
+  const div = document.createElement('div');
+  div.className = 'foto-thumb';
+  div.innerHTML = `<img src="${foto.urlThumb || foto.url}" loading="lazy" alt=""><div class="foto-overlay"><span class="foto-day-badge">${foto.autor || ''}</span></div>`;
+  div.onclick = () => window.abrirFeed(foto);
+  return div;
+}
+
+window.filtrarFotos = function(dia, btn) {
+  filtroActivo = dia;
+  document.querySelectorAll('.fday-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderizarGrid();
+};
+
+// ── FEED ──
+let feedFotos = [];
+
+window.abrirFeed = function(fotoInicial) {
+  feedFotos = filtroActivo === 'todos' ? todasLasFotos : todasLasFotos.filter(f => f.dia === filtroActivo);
+  const scroll = document.getElementById('feedScroll');
+  document.getElementById('feedCount').textContent = `${feedFotos.length} foto${feedFotos.length !== 1 ? 's' : ''}`;
+  scroll.innerHTML = '';
+  feedFotos.forEach(foto => scroll.appendChild(crearFeedItem(foto)));
+  document.getElementById('feedScreen').classList.add('active');
+  const idx = feedFotos.findIndex(f => f.id === fotoInicial.id);
+  if (idx > 0) requestAnimationFrame(() => {
+    const items = scroll.querySelectorAll('.feed-item');
+    if (items[idx]) items[idx].scrollIntoView({ behavior: 'instant' });
+  });
+};
+
+window.cerrarFeed = function() {
+  document.getElementById('feedScreen').classList.remove('active');
+};
+
+function crearFeedItem(foto) {
+  const autor = foto.autor || 'Alguien';
+  const inicial = autor.charAt(0).toUpperCase();
+  const miInicial = NOMBRE.charAt(0).toUpperCase();
+  const div = document.createElement('div');
+  div.className = 'feed-item';
+  div.id = `feed-${foto.id}`;
+  div.innerHTML = `
+    <div class="feed-item-header">
+      <div class="feed-avatar">${inicial}</div>
+      <div><div class="feed-author">${autor}</div></div>
+      <span class="feed-day-tag">${DIAS_LABEL[foto.dia] || foto.dia}</span>
+    </div>
+    <img class="feed-img" src="${foto.url}" loading="lazy" alt="">
+    <div class="feed-actions">
+      <button class="feed-action-btn" id="like-btn-${foto.id}" onclick="toggleLike('${foto.id}')">🤍</button>
+      <span class="feed-like-count" id="like-count-${foto.id}">0</span>
+    </div>
+    <div class="feed-likes-text" id="likes-text-${foto.id}"></div>
+    <div class="feed-comments" id="comments-${foto.id}"></div>
+    <div class="feed-add-comment">
+      <div class="feed-comment-avatar">${miInicial}</div>
+      <input class="feed-comment-input" id="comment-input-${foto.id}" placeholder="Añade un comentario..." oninput="toggleSendBtn('${foto.id}')">
+      <button class="feed-comment-send" id="comment-send-${foto.id}" onclick="enviarComentario('${foto.id}')">Publicar</button>
+    </div>`;
+  escucharLikes(foto.id);
+  escucharComentarios(foto.id);
+  return div;
+}
+
+function escucharLikes(fotoId) {
+  const likesRef = ref(db, `likes/${fotoId}`);
+  onValue(likesRef, (snapshot) => {
+    const likes = {};
+    snapshot.forEach(child => { likes[child.key] = child.val(); });
+    const total = Object.keys(likes).length;
+    const countEl = document.getElementById(`like-count-${fotoId}`);
+    const btnEl = document.getElementById(`like-btn-${fotoId}`);
+    const textEl = document.getElementById(`likes-text-${fotoId}`);
+    if (!countEl) return;
+    countEl.textContent = total;
+    const yoDiLike = Object.values(likes).includes(NOMBRE);
+    btnEl.textContent = yoDiLike ? '❤️' : '🤍';
+    btnEl.classList.toggle('liked', yoDiLike);
+    const nombres = Object.values(likes);
+    if (nombres.length === 0) textEl.textContent = '';
+    else if (nombres.length === 1) textEl.textContent = `Le gusta a ${nombres[0]}`;
+    else if (nombres.length === 2) textEl.textContent = `Les gusta a ${nombres[0]} y ${nombres[1]}`;
+    else textEl.textContent = `Les gusta a ${nombres[0]}, ${nombres[1]} y ${nombres.length - 2} más`;
+  });
+}
+
+window.toggleLike = async function(fotoId) {
+  const likesRef = ref(db, `likes/${fotoId}`);
+  const { get } = await import("https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js");
+  const snap = await get(likesRef);
+  const likes = {};
+  snap.forEach(child => { likes[child.key] = child.val(); });
+  const miKey = Object.keys(likes).find(k => likes[k] === NOMBRE);
+  if (miKey) await remove(ref(db, `likes/${fotoId}/${miKey}`));
+  else await push(likesRef, NOMBRE);
+};
+
+function escucharComentarios(fotoId) {
+  const commRef = query(ref(db, `comentarios/${fotoId}`), orderByChild('ts'));
+  onValue(commRef, (snapshot) => {
+    const el = document.getElementById(`comments-${fotoId}`);
+    if (!el) return;
+    el.innerHTML = '';
+    snapshot.forEach(child => {
+      const c = child.val();
+      const div = document.createElement('div');
+      div.className = 'feed-comment';
+      div.innerHTML = `<b>${c.autor}</b> ${c.texto} <span class="feed-comment-time">${hace(c.ts)}</span>`;
+      el.appendChild(div);
+    });
+  });
+}
+
+window.toggleSendBtn = function(fotoId) {
+  const input = document.getElementById(`comment-input-${fotoId}`);
+  const btn = document.getElementById(`comment-send-${fotoId}`);
+  btn.classList.toggle('ready', input.value.trim().length > 0);
+};
+
+window.enviarComentario = async function(fotoId) {
+  const input = document.getElementById(`comment-input-${fotoId}`);
+  const texto = input.value.trim();
+  if (!texto) return;
+  await push(ref(db, `comentarios/${fotoId}`), { autor: NOMBRE, texto, ts: Date.now() });
+  input.value = '';
+  document.getElementById(`comment-send-${fotoId}`).classList.remove('ready');
+};
+
+function hace(ts) {
+  const diff = Date.now() - ts;
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return 'ahora';
+  if (m < 60) return `${m}m`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h`;
+  return `${Math.floor(h / 24)}d`;
+}
+
+function mostrarToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+</script>
+
+<!-- BOTÓN FLOTANTE FRASES POLACO -->
+<button onclick="document.getElementById('modalPolaco').style.display='block'" style="position:fixed;bottom:24px;left:20px;z-index:999;background:#c0392b;color:white;border:none;border-radius:50px;padding:12px 18px;font-size:20px;box-shadow:0 4px 15px rgba(0,0,0,0.3);cursor:pointer;line-height:1;" title="Frases en polaco">🇵🇱</button>
+<div id="modalPolaco" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.75);overflow-y:auto;padding:20px 16px;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:#1a1a2e;border-radius:20px;max-width:480px;margin:0 auto;padding:24px 20px;color:white;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+      <div><div style="font-size:22px;font-weight:800;">🇵🇱 Polaco de supervivencia</div><div style="font-size:12px;color:#aaa;margin-top:2px;">Fonética en español · Memoriza piwo proszę</div></div>
+      <button onclick="document.getElementById('modalPolaco').style.display='none'" style="background:rgba(255,255,255,0.1);border:none;color:white;border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;">✕</button>
+    </div>
+    <div style="font-size:11px;font-weight:700;color:#e74c3c;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">🗣 Básico</div>
+    <div style="background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;margin-bottom:16px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;font-size:10px;font-weight:700;color:#888;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);"><span>POLACO</span><span>SUENA COMO</span><span>SIGNIFICA</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Dzień dobry</span><span style="color:#aaa;">Dyen dobri</span><span>Buenos días</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Dziękuję</span><span style="color:#aaa;">Dyenkuié</span><span>Gracias</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Przepraszam</span><span style="color:#aaa;">Psheprasham</span><span>Perdona</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Tak / Nie</span><span style="color:#aaa;">Tak / Nie</span><span>Sí / No</span></div>
+    </div>
+    <div style="font-size:11px;font-weight:700;color:#e74c3c;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">🍺 En el bar</div>
+    <div style="background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;margin-bottom:16px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;font-size:10px;font-weight:700;color:#888;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);"><span>POLACO</span><span>SUENA COMO</span><span>SIGNIFICA</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Piwo proszę</span><span style="color:#aaa;">Pivo proshé</span><span>Una cerveza</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Na zdrowie!</span><span style="color:#aaa;">Na zdravie</span><span>¡Salud!</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Rachunek proszę</span><span style="color:#aaa;">Rajunek proshé</span><span>La cuenta</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Płacisz ty</span><span style="color:#aaa;">Pwátshis ti</span><span>Pagas tú 😈</span></div>
+    </div>
+    <div style="font-size:11px;font-weight:700;color:#e74c3c;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">😂 Para vacilarse</div>
+    <div style="background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;font-size:10px;font-weight:700;color:#888;padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.08);"><span>POLACO</span><span>SUENA COMO</span><span>SIGNIFICA</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Jeszcze raz!</span><span style="color:#aaa;">Yeshche ras</span><span>¡Otra ronda!</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;padding:10px 12px;font-size:13px;"><span style="color:#f1c40f;font-weight:600;">Nie pamiętam</span><span style="color:#aaa;">Nie pamientam</span><span>No me acuerdo</span></div>
+    </div>
+    <div style="text-align:center;margin-top:20px;font-size:11px;color:#666;">Toca fuera del modal para cerrar</div>
+  </div>
+</div>
+
+</body>
+</html>
