@@ -1289,7 +1289,25 @@ window.toggleExtra = function(el) {
   document.querySelectorAll('.extra-card').forEach(e => e.classList.remove('open'));
   if (!was) el.classList.add('open');
 };
-
+// ── Tarjeta de embarque ──
+window.abrirTarjetaEmbarque = function() {
+  const boarding = {
+    'javier':   base + 'boarding-javier.pdf',
+    'bernardo': base + 'boarding-bernardo.pdf',
+    'carlos':   base + 'boarding-carlos.pdf',
+    'jose':     base + 'boarding-jose-miguel.pdf'
+  };
+  if (!usuarioActual || !boarding[usuarioActual]) {
+    mostrarToast('Selecciónate primero arriba ↑');
+    return;
+  }
+  fetch(boarding[usuarioActual], { method: 'HEAD' })
+    .then(r => {
+      if (r.ok) window.open(boarding[usuarioActual], '_blank');
+      else mostrarToast('🎫 Tarjeta aún no disponible');
+    })
+    .catch(() => mostrarToast('🎫 Tarjeta aún no disponible'));
+};
 // ── Entradas Schindler — abre directamente la del usuario ──
 window.abrirSelectorEntradas = function() {
   if (usuarioActual && entradas[usuarioActual]) {
@@ -1726,37 +1744,6 @@ iniciarApp();
     <div onclick="document.getElementById('modalLikes').style.display='none'" style="text-align:center;padding:12px;font-size:12px;color:#888;cursor:pointer;margin-top:8px;">Cerrar</div>
   </div>
   </div>
-  <!-- MODAL TARJETA DE EMBARQUE -->
-<div id="modalEmbarque" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)this.style.display='none'">
-  <div style="background:#0d1020;border-radius:16px;max-width:400px;width:100%;padding:20px;position:relative;text-align:center;">
-    <button onclick="document.getElementById('modalEmbarque').style.display='none'" style="position:absolute;top:12px;right:14px;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;">✕</button>
-    <div style="font-size:10px;color:#666;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Tarjeta de embarque</div>
-    <div id="embarqueNombre" style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:2px;color:#fff;margin-bottom:14px;"></div>
-    <img id="embarqueImg" src="" alt="Boarding pass" style="width:100%;border-radius:10px;display:block;" onerror="this.style.display='none';document.getElementById('embarqueError').style.display='block'" />
-    <div id="embarqueError" style="display:none;padding:20px;font-size:12px;color:#666;">No se encontró la tarjeta.<br>Sube el archivo al repositorio.</div>
-    <div style="margin-top:12px;font-size:11px;color:#444;">FR5356 · MAD → KRK · Lun 18 mayo · 20:35h</div>
-  </div>
 </div>
-
-<script>
-function abrirTarjetaEmbarque() {
-  const boarding = {
-    'javier':   'boarding-javier.pdf',
-    'bernardo': 'boarding-bernardo.pdf',
-    'carlos':   'boarding-carlos.pdf',
-    'jose':     'boarding-jose-miguel.pdf'
-  };
-  if (!usuarioActual || !boarding[usuarioActual]) {
-    mostrarToast('Selecciónate primero arriba ↑');
-    return;
-  }
-  fetch(boarding[usuarioActual], { method: 'HEAD' })
-    .then(r => {
-      if (r.ok) window.open(boarding[usuarioActual], '_blank');
-      else mostrarToast('🎫 Tarjeta aún no disponible');
-    })
-    .catch(() => mostrarToast('🎫 Tarjeta aún no disponible'));
-}
-</script>
 </body>
 </html>
