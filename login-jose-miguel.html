@@ -79,6 +79,108 @@ body {
   font-weight: 300;
 }
 
+/* ── BOTÓN CARTA ── */
+.carta-btn-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 28px;
+  padding: 17px 24px;
+  background: linear-gradient(135deg, #f9d423, #f0932b);
+  border: none;
+  border-radius: 14px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  color: #1a1a2e;
+  cursor: pointer;
+  box-shadow: 0 4px 24px rgba(249,212,35,0.35);
+  animation: pulse-carta 2.5s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.12s;
+}
+.carta-btn-trigger:active { transform: scale(0.97); }
+@keyframes pulse-carta {
+  0%, 100% { box-shadow: 0 4px 24px rgba(249,212,35,0.35); }
+  50%       { box-shadow: 0 4px 40px rgba(249,212,35,0.7); }
+}
+
+/* ── MODAL CARTA ── */
+.carta-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.88);
+  z-index: 100;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 20px;
+  overflow-y: auto;
+  animation: fadeIn 0.25s ease;
+}
+.carta-overlay.show { display: flex; }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+.carta-box {
+  background: #12122a;
+  border: 1px solid rgba(249,212,35,0.25);
+  border-radius: 18px;
+  padding: 30px 24px 24px;
+  max-width: 380px;
+  width: 100%;
+  margin: auto;
+}
+.carta-box h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #f9d423;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.carta-box p {
+  color: rgba(255,255,255,0.82);
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+.carta-seccion {
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  margin: 18px 0 6px;
+}
+.carta-box ul {
+  color: rgba(255,255,255,0.78);
+  font-size: 14px;
+  line-height: 1.9;
+  padding-left: 20px;
+  margin-bottom: 14px;
+}
+.carta-firma {
+  text-align: center;
+  color: rgba(255,255,255,0.35);
+  font-size: 13px;
+  margin-top: 8px;
+}
+.carta-close {
+  display: block;
+  width: 100%;
+  margin-top: 24px;
+  padding: 15px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.4);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* ── CUENTA ATRÁS ── */
 .countdown {
   display: flex;
@@ -252,11 +354,38 @@ body {
 <!-- Partículas -->
 <div class="particles" id="particles"></div>
 
+<!-- Modal carta -->
+<div class="carta-overlay" id="cartaOverlay" onclick="cerrarCarta(event)">
+  <div class="carta-box">
+    <h2>📩 Escucha bien, desgraciado</h2>
+    <p>Tus días de libertad están contados y, como somos unos caballeros, hemos decidido darte el último adiós que te mereces (o el que estamos dispuestos a pagar). No intentes entender nada, no preguntes y, sobre todo, <strong style="color:#f9d423">no llegues tarde.</strong></p>
+    <p class="carta-seccion">1. EL PUNTO DE RECOGIDA</p>
+    <p>Tienes que estar en la <strong style="color:#f9d423">Terminal T1 de Barajas el lunes 18 de mayo a las 18:00h.</strong> Puerta 6 de Salidas. Allí estaremos nosotros para recogerte y llevarte a un destino que ya conoces. A partir de ese segundo, dejas de ser dueño de tu destino. Estarás desaparecido hasta final de semana, así que avisa en casa para que no llamen a la policía.</p>
+    <p class="carta-seccion">2. EL KIT DE SUPERVIVENCIA</p>
+    <p>No vamos a cargar con maletas pesadas. Trae una mochila con esto y nada más:</p>
+    <ul>
+      <li>3 camisetas térmicas (prepárate para lo peor)</li>
+      <li>Un abrigo de verdad y un gorro de nieve</li>
+      <li>Lubricante urológico</li>
+      <li>Gafas de buceo (sí, las vas a necesitar, y no será para ver pececitos)</li>
+      <li>Ropa básica para 3 días</li>
+    </ul>
+    <p>No intentes hacerte el listo ni busques pistas. Solo preséntate con tu mochila y reza lo que sepas. El lunes empieza tu pesadilla.</p>
+    <p class="carta-firma">Nos vemos en la T1, mendrugo. 🦅</p>
+    <button class="carta-close" onclick="cerrarCarta()">Cerrar</button>
+  </div>
+</div>
+
 <div class="container">
 
   <div class="eyebrow">Mayo 2026</div>
   <div class="headline">Algo está<span>a punto de pasar.</span></div>
   <div class="subline">Te lo contamos el 18 de mayo.<br>Hasta entonces... espera.</div>
+
+  <!-- Botón carta -->
+  <button class="carta-btn-trigger" onclick="document.getElementById('cartaOverlay').classList.add('show')">
+    📩 TIENES UN MENSAJE
+  </button>
 
   <!-- Cuenta atrás -->
   <div class="countdown">
@@ -346,6 +475,16 @@ for (let i = 0; i < 25; i++) {
   container.appendChild(p);
 }
 
+// ── CARTA ──
+function cerrarCarta(e) {
+  if (!e || e.target === document.getElementById('cartaOverlay')) {
+    document.getElementById('cartaOverlay').classList.remove('show');
+  }
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') cerrarCarta();
+});
+
 // ── PIN ──
 const PIN_CORRECTO = '2947';
 const STORAGE_KEY = 'jm_acceso_ok';
@@ -389,14 +528,12 @@ function actualizarDots() {
 
 function comprobar() {
   if (input === PIN_CORRECTO) {
-    // Animar dots en dorado
     for (let i = 0; i < 4; i++) {
       document.getElementById(`d${i}`).classList.add('filled');
     }
     localStorage.setItem(STORAGE_KEY, '1');
     setTimeout(() => { window.location.href = 'planning-jose-miguel-novio.html'; }, 400);
   } else {
-    // Error
     for (let i = 0; i < 4; i++) {
       const d = document.getElementById(`d${i}`);
       d.classList.remove('filled');
