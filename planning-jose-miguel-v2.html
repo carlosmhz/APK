@@ -670,7 +670,7 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
   <button class="mnav-btn" onclick="showMain('restaurantes', this)">🍽 Comer</button>
   <button class="mnav-btn" onclick="showMain('fotos', this)">📸 Fotos</button>
   <button class="mnav-btn" onclick="showMain('extras', this)">🗺 Más planes</button>
-  <button class="mnav-btn" onclick="showMain('presupuesto', this)">💶 Gastos</button>
+  <button class="mnav-btn" onclick="showMain('tickets', this)">🎫 Tickets</button>
 </div>
 
 <!-- ════════════════ SECCIÓN: PROGRAMA ════════════════ -->
@@ -734,9 +734,9 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
       <div class="day-hdr" onclick="toggleDay('d2')">
         <div class="day-num"><span class="wday">Mar</span><span class="dnum">19</span><span class="mon">Mayo</span></div>
         <div class="day-inf">
-          <div class="day-name">Auschwitz + Tour Cervezas</div>
-          <div class="day-pre">Mañana: visita histórica · Tarde-noche: ruta de bares</div>
-          <div class="day-tags"><span class="dtag r">🏛 Auschwitz</span><span class="dtag r">🍺 Tour Cervezas</span></div>
+          <div class="day-name">Free Tour + Casa del Terror + Cervezas</div>
+          <div class="day-pre">Mañana: casco antiguo · Tarde: Casa del Terror · Noche: ruta de bares</div>
+          <div class="day-tags"><span class="dtag">🚶 Free Tour</span><span class="dtag r">👻 Casa del Terror</span><span class="dtag r">🍺 Tour Cervezas</span></div>
         </div>
         <div class="day-arr">▶</div>
       </div>
@@ -746,10 +746,13 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
           <button class="itab" onclick="showTab('d2','comer',this)">🍽 Comer</button>
         </div>
         <div class="ipanel active" id="d2-plan">
-          <div class="act"><div class="act-t">10:00</div><div class="act-b"><div class="act-title">🚌 Salida hacia Auschwitz-Birkenau</div><div class="act-desc">75 km de Cracovia, ~1h 30min. Bus desde estación MDA, cada hora, ~3 €. O tour con guía desde el centro ~25 € pp. <b>Reservad entrada online con semanas de antelación</b>, acceso gratuito pero con hora asignada.</div><span class="act-cost">🎟 Entrada: gratuita — reserva online obligatoria</span></div></div>
-          <div class="act"><div class="act-t">11:30</div><div class="act-b"><div class="act-title">Visita Auschwitz I + Birkenau</div><div class="act-desc">Calculad 3-4 horas para los dos recintos. Birkenau (Auschwitz II) es inmenso y el más devastador. Llevad agua y calzado cómodo.</div></div></div>
-          <div class="act"><div class="act-t">16:30</div><div class="act-b"><div class="act-title">Vuelta a Cracovia</div><div class="act-desc">Llegada al centro ~18h. Tiempo para cenar y prepararse para la ruta de cervezas.</div></div></div>
-          <div class="act"><div class="act-t">19:30</div><div class="act-b">
+          <div class="act"><div class="act-t">Mañana</div><div class="act-b"><div class="act-title">🚶 Free Tour Casco Antiguo</div><div class="act-desc">Tour guiado gratuito ~2-3h. Propina al guía al final (~5-10 € por persona). Cubre Plaza del Mercado, Basílica de Santa María, Castillo de Wawel, Kazimierz. Buscad tour en español — salen varias veces al día. Sin madrugar: llegasteis cerca de medianoche.</div><span class="act-cost">🎟 Gratis + propina voluntaria</span></div></div>
+          <div class="act"><div class="act-t">17:00</div><div class="act-b">
+            <div class="act-title">👻 Lost Souls Alley — Casa del Terror</div>
+            <div class="act-desc">La primera atracción de terror interactiva de Polonia, fundada en 2013. Un piso entero en el centro histórico (ul. Floriańska 6, planta 1) inspirado en películas de terror. Habitaciones a oscuras, una sola linterna para el grupo, actores en vivo que os pueden tocar, llaves y códigos para pasar de sala en sala.<br><br>🟢 Javier, Bernardo y Carlos: nivel <b>verde</b> (suave). 🔴 José Miguel: nivel <b>rojo</b> (contacto físico, máximo terror). Grupos de máx. 6 personas — soléis ser 4, perfecto. Reservad online con antelación.</div>
+            <span class="act-cost">🎟 Verde ~5 € · Rojo ~15 € · Reserva en lostsoulsalley.com</span>
+          </div></div>
+          <div class="act"><div class="act-t">21:00</div><div class="act-b">
             <div class="act-title">🍺 Tour de Cervezas por Cracovia</div>
             <div class="act-desc">6 paradas: House of Beer → Multi Qlti → Nalej Się → Eszeweria → Alchemia → Singer. ~4 horas terminando con zapiekanka en la Plaza Nowy.</div>
             <a class="act-link" href="https://carlosmhz.github.io/APK/tour-cervezas-cracovia.html" target="_blank">🍺 Ver guía completa del Tour</a>
@@ -757,20 +760,20 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
           </div></div>
         </div>
         <div class="ipanel" id="d2-comer">
-          <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">U Babci Maliny</div><div class="resto-type">La abuela frambuesa · Cocina casera polaca</div></div><span class="resto-price">~8 € pp</span></div><div class="resto-expand">Muy recomendado por guías locales. Cocina casera, carta en inglés. Ideal para cenar al volver de Auschwitz antes del tour. ul. Szpitalna.<div class="resto-must">🍽 Żurek, pierogi ruskie, codillo.</div></div></div>
+          <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">U Babci Maliny</div><div class="resto-type">La abuela frambuesa · Cocina casera polaca</div></div><span class="resto-price">~8 € pp</span></div><div class="resto-expand">Muy recomendado por guías locales. Cocina casera, carta en inglés. Ideal para cenar antes del tour de cervezas. ul. Szpitalna.<div class="resto-must">🍽 Żurek, pierogi ruskie, codillo.</div></div></div>
           <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Czarna Kaczka</div><div class="resto-type">Polaco tradicional · Carta en español</div></div><span class="resto-price">~12-17 € pp</span></div><div class="resto-expand">Carta en español. Especialidad: el pato de la casa (~17 €) y el bigos (~10 €).<div class="resto-must">🍽 El pato. No os arrepentiréis.</div></div></div>
         </div>
       </div>
     </div>
 
-    <!-- MIÉRCOLES 20 -->
+<!-- MIÉRCOLES 20 -->
     <div class="day-card" id="d3">
       <div class="day-hdr" onclick="toggleDay('d3')">
         <div class="day-num gris"><span class="wday">Mié</span><span class="dnum">20</span><span class="mon">Mayo</span></div>
         <div class="day-inf">
-          <div class="day-name">Día Tranquilo · Reponer</div>
-          <div class="day-pre">Free Tour mañana · Casa del Terror tarde · Noche suave</div>
-          <div class="day-tags"><span class="dtag">🚶 Free Tour</span><span class="dtag r">👻 Casa del Terror</span><span class="dtag g">😴 Reponer</span></div>
+          <div class="day-name">Auschwitz · Visita en español</div>
+          <div class="day-pre">Mañana libre · Flixbus 13:00 · Visita 14:45 · Vuelta 20:00</div>
+          <div class="day-tags"><span class="dtag g">😴 Mañana libre</span><span class="dtag r">🏛 Auschwitz</span></div>
         </div>
         <div class="day-arr">▶</div>
       </div>
@@ -780,16 +783,14 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
           <button class="itab" onclick="showTab('d3','comer',this)">🍽 Comer</button>
         </div>
         <div class="ipanel active" id="d3-plan">
-          <div class="act"><div class="act-t">Mañana</div><div class="act-b"><div class="act-title">🚶 Free Tour Casco Antiguo</div><div class="act-desc">Tour guiado gratuito ~2-3h. Propina al guía al final (~5-10 € por persona). Cubre Plaza del Mercado, Basílica de Santa María, Castillo de Wawel, Kazimierz. Buscad tour en español — salen varias veces al día.</div><span class="act-cost">🎟 Gratis + propina voluntaria</span></div></div>
-          <div class="act"><div class="act-t">Tarde</div><div class="act-b">
-            <div class="act-title">👻 Lost Souls Alley — Casa del Terror</div>
-            <div class="act-desc">La primera atracción de terror interactiva de Polonia, fundada en 2013. Un piso entero en el centro histórico (ul. Floriańska 6, planta 1) inspirado en películas de terror. Habitaciones a oscuras, una sola linterna para el grupo, actores en vivo que os pueden tocar, llaves y códigos para pasar de sala en sala.<br><br>🟢 Javier, Bernardo y Carlos: nivel <b>verde</b> (suave). 🔴 José Miguel: nivel <b>rojo</b> (contacto físico, máximo terror). Grupos de máx. 6 personas — soléis ser 4, perfecto. Reservad online con antelación, suele llenarse.</div>
-            <span class="act-cost">🎟 Verde ~5 € · Rojo ~15 € · Reserva en lostsoulsalley.com</span>
-          </div></div>
-          <div class="act"><div class="act-t">Noche</div><div class="act-b"><div class="act-title">Noche tranquila · Kazimierz</div><div class="act-desc">Cena y algún bar, sin pasarse. El jueves es el día fuerte: Zakopane + termas + noche grande. Guardad energía.</div></div></div>
+          <div class="act"><div class="act-t">Mañana</div><div class="act-b"><div class="act-title">😴 Mañana libre</div><div class="act-desc">Descanso, paseo por Kazimierz, cafés. Sin prisa. El bus sale a las 13:00 — la estación de autobuses está a ~20 min andando desde el apartamento.</div></div></div>
+          <div class="act"><div class="act-t">13:00</div><div class="act-b"><div class="act-title">🚌 Flixbus hacia Auschwitz</div><div class="act-desc">Salida desde la estación de autobuses de Cracovia. ~1h 30min de trayecto. <b>La estación está a ~20 min andando desde Długa 28</b> — salid con margen.</div><span class="act-cost">🎟 Flixbus · ~190 € total grupo (ida + vuelta)</span></div></div>
+          <div class="act"><div class="act-t">14:45</div><div class="act-b"><div class="act-title">🏛 Visita guiada Auschwitz-Birkenau · en español</div><div class="act-desc">Visita oficial en español. Calculad ~3h para los dos recintos: Auschwitz I y Birkenau (Auschwitz II), el más devastador por su escala. Llevad agua y calzado cómodo.</div><span class="act-cost">🎟 Entrada incluida en la reserva</span></div></div>
+          <div class="act"><div class="act-t">18:30</div><div class="act-b"><div class="act-title">🚌 Flixbus de vuelta a Cracovia</div><div class="act-desc">Salida desde Auschwitz. Llegada al centro ~20:00h.</div></div></div>
+          <div class="act"><div class="act-t">~20:00</div><div class="act-b"><div class="act-title">Llegada a Cracovia · Noche tranquila</div><div class="act-desc">Cena y algún bar, sin pasarse. El jueves es el día fuerte: Zakopane + termas + noche grande. Guardad energía.</div></div></div>
         </div>
         <div class="ipanel" id="d3-comer">
-          <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Bar Mleczny Pod Temida</div><div class="resto-type">Bar de leche comunista · Ultra barato</div></div><span class="resto-price">~4-5 € pp</span></div><div class="resto-expand">El bar de leche más famoso. Decoración de época comunista intacta. Pedís en la barra con bandeja. Ideal para el día de resaca. ul. Grodzka 43.<div class="resto-must">🍵 Żurek en pan, bigos, cualquier sopa. Todo bajo 4 €.</div></div></div>
+          <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Bar Mleczny Pod Temida</div><div class="resto-type">Bar de leche comunista · Ultra barato</div></div><span class="resto-price">~4-5 € pp</span></div><div class="resto-expand">El bar de leche más famoso. Decoración de época comunista intacta. Pedís en la barra con bandeja. Ideal para el almuerzo antes del bus. ul. Grodzka 43.<div class="resto-must">🍵 Żurek en pan, bigos, cualquier sopa. Todo bajo 4 €.</div></div></div>
           <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Przystanek Pierogarnia</div><div class="resto-type">Los mejores pierogi · Varios locales</div></div><span class="resto-price">~6-8 € pp</span></div><div class="resto-expand">Especialistas en pierogi. Ruskie (patata+queso), con carne, con setas. Varios locales en centro y Kazimierz.<div class="resto-must">🍽 El combo de degustación con varios tipos.</div></div></div>
           <div class="resto-card" onclick="toggleResto(this)"><div class="resto-top"><div><div class="resto-name">Wesele</div><div class="resto-type">Mejor calidad/precio del Rynek</div></div><span class="resto-price">~12-15 € pp</span></div><div class="resto-expand">El mejor restaurante de la Plaza del Mercado según reseñas de españoles. Pierogi y servicio excelentes.<div class="resto-must">🍽 Pierogi variados y el żurek en pan.</div></div></div>
         </div>
@@ -1021,35 +1022,63 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
   </div>
 </div>
 
-<!-- ════════════════ SECCIÓN: PRESUPUESTO ════════════════ -->
-<div class="main-section" id="sec-presupuesto">
-  <div class="section-wrap" style="padding-bottom:20px;">
-    <div class="section-label">💶 Presupuesto estimado / persona</div>
-    <div class="budget-card">
-      <div class="budget-hdr">RESUMEN DE GASTOS</div>
-      <div>
-        <div class="brow"><span class="lbl">✈️ Vuelos ida + vuelta (ya pagados)</span><span class="amt">~136 €</span></div>
-        <div class="brow"><span class="lbl">🍺 Tour cervezas (martes noche)</span><span class="amt">~20 €</span></div>
-        <div class="brow"><span class="lbl">🎉 Noche de fiesta (jueves)</span><span class="amt">~35-45 €</span></div>
-        <div class="brow"><span class="lbl">🚗 Alquiler coche jueves</span><span class="amt">~19 €</span></div>
-        <div class="brow"><span class="lbl">🚡 Teleférico Zakopane</span><span class="amt">~18 €</span></div>
-        <div class="brow"><span class="lbl">♨️ Baños Chochołów</span><span class="amt">~25 €</span></div>
-        <div class="brow"><span class="lbl">👻 Escape Room Casa del Terror</span><span class="amt">~18 €</span></div>
-        <div class="brow"><span class="lbl">🏭 Fábrica de Schindler</span><span class="amt">~12 €</span></div>
-        <div class="brow"><span class="lbl">🍽 Comidas y cenas (4 días)</span><span class="amt">~65 €</span></div>
-        <div class="brow"><span class="lbl">🚕 Transporte local Bolt</span><span class="amt">~15 €</span></div>
-        <div class="brow tot"><span class="lbl">TOTAL ESTIMADO</span><span class="amt">~363 €</span></div>
+<!-- ════════════════ SECCIÓN: TICKETS ════════════════ -->
+<div class="main-section" id="sec-tickets">
+  <div class="section-wrap" style="padding-bottom:30px;">
+    <div class="section-label">🎫 Tus entradas</div>
+
+    <!-- FLIXBUS IDA -->
+    <div class="day-card" style="cursor:default;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:14px;padding:14px 16px;">
+        <div style="font-size:2rem;flex-shrink:0;">🚌</div>
+        <div style="flex:1;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:1px;">Flixbus · Ida</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px;">Mié 20 mayo · Cracovia → Auschwitz · 13:00</div>
+          <div style="font-size:11px;color:var(--muted);">Reserva 335 504 7200 · Andén D9/D10</div>
+        </div>
+        <button onclick="window.open('https://carlosmhz.github.io/APK/flixbus-ida.pdf','_blank')" style="background:var(--rojo);color:white;border:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;">Ver 🎫</button>
       </div>
     </div>
-    <div class="section-label" style="margin-top:4px;">💡 Consejos de dinero</div>
-    <div class="day-card" style="cursor:default;">
-      <div style="padding:14px 16px;font-size:12px;color:var(--muted);line-height:1.8;">
-        <div style="margin-bottom:8px;"><b style="color:var(--texto);">💳 Tarjeta Revolut</b> — Imprescindible. Sin comisiones al pagar en zlotys (PLN) ni al sacar dinero.</div>
-        <div style="margin-bottom:8px;"><b style="color:var(--texto);">💵 Efectivo</b> — Llevad algo de PLN para los carritos callejeros y puestos del mercado. Cajeros por toda la ciudad.</div>
-        <div style="margin-bottom:8px;"><b style="color:var(--texto);">🚕 Bolt</b> — Siempre Bolt, nunca taxis de la calle. Mucho más barato y seguro.</div>
-        <div><b style="color:var(--texto);">🍺 Precios reales</b> — Caña desde 1 €, shot de vodka 2 €, cena completa 8-15 €. Cracovia es una de las capitales más baratas de Europa.</div>
+
+    <!-- FLIXBUS VUELTA -->
+    <div class="day-card" style="cursor:default;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:14px;padding:14px 16px;">
+        <div style="font-size:2rem;flex-shrink:0;">🚌</div>
+        <div style="flex:1;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:1px;">Flixbus · Vuelta</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px;">Mié 20 mayo · Auschwitz → Cracovia · 18:30</div>
+          <div style="font-size:11px;color:var(--muted);">Reserva 335 504 7200</div>
+        </div>
+        <button onclick="window.open('https://carlosmhz.github.io/APK/flixbus-vuelta.pdf','_blank')" style="background:var(--rojo);color:white;border:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;">Ver 🎫</button>
       </div>
     </div>
+
+    <!-- AUSCHWITZ -->
+    <div class="day-card" style="cursor:default;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:14px;padding:14px 16px;">
+        <div style="font-size:2rem;flex-shrink:0;">🏛</div>
+        <div style="flex:1;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:1px;">Auschwitz-Birkenau</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px;">Mié 20 mayo · Visita en español · 14:45</div>
+          <div style="font-size:11px;color:var(--muted);">Entrada nominal · lleva tu DNI</div>
+        </div>
+        <button onclick="abrirAuschwitz()" style="background:var(--rojo);color:white;border:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;">Ver 🎫</button>
+      </div>
+    </div>
+
+    <!-- SCHINDLER -->
+    <div class="day-card" style="cursor:default;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:14px;padding:14px 16px;">
+        <div style="font-size:2rem;flex-shrink:0;">🏭</div>
+        <div style="flex:1;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:1px;">Fábrica de Schindler</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px;">Vie 22 mayo · Zabłocie · ~12:00</div>
+          <div style="font-size:11px;color:var(--muted);">Entrada nominal · lleva tu DNI</div>
+        </div>
+        <button onclick="abrirSelectorEntradas()" style="background:var(--rojo);color:white;border:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;">Ver 🎫</button>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -1307,6 +1336,20 @@ window.abrirTarjetaEmbarque = function() {
       else mostrarToast('🎫 Tarjeta aún no disponible');
     })
     .catch(() => mostrarToast('🎫 Tarjeta aún no disponible'));
+};
+// ── Entrada Auschwitz — abre la del usuario ──
+window.abrirAuschwitz = function() {
+  const auschwitz = {
+    'javier':   base + 'auschwitz-javier.jpg',
+    'bernardo': base + 'auschwitz-bernardo.jpg',
+    'carlos':   base + 'auschwitz-carlos.jpg',
+    'jose':     base + 'auschwitz-josemiguel.jpg'
+  };
+  if (usuarioActual && auschwitz[usuarioActual]) {
+    window.open(auschwitz[usuarioActual], '_blank');
+  } else {
+    mostrarToast('Selecciónate primero arriba ↑');
+  }
 };
 // ── Entradas Schindler — abre directamente la del usuario ──
 window.abrirSelectorEntradas = function() {
