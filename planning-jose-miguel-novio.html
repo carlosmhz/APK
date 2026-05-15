@@ -352,11 +352,35 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
   <div class="section-wrap" style="padding-bottom:40px;">
     <div class="section-label">🎟 Tus tickets</div>
     <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">Cuando estéis en el lugar, los chicos te dirán el PIN para abrirlo. 🤫</p>
-      <div class="ticket-card" onclick="window.open('https://carlosmhz.github.io/APK/boarding-jose-miguel.pdf', '_blank')">      
+    <div class="ticket-card" onclick="window.open('https://carlosmhz.github.io/APK/boarding-jose-miguel.pdf', '_blank')">
       <div class="ticket-icon">✈️</div>
       <div class="ticket-info">
         <div class="ticket-name">Tarjeta de embarque</div>
         <div class="ticket-sub">Pulsa para ver</div>
+      </div>
+      <div class="ticket-arrow">▶</div>
+    </div>
+    <div class="ticket-card" onclick="abrirPin('busida')">
+      <div class="ticket-icon">🎫</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Miércoles · Ida</div>
+        <div class="ticket-sub">Requiere PIN · Pulsa para ver</div>
+      </div>
+      <div class="ticket-arrow">▶</div>
+    </div>
+    <div class="ticket-card" onclick="abrirPin('auschwitz')">
+      <div class="ticket-icon">🎫</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Miércoles · Visita</div>
+        <div class="ticket-sub">Requiere PIN · Pulsa para ver</div>
+      </div>
+      <div class="ticket-arrow">▶</div>
+    </div>
+    <div class="ticket-card" onclick="abrirPin('busvuelta')">
+      <div class="ticket-icon">🎫</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Miércoles · Vuelta</div>
+        <div class="ticket-sub">Requiere PIN · Pulsa para ver</div>
       </div>
       <div class="ticket-arrow">▶</div>
     </div>
@@ -463,7 +487,10 @@ const NOMBRE = 'José Miguel';
 
 const base = "https://carlosmhz.github.io/APK/";
 const TICKETS = {
-  viernes:  { pin: '4817', url: base + "ticket_JOSE_MIGUEL_DELGADO-v2.pdf",  label: 'Viernes' }
+  busida:    { pin: '7243', url: base + "flixbus-ida.pdf",               label: 'Miércoles · Ida' },
+  auschwitz: { pin: '5819', url: base + "auschwitz-josemiguel.jpg",      label: 'Miércoles · Visita' },
+  busvuelta: { pin: '3067', url: base + "flixbus-vuelta.pdf",            label: 'Miércoles · Vuelta' },
+  viernes:   { pin: '4817', url: base + "ticket_JOSE_MIGUEL_DELGADO-v2.pdf", label: 'Viernes' }
 };
 
 // ── NAV ──
