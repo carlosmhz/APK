@@ -1243,7 +1243,7 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
 <!-- ══ FIREBASE + CLOUDINARY ══ -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getDatabase, ref, push, remove, onValue, query, orderByChild } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+import { getDatabase, ref, push, remove, onValue, query, orderByChild, set } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDyECju0z-V2JkvSKfbEsiJLr4yybwqDmg",
@@ -1320,7 +1320,12 @@ window.showMain = function(id, btn) {
   document.querySelectorAll('.mnav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('sec-' + id).classList.add('active');
   btn.classList.add('active');
-  if (id === 'fotos') escucharFotos();
+  if (id === 'fotos') {
+  escucharFotos();
+  if (usuarioActual) {
+    set(ref(db, `visto/${usuarioActual}`), { ultima_visita: Date.now() });
+  }
+}
 };
 
 // ── Días ──
@@ -1642,7 +1647,10 @@ function escucharLikes(fotoId) {
   const likesRef = ref(db, `likes/${fotoId}`);
   const unsub = onValue(likesRef, (snapshot) => {
     const likes = {};
-    snapshot.forEach(child => { likes[child.key] = child.val(); });
+    snapshot.forEach(child => {
+  const v = child.val();
+  likes[child.key] = typeof v === 'object' ? v.nombre : v;
+});
     const total = Object.keys(likes).length;
     const countEl = document.getElementById(`like-count-${fotoId}`);
     const btnEl = document.getElementById(`like-btn-${fotoId}`);
@@ -1694,7 +1702,7 @@ window.toggleLike = async function(fotoId) {
   if (miKey) {
     await remove(ref(db, `likes/${fotoId}/${miKey}`));
   } else {
-    await push(likesRef, yoSoy);
+    await push(likesRef, { nombre: yoSoy, ts: Date.now() });
   }
 };
 
