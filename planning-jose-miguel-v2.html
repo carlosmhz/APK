@@ -1066,6 +1066,19 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
       </div>
     </div>
 
+    <!-- TERMAS -->
+    <div class="day-card" style="cursor:default;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:14px;padding:14px 16px;">
+        <div style="font-size:2rem;flex-shrink:0;">♨️</div>
+        <div style="flex:1;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:1px;">Termas Chochołów</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px;">Jue 21 mayo · 4h OPEN · Chochołów</div>
+          <div style="font-size:11px;color:var(--muted);">Ticket individual · lleva el QR en el móvil</div>
+        </div>
+        <button onclick="abrirTermas()" style="background:var(--rojo);color:white;border:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;">Ver 🎫</button>
+      </div>
+    </div>
+    
     <!-- SCHINDLER -->
     <div class="day-card" style="cursor:default;margin-bottom:12px;">
       <div style="display:flex;align-items:center;gap:14px;padding:14px 16px;">
@@ -1187,6 +1200,16 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
       </div>
       <span style="color:#ccc;">👁</span>
     </div>
+    
+    <div onclick="this.querySelector('.pin-val').style.display=this.querySelector('.pin-val').style.display==='none'?'block':'none'" style="background:#f5f5f7;border-radius:10px;padding:13px 14px;margin-bottom:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-weight:600;font-size:13px;">♨️ Jueves</div>
+        <div class="pin-val" style="display:none;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#D4001A;letter-spacing:4px;margin-top:4px;">6142</div>
+        <div style="font-size:11px;color:#888;margin-top:2px;">Pulsa para revelar</div>
+      </div>
+      <span style="color:#ccc;">👁</span>
+    </div>
+    
     <div onclick="this.querySelector('.pin-val').style.display=this.querySelector('.pin-val').style.display==='none'?'block':'none'" style="background:#f5f5f7;border-radius:10px;padding:13px 14px;margin-bottom:10px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
       <div>
         <div style="font-weight:600;font-size:13px;">🏭 Viernes</div>
@@ -1375,6 +1398,22 @@ window.abrirAuschwitz = function() {
     mostrarToast('Selecciónate primero arriba ↑');
   }
 };
+
+// ── Termas — abre la del usuario ──
+window.abrirTermas = function() {
+  const termas = {
+    'javier':   base + 'termas-1.pdf',
+    'bernardo': base + 'termas-2.pdf',
+    'carlos':   base + 'termas-3.pdf',
+    'jose':     base + 'termas-4.pdf'
+  };
+  if (usuarioActual && termas[usuarioActual]) {
+    window.open(termas[usuarioActual], '_blank');
+  } else {
+    mostrarToast('Selecciónate primero arriba ↑');
+  }
+};
+  
 // ── Entradas Schindler — abre directamente la del usuario ──
 window.abrirSelectorEntradas = function() {
   if (usuarioActual && entradas[usuarioActual]) {
