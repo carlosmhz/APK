@@ -719,7 +719,7 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
         <div class="ipanel active" id="d1-plan">
           <div class="act"><div class="act-t">20:35</div><div class="act-b"><div class="act-title">Salida desde Madrid · FR5356</div><div class="act-desc">Maleta de mano incluida (40×30×20 cm). Sin facturar. Id con tiempo, Ryanair no espera.</div></div></div>
           <div class="act"><div class="act-t">23:55</div><div class="act-b"><div class="act-title">Llegada aeropuerto KRK</div><div class="act-desc">El aeropuerto está a ~20 min del centro. Coged <b>Bolt</b> desde la app nada más salir. Evitad los taxis de la parada: están caros.</div><span class="act-cost">🚕 Bolt al centro: ~5-6 €</span></div></div>
-          <div class="act"><div class="act-t">~01h</div><div class="act-b"><div class="act-title">Check-in y a dormir</div><div class="act-desc">Mañana toca Auschwitz. Si hay energía, Kazimierz tiene bares abiertos hasta tarde (Singer, Eszeweria).</div></div></div>
+          <div class="act"><div class="act-t">~01h</div><div class="act-b"><div class="act-title">Check-in y a dormir</div><div class="act-desc">Mañana toca Auschwitz. Si hay energía, Kazimierz tiene bares abiertos hasta tarde (Singer, Eszeweria).</div><button onclick="document.getElementById('modalApartamento').style.display='flex'" style="margin-top:10px;background:var(--rojo);color:white;border:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:600;cursor:pointer;">🏠 Ver instrucciones de entrada</button></div></div>
         </div>
         <div class="ipanel" id="d1-comer">
           <div class="notice">Llegáis cerca de medianoche. Mejor comer antes en Madrid. A esa hora, opciones callejeras.</div>
@@ -1855,6 +1855,50 @@ iniciarApp();
     <div id="modalLikesLista"></div>
     <div onclick="document.getElementById('modalLikes').style.display='none'" style="text-align:center;padding:12px;font-size:12px;color:#888;cursor:pointer;margin-top:8px;">Cerrar</div>
   </div>
+  </div>
+</div>
+<!-- MODAL APARTAMENTO -->
+<div id="modalApartamento" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.6);align-items:flex-end;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:white;border-radius:20px 20px 0 0;padding:24px 20px 40px;width:100%;max-width:480px;max-height:85vh;overflow-y:auto;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;margin-bottom:4px;">🏠 Apartamento · Długa 28</div>
+    <div style="font-size:11px;color:#888;margin-bottom:20px;">Check-in desde las 15:00 · Check-out antes de las 11:00</div>
+
+    <div style="background:#f5f5f7;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#D4001A;margin-bottom:8px;">🚪 Puerta principal</div>
+      <div style="font-size:13px;color:#333;line-height:1.6;">En el panel a la derecha de la puerta marrón grande, pulsa el símbolo de llave (esquina inferior izquierda) y escribe el código:</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#D4001A;letter-spacing:4px;margin-top:6px;">🔑 1990</div>
+      <div style="font-size:11px;color:#888;margin-top:4px;">Atraviesa el pasillo hasta el fondo → segunda puerta → patio interior</div>
+    </div>
+
+    <div style="background:#f5f5f7;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#D4001A;margin-bottom:8px;">📦 Caja de llaves</div>
+      <div style="font-size:13px;color:#333;line-height:1.6;">En la escalera, a la derecha hay 5 cajas. Abre la <b>caja número 8</b>:</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#D4001A;letter-spacing:4px;margin-top:6px;">081114#</div>
+      <div style="font-size:11px;color:#888;margin-top:4px;">Gira el asa hacia la derecha. Apartamento nº 8 · Tercera planta.</div>
+    </div>
+
+    <div style="background:#f5f5f7;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#D4001A;margin-bottom:8px;">📤 Check-out</div>
+      <div style="font-size:13px;color:#333;line-height:1.6;">Deja las llaves en la <b>caja número 8</b> antes de las 11:00h del viernes.</div>
+    </div>
+
+    <div style="background:#f5f5f7;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#D4001A;margin-bottom:8px;">📶 WiFi</div>
+      <div style="font-size:13px;color:#333;">Red: <b>Holiday internet 8</b></div>
+      <div style="font-size:13px;color:#333;margin-top:4px;">Contraseña: <b>holiday2020</b></div>
+    </div>
+
+    <div style="background:#f5f5f7;border-radius:12px;padding:14px;margin-bottom:10px;">
+      <div style="font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#D4001A;margin-bottom:8px;">🚗 Parking</div>
+      <div style="font-size:13px;color:#333;line-height:1.6;">Parking vigilado a 200m en <b>św. Filipa 13</b> (60 zł/día) o <b>św. Filipa 15</b> (70 zł/día). También hay parquímetros en la calle.</div>
+    </div>
+
+    <div style="background:#f5f5f7;border-radius:12px;padding:14px;margin-bottom:16px;">
+      <div style="font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#D4001A;margin-bottom:8px;">📞 Contacto propietario</div>
+      <div style="font-size:13px;color:#333;">WhatsApp / Viber: <b>+48 792 590 014</b></div>
+    </div>
+
+    <div onclick="document.getElementById('modalApartamento').style.display='none'" style="text-align:center;padding:10px;font-size:12px;color:#888;cursor:pointer;">Cerrar</div>
   </div>
 </div>
 </body>
