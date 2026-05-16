@@ -629,6 +629,22 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
 }
 .identity-chip span { color: var(--texto); font-weight: 600; }
 .identity-chip .cambiar { color: var(--rojo); font-size: 10px; text-decoration: underline; }
+.mnav-btn { position: relative; }
+.nav-badge {
+  position: absolute;
+  top: 1px; right: 1px;
+  background: var(--rojo);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  padding: 0 4px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
 </style>
 </head>
 <body>
@@ -668,7 +684,7 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
 <div class="main-nav">
   <button class="mnav-btn active" onclick="showMain('programa', this)">📅 Programa</button>
   <button class="mnav-btn" onclick="showMain('restaurantes', this)">🍽 Comer</button>
-  <button class="mnav-btn" onclick="showMain('fotos', this)">📸 Fotos</button>
+  <button class="mnav-btn" onclick="showMain('fotos', this)">📸 Fotos<span class="nav-badge" id="fotosBadge"></span></button>
   <button class="mnav-btn" onclick="showMain('extras', this)">🗺 Más planes</button>
   <button class="mnav-btn" onclick="showMain('tickets', this)">🎫 Tickets</button>
 </div>
@@ -1300,6 +1316,7 @@ window.elegirIdentidad = function(id) {
   localStorage.setItem('usuario_cracovia', id);
   document.getElementById('welcomeScreen').classList.remove('active');
   actualizarUIIdentidad();
+  actualizarBadge();
 };
 
 window.resetIdentidad = function() {
@@ -1312,6 +1329,7 @@ function actualizarUIIdentidad() {
   if (!usuarioActual) return;
   const u = USUARIOS[usuarioActual];
   document.getElementById('heroNombre').textContent = u.emoji + ' ' + u.nombre;
+  actualizarBadge();
 }
 
 // ── Nav principal ──
@@ -1767,6 +1785,53 @@ function mostrarToast(msg) {
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── Badge de novedades en Fotos ──
+function actualizarBadge() {
+  if (!usuarioActual) return;
+  const uvRef = ref(db, `visto/${usuarioActual}/ultima_visita`);
+  onValue(uvRef, (snapUV) => {
+    const ultimaVisita = snapUV.val() || 0;
+    onValue(query(ref(db, 'fotos'), orderByChild('ts')), (snapFotos) => {
+      let fotosNuevas = 0, likesNuevos = 0, comentariosNuevos = 0;
+      const yoNombre = USUARIOS[usuarioActual].nombre;
+      const checks = [];
+      snapFotos.forEach(child => {
+        const f = { id: child.key, ...child.val() };
+        if (f.ts > ultimaVisita && f.autor !== yoNombre) fotosNuevas++;
+        if (f.autor === yoNombre) {
+          checks.push(new Promise(res => {
+            onValue(ref(db, `likes/${f.id}`), snap => {
+              snap.forEach(l => {
+                const v = l.val();
+                const ts = typeof v === 'object' ? v.ts : 0;
+                const nombre = typeof v === 'object' ? v.nombre : v;
+                if (ts > ultimaVisita && nombre !== yoNombre) likesNuevos++;
+              });
+              res();
+            }, { onlyOnce: true });
+          }));
+          checks.push(new Promise(res => {
+            onValue(query(ref(db, `comentarios/${f.id}`), orderByChild('ts')), snap => {
+              snap.forEach(c => {
+                const v = c.val();
+                if (v.ts > ultimaVisita && v.autor !== yoNombre) comentariosNuevos++;
+              });
+              res();
+            }, { onlyOnce: true });
+          }));
+        }
+      });
+      Promise.all(checks).then(() => {
+        const total = fotosNuevas + likesNuevos + comentariosNuevos;
+        const badge = document.getElementById('fotosBadge');
+        if (!badge) return;
+        badge.textContent = total > 0 ? total : '';
+        badge.style.display = total > 0 ? 'flex' : 'none';
+      });
+    }, { onlyOnce: true });
+  });
 }
 
 // Arrancar
