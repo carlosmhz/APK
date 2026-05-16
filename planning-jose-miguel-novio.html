@@ -384,6 +384,16 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
       </div>
       <div class="ticket-arrow">▶</div>
     </div>
+   
+    <div class="ticket-card" onclick="abrirPin('termas')">
+      <div class="ticket-icon">🎫</div>
+      <div class="ticket-info">
+        <div class="ticket-name">Jueves</div>
+        <div class="ticket-sub">Requiere PIN · Pulsa para ver</div>
+      </div>
+      <div class="ticket-arrow">▶</div>
+    </div>
+    
     <div class="ticket-card" onclick="abrirPin('viernes')">
       <div class="ticket-icon">🎫</div>
       <div class="ticket-info">
@@ -490,6 +500,7 @@ const TICKETS = {
   busida:    { pin: '7243', url: base + "flixbus-ida.pdf",               label: 'Miércoles · Ida' },
   auschwitz: { pin: '5819', url: base + "auschwitz-josemiguel.jpg",      label: 'Miércoles · Visita' },
   busvuelta: { pin: '3067', url: base + "flixbus-vuelta.pdf",            label: 'Miércoles · Vuelta' },
+  termas:    { pin: '6142', url: base + "termas-4.pdf",                  label: 'Jueves' },
   viernes:   { pin: '4817', url: base + "ticket_JOSE_MIGUEL_DELGADO-v2.pdf", label: 'Viernes' }
 };
 
