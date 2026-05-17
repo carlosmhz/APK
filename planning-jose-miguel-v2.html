@@ -707,7 +707,7 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
       </div>
       <div style="padding:12px 16px;">
         <button onclick="abrirTarjetaEmbarque()" style="width:100%;background:linear-gradient(135deg,#1a3a6b,#0d2044);color:#fff;border:none;border-radius:10px;padding:12px;font-size:13px;font-weight:600;cursor:pointer;letter-spacing:0.5px;display:flex;align-items:center;justify-content:center;gap:8px;">
-          🎫 Ver mi tarjeta de embarque
+          🎫 Añadir a tu wallet
         </button>
       </div>
     </div>
@@ -1391,10 +1391,10 @@ window.toggleExtra = function(el) {
 // ── Tarjeta de embarque ──
 window.abrirTarjetaEmbarque = function() {
   const boarding = {
-    'javier':   base + 'boarding-javier.pdf',
-    'bernardo': base + 'boarding-bernardo.pdf',
-    'carlos':   base + 'boarding-carlos.pdf',
-    'jose':     base + 'boarding-jose-miguel.pdf'
+    'javier':   null,
+    'bernardo': base + 'boarding-bernardo.pkpass',
+    'carlos':   base + 'boarding-carlos.pkpass',
+    'jose':     base + 'boarding-jose-miguel.pkpass'
   };
   if (!usuarioActual || !boarding[usuarioActual]) {
     mostrarToast('Selecciónate primero arriba ↑');
