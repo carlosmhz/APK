@@ -710,6 +710,7 @@ window.filtrarFotos = function(dia, btn) {
 let feedFotos = [];
 
 window.abrirFeed = function(fotoInicial) {
+  history.pushState({ feed: true }, '');
   feedFotos = filtroActivo === 'todos' ? todasLasFotos : todasLasFotos.filter(f => f.dia === filtroActivo);
   const scroll = document.getElementById('feedScroll');
   document.getElementById('feedCount').textContent = `${feedFotos.length} foto${feedFotos.length !== 1 ? 's' : ''}`;
@@ -722,6 +723,12 @@ window.abrirFeed = function(fotoInicial) {
     if (items[idx]) items[idx].scrollIntoView({ behavior: 'instant' });
   });
 };
+
+window.addEventListener('popstate', (e) => {
+  if (document.getElementById('feedScreen').classList.contains('active')) {
+    cerrarFeed();
+  }
+});
 
 window.cerrarFeed = function() {
   unsubscribers.forEach(unsub => unsub());
