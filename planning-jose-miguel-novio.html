@@ -632,7 +632,7 @@ window.subirFotos = async function(files) {
       if (data.secure_url) {
         await push(ref(db, 'fotos'), {
           url: data.secure_url,
-          urlThumb: `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/c_fill,w_400,h_400,q_auto,f_auto/${data.public_id}`,
+          urlThumb: data.secure_url,
           dia: diaSeleccionado,
           autor: NOMBRE,
           ts: Date.now()
