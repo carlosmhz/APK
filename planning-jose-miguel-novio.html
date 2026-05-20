@@ -340,6 +340,9 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
     </div>
   </div>
 
+  <!-- Actividad reciente -->
+  <div id="actividadWrap" style="display:none;margin:0 14px 14px;"></div>
+
   <div class="upload-zone" onclick="abrirSelectorDia()">
     <div class="upload-zone-icon">📷</div>
     <div class="upload-zone-text">Añadir foto</div>
@@ -598,6 +601,64 @@ function comprobarPin() {
 // ── FOTOS ──
 let diaSeleccionado = null;
 let filtroActivo = 'todos';
+
+// ── ACTIVIDAD RECIENTE ──
+const VISTO_KEY = 'cracovia_visto_ts';
+
+function iniciarActividad() {
+  const ultimoVisto = parseInt(localStorage.getItem(VISTO_KEY) || '0');
+  const wrap = document.getElementById('actividadWrap');
+
+  onValue(ref(db, 'comentarios'), (snapshot) => {
+    const items = [];
+    snapshot.forEach(fotoSnap => {
+      const fotoId = fotoSnap.key;
+      let nuevos = [];
+      fotoSnap.forEach(c => {
+        const val = c.val();
+        if (val.ts > ultimoVisto) nuevos.push(val);
+      });
+      if (nuevos.length > 0) {
+        const foto = todasLasFotos.find(f => f.id === fotoId);
+        if (foto) items.push({ foto, nuevos });
+      }
+    });
+
+    if (items.length === 0) { wrap.style.display = 'none'; return; }
+
+    wrap.innerHTML = `
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
+        💬 Actividad reciente
+        <span style="flex:1;height:1px;background:var(--gris);display:block;"></span>
+      </div>
+      <div id="actividadItems" style="display:flex;flex-direction:column;gap:8px;"></div>`;
+    wrap.style.display = 'block';
+
+    const lista = document.getElementById('actividadItems');
+    items.forEach(({ foto, nuevos }) => {
+      const div = document.createElement('div');
+      div.style.cssText = 'display:flex;align-items:center;gap:12px;background:white;border-radius:12px;padding:10px;cursor:pointer;border:1px solid var(--gris);';
+      const ultimo = nuevos[nuevos.length - 1];
+      div.onclick = () => {
+        localStorage.setItem(VISTO_KEY, Date.now().toString());
+        wrap.style.display = 'none';
+        window.abrirFeed(foto);
+      };
+      div.innerHTML = `
+        <img src="${foto.urlThumb || foto.url}" style="width:56px;height:56px;border-radius:8px;object-fit:cover;flex-shrink:0;">
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:12px;font-weight:600;color:var(--texto);margin-bottom:2px;">📷 ${foto.autor || 'Alguien'}</div>
+          <div style="font-size:11px;color:var(--muted);margin-bottom:5px;">${DIAS_LABEL[foto.dia] || foto.dia}</div>
+          <div style="font-size:12px;color:var(--texto);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+            <b style="color:var(--rojo);">${ultimo.autor}</b>: ${ultimo.texto}
+          </div>
+          ${nuevos.length > 1 ? `<div style="font-size:10px;color:var(--muted);margin-top:3px;">+${nuevos.length - 1} comentario${nuevos.length > 2 ? 's' : ''} más</div>` : ''}
+        </div>
+        <span style="color:var(--gris);font-size:12px;flex-shrink:0;">▶</span>`;
+      lista.appendChild(div);
+    });
+  });
+}
 let todasLasFotos = [];
 let escuchando = false;
 
@@ -660,6 +721,10 @@ function escucharFotos() {
       todasLasFotos = [];
       snapshot.forEach(child => { todasLasFotos.unshift({ id: child.key, ...child.val() }); });
       renderizarGrid();
+      if (todasLasFotos.length > 0 && !window._actividadIniciada) {
+        window._actividadIniciada = true;
+        iniciarActividad();
+      }
       const total = todasLasFotos.length;
       countEl.textContent = total === 0 ? '' : `${total} foto${total !== 1 ? 's' : ''}`;
     });
@@ -785,7 +850,7 @@ function escucharLikes(fotoId) {
     const yoDiLike = Object.values(likes).includes(NOMBRE);
     btnEl.textContent = yoDiLike ? '❤️' : '🤍';
     btnEl.classList.toggle('liked', yoDiLike);
-    const nombres = Object.values(likes);
+    const nombres = Object.values(likes).map(v => typeof v === 'string' ? v : (v.nombre || v.name || JSON.stringify(v))).filter(Boolean);
     if (nombres.length === 0) {
   textEl.textContent = '';
   textEl.onclick = null;
