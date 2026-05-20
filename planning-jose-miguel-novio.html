@@ -678,7 +678,7 @@ function renderizarGrid() {
   if (filtroActivo === 'todos') {
     const porDia = {};
     fotos.forEach(f => { if (!porDia[f.dia]) porDia[f.dia] = []; porDia[f.dia].push(f); });
-    ['previo','lun18','mar19','mie20','jue21','vie22'].forEach(dia => {
+    ['vie22','jue21','mie20','mar19','lun18','previo'].forEach(dia => {
       if (!porDia[dia]?.length) return;
       const sep = document.createElement('div');
       sep.className = 'fotos-day-sep';
