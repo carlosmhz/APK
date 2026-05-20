@@ -1127,15 +1127,6 @@ body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', s
     </div>
   </div>
 
-  <!-- Actividad reciente -->
-  <div id="actividadWrap" style="display:none;margin:0 14px 14px;">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px;">
-      💬 Actividad reciente
-      <span style="flex:1;height:1px;background:var(--gris);display:block;"></span>
-    </div>
-    <div id="actividadLista" style="display:flex;flex-direction:column;gap:8px;"></div>
-  </div>
-
   <!-- Zona de subida -->
   <div class="upload-zone" onclick="abrirSelectorDia()">
     <div class="upload-zone-icon">📷</div>
@@ -1529,83 +1520,6 @@ window.subirFotos = async function(files) {
 let filtroActivo = 'todos';
 let todasLasFotos = [];
 let escuchando = false;
-let actividadEscuchando = false;
-const VISTO_KEY = 'cracovia_ultimo_visto';
-
-function getUltimoVisto() {
-  return parseInt(localStorage.getItem(VISTO_KEY) || '0');
-}
-
-// Mapa de actividad por fotoId: { likes: N, comentarios: N }
-const actividadMap = {};
-
-function escucharActividad() {
-  // Escuchar likes globales
-  onValue(ref(db, 'likes'), (snapshot) => {
-    snapshot.forEach(fotoSnap => {
-      const fotoId = fotoSnap.key;
-      if (!actividadMap[fotoId]) actividadMap[fotoId] = { likes: 0, comentarios: 0 };
-      actividadMap[fotoId].likes = fotoSnap.numChildren();
-    });
-    renderActividad();
-  });
-
-  // Escuchar comentarios globales
-  onValue(ref(db, 'comentarios'), (snapshot) => {
-    const ultimoVisto = getUltimoVisto();
-    snapshot.forEach(fotoSnap => {
-      const fotoId = fotoSnap.key;
-      if (!actividadMap[fotoId]) actividadMap[fotoId] = { likes: 0, comentarios: 0 };
-      let nuevos = 0;
-      fotoSnap.forEach(c => { if (c.val().ts > ultimoVisto) nuevos++; });
-      actividadMap[fotoId].comentarios = nuevos;
-    });
-    renderActividad();
-  });
-}
-
-function renderActividad() {
-  const ultimoVisto = getUltimoVisto();
-  const lista = document.getElementById('actividadLista');
-  const wrap = document.getElementById('actividadWrap');
-  lista.innerHTML = '';
-
-  const fotosConActividad = todasLasFotos.filter(f => {
-    const a = actividadMap[f.id];
-    if (!a) return false;
-    // Mostrar si hay comentarios nuevos, o si hay likes y nunca se ha visto
-    return a.comentarios > 0 || (a.likes > 0 && ultimoVisto === 0);
-  });
-
-  if (fotosConActividad.length === 0) { wrap.style.display = 'none'; return; }
-
-  wrap.style.display = 'block';
-  fotosConActividad.forEach(foto => {
-    const a = actividadMap[foto.id];
-    const tags = [];
-    if (a.likes > 0) tags.push(`❤️ ${a.likes} like${a.likes > 1 ? 's' : ''}`);
-    if (a.comentarios > 0) tags.push(`💬 ${a.comentarios} nuevo${a.comentarios > 1 ? 's' : ''}`);
-    const div = document.createElement('div');
-    div.style.cssText = 'display:flex;align-items:center;gap:12px;background:white;border-radius:12px;padding:10px;cursor:pointer;border:1px solid var(--gris);transition:border-color 0.2s;';
-    div.onclick = () => {
-      // Al abrir, marcar como visto y quitar de la lista
-      localStorage.setItem(VISTO_KEY, Date.now().toString());
-      if (actividadMap[foto.id]) actividadMap[foto.id].comentarios = 0;
-      div.remove();
-      if (!document.getElementById('actividadLista').children.length) wrap.style.display = 'none';
-      window.abrirFeed(foto);
-    };
-    div.innerHTML = `
-      <img src="${foto.urlThumb || foto.url}" style="width:56px;height:56px;border-radius:8px;object-fit:cover;flex-shrink:0;">
-      <div style="flex:1;min-width:0;">
-        <div style="font-size:12px;font-weight:600;color:var(--texto);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">📷 ${foto.autor || 'Alguien'}</div>
-        <div style="font-size:11px;color:var(--muted);margin-bottom:5px;">${DIAS_LABEL[foto.dia] || foto.dia}</div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;">${tags.map(t => `<span style="font-size:11px;font-weight:600;color:var(--rojo);background:var(--rojo-suave);border:1px solid var(--rojo-borde);padding:2px 7px;border-radius:10px;">${t}</span>`).join('')}</div>
-      </div>
-      <span style="color:var(--gris);font-size:12px;">▶</span>`;
-    lista.appendChild(div);
-  });
-}
 
 function escucharFotos() {
   const grid = document.getElementById('fotosGrid');
@@ -1622,8 +1536,6 @@ function escucharFotos() {
         todasLasFotos.unshift({ id: child.key, ...child.val() });
       });
       renderizarGrid();
-      if (!actividadEscuchando) { actividadEscuchando = true; escucharActividad(); }
-      else renderActividad();
       const total = todasLasFotos.length;
       countEl.textContent = total === 0 ? '' : `${total} foto${total !== 1 ? 's' : ''}`;
     });
