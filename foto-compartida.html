@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta name="theme-color" content="#D4001A">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cracovia 2026 · Foto del viaje</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rojo: #D4001A; --rojo-suave: #fdf0f2; --rojo-borde: rgba(212,0,26,0.18);
+  --blanco: #ffffff; --gris-f: #f0f0f2; --gris: #e0e0e0;
+  --texto: #181818; --muted: #888;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--gris-f); color: var(--texto); font-family: 'DM Sans', sans-serif; font-weight: 300; min-height: 100vh; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── PANTALLA NOMBRE ── */
+.nombre-screen { display:none; position:fixed; inset:0; z-index:100; background:var(--rojo); flex-direction:column; align-items:center; justify-content:center; padding:30px 28px; text-align:center; }
+.nombre-screen.active { display:flex; }
+.nombre-eagle { font-size:3rem; margin-bottom:12px; }
+.nombre-title { font-family:'Bebas Neue',sans-serif; font-size:2rem; color:white; letter-spacing:2px; line-height:1; margin-bottom:6px; }
+.nombre-sub { font-size:13px; color:rgba(255,255,255,0.7); margin-bottom:36px; line-height:1.6; }
+.nombre-label { font-size:13px; color:rgba(255,255,255,0.85); margin-bottom:12px; font-weight:600; }
+.nombre-input { width:100%; max-width:280px; padding:16px 18px; border-radius:14px; border:2px solid rgba(255,255,255,0.3); background:rgba(255,255,255,0.15); color:white; font-family:'DM Sans',sans-serif; font-size:16px; font-weight:600; text-align:center; outline:none; margin-bottom:14px; }
+.nombre-input::placeholder { color:rgba(255,255,255,0.4); }
+.nombre-btn { width:100%; max-width:280px; padding:16px; background:white; color:var(--rojo); border:none; border-radius:14px; font-family:'Bebas Neue',sans-serif; font-size:1.2rem; letter-spacing:2px; cursor:pointer; opacity:0.4; transition:all 0.15s; }
+.nombre-btn.ready { opacity:1; }
+.nombre-btn:active { transform:scale(0.97); }
+
+/* ── HEADER ── */
+.topbar { background:white; padding:14px 16px; display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--gris); position:sticky; top:0; z-index:10; }
+.topbar-eagle { font-size:1.4rem; }
+.topbar-title { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:2px; color:var(--texto); flex:1; }
+.topbar-sub { font-size:10px; color:var(--muted); }
+
+/* ── FOTO ── */
+.foto-wrap { background:white; }
+.foto-autor { display:flex; align-items:center; padding:10px 14px; gap:10px; }
+.foto-avatar { width:34px; height:34px; border-radius:50%; background:var(--rojo); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; color:white; flex-shrink:0; }
+.foto-autor-name { font-size:13px; font-weight:600; color:var(--texto); }
+.foto-day-tag { font-size:10px; color:var(--rojo); margin-left:auto; background:var(--rojo-suave); border:1px solid var(--rojo-borde); padding:2px 8px; border-radius:10px; font-weight:600; }
+.foto-img { width:100%; aspect-ratio:1; object-fit:cover; display:block; }
+.foto-skeleton { width:100%; aspect-ratio:1; background:linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%); background-size:200% 100%; animation:shimmer 1.5s infinite; }
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+/* ── ACCIONES ── */
+.acciones { display:flex; align-items:center; padding:10px 14px 6px; gap:16px; background:white; }
+.like-btn { background:none; border:none; font-size:1.4rem; cursor:pointer; padding:0; transition:transform 0.15s; }
+.like-btn:active { transform:scale(1.2); }
+.like-btn.liked { color:#e74c3c; }
+.like-count { font-size:13px; font-weight:600; color:var(--texto); }
+.likes-text { padding:0 14px 6px; font-size:13px; color:var(--texto); font-weight:600; background:white; cursor:pointer; }
+
+/* ── COMENTARIOS ── */
+.comentarios { padding:0 14px 6px; background:white; }
+.comentario { font-size:13px; color:var(--texto); margin-bottom:6px; line-height:1.5; display:flex; align-items:baseline; gap:5px; flex-wrap:wrap; }
+.comentario b { color:var(--rojo); font-weight:700; flex-shrink:0; }
+.comentario-time { font-size:10px; color:#aaa; flex-shrink:0; }
+.add-comment { display:flex; align-items:center; padding:10px 14px 20px; gap:10px; background:white; border-top:1px solid var(--gris); }
+.comment-avatar { width:28px; height:28px; border-radius:50%; background:var(--rojo); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:white; flex-shrink:0; }
+.comment-input { flex:1; background:none; border:none; color:#444; font-size:13px; font-family:'DM Sans',sans-serif; outline:none; padding:6px 0; border-bottom:1px solid var(--gris); }
+.comment-input::placeholder { color:#bbb; }
+.comment-send { background:none; border:none; color:var(--rojo); font-size:13px; font-weight:700; cursor:pointer; padding:0 4px; opacity:0.4; transition:opacity 0.2s; }
+.comment-send.ready { opacity:1; }
+
+/* ── ERROR ── */
+.error-wrap { text-align:center; padding:60px 20px; color:var(--muted); font-size:14px; line-height:2; }
+.error-icon { font-size:3rem; margin-bottom:10px; }
+
+/* ── MODAL LIKES ── */
+.toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--texto); color:white; padding:10px 18px; border-radius:30px; font-size:12px; font-weight:600; opacity:0; transition:all 0.3s; z-index:600; white-space:nowrap; }
+.toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+.footer { text-align:center; padding:16px 16px 40px; font-size:11px; color:var(--muted); }
+.footer b { color:var(--rojo); }
+</style>
+</head>
+<body>
+
+<!-- PANTALLA NOMBRE -->
+<div class="nombre-screen" id="nombreScreen">
+  <div class="nombre-eagle">📸</div>
+  <div class="nombre-title">Foto del viaje</div>
+  <div class="nombre-sub">Te han compartido una foto<br>de la despedida de José Miguel.</div>
+  <div class="nombre-label">¿Cómo te llamas?</div>
+  <input class="nombre-input" id="nombreInput" type="text" placeholder="Tu nombre..." maxlength="20" oninput="toggleBtn()">
+  <button class="nombre-btn" id="nombreBtn" onclick="guardarNombre()">Ver foto →</button>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-eagle">🦅</div>
+  <div>
+    <div class="topbar-title">CRACOVIA 2026</div>
+    <div class="topbar-sub">Despedida de José Miguel</div>
+  </div>
+</div>
+
+<!-- CONTENIDO -->
+<div id="contenido">
+  <div class="foto-wrap">
+    <div class="foto-autor">
+      <div class="foto-avatar" id="fotoAvatar">?</div>
+      <div><div class="foto-autor-name" id="fotoAutor">Cargando...</div></div>
+      <span class="foto-day-tag" id="fotoDia"></span>
+    </div>
+    <div class="foto-skeleton" id="fotoSkeleton"></div>
+    <img class="foto-img" id="fotoImg" src="" alt="" style="display:none" onload="this.style.display='block';document.getElementById('fotoSkeleton').style.display='none'">
+    <div class="acciones">
+      <button class="like-btn" id="likeBtn" onclick="toggleLike()">🤍</button>
+      <span class="like-count" id="likeCount">0</span>
+    </div>
+    <div class="likes-text" id="likesText"></div>
+    <div class="comentarios" id="comentarios"></div>
+    <div class="add-comment">
+      <div class="comment-avatar" id="miAvatar">?</div>
+      <input class="comment-input" id="commentInput" placeholder="Añade un comentario..." oninput="toggleSend()">
+      <button class="comment-send" id="commentSend" onclick="enviarComentario()">Publicar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL LIKES -->
+<div id="modalLikes" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.5);align-items:flex-end;justify-content:center;" onclick="if(event.target===this)this.style.display='none'">
+  <div style="background:white;border-radius:20px 20px 0 0;padding:24px 20px 40px;width:100%;max-width:480px;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;margin-bottom:16px;">❤️ Les gusta a...</div>
+    <div id="modalLikesLista"></div>
+    <div onclick="document.getElementById('modalLikes').style.display='none'" style="text-align:center;padding:12px;font-size:12px;color:#888;cursor:pointer;margin-top:8px;">Cerrar</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="footer">🦅 Polska · Kraków · Mayo 2026<br><b>Despedida de José Miguel</b></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import { getDatabase, ref, get, push, remove, onValue, query, orderByChild } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDyECju0z-V2JkvSKfbEsiJLr4yybwqDmg",
+  authDomain: "despedida-jose-miguel.firebaseapp.com",
+  databaseURL: "https://despedida-jose-miguel-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "despedida-jose-miguel",
+  storageBucket: "despedida-jose-miguel.firebasestorage.app",
+  messagingSenderId: "604108160651",
+  appId: "1:604108160651:web:b9809def8b622e6fc0de8e"
+};
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const DIAS_LABEL = {
+  previo: 'Previo · Antes del viaje',
+  lun18: 'Lun 18 · Llegada',
+  mar19: 'Mar 19 · Free Tour + Cervezas',
+  mie20: 'Mié 20 · Auschwitz',
+  jue21: 'Jue 21 · Zakopane',
+  vie22: 'Vie 22 · Schindler'
+};
+
+const STORAGE_KEY = 'compartida_nombre';
+let miNombre = localStorage.getItem(STORAGE_KEY) || null;
+
+// Obtener ID de la URL
+const params = new URLSearchParams(window.location.search);
+const fotoId = params.get('id');
+
+if (!fotoId) {
+  document.getElementById('contenido').innerHTML = `<div class="error-wrap"><div class="error-icon">🔗</div>Enlace no válido.<br>Pide a los chicos que te manden la foto de nuevo.</div>`;
+}
+
+// ── NOMBRE ──
+function iniciar() {
+  if (!miNombre) {
+    document.getElementById('nombreScreen').classList.add('active');
+  } else {
+    actualizarUIUsuario();
+    if (fotoId) cargarFoto();
+  }
+}
+
+window.toggleBtn = function() {
+  const val = document.getElementById('nombreInput').value.trim();
+  document.getElementById('nombreBtn').classList.toggle('ready', val.length > 0);
+};
+
+window.guardarNombre = function() {
+  const val = document.getElementById('nombreInput').value.trim();
+  if (!val) return;
+  miNombre = val;
+  localStorage.setItem(STORAGE_KEY, val);
+  document.getElementById('nombreScreen').classList.remove('active');
+  actualizarUIUsuario();
+  if (fotoId) cargarFoto();
+};
+
+document.getElementById('nombreInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') window.guardarNombre();
+});
+
+function actualizarUIUsuario() {
+  const inicial = miNombre.charAt(0).toUpperCase();
+  document.getElementById('miAvatar').textContent = inicial;
+}
+
+// ── CARGAR FOTO ──
+async function cargarFoto() {
+  try {
+    const snap = await get(ref(db, `fotos/${fotoId}`));
+    if (!snap.exists()) {
+      document.getElementById('contenido').innerHTML = `<div class="error-wrap"><div class="error-icon">🖼️</div>Esta foto ya no existe.<br>Puede que haya sido eliminada.</div>`;
+      return;
+    }
+    const foto = snap.val();
+    const autor = foto.autor || 'Alguien';
+    document.getElementById('fotoAvatar').textContent = autor.charAt(0).toUpperCase();
+    document.getElementById('fotoAutor').textContent = autor;
+    document.getElementById('fotoDia').textContent = DIAS_LABEL[foto.dia] || foto.dia || '';
+    document.getElementById('fotoImg').src = foto.url;
+
+    escucharLikes();
+    escucharComentarios();
+  } catch(e) {
+    document.getElementById('contenido').innerHTML = `<div class="error-wrap"><div class="error-icon">⚠️</div>Error al cargar la foto.<br>Inténtalo de nuevo.</div>`;
+  }
+}
+
+// ── LIKES ──
+function escucharLikes() {
+  onValue(ref(db, `likes/${fotoId}`), (snapshot) => {
+    const likes = {};
+    snapshot.forEach(child => { likes[child.key] = child.val(); });
+    const total = Object.keys(likes).length;
+    document.getElementById('likeCount').textContent = total;
+    const yoDiLike = Object.values(likes).includes(miNombre);
+    const btn = document.getElementById('likeBtn');
+    btn.textContent = yoDiLike ? '❤️' : '🤍';
+    btn.classList.toggle('liked', yoDiLike);
+    const nombres = Object.values(likes);
+    const textEl = document.getElementById('likesText');
+    if (nombres.length === 0) {
+      textEl.textContent = ''; textEl.onclick = null; textEl.style.cursor = 'default';
+    } else if (nombres.length === 1) {
+      textEl.textContent = `Le gusta a ${nombres[0]}`; textEl.onclick = null; textEl.style.cursor = 'default';
+    } else {
+      textEl.textContent = `Les gusta a ${nombres[0]}, ${nombres[1]}${nombres.length > 2 ? ` y ${nombres.length - 2} más` : ''}`;
+      textEl.style.cursor = 'pointer';
+      textEl.onclick = () => {
+        document.getElementById('modalLikesLista').innerHTML = nombres.map(n =>
+          `<div style="padding:10px 0;border-bottom:1px solid #f0f0f0;font-size:14px;font-weight:600;">❤️ ${n}</div>`
+        ).join('');
+        document.getElementById('modalLikes').style.display = 'flex';
+      };
+    }
+  });
+}
+
+window.toggleLike = async function() {
+  if (!miNombre) return;
+  const likesRef = ref(db, `likes/${fotoId}`);
+  const snap = await get(likesRef);
+  const likes = {};
+  snap.forEach(child => { likes[child.key] = child.val(); });
+  const miKey = Object.keys(likes).find(k => likes[k] === miNombre);
+  if (miKey) await remove(ref(db, `likes/${fotoId}/${miKey}`));
+  else await push(likesRef, miNombre);
+};
+
+// ── COMENTARIOS ──
+function escucharComentarios() {
+  const commRef = query(ref(db, `comentarios/${fotoId}`), orderByChild('ts'));
+  onValue(commRef, (snapshot) => {
+    const el = document.getElementById('comentarios');
+    el.innerHTML = '';
+    snapshot.forEach(child => {
+      const c = child.val();
+      const div = document.createElement('div');
+      div.className = 'comentario';
+      div.innerHTML = `<b>${c.autor}</b> ${c.texto} <span class="comentario-time">${hace(c.ts)}</span>`;
+      el.appendChild(div);
+    });
+  });
+}
+
+window.toggleSend = function() {
+  const val = document.getElementById('commentInput').value.trim();
+  document.getElementById('commentSend').classList.toggle('ready', val.length > 0);
+};
+
+window.enviarComentario = async function() {
+  const input = document.getElementById('commentInput');
+  const texto = input.value.trim();
+  if (!texto || !miNombre) return;
+  await push(ref(db, `comentarios/${fotoId}`), { autor: miNombre, texto, ts: Date.now() });
+  input.value = '';
+  document.getElementById('commentSend').classList.remove('ready');
+};
+
+function hace(ts) {
+  const diff = Date.now() - ts;
+  const m = Math.floor(diff / 60000);
+  if (m < 1) return 'ahora';
+  if (m < 60) return `${m}m`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h`;
+  return `${Math.floor(h / 24)}d`;
+}
+
+function mostrarToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+iniciar();
+</script>
+</body>
+</html>
