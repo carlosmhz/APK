@@ -850,7 +850,11 @@ function escucharLikes(fotoId) {
     const yoDiLike = Object.values(likes).includes(NOMBRE);
     btnEl.textContent = yoDiLike ? '❤️' : '🤍';
     btnEl.classList.toggle('liked', yoDiLike);
-    const nombres = Object.values(likes).map(v => typeof v === 'string' ? v : (v.nombre || v.name || JSON.stringify(v))).filter(Boolean);
+    const nombres = Object.values(likes).map(v => {
+      if (typeof v === 'string') return v;
+      if (typeof v === 'object' && v !== null) return Object.values(v)[0] || null;
+      return null;
+    }).filter(n => n && typeof n === 'string');
     if (nombres.length === 0) {
   textEl.textContent = '';
   textEl.onclick = null;
