@@ -6,10 +6,10 @@
 <title>Plan Nutricional · Lucciana</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--green:#2d6a4f;--green2:#52b788;--green-light:#d8f3dc;--cream:#faf8f4;--accent:#e76f51;--gold:#e9c46a;--blue:#457b9d;--purple:#6d6875;--brown:#5d4037;--text:#1c1c1e;--muted:#8e8e93;--line:#e8e8e8;--card:#ffffff;}
+:root{--green:#2d6a4f;--green2:#52b788;--green-light:#d8f3dc;--cream:#faf8f4;--accent:#e76f51;--gold:#e9c46a;--blue:#457b9d;--purple:#6d6875;--brown:#5d4037;--red:#c0392b;--text:#1c1c1e;--muted:#8e8e93;--line:#e8e8e8;--card:#fff;}
 *{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;padding-bottom:5rem;}
+/* HEADER */
 .app-header{background:var(--green);padding:1.8rem 1.5rem 1.5rem;color:white;}
 .header-badge{display:inline-block;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:30px;padding:0.2rem 0.8rem;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;}
 .header-row{display:flex;align-items:flex-start;justify-content:space-between;gap:0.8rem;}
@@ -17,17 +17,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .app-header h1 em{font-style:normal;color:var(--green2);}
 .header-sub{font-size:0.78rem;opacity:0.6;margin-top:0.3rem;}
 .semana-badge{background:var(--gold);color:#1c1c1e;font-size:0.72rem;font-weight:700;padding:0.3rem 0.8rem;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-top:0.3rem;}
+/* NAV */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid var(--line);display:flex;z-index:100;box-shadow:0 -4px 20px rgba(0,0,0,0.06);}
 .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;padding:0.6rem 0.3rem 0.5rem;cursor:pointer;border:none;background:transparent;font-family:'DM Sans',sans-serif;color:var(--muted);font-size:0.62rem;font-weight:500;gap:0.15rem;transition:color 0.2s;-webkit-tap-highlight-color:transparent;}
 .nav-btn .nav-icon{font-size:1.2rem;}
 .nav-btn.active{color:var(--green);}
+/* SECTIONS */
 .section{display:none;padding:1rem 0 2rem;animation:fadeUp 0.3s ease;}
 .section.active{display:block;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 .section-title-bar{padding:0.8rem 1.5rem 0.4rem;font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--green);}
-.obj-banner{margin:0 1.5rem 1rem;background:var(--green-light);border-left:4px solid var(--green);border-radius:0 12px 12px 0;padding:0.9rem 1rem;}
+/* BANNERS */
+.obj-banner{margin:0 1.5rem 0.8rem;background:var(--green-light);border-left:4px solid var(--green);border-radius:0 12px 12px 0;padding:0.9rem 1rem;}
 .obj-banner-title{font-weight:700;font-size:0.82rem;color:var(--green);margin-bottom:0.5rem;}
 .obj-item{font-size:0.8rem;padding:0.2rem 0;display:flex;gap:0.5rem;line-height:1.4;}
+.alert-banner{margin:0 1.5rem 1rem;background:#fff3f0;border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:0.9rem 1rem;}
+.alert-banner-title{font-weight:700;font-size:0.82rem;color:var(--accent);margin-bottom:0.3rem;}
+.alert-banner p{font-size:0.8rem;line-height:1.5;color:var(--text);}
 /* REGISTRO */
 .registro-card{margin:0 1.5rem 1rem;background:white;border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
 .registro-hd{background:var(--green);color:white;padding:0.7rem 1rem;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;display:flex;justify-content:space-between;align-items:center;-webkit-tap-highlight-color:transparent;}
@@ -44,7 +50,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .tracker-card{flex:1;background:white;border-radius:14px;padding:1rem;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
 .tracker-label{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);font-weight:600;margin-bottom:0.6rem;}
 .water-controls{display:flex;align-items:center;gap:0.6rem;}
-.w-btn{width:30px;height:30px;border-radius:50%;border:none;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.w-btn{width:30px;height:30px;border-radius:50%;border:none;font-size:1rem;cursor:pointer;}
 .w-num{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--green);min-width:2rem;text-align:center;}
 .w-of{font-size:0.72rem;color:var(--muted);}
 .water-dots{margin-top:0.6rem;display:flex;gap:4px;}
@@ -62,6 +68,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .day-panel.active{display:block;animation:fadeUp 0.25s ease;}
 .day-heading{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:0.9rem;}
 .day-heading small{font-family:'DM Sans',sans-serif;font-size:0.75rem;color:var(--muted);font-weight:400;margin-left:0.4rem;}
+/* MEAL CARDS */
 .meal-card{background:var(--card);border-radius:16px;margin-bottom:0.85rem;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
 .meal-hd{display:flex;align-items:center;gap:0.6rem;padding:0.65rem 1rem;color:white;}
 .meal-hd-icon{font-size:1rem;}
@@ -77,6 +84,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .meal-row b{font-weight:500;display:block;}
 .meal-row span{font-size:0.78rem;color:var(--muted);}
 .postre{display:inline-block;background:var(--green-light);color:var(--green);font-size:0.72rem;font-weight:600;padding:0.2rem 0.7rem;border-radius:20px;margin-top:0.6rem;}
+.batch-tag{display:inline-block;background:#fff8e1;color:#f57f17;font-size:0.7rem;font-weight:600;padding:0.15rem 0.6rem;border-radius:10px;margin-top:0.4rem;}
 .libre-box{background:#fff8f0;border:2px dashed var(--accent);border-radius:16px;padding:1.2rem;text-align:center;margin-bottom:0.85rem;}
 .libre-box .le{font-size:1.8rem;display:block;margin-bottom:0.25rem;}
 .libre-box strong{color:var(--accent);font-size:0.9rem;}
@@ -111,7 +119,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .shop-item.checked .chk{background:var(--green);border-color:var(--green);}
 .chk svg{display:none;width:13px;height:13px;}
 .shop-item.checked .chk svg{display:block;}
-.si-name{font-size:0.88rem;font-weight:500;flex:1;transition:color 0.2s;}
+.si-name{font-size:0.88rem;font-weight:500;flex:1;}
 .si-qty{font-size:0.76rem;color:var(--muted);margin-top:0.1rem;}
 .shop-item.checked .si-name{color:#bbb;text-decoration:line-through;}
 .shop-item.checked .si-qty{color:#ccc;}
@@ -133,6 +141,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
 .rtag-orange{background:#fdebd0;color:#c0392b;}
 .rtag-blue{background:#dbeafe;color:#1e40af;}
 .rtag-purple{background:#f3e8ff;color:#6b21a8;}
+.rtag-red{background:#fde8e8;color:#c0392b;}
 .recipe-toggle{width:30px;height:30px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;transition:transform 0.3s;}
 .recipe-card.open .recipe-toggle{transform:rotate(180deg);}
 .recipe-body{display:none;padding:0 1.1rem 1.1rem;border-top:1px solid var(--line);}
@@ -160,19 +169,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
       <h1>Plan <em>Semanal</em></h1>
       <p class="header-sub">Lucciana Montemayor · 3 personas</p>
     </div>
-    <div class="semana-badge">Semana 2</div>
+    <div class="semana-badge">Semana 3</div>
   </div>
 </header>
 
 <!-- ══ MENÚ ══ -->
 <div class="section active" id="sec-menu">
   <div class="section-title-bar">🗓 Menú Semanal</div>
+
+  <div class="alert-banner">
+    <div class="alert-banner-title">⚠️ Importante esta semana</div>
+    <p>Cumple cada día con el desayuno, media mañana y merienda pautados. Coger cosas del supermercado solo está permitido en los días libres.</p>
+  </div>
+
   <div class="obj-banner">
     <div class="obj-banner-title">Objetivos de esta semana</div>
     <div class="obj-item">🍓 Desayuno con fresas antes de clase cada día</div>
-    <div class="obj-item">💧 Mínimo 7 vasos de agua al día (mejor por la mañana)</div>
     <div class="obj-item">🚶 Paseo de ~30 min cada 2 días — un día sí, otro no</div>
-    <div class="obj-item">🌙 Acostarse antes de la 1:00 de la madrugada</div>
     <div class="obj-item">📋 Rellenar el registro diario (pestaña Registro)</div>
   </div>
 
@@ -191,9 +204,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
     <div class="day-heading">Lunes <small>Día 1</small></div>
     <div class="meal-card"><div class="meal-hd hd-desayuno"><span class="meal-hd-icon">🌅</span><span class="meal-hd-label">Desayuno</span></div><div class="meal-body"><div class="meal-row"><b>Cuenco de fresas</b><span>7-8 unidades · con leche, yogur o lo que prefieras</span></div></div></div>
     <div class="meal-card"><div class="meal-hd hd-mmañana"><span class="meal-hd-icon">☕</span><span class="meal-hd-label">Media Mañana</span></div><div class="meal-body"><div class="meal-row"><b>Bocadillo jamón cocido 92% + queso Havarti</b><span>Con kéfir natural · El Pozo BienStar</span></div></div></div>
-    <div class="meal-card"><div class="meal-hd hd-comida"><span class="meal-hd-icon">🍽️</span><span class="meal-hd-label">Comida</span></div><div class="meal-body"><div class="meal-row"><b>Ensalada de alubias con arroz</b><span>Con queso fresco, atún, tomate, cebolla, maíz y pimientos asados</span></div><span class="postre">🍊 Postre: pieza de fruta</span></div></div>
+    <div class="meal-card"><div class="meal-hd hd-comida"><span class="meal-hd-icon">🍽️</span><span class="meal-hd-label">Comida</span></div>
+      <div class="meal-body">
+        <div class="meal-row"><b>Guiso de garbanzos con pisto de verduras</b><span>♻️ Prepara el doble de pisto — reutiliza mañana</span></div>
+        <div class="meal-row"><b>Migas de bacalao</b></div>
+        <div class="batch-tag">♻️ Guarda pisto para el martes</div>
+        <span class="postre">🍊 Postre: pieza de fruta</span>
+      </div>
+    </div>
     <div class="meal-card"><div class="meal-hd hd-merienda"><span class="meal-hd-icon">🌿</span><span class="meal-hd-label">Merienda</span></div><div class="meal-body"><div class="meal-row"><b>Bowl de yogur con 2 piezas de fruta y copos de maíz</b></div></div></div>
-    <div class="meal-card"><div class="meal-hd hd-cena"><span class="meal-hd-icon">🌙</span><span class="meal-hd-label">Cena</span></div><div class="meal-body"><div class="meal-row"><b>Parrillada de verduras (bolsa) con salsa de soja</b><span>Verdura 1 · ♻️ prepara extra para comida del martes</span></div><div class="meal-row"><b>Huevo a la plancha</b></div></div></div>
+    <div class="meal-card"><div class="meal-hd hd-cena"><span class="meal-hd-icon">🌙</span><span class="meal-hd-label">Cena</span></div>
+      <div class="meal-body">
+        <div class="meal-row"><b>Huevos rellenos de atún, cebolla, piquillo y salsa de tomate</b><span>Ver receta</span></div>
+      </div>
+    </div>
   </div>
 
   <!-- MARTES -->
@@ -201,9 +225,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
     <div class="day-heading">Martes <small>Día 2</small></div>
     <div class="meal-card"><div class="meal-hd hd-desayuno"><span class="meal-hd-icon">🌅</span><span class="meal-hd-label">Desayuno</span></div><div class="meal-body"><div class="meal-row"><b>Cuenco de fresas</b><span>7-8 unidades</span></div></div></div>
     <div class="meal-card"><div class="meal-hd hd-mmañana"><span class="meal-hd-icon">☕</span><span class="meal-hd-label">Media Mañana</span></div><div class="meal-body"><div class="meal-row"><b>Tortitas de maíz + pieza de fruta</b></div></div></div>
-    <div class="meal-card"><div class="meal-hd hd-comida"><span class="meal-hd-icon">🍽️</span><span class="meal-hd-label">Comida</span></div><div class="meal-body"><div class="meal-row"><b>Parrillada de verduras con salsa de soja</b><span>Verdura 1 · la de anoche</span></div><div class="meal-row"><b>Pollo a la plancha</b></div><span class="postre">🍊 Postre: pieza de fruta</span></div></div>
+    <div class="meal-card"><div class="meal-hd hd-comida"><span class="meal-hd-icon">🍽️</span><span class="meal-hd-label">Comida</span></div>
+      <div class="meal-body">
+        <div class="meal-row"><b>Pisto de verduras</b><span>El del lunes · Verdura 1</span></div>
+        <div class="meal-row"><b>Solomillo de pavo al ajillo</b></div>
+        <span class="postre">🍊 Postre: pieza de fruta</span>
+      </div>
+    </div>
     <div class="meal-card"><div class="meal-hd hd-merienda"><span class="meal-hd-icon">🌿</span><span class="meal-hd-label">Merienda</span></div><div class="meal-body"><div class="meal-row"><b>Bowl de yogur con 2 piezas de fruta y copos de maíz</b></div></div></div>
-    <div class="meal-card"><div class="meal-hd hd-cena"><span class="meal-hd-icon">🌙</span><span class="meal-hd-label">Cena</span></div><div class="meal-body"><div class="meal-row"><b>Guisantes salteados con zanahoria y ajetes + salsa de soja</b><span>Verdura 2 · ♻️ prepara extra para cena del miércoles</span></div><div class="meal-row"><b>Merluza a la plancha</b></div></div></div>
+    <div class="meal-card"><div class="meal-hd hd-cena"><span class="meal-hd-icon">🌙</span><span class="meal-hd-label">Cena</span></div>
+      <div class="meal-body">
+        <div class="meal-row"><b>Guisantes en salsa de tomate</b></div>
+        <div class="meal-row"><b>2 huevos a la plancha</b></div>
+      </div>
+    </div>
   </div>
 
   <!-- MIÉRCOLES -->
@@ -211,9 +246,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
     <div class="day-heading">Miércoles <small>Día 3</small></div>
     <div class="meal-card"><div class="meal-hd hd-desayuno"><span class="meal-hd-icon">🌅</span><span class="meal-hd-label">Desayuno</span></div><div class="meal-body"><div class="meal-row"><b>Cuenco de fresas</b><span>7-8 unidades</span></div></div></div>
     <div class="meal-card"><div class="meal-hd hd-mmañana"><span class="meal-hd-icon">☕</span><span class="meal-hd-label">Media Mañana</span></div><div class="meal-body"><div class="meal-row"><b>Tupper de macedonia</b><span>Naranja + manzana + arándanos · con onza de chocolate 70% derretida</span></div></div></div>
-    <div class="meal-card"><div class="meal-hd hd-comida"><span class="meal-hd-icon">🍽️</span><span class="meal-hd-label">Comida</span></div><div class="meal-body"><div class="meal-row"><b>Garbanzos con espinacas (lata Litoral)</b></div><span class="postre">🍊 Postre: pieza de fruta</span></div></div>
+    <div class="meal-card"><div class="meal-hd hd-comida"><span class="meal-hd-icon">🍽️</span><span class="meal-hd-label">Comida</span></div>
+      <div class="meal-body">
+        <div class="meal-row"><b>Pollo asado al horno</b><span>Con tomate, cebolla y pimiento asados</span></div>
+        <span class="postre">🍊 Postre: pieza de fruta</span>
+      </div>
+    </div>
     <div class="meal-card"><div class="meal-hd hd-merienda"><span class="meal-hd-icon">🌿</span><span class="meal-hd-label">Merienda</span></div><div class="meal-body"><div class="meal-row"><b>Bowl de yogur con 2 piezas de fruta y copos de maíz</b></div></div></div>
-    <div class="meal-card"><div class="meal-hd hd-cena"><span class="meal-hd-icon">🌙</span><span class="meal-hd-label">Cena</span></div><div class="meal-body"><div class="meal-row"><b>Guisantes salteados con zanahoria, ajetes, soja y tiras de pollo</b><span>Verdura 2 · la de anoche + añade pollo</span></div></div></div>
+    <div class="meal-card"><div class="meal-hd hd-cena"><span class="meal-hd-icon">🌙</span><span class="meal-hd-label">Cena</span></div>
+      <div class="meal-body">
+        <div class="meal-row"><b>Tostas integrales Wasa con rúcula, hummus y queso fresco</b><span>Marca Wasa Authentique</span></div>
+      </div>
+    </div>
   </div>
 
   <!-- JUEVES -->
@@ -221,9 +265,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
     <div class="day-heading">Jueves <small>Día 4</small></div>
     <div class="meal-card"><div class="meal-hd hd-desayuno"><span class="meal-hd-icon">🌅</span><span class="meal-hd-label">Desayuno</span></div><div class="meal-body"><div class="meal-row"><b>Cuenco de fresas</b><span>7-8 unidades</span></div></div></div>
     <div class="meal-card"><div class="meal-hd hd-mmañana"><span class="meal-hd-icon">☕</span><span class="meal-hd-label">Media Mañana</span></div><div class="meal-body"><div class="meal-row"><b>Libre 🎉</b></div></div></div>
-    <div class="meal-card"><div class="meal-hd hd-comida"><span class="meal-hd-icon">🍽️</span><span class="meal-hd-label">Comida</span></div><div class="meal-body"><div class="meal-row"><b>Crema de zanahoria</b><span>Verdura 4 · ♻️ prepara cantidad extra para viernes</span></div><div class="meal-row"><b>Merluza a la plancha con espárragos blancos</b></div><span class="postre">🍊 Postre: pieza de fruta</span></div></div>
+    <div class="meal-card"><div class="meal-hd hd-comida"><span class="meal-hd-icon">🍽️</span><span class="meal-hd-label">Comida</span></div>
+      <div class="meal-body">
+        <div class="meal-row"><b>Ensalada de pasta de lentejas</b><span>Con rúcula, cebolla, tomate, maíz y espárragos blancos</span></div>
+        <span class="postre">🍊 Postre: pieza de fruta</span>
+      </div>
+    </div>
     <div class="meal-card"><div class="meal-hd hd-merienda"><span class="meal-hd-icon">🌿</span><span class="meal-hd-label">Merienda</span></div><div class="meal-body"><div class="meal-row"><b>Bowl de yogur con 2 piezas de fruta y copos de maíz</b></div></div></div>
-    <div class="meal-card"><div class="meal-hd hd-cena"><span class="meal-hd-icon">🌙</span><span class="meal-hd-label">Cena</span></div><div class="meal-body"><div class="meal-row"><b>Salteado de champiñones / setas</b><span>Verdura 3 · ♻️ prepara extra para cena del sábado</span></div><div class="meal-row"><b>Albóndigas de pollo en salsa de tomate</b><span>Ver receta</span></div></div></div>
+    <div class="meal-card"><div class="meal-hd hd-cena"><span class="meal-hd-icon">🌙</span><span class="meal-hd-label">Cena</span></div>
+      <div class="meal-body">
+        <div class="meal-row"><b>Tortilla de espinacas y cebolla</b></div>
+      </div>
+    </div>
   </div>
 
   <!-- VIERNES -->
@@ -231,7 +284,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
     <div class="day-heading">Viernes <small>Semilibre 🎉</small></div>
     <div class="meal-card"><div class="meal-hd hd-desayuno"><span class="meal-hd-icon">🌅</span><span class="meal-hd-label">Desayuno</span></div><div class="meal-body"><div class="meal-row"><b>Cuenco de fresas</b><span>7-8 unidades</span></div></div></div>
     <div class="meal-card"><div class="meal-hd hd-mmañana"><span class="meal-hd-icon">☕</span><span class="meal-hd-label">Media Mañana</span></div><div class="meal-body"><div class="meal-row"><b>Libre 🎉</b></div></div></div>
-    <div class="meal-card"><div class="meal-hd hd-comida"><span class="meal-hd-icon">🍽️</span><span class="meal-hd-label">Comida</span></div><div class="meal-body"><div class="meal-row"><b>Crema de zanahoria</b><span>Verdura 4 · la del jueves</span></div><div class="meal-row"><b>Pasta de lentejas con salsa de zanahoria, queso y tiras de pollo</b><span>Ver receta · Auchan espirales de lenteja</span></div><span class="postre">🍊 Postre: pieza de fruta</span></div></div>
+    <div class="meal-card"><div class="meal-hd hd-comida"><span class="meal-hd-icon">🍽️</span><span class="meal-hd-label">Comida</span></div>
+      <div class="meal-body">
+        <div class="meal-row"><b>Lasaña de calabacín</b><span>Ver receta · congela la boloñesa sobrante para la próxima semana</span></div>
+        <div class="batch-tag">🧊 Congela la boloñesa sobrante</div>
+        <span class="postre">🍊 Postre: pieza de fruta</span>
+      </div>
+    </div>
     <div class="libre-box"><span class="le">🌿</span><strong>Merienda libre</strong><p>Vie, sáb y dom son libres</p></div>
     <div class="libre-box"><span class="le">🌙</span><strong>Cena libre</strong></div>
   </div>
@@ -239,18 +298,32 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
   <!-- SÁBADO -->
   <div class="day-panel" id="dp-sab">
     <div class="day-heading">Sábado <small>Día 6</small></div>
-    <div class="meal-card"><div class="meal-hd hd-comida"><span class="meal-hd-icon">🍽️</span><span class="meal-hd-label">Comida</span></div><div class="meal-body"><div class="meal-row"><b>Pasta carbonara estilo fit</b><span>Ver receta</span></div><span class="postre">🍊 Postre: pieza de fruta</span></div></div>
+    <div class="libre-box"><span class="le">🍽️</span><strong>Comida libre</strong></div>
     <div class="libre-box"><span class="le">🌿</span><strong>Merienda libre</strong></div>
-    <div class="meal-card"><div class="meal-hd hd-cena"><span class="meal-hd-icon">🌙</span><span class="meal-hd-label">Cena</span></div><div class="meal-body"><div class="meal-row"><b>Salteado de champiñones / setas</b><span>Verdura 3 · la del jueves</span></div><div class="meal-row"><b>Fajipizza con atún y verduras</b><span>Ver receta</span></div></div></div>
+    <div class="meal-card"><div class="meal-hd hd-cena"><span class="meal-hd-icon">🌙</span><span class="meal-hd-label">Cena</span></div>
+      <div class="meal-body">
+        <div class="meal-row"><b>Parrillada de verduras</b><span>Bolsa Hacendado / Auchan</span></div>
+        <div class="meal-row"><b>Lata de melva en AOVE escurrida</b></div>
+      </div>
+    </div>
   </div>
 
   <!-- DOMINGO -->
   <div class="day-panel" id="dp-dom">
     <div class="day-heading">Domingo <small>Día 7</small></div>
     <div class="meal-card"><div class="meal-hd hd-desayuno"><span class="meal-hd-icon">🌅</span><span class="meal-hd-label">Desayuno</span></div><div class="meal-body"><div class="meal-row"><b>Cuenco de fresas</b><span>7-8 unidades</span></div></div></div>
-    <div class="libre-box"><span class="le">🍽️</span><strong>Comida libre</strong><p>¡Domingo es libre!</p></div>
+    <div class="meal-card"><div class="meal-hd hd-comida"><span class="meal-hd-icon">🍽️</span><span class="meal-hd-label">Comida</span></div>
+      <div class="meal-body">
+        <div class="meal-row"><b>Arroz integral con verduras y pollo al curry</b><span>Zanahoria, pimiento y calabacín</span></div>
+        <span class="postre">🍊 Postre: pieza de fruta</span>
+      </div>
+    </div>
     <div class="libre-box"><span class="le">🌿</span><strong>Merienda libre</strong></div>
-    <div class="meal-card"><div class="meal-hd hd-cena"><span class="meal-hd-icon">🌙</span><span class="meal-hd-label">Cena</span></div><div class="meal-body"><div class="meal-row"><b>Tortilla de calabacín</b><span>Ver receta</span></div></div></div>
+    <div class="meal-card"><div class="meal-hd hd-cena"><span class="meal-hd-icon">🌙</span><span class="meal-hd-label">Cena</span></div>
+      <div class="meal-body">
+        <div class="meal-row"><b>Revuelto de champiñones y calabacín</b></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -264,7 +337,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);
       <table class="registro-table">
         <thead><tr><th></th><th>Lunes</th><th>Martes</th><th>Miérc.</th><th>Jueves</th><th>Viernes</th><th>Sábado</th><th>Domingo</th></tr></thead>
         <tbody>
-          <tr><td>Desayuno</td><td><textarea class="reg-input" placeholder="Fresas..."></textarea></td><td><textarea class="reg-input" placeholder="Fresas..."></textarea></td><td><textarea class="reg-input" placeholder="Fresas..."></textarea></td><td><textarea class="reg-input" placeholder="Fresas..."></textarea></td><td><textarea class="reg-input" placeholder="Fresas..."></textarea></td><td><textarea class="reg-input" placeholder="Fresas..."></textarea></td><td><textarea class="reg-input" placeholder="Fresas..."></textarea></td></tr>
+          <tr><td>Desayuno</td><td><textarea class="reg-input" placeholder="Fresas..."></textarea></td><td><textarea class="reg-input" placeholder="Fresas..."></textarea></td><td><textarea class="reg-input" placeholder="Fresas..."></textarea></td><td><textarea class="reg-input" placeholder="Fresas..."></textarea></td><td><textarea class="reg-input" placeholder="Fresas..."></textarea></td><td><textarea class="reg-input" placeholder="..."></textarea></td><td><textarea class="reg-input" placeholder="Fresas..."></textarea></td></tr>
           <tr><td>M.Mañana</td><td><textarea class="reg-input" placeholder="Bocadillo..."></textarea></td><td><textarea class="reg-input" placeholder="Tortitas..."></textarea></td><td><textarea class="reg-input" placeholder="Macedonia..."></textarea></td><td><textarea class="reg-input" placeholder="Libre..."></textarea></td><td><textarea class="reg-input" placeholder="Libre..."></textarea></td><td><textarea class="reg-input" placeholder="..."></textarea></td><td><textarea class="reg-input" placeholder="..."></textarea></td></tr>
           <tr><td>Merienda</td><td><textarea class="reg-input" placeholder="Bowl yogur..."></textarea></td><td><textarea class="reg-input" placeholder="Bowl yogur..."></textarea></td><td><textarea class="reg-input" placeholder="Bowl yogur..."></textarea></td><td><textarea class="reg-input" placeholder="Bowl yogur..."></textarea></td><td><textarea class="reg-input" placeholder="Libre..."></textarea></td><td><textarea class="reg-input" placeholder="Libre..."></textarea></td><td><textarea class="reg-input" placeholder="Libre..."></textarea></td></tr>
         </tbody>
@@ -339,40 +412,48 @@ const shopData=[
   {cat:'fruta',name:'Manzana',qty:'~6 ud. · macedonias y postre'},
   {cat:'fruta',name:'Fruta variada para postre',qty:'4-5 días × 3 personas'},
   {cat:'fruta',name:'Arándanos',qty:'1 bandeja · macedonias miércoles'},
-  {cat:'verdura',name:'Bolsa parrillada de verduras',qty:'2 bolsas · cena lun + comida mar',marca:true,marcaText:'Hacendado / Auchan'},
-  {cat:'verdura',name:'Guisantes congelados',qty:'~600g · cenas mar y mié'},
-  {cat:'verdura',name:'Zanahoria',qty:'8-10 ud. · crema jue+vie + salteado guisantes'},
-  {cat:'verdura',name:'Ajetes / cebolleta tierna',qty:'1 manojo'},
-  {cat:'verdura',name:'Champiñones o setas',qty:'~600g · cenas jue y sáb'},
-  {cat:'verdura',name:'Calabacín',qty:'3 ud. · tortilla domingo'},
-  {cat:'verdura',name:'Cebolla',qty:'4 ud. · tortilla, ensalada, albóndigas'},
-  {cat:'verdura',name:'Espárragos blancos (lata)',qty:'1 lata · comida jueves'},
-  {cat:'verdura',name:'Pimientos asados (bote)',qty:'1 bote · ensalada alubias lunes'},
-  {cat:'verdura',name:'Tomate fresco',qty:'3 ud. · ensalada alubias lunes'},
-  {cat:'proteina',name:'Pechuga de pollo',qty:'~1,2 kg · comida mar, cena mié, viernes, albóndigas'},
-  {cat:'proteina',name:'Merluza (filetes)',qty:'~900g · cena mar + comida jue'},
-  {cat:'proteina',name:'Atún en lata',qty:'3 latas · ensalada lun + fajipizza sáb'},
-  {cat:'proteina',name:'Huevos',qty:'~15 ud. · cenas, tortilla, carbonara'},
-  {cat:'proteina',name:'Jamón cocido 92%',qty:'1 paquete · bocadillo lun + carbonara sáb',marca:true,marcaText:'El Pozo BienStar 92%'},
+  {cat:'verdura',name:'Pisto de verduras (para hacer o en lata)',qty:'Doble cantidad lunes · reutiliza el martes',marca:true,marcaText:'Hida casero o lata Alcampo'},
+  {cat:'verdura',name:'Tomate fresco',qty:'6 ud. · pisto, pollo asado, ensalada lentejas, huevos rellenos'},
+  {cat:'verdura',name:'Cebolla',qty:'5-6 ud. · pisto, pollo asado, huevos rellenos, tortilla, arroz'},
+  {cat:'verdura',name:'Pimiento rojo y verde',qty:'4-5 ud. · pisto, pollo asado, lasaña, arroz'},
+  {cat:'verdura',name:'Calabacín',qty:'5 ud. · lasaña viernes + revuelto domingo'},
+  {cat:'verdura',name:'Zanahoria',qty:'3-4 ud. · arroz al curry domingo'},
+  {cat:'verdura',name:'Espinacas frescas',qty:'1 bolsa · tortilla jueves'},
+  {cat:'verdura',name:'Rúcula',qty:'2 bolsas · tostas miércoles + ensalada lentejas'},
+  {cat:'verdura',name:'Champiñones',qty:'~400g · revuelto domingo'},
+  {cat:'verdura',name:'Guisantes (congelados o lata)',qty:'~400g · cena martes'},
+  {cat:'verdura',name:'Bolsa parrillada de verduras',qty:'1 bolsa · cena sábado',marca:true,marcaText:'Hacendado / Auchan'},
+  {cat:'proteina',name:'Bacalao (migas desaladas)',qty:'~450g · comida lunes'},
+  {cat:'proteina',name:'Solomillo de pavo',qty:'~750g · comida martes'},
+  {cat:'proteina',name:'Pollo (muslos o pechuga entera)',qty:'~1,2 kg · comida miércoles + arroz domingo'},
+  {cat:'proteina',name:'Carne picada de vacuno',qty:'~600g · lasaña calabacín viernes',marca:true,marcaText:'Picada Vacuno Bovino (foto PDF)'},
+  {cat:'proteina',name:'Melva en lata en AOVE',qty:'3 latas · cena sábado'},
+  {cat:'proteina',name:'Atún en lata',qty:'3 latas · huevos rellenos lunes'},
+  {cat:'proteina',name:'Huevos',qty:'~18 ud. · cenas martes/jueves/dom, huevos rellenos'},
+  {cat:'proteina',name:'Jamón cocido 92%',qty:'1 paquete · bocadillo lunes',marca:true,marcaText:'El Pozo BienStar 92%'},
   {cat:'lacteos',name:'Kéfir natural',qty:'1 botella · bocadillo lunes',marca:true,marcaText:'Auchan 100% Natural'},
   {cat:'lacteos',name:'Yogur natural',qty:'~8 ud. · meriendas lun/mar/mié/jue × 3 personas'},
-  {cat:'lacteos',name:'Queso fresco',qty:'1 ud. · ensalada alubias lunes'},
-  {cat:'lacteos',name:'Mozzarella rallada',qty:'1-2 bolsas · carbonara sáb + fajipizza sáb',marca:true,marcaText:'Hacendado Pizza-Roma'},
-  {cat:'despensa',name:'Alubias cocidas (bote)',qty:'3 botes · ensalada lunes'},
-  {cat:'despensa',name:'Garbanzos con espinacas (lata)',qty:'3 latas · comida miércoles',marca:true,marcaText:'Litoral Vegetal'},
-  {cat:'despensa',name:'Pasta de lentejas (espirales)',qty:'1 paquete · comida viernes',marca:true,marcaText:'Auchan espirales de lenteja'},
-  {cat:'despensa',name:'Tortillas de trigo con maíz',qty:'1 paquete · fajipizza sábado',marca:true,marcaText:'Auchan tortillas con maíz'},
-  {cat:'despensa',name:'Tomate triturado',qty:'2 bricks · albóndigas + fajipizza',marca:true,marcaText:'Auchan categoría extra'},
-  {cat:'despensa',name:'Maíz dulce (lata)',qty:'1 lata · ensalada alubias lunes'},
-  {cat:'despensa',name:'Arroz integral',qty:'~300g · ensalada alubias lunes'},
-  {cat:'despensa',name:'Pasta integral (spaguetis)',qty:'~400g · carbonara sábado'},
+  {cat:'lacteos',name:'Queso fresco',qty:'1 ud. · tostas miércoles'},
+  {cat:'lacteos',name:'Mozzarella rallada',qty:'1 bolsa · lasaña calabacín viernes',marca:true,marcaText:'Hacendado Pizza-Roma'},
+  {cat:'lacteos',name:'Leche',qty:'Un chorrito · lasaña (boloñesa)'},
+  {cat:'lacteos',name:'Queso Havarti',qty:'1 paquete · bocadillo lunes'},
+  {cat:'despensa',name:'Garbanzos cocidos (bote)',qty:'3 botes · guiso lunes'},
+  {cat:'despensa',name:'Pasta de lentejas (espirales)',qty:'1 paquete · ensalada jueves',marca:true,marcaText:'Auchan espirales de lenteja'},
+  {cat:'despensa',name:'Tostas integrales Wasa',qty:'1 caja · cena miércoles',marca:true,marcaText:'Wasa Authentique'},
+  {cat:'despensa',name:'Hummus',qty:'1 tarrina · cena miércoles'},
+  {cat:'despensa',name:'Pimientos del piquillo (tarro)',qty:'1 tarro · huevos rellenos lunes'},
+  {cat:'despensa',name:'Espárragos blancos (lata)',qty:'1 lata · ensalada lentejas jueves'},
+  {cat:'despensa',name:'Maíz dulce (lata)',qty:'1 lata · ensalada lentejas jueves'},
+  {cat:'despensa',name:'Tomate triturado',qty:'2 bricks · pisto, boloñesa, guisantes',marca:true,marcaText:'Auchan categoría extra'},
+  {cat:'despensa',name:'Arroz integral',qty:'~400g · comida domingo'},
+  {cat:'despensa',name:'Curry en polvo',qty:'1 bote · arroz domingo'},
   {cat:'despensa',name:'Copos de maíz sin azúcar',qty:'1 caja · meriendas lun/mar/mié/jue'},
   {cat:'despensa',name:'Tortitas de maíz con chocolate',qty:'1 paquete · media mañana martes',marca:true,marcaText:'Vitalday / Gullón'},
   {cat:'despensa',name:'Chocolate negro 70%',qty:'1 tableta · macedonias miércoles'},
-  {cat:'despensa',name:'Salsa de soja',qty:'Si no tienes · varias cenas'},
   {cat:'despensa',name:'AOVE',qty:'Si no tienes · 1 cda. por comida/cena'},
   {cat:'despensa',name:'Sal marina sin refinar',qty:'Si no tienes'},
-  {cat:'despensa',name:'Especias (pimienta, orégano, perejil)',qty:'Para albóndigas y carbonara'},
+  {cat:'despensa',name:'Especias (ajo, pimienta, orégano, pimentón)',qty:'Pavo al ajillo, pollo asado, boloñesa'},
+  {cat:'despensa',name:'Pan de masa madre',qty:'Opcional · para añadir en comidas/cenas'},
 ];
 
 const catLabels={fruta:'🍓 Fruta',verdura:'🥦 Verdura',proteina:'🥩 Proteína',lacteos:'🥛 Lácteos',despensa:'🫙 Despensa'};
@@ -380,8 +461,7 @@ const catDots={fruta:'dot-fruta',verdura:'dot-verdura',proteina:'dot-proteina',l
 
 function buildShopList(){
   const wrap=document.getElementById('shop-list-wrap');
-  const cats=['fruta','verdura','proteina','lacteos','despensa'];
-  wrap.innerHTML=cats.map(cat=>{
+  wrap.innerHTML=['fruta','verdura','proteina','lacteos','despensa'].map(cat=>{
     const items=shopData.filter(i=>i.cat===cat);
     return`<div class="shop-cat" data-scat="${cat}"><div class="shop-cat-hd"><div class="cat-dot ${catDots[cat]}"></div><span class="cat-name">${catLabels[cat]}</span><span class="cat-prog" id="cp-${cat}">0/${items.length}</span></div><div class="items-wrap">${items.map(item=>`<div class="shop-item" data-cat="${cat}" data-marca="${item.marca?'1':'0'}" onclick="shopToggle(this)"><div class="chk"><svg viewBox="0 0 12 10" fill="none"><polyline points="1,5 4.5,8.5 11,1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div style="flex:1"><div class="si-name">${item.name}</div><div class="si-qty">${item.qty}</div></div>${item.marca?`<span class="tag-m">⭐ ${item.marcaText||'Marca recom.'}</span>`:''}</div>`).join('')}</div></div>`;
   }).join('');
@@ -390,64 +470,76 @@ function buildShopList(){
 
 function shopToggle(el){el.classList.toggle('checked');updateShopProgress();}
 function updateShopProgress(){
-  const all=document.querySelectorAll('.shop-item');
-  const done=document.querySelectorAll('.shop-item.checked');
+  const all=document.querySelectorAll('.shop-item'),done=document.querySelectorAll('.shop-item.checked');
   const pct=all.length?Math.round(done.length/all.length*100):0;
   document.getElementById('prog-fill').style.width=pct+'%';
   document.getElementById('prog-text').textContent=done.length+' de '+all.length+' productos';
   document.getElementById('prog-pct').textContent=pct+'%';
   ['fruta','verdura','proteina','lacteos','despensa'].forEach(cat=>{
-    const t=document.querySelectorAll(`.shop-item[data-cat="${cat}"]`).length;
-    const c=document.querySelectorAll(`.shop-item[data-cat="${cat}"].checked`).length;
     const el=document.getElementById('cp-'+cat);
-    if(el)el.textContent=c+'/'+t;
+    if(el)el.textContent=document.querySelectorAll(`.shop-item[data-cat="${cat}"].checked`).length+'/'+document.querySelectorAll(`.shop-item[data-cat="${cat}"]`).length;
   });
 }
 function shopFilter(f,btn){
   document.querySelectorAll('.sf').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
   if(f==='all'){document.querySelectorAll('.shop-cat').forEach(c=>c.style.display='');document.querySelectorAll('.shop-item').forEach(i=>i.style.display='');}
-  else if(f==='marca'){document.querySelectorAll('.shop-cat').forEach(c=>c.style.display='');document.querySelectorAll('.shop-item').forEach(i=>{i.style.display=i.dataset.marca==='1'?'':'none';});document.querySelectorAll('.shop-cat').forEach(c=>{c.style.display=c.querySelectorAll('.shop-item[data-marca="1"]').length?'':'none';});}
+  else if(f==='marca'){document.querySelectorAll('.shop-item').forEach(i=>{i.style.display=i.dataset.marca==='1'?'':'none';});document.querySelectorAll('.shop-cat').forEach(c=>{c.style.display=c.querySelectorAll('.shop-item[data-marca="1"]').length?'':'none';});}
   else{document.querySelectorAll('.shop-cat').forEach(c=>{c.style.display=c.dataset.scat===f?'':'none';});document.querySelectorAll('.shop-item').forEach(i=>i.style.display='');}
 }
 function shopReset(){if(!confirm('¿Resetear toda la lista?'))return;document.querySelectorAll('.shop-item').forEach(i=>i.classList.remove('checked'));updateShopProgress();}
 function shopCopy(){
-  const cats=['fruta','verdura','proteina','lacteos','despensa'];
-  let txt='🛒 LISTA DE LA COMPRA · Semana 2 · 3 personas\nPlan Nutrición Nervión\n\n';
-  cats.forEach(cat=>{txt+=catLabels[cat].toUpperCase()+'\n';document.querySelectorAll(`.shop-item[data-cat="${cat}"]`).forEach(el=>{const chk=el.classList.contains('checked')?'✅':'⬜';txt+=`${chk} ${el.querySelector('.si-name').textContent} · ${el.querySelector('.si-qty').textContent}\n`;});txt+='\n';});
+  let txt='🛒 LISTA DE LA COMPRA · Semana 3 · 3 personas\nPlan Nutrición Nervión\n\n';
+  ['fruta','verdura','proteina','lacteos','despensa'].forEach(cat=>{
+    txt+=catLabels[cat].toUpperCase()+'\n';
+    document.querySelectorAll(`.shop-item[data-cat="${cat}"]`).forEach(el=>{txt+=`${el.classList.contains('checked')?'✅':'⬜'} ${el.querySelector('.si-name').textContent} · ${el.querySelector('.si-qty').textContent}\n`;});
+    txt+='\n';
+  });
   navigator.clipboard.writeText(txt).then(()=>alert('¡Copiada! Pégala en WhatsApp o notas 📋'));
 }
 
 const recipes=[
-  {emoji:'🍝',name:'Pasta Carbonara Fit',when:'Comida sábado',
-    tags:[{label:'Sin nata',cls:'rtag-green'},{label:'~25 min',cls:'rtag-blue'},{label:'3 raciones',cls:'rtag-purple'}],
-    ing:[{qty:'~360g',name:'Pasta integral (spaguetis)'},{qty:'6-9 ud.',name:'Huevos (solo yemas)'},{qty:'~150g',name:'Queso mozzarella rallada'},{qty:'~180g',name:'Trocitos de jamón cocido'},{qty:'Al gusto',name:'Pimienta negra'}],
-    steps:['Cuece la pasta en agua con sal. Reserva un vaso del agua de cocción antes de escurrir.','Añade los trocitos de jamón a una sartén sin aceite y dóralos en su propia grasa. Aparta y reserva.','Separa las claras de las yemas. Bate las yemas con el queso rallado y pimienta al gusto.','Escurre la pasta y añádela a la sartén del jamón a fuego muy bajo.','Fuera del fuego, añade la mezcla de yemas y queso. Remueve rápido para que no cuaje.','Si queda muy espeso, añade cucharadas del agua de cocción hasta conseguir textura cremosa.'],
-    tip:'El truco es hacerlo fuera del fuego o al mínimo — si el huevo se calienta demasiado se convierte en revuelto.'},
-  {emoji:'🍕',name:'Fajipizza con Atún y Verduras',when:'Cena sábado',
-    tags:[{label:'~15 min',cls:'rtag-blue'},{label:'Air fryer / horno',cls:'rtag-orange'},{label:'3 raciones',cls:'rtag-purple'}],
-    ing:[{qty:'3 ud.',name:'Tortillas de trigo con maíz (Auchan)'},{qty:'1 brick',name:'Tomate triturado'},{qty:'~150g',name:'Queso mozzarella rallada'},{qty:'2 latas',name:'Atún en lata (escurrido)'},{qty:'Al gusto',name:'Cebolla, pimiento u otros toppings'}],
-    steps:['Si usas verduras como topping (cebolla, pimiento), córtalas y saltéalas 3-4 minutos. Reserva.','Extiende cada tortilla sobre papel de horno.','Cubre con una capa generosa de tomate triturado.','Añade el queso mozzarella por encima.','Coloca el atún escurrido y los toppings elegidos.','Air fryer 5-7 min a 180°C o horno precalentado 8-10 min hasta que el queso burbujee y los bordes estén crujientes.'],
-    tip:'El air fryer le da un toque más crujiente. Si el borde se enrolla, sujétalo con papel de horno.'},
-  {emoji:'🥚',name:'Tortilla de Calabacín',when:'Cena domingo',
-    tags:[{label:'Sin gluten',cls:'rtag-green'},{label:'~20 min',cls:'rtag-blue'},{label:'Microondas + sartén',cls:'rtag-purple'}],
-    ing:[{qty:'3 ud.',name:'Calabacines medianos'},{qty:'1 ud.',name:'Cebolla'},{qty:'6-9 ud.',name:'Huevos'},{qty:'Al gusto',name:'Sal y AOVE'}],
-    steps:['Corta el calabacín en rodajas. Ponlo en un recipiente apto para microondas con un chorrito de AOVE y sal.','Tapa con film y cocina en el microondas ~10 minutos hasta que esté blando. Reserva.','Sofríe la cebolla en una sartén con AOVE a fuego medio hasta dorar.','Bate los huevos con sal. Añade el calabacín y la cebolla. Mezcla bien.','Vierte en la sartén engrasada a fuego medio-bajo. Cuando cuaje por los bordes, da la vuelta con un plato.','Cocina un par de minutos más hasta el punto que te guste.'],
-    tip:'El microondas para el calabacín ahorra mucho tiempo y el resultado es igual de bueno.'},
-  {emoji:'🍗',name:'Albóndigas de Pollo en Salsa de Tomate',when:'Cena jueves',
-    tags:[{label:'Alta proteína',cls:'rtag-green'},{label:'~30 min',cls:'rtag-blue'},{label:'Batch cooking',cls:'rtag-orange'}],
-    ing:[{qty:'~750g',name:'Pechuga de pollo picada'},{qty:'1 ud.',name:'Huevo'},{qty:'2 dientes',name:'Ajo picado'},{qty:'Al gusto',name:'Perejil, sal, pimienta, orégano'},{qty:'1 brick',name:'Tomate triturado (Auchan extra)'},{qty:'1 cda.',name:'AOVE'}],
-    steps:['Mezcla el pollo picado con el huevo, el ajo, el perejil y las especias. Amasa hasta que quede homogéneo.','Forma bolitas del tamaño de una nuez con las manos húmedas.','Dóralas en una sartén con AOVE a fuego medio-alto por todos los lados (~5 min).','En la misma sartén, añade el tomate triturado con sal y orégano. Baja el fuego.','Introduce las albóndigas en la salsa, tapa y cocina 15 minutos a fuego bajo.'],
-    tip:'Puedes pedir al carnicero que pique la pechuga. Prepara cantidad extra — aguantan 3 días en el frigo.'},
-  {emoji:'🥕',name:'Crema de Zanahoria',when:'Comida jueves y viernes (batch)',
-    tags:[{label:'Verdura 4 · batch',cls:'rtag-orange'},{label:'~25 min o comprada',cls:'rtag-blue'},{label:'6 raciones',cls:'rtag-purple'}],
-    ing:[{qty:'8-10 ud.',name:'Zanahorias'},{qty:'1 ud.',name:'Cebolla'},{qty:'1 diente',name:'Ajo'},{qty:'1 cda.',name:'AOVE'},{qty:'Al gusto',name:'Sal, comino, jengibre en polvo'}],
-    steps:['Opción rápida: compra la crema de zanahoria en brick. Calienta y listo.','Opción casera: pocha la cebolla y el ajo con AOVE 5 minutos.','Añade las zanahorias peladas y troceadas. Cubre con agua o caldo y cocina 20 minutos.','Tritura con la batidora. Sazona con sal, comino y jengibre.','Ajusta la textura con más agua si queda demasiado espesa.','Guarda parte para el viernes — reserva una porción más espesa para usarla como salsa de la pasta.'],
-    tip:'La porción que uses el viernes en la pasta debe quedar más espesa. Diluye solo la que vas a tomar como crema.'},
-  {emoji:'🍛',name:'Pasta de Lentejas con Zanahoria y Pollo',when:'Comida viernes',
-    tags:[{label:'Legumbre + proteína',cls:'rtag-green'},{label:'~15 min',cls:'rtag-blue'},{label:'Reutiliza crema jue',cls:'rtag-orange'}],
-    ing:[{qty:'1 paquete',name:'Pasta de lentejas (Auchan espirales)'},{qty:'~2 cazos',name:'Crema de zanahoria espesa del jueves'},{qty:'~450g',name:'Pechuga de pollo en tiras'},{qty:'~90g',name:'Queso mozzarella rallada'},{qty:'1 cda.',name:'AOVE'}],
-    steps:['Cuece la pasta de lentejas según el paquete (8-10 min). Escurre.','Saltea las tiras de pollo en una sartén con AOVE y sal hasta dorar.','Calienta la crema de zanahoria reservada — será la salsa.','Mezcla la pasta con la salsa de zanahoria y las tiras de pollo.','Sirve con el queso mozzarella por encima.'],
-    tip:'La clave es guardar una parte de la crema del jueves más espesa para que funcione como salsa de pasta.'},
+  {
+    emoji:'🥚',name:'Huevos Rellenos de Atún y Tomate',when:'Cena lunes',
+    tags:[{label:'Sin cocción extra',cls:'rtag-green'},{label:'~15 min',cls:'rtag-blue'},{label:'3 raciones',cls:'rtag-purple'}],
+    ing:[{qty:'9 ud.',name:'Huevos'},{qty:'3 latas',name:'Atún en lata (escurrido)'},{qty:'Al gusto',name:'Tomate triturado (Auchan extra)'},{qty:'1 tarro',name:'Pimientos del piquillo'},{qty:'1',name:'Cebolla pequeña (opcional, picada fina)'}],
+    steps:['Cuece los huevos en agua hirviendo 10 minutos. Sácalos e introdúcelos inmediatamente en agua fría para poder pelarlos bien.','Mientras, pica los pimientos del piquillo en trocitos pequeños.','Mezcla el atún escurrido con el tomate triturado, los piquillos y la cebolla picada si la usas.','Pela los huevos, córtalos por la mitad longitudinalmente y saca las yemas con cuidado.','Añade las yemas a la mezcla de atún y aplasta con un tenedor. Mezcla bien.','Rellena las mitades de huevo con la mezcla y sirve.'],
+    tip:'Puedes añadir una cucharadita de mayonesa light a la mezcla para darle más cremosidad. Quedan mejor si los dejas un rato en el frigo antes de servir.'
+  },
+  {
+    emoji:'🫑',name:'Lasaña de Calabacín',when:'Comida viernes',
+    tags:[{label:'Sin pasta',cls:'rtag-green'},{label:'~40 min',cls:'rtag-blue'},{label:'Congela el resto',cls:'rtag-orange'}],
+    ing:[{qty:'6 ud.',name:'Calabacines medianos'},{qty:'~600g',name:'Carne picada de vacuno'},{qty:'1 ud.',name:'Pimiento rojo'},{qty:'1 ud.',name:'Cebolla'},{qty:'1 brick',name:'Tomate triturado'},{qty:'Un chorrito',name:'Leche'},{qty:'~150g',name:'Queso mozzarella rallada'},{qty:'Al gusto',name:'Sal, pimienta, orégano, AOVE'}],
+    steps:['SALSA BOLOÑESA: Pica la cebolla y el pimiento y póchalos en una sartén con AOVE a fuego medio 5-7 minutos.','Cuando estén dorados, añade la carne picada y cocina removiendo hasta que se dore bien.','Incorpora el tomate triturado, un chorrito de leche, sal, pimienta y orégano. Tapa y cocina 15 minutos a fuego bajo. ⚠️ Congela la mitad sobrante para la próxima semana.','CALABACÍN: Corta el calabacín en láminas finas (2-3 mm). Añade una pizca de sal y déjalas 5 minutos para que suelten el agua.','Pásalas vuelta y vuelta en una sartén seca o con unas gotas de AOVE hasta que estén tiernas.','MONTAJE: En una fuente apta para horno, haz capas alternando calabacín y boloñesa. La capa superior será de queso mozzarella rallado.','Hornea a 190°C durante 10 minutos hasta que el queso gratine y burbujee.'],
+    tip:'El truco de la sal en el calabacín es clave — elimina el amargor y el exceso de agua para que no quede aguada la lasaña.'
+  },
+  {
+    emoji:'🍗',name:'Pollo Asado con Verduras',when:'Comida miércoles',
+    tags:[{label:'Al horno',cls:'rtag-blue'},{label:'~45 min',cls:'rtag-orange'},{label:'Fácil',cls:'rtag-green'}],
+    ing:[{qty:'~1,2 kg',name:'Muslos o contramuslos de pollo'},{qty:'3 ud.',name:'Tomates cortados en cuartos'},{qty:'2 ud.',name:'Cebollas en juliana'},{qty:'2 ud.',name:'Pimientos (rojo y verde) en tiras'},{qty:'2 cdas.',name:'AOVE'},{qty:'Al gusto',name:'Sal, pimienta, orégano, ajo en polvo, pimentón'}],
+    steps:['Precalienta el horno a 200°C.','Coloca las verduras en una fuente de horno. Riega con una cucharada de AOVE y sazona.','Pon el pollo encima de las verduras. Píntalos con la otra cucharada de AOVE y sazona bien con sal, pimienta, ajo en polvo y pimentón.','Hornea 40-45 minutos hasta que el pollo esté dorado y la piel crujiente.','A mitad de cocción (20 min), puedes bañar el pollo con los jugos de la fuente.'],
+    tip:'Si tienes air fryer, queda genial: 180°C durante 25-30 minutos. Los jugos de las verduras son deliciosos para mojar pan de masa madre.'
+  },
+  {
+    emoji:'🍛',name:'Arroz Integral con Verduras y Pollo al Curry',when:'Comida domingo',
+    tags:[{label:'Hidrato + proteína',cls:'rtag-green'},{label:'~35 min',cls:'rtag-blue'},{label:'3 raciones',cls:'rtag-purple'}],
+    ing:[{qty:'~400g',name:'Arroz integral'},{qty:'~450g',name:'Pechuga de pollo en dados'},{qty:'2 ud.',name:'Zanahorias en daditos'},{qty:'1 ud.',name:'Pimiento en tiras'},{qty:'1 ud.',name:'Calabacín en dados'},{qty:'1 cda.',name:'Curry en polvo'},{qty:'1 cda.',name:'AOVE'},{qty:'Al gusto',name:'Sal, cúrcuma (opcional)'}],
+    steps:['Cuece el arroz integral según el paquete (suele ser 25-30 min). Escurre y reserva.','Saltea el pollo en dados con AOVE y sal en una sartén grande hasta dorar. Aparta.','En la misma sartén, saltea las verduras (zanahoria, pimiento, calabacín) 7-8 minutos.','Añade el curry al gusto y remueve 1 minuto para que se integre con las verduras.','Incorpora el pollo y el arroz. Mezcla bien y cocina 2-3 minutos más.'],
+    tip:'El arroz integral tarda el doble que el blanco, pero puedes cocer el doble el sábado y guardarlo en el frigo.'
+  },
+  {
+    emoji:'🌿',name:'Guiso de Garbanzos con Pisto',when:'Comida lunes · batch con martes',
+    tags:[{label:'Legumbre + pescado',cls:'rtag-green'},{label:'~20 min',cls:'rtag-blue'},{label:'♻️ Pisto para martes',cls:'rtag-orange'}],
+    ing:[{qty:'3 botes',name:'Garbanzos cocidos (escurridos)'},{qty:'Doble cantidad',name:'Pisto de verduras (casero o lata Hida)'},{qty:'~450g',name:'Migas de bacalao desaladas'},{qty:'2 dientes',name:'Ajo'},{qty:'1 cda.',name:'AOVE'},{qty:'Al gusto',name:'Pimentón, sal, perejil'}],
+    steps:['Prepara el doble de pisto — la mitad para hoy y la otra mitad para la comida del martes.','En una sartén, dora el ajo laminado con AOVE. Añade las migas de bacalao y saltea 4-5 minutos.','En la misma sartén, añade los garbanzos escurridos y la mitad del pisto. Mezcla bien y calienta 5 minutos.','Sazona con pimentón y perejil. Sirve caliente.','Guarda el pisto restante en un tupper para el martes.'],
+    tip:'Las migas de bacalao ya vienen desaladas en la mayoría de supermercados — mucho más cómodo que desalar en casa.'
+  },
+  {
+    emoji:'🥬',name:'Tostas Integrales con Hummus, Rúcula y Queso Fresco',when:'Cena miércoles',
+    tags:[{label:'Sin cocción',cls:'rtag-green'},{label:'~5 min',cls:'rtag-blue'},{label:'Muy fácil',cls:'rtag-purple'}],
+    ing:[{qty:'6-9 ud.',name:'Tostas integrales Wasa Authentique'},{qty:'1 tarrina',name:'Hummus'},{qty:'1 bolsa',name:'Rúcula fresca'},{qty:'1 ud.',name:'Queso fresco'},{qty:'Al gusto',name:'AOVE, sal marina, pimienta'}],
+    steps:['Extiende una capa generosa de hummus sobre cada tosta.','Coloca unas hojas de rúcula encima.','Desmenuza o corta el queso fresco en trocitos y distribúyelo.','Aliña con un hilo de AOVE y una pizca de sal marina y pimienta.'],
+    tip:'Puedes añadir tomate cherry cortado por la mitad para darle frescura. Las tostas Wasa aguantan el hummus sin ablandarse, a diferencia del pan de molde.'
+  },
 ];
 
 function buildRecipes(){
