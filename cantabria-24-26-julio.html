@@ -134,7 +134,42 @@ h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.02re
 .acciones a:hover,.acciones a:focus-visible{background:var(--mar);color:#fff}
 .acciones a:focus-visible{outline:2px solid var(--profundo);outline-offset:2px}
 
-/* ---------- avisos ---------- */
+/* ---------- carrusel de opciones ---------- */
+.carrusel-wrap{margin:2px 0 4px}
+.carrusel{
+  display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:2px 2px 10px;margin:0 -2px;-webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:var(--agua) transparent;
+}
+.carrusel::-webkit-scrollbar{height:6px}
+.carrusel::-webkit-scrollbar-thumb{background:var(--agua);border-radius:10px}
+.opcion{
+  flex:0 0 82%;max-width:320px;scroll-snap-align:start;
+  background:var(--blanco);border-radius:14px;border:1px solid var(--linea);
+  overflow:hidden;box-shadow:0 1px 3px rgba(8,50,74,.06);
+  display:flex;flex-direction:column;text-align:left;font:inherit;color:inherit;
+  cursor:pointer;padding:0;
+}
+.opcion:hover,.opcion:focus-visible{border-color:var(--turquesa);box-shadow:0 3px 12px rgba(31,163,184,.18)}
+.opcion:focus-visible{outline:2px solid var(--mar);outline-offset:2px}
+.opcion img{width:100%;height:120px;object-fit:cover;display:block}
+.opcion-cuerpo{padding:12px 14px 14px}
+.opcion-tag{
+  display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--mar);
+  background:rgba(31,163,184,.12);border-radius:20px;padding:3px 9px;margin-bottom:7px;
+}
+.opcion h4{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.08rem;margin:0 0 4px;letter-spacing:-.01em}
+.opcion p{margin:0;font-size:13.5px;color:var(--suave);line-height:1.4}
+.opcion-mas{
+  margin-top:9px;font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--turquesa);
+  display:flex;align-items:center;gap:4px;
+}
+.desliza{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;
+  color:var(--suave);text-align:right;margin:0 0 12px;
+}
 .aviso{
   background:var(--blanco);border-left:4px solid var(--coral);border-radius:0 10px 10px 0;
   padding:12px 14px;margin-bottom:14px;box-shadow:0 1px 3px rgba(8,50,74,.06);
@@ -421,22 +456,40 @@ footer{margin-top:26px;font-family:"IBM Plex Mono",monospace;font-size:10px;colo
   <div class="tramo mar">
     <div class="hora">11:15<small>playa</small></div>
     <div class="cont">
-      <h3>Los Molinucos, Santander</h3>
-      <button class="ficha" data-modal="m-molinucos">
-        <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjAia8OI80hmpkLBUf_u8aS3ErFhxv2TOT3dZi_TklpvriLk438ycGATkz5DPFcmaDk933jvsJIWh148Le-tfW-xitdzMvKVEzJljvMrDAFLLvHGYEG8zSUMCtwGbztk1UbiXohj2vBsovXkwk8=s4800-w800-h600" alt="Playa de Los Molinucos, Santander">
-        <span class="ficha-txt"><span>La playa</span><b>Los Molinucos</b></span>
-        <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
-      </button>
-      <p>A 55 minutos por la A-67. Conviene llegar antes de las 12:00 para aparcar en Mataleñas y coger sitio.</p>
-      <div class="perro">Perro: acceso 24 horas todo el año</div>
+      <h3>Elegid la playa</h3>
+      <p>Dos formas distintas de pasar la mañana. Deslizad para ver la otra.</p>
+      <p class="desliza">deslizar →</p>
+      <div class="carrusel-wrap">
+        <div class="carrusel">
+          <button class="opcion" data-modal="m-molinucos">
+            <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjAia8OI80hmpkLBUf_u8aS3ErFhxv2TOT3dZi_TklpvriLk438ycGATkz5DPFcmaDk933jvsJIWh148Le-tfW-xitdzMvKVEzJljvMrDAFLLvHGYEG8zSUMCtwGbztk1UbiXohj2vBsovXkwk8=s4800-w800-h600" alt="Playa de Los Molinucos">
+            <div class="opcion-cuerpo">
+              <span class="opcion-tag">En coche · 55 min</span>
+              <h4>Los Molinucos</h4>
+              <p>Cala pequeña de mar abierto junto a Mataleñas. Aparcáis y bajáis andando, sin más complicación.</p>
+              <span class="opcion-mas">Ver más <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
+            </div>
+          </button>
+          <button class="opcion" data-modal="m-puntal">
+            <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjAia8OI80hmpkLBUf_u8aS3ErFhxv2TOT3dZi_TklpvriLk438ycGATkz5DPFcmaDk933jvsJIWh148Le-tfW-xitdzMvKVEzJljvMrDAFLLvHGYEG8zSUMCtwGbztk1UbiXohj2vBsovXkwk8=s4800-w800-h600" alt="Playa de El Puntal, Somo">
+            <div class="opcion-cuerpo">
+              <span class="opcion-tag">En lancha · 20 min</span>
+              <h4>El Puntal, Somo</h4>
+              <p>Arenal de 4,5 km al otro lado de la bahía. Se cruza en barco desde el centro de Santander, la zona canina queda junto al muelle de llegada.</p>
+              <span class="opcion-mas">Ver más <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
+            </div>
+          </button>
+        </div>
+      </div>
+      <div class="perro">Ambas admiten perro todo el año, sin restricción horaria</div>
     </div>
   </div>
 
   <div class="tramo">
     <div class="hora">14:30<small>comida</small></div>
     <div class="cont">
-      <h3>Comer en El Sardinero</h3>
-      <p>A 5 minutos de la playa. Domingo de julio en Santander: reservad por la mañana o no habrá mesa.</p>
+      <h3>Comer en Santander</h3>
+      <p>A 10-15 minutos de cualquiera de las dos playas. Domingo de julio en Santander: reservad por la mañana o no habrá mesa.</p>
       <div class="mesa">
         <p class="mesa-tit">Junto al Sardinero</p>
         <div class="sitio">
@@ -665,6 +718,37 @@ footer{margin-top:26px;font-family:"IBM Plex Mono",monospace;font-size:10px;colo
     <div class="acciones" style="margin-top:14px">
       <a href="https://www.google.com/maps/search/?api=1&query=Playa+de+Los+Molinucos+Santander" target="_blank" rel="noopener">Cómo llegar</a>
       <a href="https://www.google.com/search?q=mareas+Santander" target="_blank" rel="noopener">Mareas</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="overlay" id="m-puntal">
+<div class="modal">
+  <div class="m-foto">
+    <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjAia8OI80hmpkLBUf_u8aS3ErFhxv2TOT3dZi_TklpvriLk438ycGATkz5DPFcmaDk933jvsJIWh148Le-tfW-xitdzMvKVEzJljvMrDAFLLvHGYEG8zSUMCtwGbztk1UbiXohj2vBsovXkwk8=s4800-w800-h600" alt="Playa de El Puntal, Somo">
+    <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
+  </div>
+  <div class="m-cuerpo">
+    <p class="m-eyebrow">Domingo · 11:15</p>
+    <h4>El Puntal, Somo</h4>
+    <p>Una lengua de arena de 4,5 km que cierra la bahía de Santander por el norte, con dunas en el centro y mar abierto de verdad al otro lado. La zona canina está en el extremo sur, junto al muelle de Somo, sobre el estuario del Miera: agua tranquila, sin oleaje.</p>
+    <p>No hay carretera hasta ahí. Se llega en lancha desde el centro de Santander, o en coche hasta Somo y luego caminando unos 2 km por la arena. La lancha deja a pocos metros de la zona canina, así que es la opción cómoda con niña, abuelos y perro.</p>
+
+    <p class="m-eyebrow" style="margin-top:16px">La lancha, Los Reginas</p>
+    <p>Sale del embarcadero junto al Centro Botín, hace escala en Pedreña y llega a Somo. Trayecto de unos 20-25 minutos por la bahía. Los perros viajan gratis, solo tienen que ir atados.</p>
+    <dl class="datos">
+      <div><dt>Precio</dt><dd>Ida y vuelta 6,50 € por persona · solo ida 4,00 €</dd></div>
+      <div><dt>Frecuencia</dt><dd>Cada hora, sábados domingos y festivos (18–28 julio)</dd></div>
+      <div><dt>Duración</dt><dd>20-25 minutos, sin billete con hora fija</dd></div>
+      <div><dt>Perro</dt><dd>Admitido gratis, atado y junto al dueño</dd></div>
+      <div><dt>Embarque</dt><dd>Paseo Marítimo, junto al Centro Botín, Santander</dd></div>
+    </dl>
+    <p style="margin-top:10px">Vuelta cuando queráis con el mismo billete de ida y vuelta, no hace falta reservar hora. Conviene confirmar el horario exacto el mismo sábado, porque la tabla cambia por quincenas.</p>
+    <div class="acciones" style="margin-top:14px">
+      <a href="tel:+34942216753">942 21 67 53</a>
+      <a href="https://www.losreginas.com/paseos-en-barco-por-la-bahia-de-santander-con-escala-en-pedrena-y-somo/horarios-y-tarifas-viaje-pedrena-somo/" target="_blank" rel="noopener">Horarios</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Embarcadero+Los+Reginas+Santander" target="_blank" rel="noopener">Embarcadero</a>
     </div>
   </div>
 </div>
