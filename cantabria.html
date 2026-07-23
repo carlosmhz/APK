@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pesquera · 24–26 julio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --espuma:#EDF7FA;
+  --blanco:#FFFFFF;
+  --profundo:#08324A;
+  --mar:#12688F;
+  --turquesa:#1FA3B8;
+  --agua:#8FD6DE;
+  --arena:#F7E4BE;
+  --coral:#E2603F;
+  --suave:#4F7387;
+  --linea:rgba(8,50,74,.12);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--espuma);color:var(--profundo);
+  font-family:"Newsreader",Georgia,serif;font-size:16.5px;line-height:1.5;
+  padding-bottom:3rem;
+}
+.wrap{max-width:640px;margin:0 auto;padding:0 18px}
+
+/* ---------- cabecera ---------- */
+.hero{
+  background:linear-gradient(160deg,#08324A 0%,#12688F 45%,#1FA3B8 100%);
+  color:#fff;position:relative;overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:38px;
+  background:var(--espuma);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 40V16c60-10 120-16 200-8s140 22 240 20 160-22 250-24 180 14 270 12 180-12 240-16v40z' fill='%23000'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 40V16c60-10 120-16 200-8s140 22 240 20 160-22 250-24 180 14 270 12 180-12 240-16v40z' fill='%23000'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+}
+.hero-in{max-width:640px;margin:0 auto;padding:32px 18px 54px;position:relative;z-index:1}
+.sol{
+  position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;
+  background:radial-gradient(circle,rgba(247,228,190,.55),rgba(247,228,190,0) 70%);
+}
+h1{
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;
+  font-size:2.4rem;line-height:.95;letter-spacing:-.03em;margin:0;
+}
+h1 em{font-style:normal;display:block;font-size:.55em;font-weight:600;color:var(--agua);letter-spacing:-.01em;margin-top:4px}
+.hero p{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;margin:0 0 16px;color:var(--agua);
+}
+.casa{
+  margin-top:20px;display:flex;gap:20px;flex-wrap:wrap;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;line-height:1.6;color:rgba(255,255,255,.82);
+}
+.casa b{display:block;color:#fff;font-weight:600;letter-spacing:.06em}
+
+/* ---------- pestañas ---------- */
+.tabs{
+  position:sticky;top:0;z-index:20;background:var(--espuma);
+  display:flex;margin:0 -18px 0;padding:0 12px;
+  box-shadow:0 1px 0 var(--linea);
+}
+.tab{
+  flex:1;background:none;border:0;border-bottom:3px solid transparent;
+  padding:12px 2px 10px;cursor:pointer;color:var(--suave);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;text-align:center;line-height:1.35;
+}
+.tab small{display:block;font-weight:400;font-size:9.5px;letter-spacing:.06em;opacity:.8}
+.tab[aria-selected="true"]{color:var(--mar);border-bottom-color:var(--coral)}
+.tab:focus-visible{outline:2px solid var(--mar);outline-offset:-3px}
+
+/* ---------- panel ---------- */
+[role="tabpanel"]{padding-top:24px}
+[role="tabpanel"][hidden]{display:none}
+.titular{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.35rem;
+  letter-spacing:-.02em;margin:0 0 3px;line-height:1.15;color:var(--mar);
+}
+.bajada{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--suave);letter-spacing:.05em;margin:0 0 22px}
+
+/* ---------- horario ---------- */
+.tramo{display:grid;grid-template-columns:52px 1fr;gap:0 16px;padding-bottom:22px}
+.hora{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;color:var(--turquesa);padding-top:2px}
+.hora small{display:block;font-weight:400;color:var(--suave);font-size:10px;letter-spacing:.04em}
+.cont{border-left:1px solid var(--linea);padding-left:18px;position:relative}
+.cont::before{content:"";position:absolute;left:-5px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--turquesa);box-shadow:0 0 0 3px var(--espuma)}
+.tramo.mar .cont::before{background:var(--mar)}
+.tramo.clave .cont::before{background:var(--coral)}
+.tramo:last-child .cont{border-left-color:transparent}
+h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.02rem;margin:0 0 3px;letter-spacing:-.01em}
+.cont p{margin:0 0 7px;font-size:15px}
+.cont p:last-child{margin-bottom:0}
+.meta{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--suave);letter-spacing:.02em}
+.perro{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--coral);
+  letter-spacing:.02em;margin-top:6px;
+}
+
+/* ---------- tarjeta lanzadera del modal ---------- */
+.ficha{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+  background:var(--blanco);border:1px solid var(--linea);border-radius:12px;
+  padding:8px;margin:0 0 10px;cursor:pointer;font:inherit;color:inherit;
+  box-shadow:0 1px 3px rgba(8,50,74,.06);
+}
+.ficha:hover,.ficha:focus-visible{border-color:var(--turquesa);box-shadow:0 3px 10px rgba(31,163,184,.16)}
+.ficha:focus-visible{outline:2px solid var(--mar);outline-offset:2px}
+.ficha img{width:64px;height:64px;object-fit:cover;border-radius:8px;flex:0 0 auto;background:var(--agua)}
+.ficha-txt{flex:1;min-width:0}
+.ficha-txt b{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:15px;display:block;line-height:1.2}
+.ficha-txt span{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--turquesa)}
+.ficha svg{flex:0 0 auto;color:var(--turquesa);margin-right:4px}
+
+/* ---------- restaurantes ---------- */
+.mesa{background:var(--blanco);border-radius:12px;padding:14px 16px;margin-top:10px;border:1px solid var(--linea)}
+.mesa-tit{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--turquesa);margin:0 0 9px}
+.sitio{padding:9px 0;border-top:1px solid var(--linea)}
+.sitio:first-of-type{border-top:0;padding-top:0}
+.sitio b{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:15px}
+.sitio p{margin:1px 0 0;font-size:14px;color:var(--suave)}
+.acciones{margin-top:7px;display:flex;flex-wrap:wrap;gap:6px}
+.acciones a{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  text-decoration:none;color:var(--mar);background:rgba(31,163,184,.1);
+  border-radius:20px;padding:5px 11px;
+}
+.acciones a:hover,.acciones a:focus-visible{background:var(--mar);color:#fff}
+.acciones a:focus-visible{outline:2px solid var(--profundo);outline-offset:2px}
+
+/* ---------- carrusel de opciones ---------- */
+.carrusel-wrap{margin:2px 0 4px}
+.carrusel{
+  display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:2px 2px 10px;margin:0 -2px;-webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:var(--agua) transparent;
+}
+.carrusel::-webkit-scrollbar{height:6px}
+.carrusel::-webkit-scrollbar-thumb{background:var(--agua);border-radius:10px}
+.opcion{
+  flex:0 0 82%;max-width:320px;scroll-snap-align:start;
+  background:var(--blanco);border-radius:14px;border:1px solid var(--linea);
+  overflow:hidden;box-shadow:0 1px 3px rgba(8,50,74,.06);
+  display:flex;flex-direction:column;text-align:left;font:inherit;color:inherit;
+  cursor:pointer;padding:0;
+}
+.opcion:hover,.opcion:focus-visible{border-color:var(--turquesa);box-shadow:0 3px 12px rgba(31,163,184,.18)}
+.opcion:focus-visible{outline:2px solid var(--mar);outline-offset:2px}
+.opcion img{width:100%;height:120px;object-fit:cover;display:block}
+.opcion-cuerpo{padding:12px 14px 14px}
+.opcion-tag{
+  display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--mar);
+  background:rgba(31,163,184,.12);border-radius:20px;padding:3px 9px;margin-bottom:7px;
+}
+.opcion h4{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.08rem;margin:0 0 4px;letter-spacing:-.01em}
+.opcion p{margin:0;font-size:13.5px;color:var(--suave);line-height:1.4}
+.opcion-mas{
+  margin-top:9px;font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--turquesa);
+  display:flex;align-items:center;gap:4px;
+}
+.desliza{
+  font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;
+  color:var(--suave);text-align:right;margin:0 0 12px;
+}
+.aviso{
+  background:var(--blanco);border-left:4px solid var(--coral);border-radius:0 10px 10px 0;
+  padding:12px 14px;margin-bottom:14px;box-shadow:0 1px 3px rgba(8,50,74,.06);
+}
+.aviso b{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;display:block;font-size:14.5px;letter-spacing:-.01em}
+.aviso p{margin:3px 0 0;font-size:15px;color:var(--suave)}
+
+/* ---------- checklist ---------- */
+.maleta{margin-top:26px;border-top:1px solid var(--linea);padding-top:18px}
+.maleta h4{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.05rem;margin:0 0 10px}
+.maleta ul{list-style:none;margin:0;padding:0}
+.maleta li{padding:8px 0 8px 26px;border-bottom:1px solid var(--linea);position:relative;font-size:15px}
+.maleta li::before{content:"";position:absolute;left:0;top:13px;width:12px;height:12px;border:1.5px solid var(--agua);border-radius:3px}
+footer{margin-top:26px;font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--suave);letter-spacing:.04em}
+
+/* ---------- modales ---------- */
+.overlay{
+  position:fixed;inset:0;z-index:100;background:rgba(8,50,74,.55);
+  backdrop-filter:blur(2px);
+  display:flex;align-items:center;justify-content:center;padding:14px;
+  opacity:0;pointer-events:none;transition:opacity .18s ease;
+}
+.overlay.abierto{opacity:1;pointer-events:auto}
+.modal{
+  border-radius:16px;max-width:520px;width:100%;
+  max-height:calc(100vh - 28px);background:var(--blanco);color:var(--profundo);
+  overflow:hidden;display:flex;flex-direction:column;
+  transform:translateY(10px);transition:transform .18s ease;
+}
+.overlay.abierto .modal{transform:translateY(0)}
+.m-foto{position:relative;line-height:0;flex:0 0 auto}
+.m-foto img{width:100%;height:200px;object-fit:cover;display:block}
+.cerrar{
+  position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;
+  border:0;background:rgba(255,255,255,.92);color:var(--profundo);font-size:20px;
+  line-height:1;cursor:pointer;display:grid;place-items:center;
+}
+.cerrar:focus-visible{outline:2px solid var(--mar);outline-offset:2px}
+.m-cuerpo{padding:18px 20px 22px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.m-eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--turquesa);margin:0 0 4px}
+.m-cuerpo h4{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.4rem;margin:0 0 10px;letter-spacing:-.02em;line-height:1.1}
+.m-cuerpo p{margin:0 0 10px;font-size:15.5px}
+.datos{margin:14px 0 0;padding:12px 14px;background:var(--espuma);border-radius:10px;font-size:14px}
+.datos div{display:flex;gap:10px;padding:4px 0}
+.datos dt{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--turquesa);flex:0 0 82px;padding-top:3px}
+.datos dd{margin:0;flex:1}
+.credito{font-family:"IBM Plex Mono",monospace;font-size:9.5px;color:var(--suave);margin:14px 0 0;letter-spacing:.04em}
+
+@media (max-width:400px){
+  .tramo{grid-template-columns:46px 1fr;gap:0 11px}
+  .cont{padding-left:14px}
+  h1{font-size:2.05rem}
+  .datos dt{flex:0 0 70px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="sol"></div>
+  <div class="hero-in">
+    <p>Cantabria · 24 a 26 de julio</p>
+    <h1>Pesquera<em>Altamira y mar</em></h1>
+    <div class="casa">
+      <div><b>Casa García</b>Apartamento con cocina<br>350,51 €</div>
+      <div><b>Entrada / salida</b>Vie 24, 15:00–23:30<br>Dom 26, hasta las 11:00</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="tabs" role="tablist" aria-label="Días del viaje">
+  <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true">Vie<small>24</small></button>
+  <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">Sáb<small>25</small></button>
+  <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">Dom<small>26</small></button>
+  <button class="tab" role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">Claves<small>y plan B</small></button>
+</div>
+
+<!-- ===== VIERNES ===== -->
+<section role="tabpanel" id="p1" aria-labelledby="t1" tabindex="0">
+  <p class="titular">Llegada y asentarse</p>
+  <p class="bajada">Salamanca → Pesquera · 2 h 50 de viaje</p>
+
+  <div class="tramo">
+    <div class="hora">15:30<small>salida</small></div>
+    <div class="cont">
+      <h3>Carretera</h3>
+      <p>Por Palencia y Aguilar de Campoo. Con una sola parada de media hora, llegada sobre las 18:50.</p>
+    </div>
+  </div>
+
+  <div class="tramo">
+    <div class="hora">17:20<small>30 min</small></div>
+    <div class="cont">
+      <h3>Aguilar de Campoo</h3>
+      <p>A hora y media larga de camino, con la última hora por delante. Café, estirar las piernas y que el perro salga un rato.</p>
+    </div>
+  </div>
+
+  <div class="tramo clave">
+    <div class="hora">18:50<small>entrada</small></div>
+    <div class="cont">
+      <h3>Llegada a la casa</h3>
+      <button class="ficha" data-modal="m-pesquera">
+        <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjDYrpS3ZSmuuMjiEYV8ZF36qof-e6_OXjmQKCJQDPch71MO2HhlFBTUFQ10vgcZuKFU7Rj-OBMY8YkCX0OJEgSS9WTSmiaTGuBRf06Zs-dnfF0iMCiNo0EgtVfk7135KAJ8CZ7FqgAwD6ce6Q=s4800-w800-h600" alt="Pesquera, en el valle de Iguña">
+        <span class="ficha-txt"><span>El pueblo</span><b>Pesquera</b></span>
+        <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+      </button>
+      <p>Deshacer maletas, meter en la nevera lo que traigáis y que el perro reconozca el terreno. Queda tarde de sobra para un paseo antes de cenar.</p>
+      <div class="meta">Entrada hasta las 23:30 · avisa de la hora de llegada</div>
+    </div>
+  </div>
+
+  <div class="tramo">
+    <div class="hora">20:30<small>cena</small></div>
+    <div class="cont">
+      <h3>Cena en casa</h3>
+      <p>Lo que traigáis de Salamanca. Después del coche y con la niña y los abuelos, mejor plan que buscar mesa fuera el primer día.</p>
+      <p>Si aun así apetece salir, en Molledo tenéis <b>Taberna Ytria</b> a 10 minutos, con terraza en la plaza y cocina hasta medianoche. Y <b>Taberna Rueda</b>, casera de verdad y con perro admitido dentro, si reserváis y sentáis antes de las 21:30.</p>
+      <div class="acciones">
+        <a href="tel:+34942828922">Ytria</a>
+        <a href="tel:+34653805871">Rueda</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Molledo+Cantabria" target="_blank" rel="noopener">Mapa</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SÁBADO ===== -->
+<section role="tabpanel" id="p2" aria-labelledby="t2" tabindex="0" hidden>
+  <p class="titular">Altamira, Santillana y playa</p>
+  <p class="bajada">El día grande · unos 175 km en total</p>
+
+  <div class="tramo">
+    <div class="hora">08:30<small>salida</small></div>
+    <div class="cont">
+      <h3>Pesquera → Santillana del Mar</h3>
+      <p>45 km por la A-67, unos 40 minutos. Salir pronto evita el atasco de aparcamiento y el calor de mediodía.</p>
+      <p>Desayuno en casa y, si queréis, dejad preparada la nevera para la playa de la tarde.</p>
+    </div>
+  </div>
+
+  <div class="tramo clave">
+    <div class="hora">09:30<small>turno 1</small></div>
+    <div class="cont">
+      <h3>Museo de Altamira</h3>
+      <button class="ficha" data-modal="m-altamira">
+        <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjC1z5Vb-o9lvGwMrqRPwMIZRsRmnfxuJl_PnS3aOJxumjz424r6MWc-4_vWf1XKR5jGWsReFO2F1GVEWjnPOFjxe4ZWQX1mr1Eor3KhrQR1LphJrxgIOfkOxLU8sm6pBGMRppj574mMIQtM=s4800-w800-h600" alt="Museo de Altamira">
+        <span class="ficha-txt"><span>Qué se visita</span><b>La Neocueva</b></span>
+        <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+      </button>
+      <p>Entran dos. La entrada lleva impresa la hora de acceso a la Neocueva; el museo se ve antes o después, y entre todo se va a hora y media.</p>
+      <p>Los otros tres se quedan con el perro: café en Santillana o paseo por el entorno del museo, que es arbolado y tiene sombra.</p>
+      <div class="perro">Comprad las entradas en dos operaciones, con horas distintas</div>
+    </div>
+  </div>
+
+  <div class="tramo clave">
+    <div class="hora">11:15<small>turno 2</small></div>
+    <div class="cont">
+      <h3>Cambio</h3>
+      <p>Entran los tres restantes con su franja reservada y salen sobre las 12:45. Los dos primeros se quedan fuera con el perro.</p>
+      <div class="meta">Si la niña va en este turno, su entrada gratuita tiene que ser de esta hora</div>
+    </div>
+  </div>
+
+  <div class="tramo">
+    <div class="hora">12:45<small>a pie</small></div>
+    <div class="cont">
+      <h3>Santillana del Mar</h3>
+      <button class="ficha" data-modal="m-santillana">
+        <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjCJ3o8uHQMoJN8ABWZZ__GajuNgGc6-kCizluM5kosMCjQJXo-utrOc6KoAt5hPo4R2TW-KXMu3-7XO9yavUDSkzWldK9OIy0vccwvWsjejPU2WX4DhCa1eiEDuGIXYeVUdn1ogiOgTYr3mIOA=s4800-w800-h600" alt="Colegiata de Santa Juliana, Santillana del Mar">
+        <span class="ficha-txt"><span>Qué ver</span><b>El casco histórico</b></span>
+        <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+      </button>
+      <p>A 3 km del museo. Ya todos juntos y con el perro, que puede pasear por todo el casco. Una vuelta corta antes de comer, o larga si el segundo turno se retrasa.</p>
+    </div>
+  </div>
+
+  <div class="tramo">
+    <div class="hora">13:30<small>comida</small></div>
+    <div class="cont">
+      <h3>Comer en Santillana</h3>
+      <div class="mesa">
+        <p class="mesa-tit">Reserva por la mañana, en julio se llena</p>
+        <div class="sitio">
+          <b>El Bisonte Rojo</b>
+          <p>La mejor con la niña y el perro: terraza amplia con zona verde donde puede corretear. Cocina cántabra sin florituras, precios contenidos.</p>
+          <div class="acciones">
+            <a href="tel:+34653718182">Llamar</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=El+Bisonte+Rojo+Santillana+del+Mar" target="_blank" rel="noopener">Mapa</a>
+          </div>
+        </div>
+        <div class="sitio">
+          <b>Gran Duque</b>
+          <p>Si preferís sentaros bien. Menú del día sobre 29 € con tres platos y vino. Anchoas de Santoña, carrilleras. Cocina hasta las 15:30.</p>
+          <div class="acciones">
+            <a href="tel:+34942840386">Llamar</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Gran+Duque+Santillana+del+Mar" target="_blank" rel="noopener">Mapa</a>
+          </div>
+        </div>
+        <div class="sitio">
+          <b>La Nueva Santuca</b>
+          <p>A 3 km, en campo abierto. Carnes y chuletón. Para una comida más larga si los abuelos no tienen prisa.</p>
+          <div class="acciones">
+            <a href="tel:+34942840287">Llamar</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=La+Nueva+Santuca+Santillana+del+Mar" target="_blank" rel="noopener">Mapa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tramo mar">
+    <div class="hora">16:30<small>playa</small></div>
+    <div class="cont">
+      <h3>La Maza, San Vicente de la Barquera</h3>
+      <button class="ficha" data-modal="m-maza">
+        <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjDMlME9gXDJoISBfcx3zXgY6ucz6Q5op0Gjt4lK1rSa3upaIIoSLhKaXiQdP4iZxgQPcYHAXhTeK6Jrso1k46WdPXm2OcN111kolIqPvNmOUOSAfLDYx1Sa3QhnRtdHrFtZhMQk47unecHOwzkgSpH3UQ=s4800-w800-h600" alt="Playa de La Maza, San Vicente de la Barquera">
+        <span class="ficha-txt"><span>La playa</span><b>La Maza</b></span>
+        <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+      </button>
+      <p>A 35 minutos de Santillana por la A-8. La mejor playa canina de Cantabria y la única de la zona donde podéis estar todos juntos.</p>
+      <div class="perro">Perro: admitido todo el año, sin restricción horaria</div>
+    </div>
+  </div>
+
+  <div class="tramo">
+    <div class="hora">20:30<small>cena</small></div>
+    <div class="cont">
+      <h3>Cenar en San Vicente</h3>
+      <button class="ficha" data-modal="m-sanvicente">
+        <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjDIfMfWhtRRx4vE5ItJo3Cjq-p-heJfm5PyZc3jT6Cmk00TG_GKkLZk_d-9f_QRRz3AUS1q3F1nld2J-FT8QryzdqJwh_43DXrp0jTP9nEMTHhKbP_uxzwezjQ8AgK4PCLL6J2PLKlac5u6mw=s4800-w800-h600" alt="Castillo del Rey, San Vicente de la Barquera">
+        <span class="ficha-txt"><span>Qué ver</span><b>El pueblo y el castillo</b></span>
+        <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+      </button>
+      <div class="mesa">
+        <p class="mesa-tit">Los soportales y el paseo</p>
+        <div class="sitio">
+          <b>El Bodegón</b>
+          <p>Pescado fresco y arroces en los soportales, cocina hasta las 23:00 todos los días. Terraza amplia, lo más cómodo para cinco y un perro.</p>
+          <div class="acciones">
+            <a href="tel:+34942710043">Llamar</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+El+Bodegon+San+Vicente+de+la+Barquera" target="_blank" rel="noopener">Mapa</a>
+          </div>
+        </div>
+        <div class="sitio">
+          <b>Las Redes</b>
+          <p>Un escalón por encima en producto y precio, marisco y pescado de lonja. De noche solo abre viernes y sábado, y hay que reservar.</p>
+          <div class="acciones">
+            <a href="tel:+34689085455">Llamar</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+Las+Redes+San+Vicente+de+la+Barquera" target="_blank" rel="noopener">Mapa</a>
+          </div>
+        </div>
+        <div class="sitio">
+          <b>La Ostrería</b>
+          <p>Terraza sobre la ría con las mejores vistas del pueblo. Más de picar que de cena formal. Bien si la niña no aguanta una cena larga.</p>
+          <div class="acciones">
+            <a href="tel:+34942173013">Llamar</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=La+Ostreria+San+Vicente+de+la+Barquera" target="_blank" rel="noopener">Mapa</a>
+          </div>
+        </div>
+      </div>
+      <div class="meta" style="margin-top:10px">Vuelta a Pesquera: 95 km, 1 h 15</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DOMINGO ===== -->
+<section role="tabpanel" id="p3" aria-labelledby="t3" tabindex="0" hidden>
+  <p class="titular">Segunda playa y vuelta</p>
+  <p class="bajada">Pesquera → Santander → Salamanca</p>
+
+  <div class="tramo clave">
+    <div class="hora">10:00<small>salida</small></div>
+    <div class="cont">
+      <h3>Dejar la casa</h3>
+      <p>Hasta las 11:00. Cargad el coche antes de desayunar: hoy no se vuelve por aquí.</p>
+    </div>
+  </div>
+
+  <div class="tramo mar">
+    <div class="hora">11:15<small>playa</small></div>
+    <div class="cont">
+      <h3>Elegid la playa</h3>
+      <p>Dos formas distintas de pasar la mañana. Deslizad para ver la otra.</p>
+      <p class="desliza">deslizar →</p>
+      <div class="carrusel-wrap">
+        <div class="carrusel">
+          <button class="opcion" data-modal="m-puntal">
+            <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjD_YPVqRfjGCWX9KGe3FZXHH7taIc0K01CRB0UmRSPYSnOd6WKRdfnJ87Oz4p-X1_PVSTy0835bwvq-l_Skv82Z1gcRL_fp2mj5eT13AMn9GziPlr9GXVQDTaTxXkqhah4H2VeOs-01Ogwld8E=s4800-w800-h600" alt="Playa de El Puntal, Somo">
+            <div class="opcion-cuerpo">
+              <span class="opcion-tag">En lancha · 20 min</span>
+              <h4>El Puntal, Somo</h4>
+              <p>Arenal de 4,5 km al otro lado de la bahía. Se cruza en barco desde el centro de Santander, la zona canina queda junto al muelle de llegada.</p>
+              <span class="opcion-mas">Ver más <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
+            </div>
+          </button>
+          <button class="opcion" data-modal="m-molinucos">
+            <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjAia8OI80hmpkLBUf_u8aS3ErFhxv2TOT3dZi_TklpvriLk438ycGATkz5DPFcmaDk933jvsJIWh148Le-tfW-xitdzMvKVEzJljvMrDAFLLvHGYEG8zSUMCtwGbztk1UbiXohj2vBsovXkwk8=s4800-w800-h600" alt="Playa de Los Molinucos">
+            <div class="opcion-cuerpo">
+              <span class="opcion-tag">En coche · 55 min</span>
+              <h4>Los Molinucos</h4>
+              <p>Cala pequeña de mar abierto junto a Mataleñas. Aparcáis y bajáis andando, sin más complicación.</p>
+              <span class="opcion-mas">Ver más <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span>
+            </div>
+          </button>
+        </div>
+      </div>
+      <div class="perro">Ambas admiten perro todo el año, sin restricción horaria</div>
+    </div>
+  </div>
+
+  <div class="tramo">
+    <div class="hora">14:30<small>comida</small></div>
+    <div class="cont">
+      <h3>Comer en Santander</h3>
+      <p>A 10-15 minutos de cualquiera de las dos playas. Domingo de julio en Santander: reservad por la mañana o no habrá mesa.</p>
+      <div class="mesa">
+        <p class="mesa-tit">Junto al Sardinero</p>
+        <div class="sitio">
+          <b>Abra Sardinero</b>
+          <p>Platos para compartir y menú cerrado con vino a muy buen precio, con vistas al mar desde la primera planta. Lo mejor valorado de la zona.</p>
+          <div class="acciones">
+            <a href="tel:+34624073524">Llamar</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Abra+Sardinero+Santander" target="_blank" rel="noopener">Mapa</a>
+          </div>
+        </div>
+        <div class="sitio">
+          <b>La Cañía</b>
+          <p>Cántabro de toda la vida, raciones enormes y terraza. Cocina continua de 11:00 a 1:00, sin problema si os retrasáis en la playa.</p>
+          <div class="acciones">
+            <a href="tel:+34942270491">Llamar</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Restaurante+La+Cania+Santander" target="_blank" rel="noopener">Mapa</a>
+          </div>
+        </div>
+        <div class="sitio">
+          <b>La Casa de Revert</b>
+          <p>Cocina cántabra y vasca, un punto más cuidada. Domingo solo mediodía y conviene reservar.</p>
+          <div class="acciones">
+            <a href="tel:+34942281806">Llamar</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=La+Casa+de+Revert+Santander" target="_blank" rel="noopener">Mapa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tramo">
+    <div class="hora">17:00<small>ruta</small></div>
+    <div class="cont">
+      <h3>Santander → Salamanca</h3>
+      <p>Unos 400 km por la A-67 y Aguilar de Campoo. Cuatro horas largas, así que salid con margen y contad con una parada.</p>
+      <button class="ficha" data-modal="m-fontibre">
+        <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjAXmlJej_xoif8fQFL2_bICz9IdfEfHQ1xXAD0Fvi8djf7n4FvwrZgFvKK104nifJRQzHXlU8Iwcmz5JSx79qxhpoXwYpYAkqShtd1UxN6TT3nT9QXW7ZqnyBjslx-PNLI2bTkS540XlxDWmA=s4800-w800-h600" alt="Nacimiento del Ebro en Fontibre">
+        <span class="ficha-txt"><span>Parada opcional</span><b>Fontibre</b></span>
+        <svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CLAVES ===== -->
+<section role="tabpanel" id="p4" aria-labelledby="t4" tabindex="0" hidden>
+  <p class="titular">Lo que no puede fallar</p>
+  <p class="bajada">Avisos, plan B y checklist</p>
+
+  <div class="aviso">
+    <b>Compra ya las entradas de Altamira, en dos tandas</b>
+    <p>La entrada lleva hora fija de acceso a la Neocueva, así que no se puede comprar para cinco y entrar cuando os venga bien. Hay que hacer dos compras separadas: dos entradas para una franja y tres para otra, con hora y media de diferencia. La niña necesita su propia entrada gratuita, en el turno de quien la acompañe.</p>
+    <p>3 € por adulto. Coge franjas de mañana: el sábado 25 es festivo y puede cerrar a las 15:00 en vez de a las 20:00.</p>
+  </div>
+  <div class="aviso">
+    <b>El perro no entra en Altamira</b>
+    <p>Ni al museo ni a la Neocueva. Por eso se compran las entradas en dos turnos: mientras dos o tres visitan, el resto se queda fuera con él, y luego se cambia.</p>
+  </div>
+  <div class="aviso">
+    <b>Las playas están elegidas por el perro</b>
+    <p>Casi todas las de Cantabria lo prohíben de día entre junio y septiembre, La Concha de Suances incluida. La Maza y Los Molinucos son de las pocas caninas oficiales y son además buenas playas, así que no hay que renunciar a nada. La Riberuca, que aparece en muchas listas, está llena de barro y algas: no vayáis.</p>
+  </div>
+  <div class="aviso">
+    <b>Cartilla del perro encima</b>
+    <p>En las playas caninas pueden pedir microchip y vacunas al día. Y en la ducha de Los Molinucos está prohibido usar jabón, solo agua.</p>
+  </div>
+
+  <div class="tramo mar" style="margin-top:24px">
+    <div class="hora">—<small>plan B</small></div>
+    <div class="cont">
+      <h3>Comillas si el sábado sale gris</h3>
+      <p>Queda de camino entre Santillana y San Vicente, así que se puede sustituir la playa sin cambiar la ruta. El Capricho de Gaudí, el palacio de Sobrellano y la Universidad Pontificia dan de sobra para una tarde sin bañarse. En la playa el perro no puede entrar, pero por el pueblo sí.</p>
+      <div class="mesa">
+        <p class="mesa-tit">Comer o cenar en Comillas</p>
+        <div class="sitio">
+          <b>El Carel</b>
+          <p>Costilla ibérica y cochinillo, relación calidad-precio difícil de batir. Siempre lleno.</p>
+          <div class="acciones"><a href="tel:+34942086096">Llamar</a></div>
+        </div>
+        <div class="sitio">
+          <b>Gurea</b>
+          <p>Cocido montañés y cocina de siempre, con opciones sin gluten. Cierra los miércoles.</p>
+          <div class="acciones"><a href="tel:+34942722446">Llamar</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tramo">
+    <div class="hora">—<small>lluvia</small></div>
+    <div class="cont">
+      <h3>Si llueve de verdad</h3>
+      <p>El domingo, en lugar de playa: Julióbriga, la ciudad romana de Retortillo, a 25 minutos de Pesquera y abierta de 9:30 a 14:30. Se ve en una hora y os deja de camino para volver. Teléfono 942 59 84 25.</p>
+      <p>Y si el sábado se estropea, alargar Altamira con los talleres de arqueología del museo y una comida larga en Santillana.</p>
+    </div>
+  </div>
+
+  <div class="maleta">
+    <h4>Antes de salir</h4>
+    <ul>
+      <li>Entradas de Altamira compradas en dos tandas de hora distinta, con la niña incluida en un turno</li>
+      <li>Confirmar el horario del sábado 25 al comprar: puede cerrar a las 15:00</li>
+      <li>Avisar a la casa de la hora de llegada e instrucciones de las llaves</li>
+      <li>Cartilla veterinaria y microchip del perro al día</li>
+      <li>Reservar cena en San Vicente el sábado y comida en Santander el domingo</li>
+      <li>Reservar mesa en Santillana para la comida del sábado</li>
+      <li>Nevera portátil con acumuladores para la comida del trayecto</li>
+      <li>Desayunos y la cena del viernes, que en Pesquera no hay tienda</li>
+      <li>Chubasquero y manga larga: en la costa refresca al caer la tarde</li>
+      <li>Crema solar, toallas y sombrilla</li>
+    </ul>
+  </div>
+</section>
+
+<footer>Programa de viaje · 24–26 julio 2026 · fotos de Google Maps</footer>
+
+</div>
+
+<!-- ===== MODALES ===== -->
+<div class="overlay" id="m-altamira">
+<div class="modal">
+  <div class="m-foto">
+    <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjC1z5Vb-o9lvGwMrqRPwMIZRsRmnfxuJl_PnS3aOJxumjz424r6MWc-4_vWf1XKR5jGWsReFO2F1GVEWjnPOFjxe4ZWQX1mr1Eor3KhrQR1LphJrxgIOfkOxLU8sm6pBGMRppj574mMIQtM=s4800-w800-h600" alt="Museo de Altamira">
+    <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
+  </div>
+  <div class="m-cuerpo">
+    <p class="m-eyebrow">Sábado · 9:30</p>
+    <h4>Museo de Altamira</h4>
+    <p>La cueva original lleva cerrada al público desde 2002 para conservar las pinturas. Lo que se visita es la Neocueva: una réplica exacta del techo policromado y de las salas, reproducida con la misma topografía y las mismas técnicas que usaron hace entre 13.000 y 36.000 años.</p>
+    <p>Alrededor, el museo recorre el Paleolítico superior con piezas originales, audiovisuales y talleres. Se entra a la Neocueva a la hora impresa en la entrada, en grupos controlados, y el recorrido dura unos 25 minutos de pie.</p>
+    <dl class="datos">
+      <div><dt>Turnos</dt><dd>Compra las entradas en dos tandas de hora distinta: no se puede reservar un grupo entero para horas libres</dd></div>
+      <div><dt>Precio</dt><dd>3 € adultos, menores de 18 gratis (con entrada igualmente)</dd></div>
+      <div><dt>Horario</dt><dd>Martes a sábado 9:30–20:00. Domingos y festivos hasta las 15:00. Lunes cerrado</dd></div>
+      <div><dt>Ojo</dt><dd>El sábado 25 es festivo: confirma el horario al comprar</dd></div>
+      <div><dt>Perro</dt><dd>No se admiten animales</dd></div>
+    </dl>
+    <div class="acciones" style="margin-top:14px">
+      <a href="https://www.google.com/search?tbm=isch&q=Museo%20de%20Altamira%20Neocueva" target="_blank" rel="noopener">Más fotos</a>
+      <a href="tel:+34942818005">942 81 80 05</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Museo+de+Altamira+Santillana+del+Mar" target="_blank" rel="noopener">Cómo llegar</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="overlay" id="m-santillana">
+<div class="modal">
+  <div class="m-foto">
+    <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjCJ3o8uHQMoJN8ABWZZ__GajuNgGc6-kCizluM5kosMCjQJXo-utrOc6KoAt5hPo4R2TW-KXMu3-7XO9yavUDSkzWldK9OIy0vccwvWsjejPU2WX4DhCa1eiEDuGIXYeVUdn1ogiOgTYr3mIOA=s4800-w800-h600" alt="Colegiata de Santa Juliana">
+    <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
+  </div>
+  <div class="m-cuerpo">
+    <p class="m-eyebrow">Sábado · 11:30</p>
+    <h4>Santillana del Mar</h4>
+    <p>Uno de los conjuntos medievales mejor conservados de España: calles empedradas, casonas blasonadas de los siglos XV al XVIII y ni un cable a la vista. Se recorre entero andando en una hora larga.</p>
+    <p>La pieza mayor es la Colegiata de Santa Juliana, románica del siglo XII, con un claustro de capiteles tallados que merece la entrada. Alrededor, la Torre del Merino y la plaza del Mercado.</p>
+    <dl class="datos">
+      <div><dt>Colegiata</dt><dd>3 € la entrada, incluye el claustro</dd></div>
+      <div><dt>Coche</dt><dd>Aparcamientos de pago a la entrada del pueblo; dentro no se circula</dd></div>
+      <div><dt>Perro</dt><dd>Puede pasear por todo el casco</dd></div>
+    </dl>
+    <div class="acciones" style="margin-top:14px">
+      <a href="https://www.google.com/search?tbm=isch&q=Santillana%20del%20Mar%20casco%20hist%C3%B3rico" target="_blank" rel="noopener">Más fotos</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="overlay" id="m-maza">
+<div class="modal">
+  <div class="m-foto">
+    <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjDMlME9gXDJoISBfcx3zXgY6ucz6Q5op0Gjt4lK1rSa3upaIIoSLhKaXiQdP4iZxgQPcYHAXhTeK6Jrso1k46WdPXm2OcN111kolIqPvNmOUOSAfLDYx1Sa3QhnRtdHrFtZhMQk47unecHOwzkgSpH3UQ=s4800-w800-h600" alt="Playa de La Maza">
+    <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
+  </div>
+  <div class="m-cuerpo">
+    <p class="m-eyebrow">Sábado · 16:30</p>
+    <h4>Playa de La Maza</h4>
+    <p>La llaman playa de los Vagos. Son 150 metros de arena fina en la ría de Oyambre, junto al puente de La Maza, con San Vicente de la Barquera a un lado y los Picos de Europa al fondo.</p>
+    <p>Habilitada como canina en 2016, es la mejor de Cantabria para ir con perro: zona de césped, sombra, ducha y fuente para animales. El agua es de ría, transparente y sin corriente, así que también es la más segura para la niña.</p>
+    <dl class="datos">
+      <div><dt>Perro</dt><dd>Todo el año, sin restricción de horario</dd></div>
+      <div><dt>Servicios</dt><dd>Césped, sombra, ducha y fuente canina, papeleras</dd></div>
+      <div><dt>Ojo</dt><dd>Es pequeña y en julio se llena. Llegad con margen</dd></div>
+    </dl>
+    <div class="acciones" style="margin-top:14px">
+      <a href="https://www.google.com/search?tbm=isch&q=Playa%20de%20La%20Maza%20San%20Vicente%20de%20la%20Barquera" target="_blank" rel="noopener">Más fotos</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Playa+de+La+Maza+San+Vicente+de+la+Barquera" target="_blank" rel="noopener">Cómo llegar</a>
+      <a href="https://www.google.com/search?q=mareas+San+Vicente+de+la+Barquera" target="_blank" rel="noopener">Mareas</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="overlay" id="m-sanvicente">
+<div class="modal">
+  <div class="m-foto">
+    <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjDIfMfWhtRRx4vE5ItJo3Cjq-p-heJfm5PyZc3jT6Cmk00TG_GKkLZk_d-9f_QRRz3AUS1q3F1nld2J-FT8QryzdqJwh_43DXrp0jTP9nEMTHhKbP_uxzwezjQ8AgK4PCLL6J2PLKlac5u6mw=s4800-w800-h600" alt="Castillo del Rey">
+    <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
+  </div>
+  <div class="m-cuerpo">
+    <p class="m-eyebrow">Sábado · 20:00</p>
+    <h4>San Vicente de la Barquera</h4>
+    <p>Pueblo marinero encajado entre dos rías, con puerto pesquero en activo. Sobre el casco antiguo se levanta el Castillo del Rey, del siglo XIII, desde cuyas almenas se ve la bahía entera y los Picos de Europa nevados hasta bien entrado el verano.</p>
+    <p>Los restaurantes se concentran en los soportales, a cinco minutos andando de la playa. Un paseo por el puente de la Maza antes de cenar es el mejor momento del día para las fotos.</p>
+    <dl class="datos">
+      <div><dt>Castillo</dt><dd>2 € · 10:30–14:00 y 16:30–20:30 todos los días</dd></div>
+      <div><dt>Coche</dt><dd>Aparcamiento gratuito junto al puerto</dd></div>
+      <div><dt>Perro</dt><dd>Sin problema por el pueblo y las terrazas</dd></div>
+    </dl>
+    <div class="acciones" style="margin-top:14px">
+      <a href="https://www.google.com/search?tbm=isch&q=San%20Vicente%20de%20la%20Barquera%20Castillo%20del%20Rey" target="_blank" rel="noopener">Más fotos</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="overlay" id="m-molinucos">
+<div class="modal">
+  <div class="m-foto">
+    <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjAia8OI80hmpkLBUf_u8aS3ErFhxv2TOT3dZi_TklpvriLk438ycGATkz5DPFcmaDk933jvsJIWh148Le-tfW-xitdzMvKVEzJljvMrDAFLLvHGYEG8zSUMCtwGbztk1UbiXohj2vBsovXkwk8=s4800-w800-h600" alt="Playa de Los Molinucos">
+    <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
+  </div>
+  <div class="m-cuerpo">
+    <p class="m-eyebrow">Domingo · 11:15</p>
+    <h4>Playa de Los Molinucos</h4>
+    <p>Cala de arena fina al norte de Santander, encajada entre acantilados junto al parque de Mataleñas. Está resguardada del viento y rodeada de verde, y se baja desde el sendero de la costa, lo que hace que mucha gente pase de largo.</p>
+    <p>Es la playa canina urbana de Santander, con acceso las 24 horas todo el año y ducha para perros. Pequeña, así que en domingo de julio conviene madrugar.</p>
+    <dl class="datos">
+      <div><dt>Perro</dt><dd>24 horas todo el año. Prohibido el jabón en la ducha</dd></div>
+      <div><dt>Coche</dt><dd>Aparcar en Mataleñas y bajar andando</dd></div>
+      <div><dt>Ojo</dt><dd>Con marea baja el agua queda lejos</dd></div>
+    </dl>
+    <div class="acciones" style="margin-top:14px">
+      <a href="https://www.google.com/search?tbm=isch&q=Playa%20de%20Los%20Molinucos%20Santander" target="_blank" rel="noopener">Más fotos</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Playa+de+Los+Molinucos+Santander" target="_blank" rel="noopener">Cómo llegar</a>
+      <a href="https://www.google.com/search?q=mareas+Santander" target="_blank" rel="noopener">Mareas</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="overlay" id="m-puntal">
+<div class="modal">
+  <div class="m-foto">
+    <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjD_YPVqRfjGCWX9KGe3FZXHH7taIc0K01CRB0UmRSPYSnOd6WKRdfnJ87Oz4p-X1_PVSTy0835bwvq-l_Skv82Z1gcRL_fp2mj5eT13AMn9GziPlr9GXVQDTaTxXkqhah4H2VeOs-01Ogwld8E=s4800-w800-h600" alt="Playa de El Puntal, Somo">
+    <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
+  </div>
+  <div class="m-cuerpo">
+    <p class="m-eyebrow">Domingo · 11:15</p>
+    <h4>El Puntal, Somo</h4>
+    <p>Una lengua de arena de 4,5 km que cierra la bahía de Santander por el norte, con dunas en el centro y mar abierto de verdad al otro lado. La zona canina está en el extremo sur, junto al muelle de Somo, sobre el estuario del Miera: agua tranquila, sin oleaje.</p>
+    <p>No hay carretera hasta ahí. Se llega en lancha desde el centro de Santander, o en coche hasta Somo y luego caminando unos 2 km por la arena. La lancha deja a pocos metros de la zona canina, así que es la opción cómoda con niña, abuelos y perro.</p>
+
+    <p class="m-eyebrow" style="margin-top:16px">La lancha, Los Reginas</p>
+    <p>Sale del embarcadero junto al Centro Botín, hace escala en Pedreña y llega a Somo. Trayecto de unos 20-25 minutos por la bahía. Los perros viajan gratis, solo tienen que ir atados.</p>
+    <dl class="datos">
+      <div><dt>Precio</dt><dd>Ida y vuelta 6,50 € por persona · solo ida 4,00 €</dd></div>
+      <div><dt>Frecuencia</dt><dd>Cada hora, sábados domingos y festivos (18–28 julio)</dd></div>
+      <div><dt>Duración</dt><dd>20-25 minutos, sin billete con hora fija</dd></div>
+      <div><dt>Perro</dt><dd>Admitido gratis, atado y junto al dueño</dd></div>
+      <div><dt>Embarque</dt><dd>Paseo Marítimo, junto al Centro Botín, Santander</dd></div>
+    </dl>
+    <p style="margin-top:10px">Vuelta cuando queráis con el mismo billete de ida y vuelta, no hace falta reservar hora. Conviene confirmar el horario exacto el mismo sábado, porque la tabla cambia por quincenas.</p>
+    <div class="acciones" style="margin-top:14px">
+      <a href="https://www.google.com/search?tbm=isch&q=Playa%20El%20Puntal%20Somo" target="_blank" rel="noopener">Más fotos</a>
+      <a href="tel:+34942216753">942 21 67 53</a>
+      <a href="https://www.losreginas.com/paseos-en-barco-por-la-bahia-de-santander-con-escala-en-pedrena-y-somo/horarios-y-tarifas-viaje-pedrena-somo/" target="_blank" rel="noopener">Horarios</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Embarcadero+Los+Reginas+Santander" target="_blank" rel="noopener">Embarcadero</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="overlay" id="m-fontibre">
+<div class="modal">
+  <div class="m-foto">
+    <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjAXmlJej_xoif8fQFL2_bICz9IdfEfHQ1xXAD0Fvi8djf7n4FvwrZgFvKK104nifJRQzHXlU8Iwcmz5JSx79qxhpoXwYpYAkqShtd1UxN6TT3nT9QXW7ZqnyBjslx-PNLI2bTkS540XlxDWmA=s4800-w800-h600" alt="Nacimiento del Ebro en Fontibre">
+    <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
+  </div>
+  <div class="m-cuerpo">
+    <p class="m-eyebrow">Domingo · de camino</p>
+    <h4>Fontibre</h4>
+    <p>Aquí brota el Ebro, el río más caudaloso de España. El manantial sale entre las raíces de los árboles y forma una poza de agua muy clara; alrededor hay un paseo circular de unos quince minutos, todo a la sombra.</p>
+    <p>Es gratis, está siempre abierto y queda a diez minutos de la autovía pasando Reinosa. Buen sitio para partir las cuatro horas de vuelta y que el perro y la niña se estiren.</p>
+    <dl class="datos">
+      <div><dt>Precio</dt><dd>Gratis, acceso libre</dd></div>
+      <div><dt>Servicios</dt><dd>Aparcamiento y cafetería al lado</dd></div>
+      <div><dt>Perro</dt><dd>Todo al aire libre, sin restricciones</dd></div>
+    </dl>
+    <div class="acciones" style="margin-top:14px">
+      <a href="https://www.google.com/search?tbm=isch&q=Nacimiento%20del%20Ebro%20Fontibre" target="_blank" rel="noopener">Más fotos</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="overlay" id="m-pesquera">
+<div class="modal">
+  <div class="m-foto">
+    <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjDYrpS3ZSmuuMjiEYV8ZF36qof-e6_OXjmQKCJQDPch71MO2HhlFBTUFQ10vgcZuKFU7Rj-OBMY8YkCX0OJEgSS9WTSmiaTGuBRf06Zs-dnfF0iMCiNo0EgtVfk7135KAJ8CZ7FqgAwD6ce6Q=s4800-w800-h600" alt="Pesquera, Cantabria">
+    <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
+  </div>
+  <div class="m-cuerpo">
+    <p class="m-eyebrow">Viernes · 18:50</p>
+    <h4>Pesquera</h4>
+    <p>Pueblo de montaña en el valle de Iguña, entre Reinosa y Torrelavega, con la A-67 al lado. Poco más de treinta vecinos, prados y ganado. Es una base tranquila y bien situada: la costa queda a 45 minutos y Reinosa a 20.</p>
+    <p>No hay tienda ni bar, así que la compra hay que traerla hecha. Para salir a cenar, Molledo está a 10 minutos.</p>
+    <dl class="datos">
+      <div><dt>Entrada</dt><dd>Viernes de 15:00 a 23:30</dd></div>
+      <div><dt>Salida</dt><dd>Domingo hasta las 11:00</dd></div>
+      <div><dt>Distancias</dt><dd>Santillana 45 min · Santander 55 min · San Vicente 1 h 15</dd></div>
+    </dl>
+    <div class="acciones" style="margin-top:14px">
+      <a href="https://www.google.com/search?tbm=isch&q=Pesquera%20Cantabria%20valle%20de%20Igu%C3%B1a" target="_blank" rel="noopener">Más fotos</a>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+(function(){
+  /* --- pestañas --- */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function activar(i, foco){
+    tabs.forEach(function(t, j){
+      var sel = i === j;
+      t.setAttribute('aria-selected', sel);
+      t.tabIndex = sel ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !sel;
+    });
+    if (foco) tabs[i].focus();
+    window.scrollTo({top:0});
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ activar(i, false); });
+    t.addEventListener('keydown', function(e){
+      var n = null;
+      if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+      if (e.key === 'ArrowLeft')  n = (i - 1 + tabs.length) % tabs.length;
+      if (e.key === 'Home') n = 0;
+      if (e.key === 'End')  n = tabs.length - 1;
+      if (n !== null){ e.preventDefault(); activar(n, true); }
+    });
+  });
+  var hoy = new Date();
+  if (hoy.getFullYear() === 2026 && hoy.getMonth() === 6){
+    var mapa = {24:0, 25:1, 26:2};
+    if (mapa[hoy.getDate()] !== undefined) activar(mapa[hoy.getDate()], false);
+  }
+
+  /* --- modales --- */
+  var overlayAbierto = null;
+
+  function abrirModal(id){
+    var ov = document.getElementById(id);
+    if (!ov) return;
+    ov.classList.add('abierto');
+    var cuerpo = ov.querySelector('.m-cuerpo');
+    if (cuerpo) cuerpo.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+    overlayAbierto = ov;
+    var cerrarBtn = ov.querySelector('.cerrar');
+    if (cerrarBtn) cerrarBtn.focus();
+  }
+
+  function cerrarModal(ov){
+    if (!ov) return;
+    ov.classList.remove('abierto');
+    document.body.style.overflow = '';
+    if (overlayAbierto === ov) overlayAbierto = null;
+  }
+
+  document.querySelectorAll('[data-modal]').forEach(function(b){
+    b.addEventListener('click', function(){ abrirModal(b.dataset.modal); });
+  });
+
+  document.querySelectorAll('.overlay').forEach(function(ov){
+    ov.classList.remove('abierto');
+    ov.querySelectorAll('[data-cerrar]').forEach(function(c){
+      c.addEventListener('click', function(){ cerrarModal(ov); });
+    });
+    /* cerrar al tocar el fondo, pero no el contenido del modal */
+    ov.addEventListener('click', function(e){
+      if (e.target === ov) cerrarModal(ov);
+    });
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && overlayAbierto) cerrarModal(overlayAbierto);
+  });
+})();
+</script>
+</body>
+</html>
