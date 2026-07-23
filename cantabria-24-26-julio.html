@@ -151,12 +151,21 @@ h3{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.02re
 footer{margin-top:26px;font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--suave);letter-spacing:.04em}
 
 /* ---------- modales ---------- */
-dialog{
-  border:0;padding:0;border-radius:16px;max-width:520px;width:calc(100% - 28px);
-  background:var(--blanco);color:var(--profundo);overflow:hidden;
+.overlay{
+  position:fixed;inset:0;z-index:100;background:rgba(8,50,74,.55);
+  backdrop-filter:blur(2px);
+  display:flex;align-items:center;justify-content:center;padding:14px;
+  opacity:0;pointer-events:none;transition:opacity .18s ease;
 }
-dialog::backdrop{background:rgba(8,50,74,.55);backdrop-filter:blur(2px)}
-.m-foto{position:relative;line-height:0}
+.overlay.abierto{opacity:1;pointer-events:auto}
+.modal{
+  border-radius:16px;max-width:520px;width:100%;
+  max-height:calc(100vh - 28px);background:var(--blanco);color:var(--profundo);
+  overflow:hidden;display:flex;flex-direction:column;
+  transform:translateY(10px);transition:transform .18s ease;
+}
+.overlay.abierto .modal{transform:translateY(0)}
+.m-foto{position:relative;line-height:0;flex:0 0 auto}
 .m-foto img{width:100%;height:200px;object-fit:cover;display:block}
 .cerrar{
   position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;
@@ -164,7 +173,7 @@ dialog::backdrop{background:rgba(8,50,74,.55);backdrop-filter:blur(2px)}
   line-height:1;cursor:pointer;display:grid;place-items:center;
 }
 .cerrar:focus-visible{outline:2px solid var(--mar);outline-offset:2px}
-.m-cuerpo{padding:18px 20px 22px}
+.m-cuerpo{padding:18px 20px 22px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 .m-eyebrow{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--turquesa);margin:0 0 4px}
 .m-cuerpo h4{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.4rem;margin:0 0 10px;letter-spacing:-.02em;line-height:1.1}
 .m-cuerpo p{margin:0 0 10px;font-size:15.5px}
@@ -547,7 +556,8 @@ dialog::backdrop{background:rgba(8,50,74,.55);backdrop-filter:blur(2px)}
 </div>
 
 <!-- ===== MODALES ===== -->
-<dialog id="m-altamira">
+<div class="overlay" id="m-altamira">
+<div class="modal">
   <div class="m-foto">
     <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjC1z5Vb-o9lvGwMrqRPwMIZRsRmnfxuJl_PnS3aOJxumjz424r6MWc-4_vWf1XKR5jGWsReFO2F1GVEWjnPOFjxe4ZWQX1mr1Eor3KhrQR1LphJrxgIOfkOxLU8sm6pBGMRppj574mMIQtM=s4800-w800-h600" alt="Museo de Altamira">
     <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
@@ -569,9 +579,11 @@ dialog::backdrop{background:rgba(8,50,74,.55);backdrop-filter:blur(2px)}
       <a href="https://www.google.com/maps/search/?api=1&query=Museo+de+Altamira+Santillana+del+Mar" target="_blank" rel="noopener">Cómo llegar</a>
     </div>
   </div>
-</dialog>
+</div>
+</div>
 
-<dialog id="m-santillana">
+<div class="overlay" id="m-santillana">
+<div class="modal">
   <div class="m-foto">
     <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjCJ3o8uHQMoJN8ABWZZ__GajuNgGc6-kCizluM5kosMCjQJXo-utrOc6KoAt5hPo4R2TW-KXMu3-7XO9yavUDSkzWldK9OIy0vccwvWsjejPU2WX4DhCa1eiEDuGIXYeVUdn1ogiOgTYr3mIOA=s4800-w800-h600" alt="Colegiata de Santa Juliana">
     <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
@@ -587,9 +599,11 @@ dialog::backdrop{background:rgba(8,50,74,.55);backdrop-filter:blur(2px)}
       <div><dt>Perro</dt><dd>Puede pasear por todo el casco</dd></div>
     </dl>
   </div>
-</dialog>
+</div>
+</div>
 
-<dialog id="m-maza">
+<div class="overlay" id="m-maza">
+<div class="modal">
   <div class="m-foto">
     <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjDMlME9gXDJoISBfcx3zXgY6ucz6Q5op0Gjt4lK1rSa3upaIIoSLhKaXiQdP4iZxgQPcYHAXhTeK6Jrso1k46WdPXm2OcN111kolIqPvNmOUOSAfLDYx1Sa3QhnRtdHrFtZhMQk47unecHOwzkgSpH3UQ=s4800-w800-h600" alt="Playa de La Maza">
     <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
@@ -609,9 +623,11 @@ dialog::backdrop{background:rgba(8,50,74,.55);backdrop-filter:blur(2px)}
       <a href="https://www.google.com/search?q=mareas+San+Vicente+de+la+Barquera" target="_blank" rel="noopener">Mareas</a>
     </div>
   </div>
-</dialog>
+</div>
+</div>
 
-<dialog id="m-sanvicente">
+<div class="overlay" id="m-sanvicente">
+<div class="modal">
   <div class="m-foto">
     <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjDIfMfWhtRRx4vE5ItJo3Cjq-p-heJfm5PyZc3jT6Cmk00TG_GKkLZk_d-9f_QRRz3AUS1q3F1nld2J-FT8QryzdqJwh_43DXrp0jTP9nEMTHhKbP_uxzwezjQ8AgK4PCLL6J2PLKlac5u6mw=s4800-w800-h600" alt="Castillo del Rey">
     <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
@@ -627,9 +643,11 @@ dialog::backdrop{background:rgba(8,50,74,.55);backdrop-filter:blur(2px)}
       <div><dt>Perro</dt><dd>Sin problema por el pueblo y las terrazas</dd></div>
     </dl>
   </div>
-</dialog>
+</div>
+</div>
 
-<dialog id="m-molinucos">
+<div class="overlay" id="m-molinucos">
+<div class="modal">
   <div class="m-foto">
     <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjAia8OI80hmpkLBUf_u8aS3ErFhxv2TOT3dZi_TklpvriLk438ycGATkz5DPFcmaDk933jvsJIWh148Le-tfW-xitdzMvKVEzJljvMrDAFLLvHGYEG8zSUMCtwGbztk1UbiXohj2vBsovXkwk8=s4800-w800-h600" alt="Playa de Los Molinucos">
     <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
@@ -649,9 +667,11 @@ dialog::backdrop{background:rgba(8,50,74,.55);backdrop-filter:blur(2px)}
       <a href="https://www.google.com/search?q=mareas+Santander" target="_blank" rel="noopener">Mareas</a>
     </div>
   </div>
-</dialog>
+</div>
+</div>
 
-<dialog id="m-fontibre">
+<div class="overlay" id="m-fontibre">
+<div class="modal">
   <div class="m-foto">
     <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjAXmlJej_xoif8fQFL2_bICz9IdfEfHQ1xXAD0Fvi8djf7n4FvwrZgFvKK104nifJRQzHXlU8Iwcmz5JSx79qxhpoXwYpYAkqShtd1UxN6TT3nT9QXW7ZqnyBjslx-PNLI2bTkS540XlxDWmA=s4800-w800-h600" alt="Nacimiento del Ebro en Fontibre">
     <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
@@ -667,9 +687,11 @@ dialog::backdrop{background:rgba(8,50,74,.55);backdrop-filter:blur(2px)}
       <div><dt>Perro</dt><dd>Todo al aire libre, sin restricciones</dd></div>
     </dl>
   </div>
-</dialog>
+</div>
+</div>
 
-<dialog id="m-pesquera">
+<div class="overlay" id="m-pesquera">
+<div class="modal">
   <div class="m-foto">
     <img src="https://lh3.googleusercontent.com/place-photos/AG9NLjDYrpS3ZSmuuMjiEYV8ZF36qof-e6_OXjmQKCJQDPch71MO2HhlFBTUFQ10vgcZuKFU7Rj-OBMY8YkCX0OJEgSS9WTSmiaTGuBRf06Zs-dnfF0iMCiNo0EgtVfk7135KAJ8CZ7FqgAwD6ce6Q=s4800-w800-h600" alt="Pesquera, Cantabria">
     <button class="cerrar" data-cerrar aria-label="Cerrar">×</button>
@@ -685,7 +707,8 @@ dialog::backdrop{background:rgba(8,50,74,.55);backdrop-filter:blur(2px)}
       <div><dt>Distancias</dt><dd>Santillana 45 min · Santander 55 min · San Vicente 1 h 15</dd></div>
     </dl>
   </div>
-</dialog>
+</div>
+</div>
 
 <script>
 (function(){
@@ -719,20 +742,44 @@ dialog::backdrop{background:rgba(8,50,74,.55);backdrop-filter:blur(2px)}
   }
 
   /* --- modales --- */
+  var overlayAbierto = null;
+
+  function abrirModal(id){
+    var ov = document.getElementById(id);
+    if (!ov) return;
+    ov.classList.add('abierto');
+    var cuerpo = ov.querySelector('.m-cuerpo');
+    if (cuerpo) cuerpo.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+    overlayAbierto = ov;
+    var cerrarBtn = ov.querySelector('.cerrar');
+    if (cerrarBtn) cerrarBtn.focus();
+  }
+
+  function cerrarModal(ov){
+    if (!ov) return;
+    ov.classList.remove('abierto');
+    document.body.style.overflow = '';
+    if (overlayAbierto === ov) overlayAbierto = null;
+  }
+
   document.querySelectorAll('[data-modal]').forEach(function(b){
-    b.addEventListener('click', function(){
-      var d = document.getElementById(b.dataset.modal);
-      if (d && d.showModal) d.showModal();
+    b.addEventListener('click', function(){ abrirModal(b.dataset.modal); });
+  });
+
+  document.querySelectorAll('.overlay').forEach(function(ov){
+    ov.classList.remove('abierto');
+    ov.querySelectorAll('[data-cerrar]').forEach(function(c){
+      c.addEventListener('click', function(){ cerrarModal(ov); });
+    });
+    /* cerrar al tocar el fondo, pero no el contenido del modal */
+    ov.addEventListener('click', function(e){
+      if (e.target === ov) cerrarModal(ov);
     });
   });
-  document.querySelectorAll('dialog').forEach(function(d){
-    d.querySelectorAll('[data-cerrar]').forEach(function(c){
-      c.addEventListener('click', function(){ d.close(); });
-    });
-    d.addEventListener('click', function(e){
-      var r = d.getBoundingClientRect();
-      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) d.close();
-    });
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && overlayAbierto) cerrarModal(overlayAbierto);
   });
 })();
 </script>
