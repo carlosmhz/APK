@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Peñíscola con la perra</title>
+<style>
+  :root{
+    --bg:#f6f4ef; --card:#ffffff; --text:#1f2933; --muted:#5b6670;
+    --accent:#0d7a8a; --accent-soft:#dff1f3; --on-accent:#ffffff;
+    --warn:#9a5b00; --warn-soft:#fff1d6; --line:#e3ded3;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#14181b; --card:#1d2328; --text:#e8ecef; --muted:#9aa5ae;
+      --accent:#5cc6d4; --accent-soft:#1b3a40; --on-accent:#0b1215;
+      --warn:#f0b35a; --warn-soft:#3a2d12; --line:#2c353b;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  header{padding:18px 16px 8px;max-width:760px;margin:0 auto}
+  h1{font-size:1.5rem;margin:0 0 2px}
+  .sub{color:var(--muted);margin:0;font-size:.95rem}
+  nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+  .tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px;max-width:760px;margin:0 auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  [role=tab]{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--text);
+    border-radius:999px;padding:8px 14px;font:inherit;font-size:.92rem;cursor:pointer}
+  [role=tab][aria-selected=true]{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:600}
+  main{max-width:760px;margin:0 auto;padding:6px 16px 56px}
+  section[hidden]{display:none}
+  h2{font-size:1.1rem;margin:22px 0 8px;color:var(--accent)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:10px 0}
+  .alert{background:var(--warn-soft);border-color:var(--warn)}
+  .alert strong{color:var(--warn)}
+  .small{font-size:.88rem;color:var(--muted)}
+  ul{padding-left:20px;margin:6px 0}
+  .btn{display:inline-block;background:var(--accent);color:var(--on-accent);text-decoration:none;border:0;
+    border-radius:10px;padding:10px 14px;font:inherit;font-weight:600;font-size:.92rem;cursor:pointer;margin:4px 6px 4px 0}
+  .btn.ghost{background:var(--accent-soft);color:var(--accent)}
+  .link{color:var(--accent);font-weight:600;text-decoration:none;white-space:nowrap}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+  .kpi b{display:block;font-size:1.15rem;color:var(--accent)}
+  .step{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:0}
+  .step input{width:22px;height:22px;margin-top:3px;accent-color:var(--accent);flex:0 0 auto}
+  .step .t{flex:0 0 56px;font-weight:700;color:var(--accent)}
+  .step.done .body{opacity:.5;text-decoration:line-through}
+  .body{flex:1}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:4px 0 10px}
+  .seg button{border:0;background:var(--card);color:var(--text);padding:8px 14px;font:inherit;cursor:pointer}
+  .seg button[aria-pressed=true]{background:var(--accent);color:var(--on-accent);font-weight:600}
+  label.chk{display:flex;gap:10px;align-items:flex-start;padding:7px 0}
+  label.chk input{width:20px;height:20px;margin-top:2px;accent-color:var(--accent)}
+  .bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+  .bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+</style>
+</head>
+<body>
+<header>
+  <h1>🐾 Peñíscola con la perra</h1>
+  <p class="sub">Domingo 11 y lunes 12 de octubre · salida desde Salamanca</p>
+</header>
+
+<nav><div class="tabs" role="tablist" aria-label="Secciones">
+  <button role="tab" aria-selected="true" data-tab="resumen">Resumen</button>
+  <button role="tab" aria-selected="false" data-tab="ruta">Ruta</button>
+  <button role="tab" aria-selected="false" data-tab="domingo">Domingo</button>
+  <button role="tab" aria-selected="false" data-tab="lunes">Lunes</button>
+  <button role="tab" aria-selected="false" data-tab="perra">Perra</button>
+</div></nav>
+
+<main>
+
+<!-- RESUMEN -->
+<section id="resumen">
+  <div class="card alert">
+    <strong>Dos avisos</strong>
+    <ul>
+      <li><strong>Playa:</strong> no he podido confirmar que se permitan perros en las playas de Peñíscola. Una reseña de octubre de 2025 cita a la Policía Local diciendo que no, y que fueran a Benicarló. Preguntad en el hotel antes de bajar a la arena.</li>
+      <li><strong>Bioparc:</strong> no admite mascotas (solo perros de asistencia). Dos de vosotros os quedáis fuera con la perra.</li>
+    </ul>
+  </div>
+
+  <h2>Lo esencial</h2>
+  <div class="grid">
+    <div class="kpi"><span class="small">Domingo salida</span><b>5:00</b></div>
+    <div class="kpi"><span class="small">Desayuno (Área 77)</span><b>~8:00</b></div>
+    <div class="kpi"><span class="small">Llegada prevista</span><b>~13:00</b></div>
+    <div class="kpi"><span class="small">Comida (Papa Luna)</span><b>~14:00</b></div>
+    <div class="kpi"><span class="small">Check-in hotel</span><b>17:00</b></div>
+    <div class="kpi"><span class="small">Lunes salida</span><b>~9:30</b></div>
+    <div class="kpi"><span class="small">Bioparc</span><b>12:00</b></div>
+  </div>
+  <p class="small">Tiempos aproximados, calculados a mano. Comprobad el tráfico real en Google Maps el domingo antes de salir.</p>
+
+  <h2>Accesos rápidos</h2>
+  <div class="card">
+    <a class="btn" target="_blank" rel="noopener" id="goRoute1" href="#">🚗 Ruta completa en Maps</a>
+    <a class="btn ghost" target="_blank" rel="noopener" href="https://maps.google.com/?cid=10835568397610632683">☕ Área 77 (desayuno)</a>
+    <a class="btn ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Restaurante+Papa+Luna+Pe%C3%B1%C3%ADscola">🍽️ Papa Luna</a>
+    <a class="btn ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Bioparc+Valencia">🦁 Bioparc</a>
+    <a class="btn ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=veterinario+urgencias+Pe%C3%B1%C3%ADscola">🩺 Veterinario</a>
+  </div>
+</section>
+
+<!-- RUTA -->
+<section id="ruta" hidden>
+  <h2>Salamanca → Peñíscola</h2>
+  <div class="seg" role="group" aria-label="Opción de ruta">
+    <button aria-pressed="true" data-route="1">Opción 1 · Madrid y Valencia</button>
+    <button aria-pressed="false" data-route="2">Opción 2 · Teruel</button>
+  </div>
+
+  <div id="route1">
+    <div class="card">
+      <p style="margin-top:0">Salamanca → Ávila → Madrid (M-40) → A-3 → Tarancón → Requena → Valencia → AP-7 → Peñíscola. Unos 700 km.</p>
+      <a class="btn" target="_blank" rel="noopener" id="goRoute1b" href="#">Abrir ruta en Google Maps</a>
+    </div>
+    <h2>Paradas</h2>
+    <div class="card">
+      <div class="step"><span class="t">5:00</span><div class="body"><strong>Salida de Salamanca</strong></div></div>
+      <div class="step"><span class="t">~6:00</span><div class="body"><strong>Paso por Ávila</strong><br><span class="small">Si la perra lo necesita, parada rápida de 5–10 min. Si no, seguid hasta el desayuno.</span></div></div>
+      <div class="step"><span class="t">~8:00</span><div class="body"><strong>☕ Desayuno en Área 77 (Tarancón)</strong><br><span class="small">A-3, km 77, tras pasar Madrid. Domingo abre a las 8:00. Nota 4,0 en Google con unas 7.400 opiniones, y las reseñas hablan de buen café y precios razonables. Tel. 969 32 30 82. No he podido confirmar si dejan entrar perros, así que llamad o desayunad fuera.</span><br><a class="link" target="_blank" rel="noopener" href="https://maps.google.com/?cid=10835568397610632683">Abrir en Maps ↗</a> · <a class="link" href="tel:+34969323082">Llamar ↗</a></div></div>
+      <div class="step"><span class="t">plan B</span><div class="body"><strong>Área de Servicio Belinchón La Pausa</strong><br><span class="small">A-3, km 72, 5 km antes. Domingo abre a las 7:30 y tiene terraza, mejor para la perra si en Área 77 no dejan entrar. Peor valorada (3,1). Tel. 969 32 30 40.</span><br><a class="link" target="_blank" rel="noopener" href="https://maps.google.com/?cid=1091459151408107844">Abrir en Maps ↗</a></div></div>
+      <div class="step"><span class="t">~10:45</span><div class="body"><strong>Requena · segunda parada</strong><br><span class="small">Agua, paseo y baño. Después quedan unos 210 km hasta Peñíscola.</span></div></div>
+      <div class="step"><span class="t">~13:00</span><div class="body"><strong>Llegada a Peñíscola</strong><br><span class="small">Si vais con retraso, retrasad la comida en lugar de saltaros las paradas de la perra.</span></div></div>
+    </div>
+    <p class="small">Parte de la AP-7 entre Valencia y Peñíscola es de peaje; Maps os enseña la alternativa gratuita si la pedís.</p>
+  </div>
+
+  <div id="route2" hidden>
+    <div class="card">
+      <p style="margin-top:0">Salamanca → Madrid → Guadalajara → Teruel → Castellón → Peñíscola. Menos tráfico, pero con tramos más lentos.</p>
+      <a class="btn" target="_blank" rel="noopener" id="goRoute2" href="#">Abrir ruta en Google Maps</a>
+    </div>
+    <div class="card">
+      <p style="margin-top:0">No he calculado tiempos para esta opción. Mirad la duración en Maps antes de decidir.</p>
+      <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=desayuno+terraza+Teruel">Buscar desayuno en Teruel ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- DOMINGO -->
+<section id="domingo" hidden>
+  <h2>Domingo 11</h2>
+  <div class="bar"><i id="barDomingo"></i></div>
+  <div class="card" id="listDomingo">
+    <div class="step"><input type="checkbox" data-k="d1"><span class="t">13:00</span><div class="body"><strong>Llegada y paseo</strong><br><span class="small">Paseo con correa por el paseo marítimo y el puerto.</span><br><a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Paseo+Mar%C3%ADtimo+Pe%C3%B1%C3%ADscola">Paseo marítimo ↗</a></div></div>
+    <div class="step"><input type="checkbox" data-k="d2"><span class="t">14:00</span><div class="body"><strong>Comer en Papa Luna</strong><br><span class="small">Terraza, con reserva previa. Las reseñas dicen que pusieron agua a los perros al sentarse.</span><br><a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Restaurante+Papa+Luna+Pe%C3%B1%C3%ADscola">Ver en Maps ↗</a></div></div>
+    <div class="step"><input type="checkbox" data-k="d3"><span class="t">16:00</span><div class="body"><strong>Playa, solo si se puede</strong><br><span class="small">Confirmad el permiso en el hotel o en la policía. Planes B:</span><br><a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=playa+perros+Benic%C3%A0rl%C3%B3">Benicarló ↗</a> · <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Platja+Morro+de+Gos+Cabanes">Morro de Gos (Cabanes) ↗</a> · <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Platja+de+les+Fonts+Cabanes">Les Fonts ↗</a></div></div>
+    <div class="step"><input type="checkbox" data-k="d4"><span class="t">17:00</span><div class="body"><strong>Check-in en el hotel</strong><br><span class="small">Manta de la perra en la habitación para que se tranquilice.</span></div></div>
+    <div class="step"><input type="checkbox" data-k="d5"><span class="t">19:00</span><div class="body"><strong>Paseo al atardecer por el casco antiguo y el castillo</strong><br><span class="small">El interior del castillo normalmente no admite perros, pero podéis rodearlo y ver las vistas.</span><br><a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Castillo+de+Pe%C3%B1%C3%ADscola">Castillo ↗</a></div></div>
+    <div class="step"><input type="checkbox" data-k="d6"><span class="t">21:00</span><div class="body"><strong>Cena en terraza</strong><br><a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=restaurantes+terraza+Pe%C3%B1%C3%ADscola">Buscar terrazas ↗</a></div></div>
+  </div>
+</section>
+
+<!-- LUNES -->
+<section id="lunes" hidden>
+  <h2>Lunes 12</h2>
+  <div class="bar"><i id="barLunes"></i></div>
+  <div class="card" id="listLunes">
+    <div class="step"><input type="checkbox" data-k="l1"><span class="t">8:30</span><div class="body"><strong>Paseo temprano y desayuno en terraza</strong><br><a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=desayuno+terraza+Pe%C3%B1%C3%ADscola">Buscar desayuno ↗</a></div></div>
+    <div class="step"><input type="checkbox" data-k="l2"><span class="t">9:30</span><div class="body"><strong>Salida hacia Valencia</strong><br><span class="small">Unos 140 km por la AP-7, algo más de 1 h 30.</span><br><a class="link" target="_blank" rel="noopener" id="goLunes" href="#">Ruta Peñíscola → Bioparc ↗</a></div></div>
+    <div class="step"><input type="checkbox" data-k="l3"><span class="t">11:30</span><div class="body"><strong>Aparcar y hacer cola</strong><br><span class="small">Hay una sola entrada con fila por orden de llegada, y la entrada online no da prioridad.</span></div></div>
+    <div class="step"><input type="checkbox" data-k="l4"><span class="t">12:00</span><div class="body"><strong>Bioparc: entran los que visitan el parque</strong><br><span class="small">Dos se quedan fuera con la perra y pasean por el Parque de Cabecera, junto al Bioparc. Podéis turnaros.</span><br><a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Bioparc+Valencia">Bioparc ↗</a> · <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Parque+de+Cabecera+Valencia">Parque de Cabecera ↗</a></div></div>
+  </div>
+</section>
+
+<!-- PERRA -->
+<section id="perra" hidden>
+  <h2>Lista para la perra</h2>
+  <div class="bar"><i id="barPerra"></i></div>
+  <div class="card" id="listPerra">
+    <label class="chk"><input type="checkbox" data-k="p1"> Cartilla veterinaria y chip a mano</label>
+    <label class="chk"><input type="checkbox" data-k="p2"> Correa corta y bolsas de recogida</label>
+    <label class="chk"><input type="checkbox" data-k="p3"> Agua dulce y cuenco plegable (no debe beber agua de mar)</label>
+    <label class="chk"><input type="checkbox" data-k="p4"> Manta o cama para la habitación</label>
+    <label class="chk"><input type="checkbox" data-k="p5"> Toalla para aclararla si pisa la arena</label>
+    <label class="chk"><input type="checkbox" data-k="p6"> Confirmar condiciones para perros con el hotel (suplemento, normas)</label>
+    <label class="chk"><input type="checkbox" data-k="p7"> Reservar mesa en Papa Luna para el domingo</label>
+    <label class="chk"><input type="checkbox" data-k="p8"> Comprobar la ruta en Google Maps antes de salir</label>
+  </div>
+  <div class="card">
+    <strong>Consejos</strong>
+    <ul>
+      <li>Parad cada 2 horas en el viaje y nunca la dejéis sola en el coche.</li>
+      <li>Si hace calor al mediodía, evitad el asfalto y los adoquines: queman las almohadillas.</li>
+      <li>Tened a mano un veterinario de guardia.</li>
+    </ul>
+    <a class="btn ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=veterinario+urgencias+Pe%C3%B1%C3%ADscola">🩺 Veterinario en Peñíscola</a>
+    <a class="btn ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=veterinario+urgencias+Valencia">🩺 Veterinario en Valencia</a>
+  </div>
+  <p class="small">Información sacada de reseñas y fichas públicas. Confirmad por teléfono horarios y condiciones para perros.</p>
+</section>
+
+</main>
+
+<script>
+(function(){
+  var MAPS = 'https://www.google.com/maps/dir/?api=1&travelmode=driving';
+  function dir(o, d, w){
+    var u = MAPS + '&origin=' + encodeURIComponent(o) + '&destination=' + encodeURIComponent(d);
+    if (w && w.length) u += '&waypoints=' + encodeURIComponent(w.join('|'));
+    return u;
+  }
+  var r1 = dir('Salamanca, España', 'Peñíscola, España', ['Ávila, España', 'Área 77, N-III 77, Tarancón, Cuenca', 'Requena, España']);
+  var r2 = dir('Salamanca, España', 'Peñíscola, España', ['Guadalajara, España', 'Teruel, España']);
+  var rl = dir('Peñíscola, España', 'Bioparc Valencia, España');
+  ['goRoute1','goRoute1b'].forEach(function(id){ document.getElementById(id).href = r1; });
+  document.getElementById('goRoute2').href = r2;
+  document.getElementById('goLunes').href = rl;
+
+  /* Pestañas */
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role=tab]'));
+  function show(id){
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', t.dataset.tab === id ? 'true' : 'false'); });
+    ['resumen','ruta','domingo','lunes','perra'].forEach(function(s){
+      document.getElementById(s).hidden = (s !== id);
+    });
+    window.scrollTo(0, 0);
+    try { sessionStorage.setItem('tab', id); } catch(e){}
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.tab); }); });
+  try { var saved = sessionStorage.getItem('tab'); if (saved) show(saved); } catch(e){}
+
+  /* Selector de ruta */
+  var segBtns = document.querySelectorAll('.seg button');
+  Array.prototype.forEach.call(segBtns, function(b){
+    b.addEventListener('click', function(){
+      Array.prototype.forEach.call(segBtns, function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      document.getElementById('route1').hidden = b.dataset.route !== '1';
+      document.getElementById('route2').hidden = b.dataset.route !== '2';
+    });
+  });
+
+  /* Casillas con progreso (se guardan en este navegador si es posible) */
+  var KEY = 'peniscola-checks';
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ state = {}; }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+  function progress(listId, barId){
+    var boxes = document.querySelectorAll('#' + listId + ' input[type=checkbox]');
+    var done = 0;
+    Array.prototype.forEach.call(boxes, function(b){ if (b.checked) done++; });
+    document.getElementById(barId).style.width = (boxes.length ? (done / boxes.length * 100) : 0) + '%';
+  }
+  var groups = [['listDomingo','barDomingo'],['listLunes','barLunes'],['listPerra','barPerra']];
+  Array.prototype.forEach.call(document.querySelectorAll('input[data-k]'), function(b){
+    b.checked = !!state[b.dataset.k];
+    var step = b.closest('.step');
+    if (step) step.classList.toggle('done', b.checked);
+    b.addEventListener('change', function(){
+      state[b.dataset.k] = b.checked;
+      if (step) step.classList.toggle('done', b.checked);
+      save();
+      groups.forEach(function(g){ progress(g[0], g[1]); });
+    });
+  });
+  groups.forEach(function(g){ progress(g[0], g[1]); });
+})();
+</script>
+</body>
+</html>
